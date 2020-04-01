@@ -816,7 +816,8 @@ this._http.post(link, source)
                 });
         }
          else {
-            this._http.get("assets/data/" + source + ".json")
+             console.log(source, '++++')
+            this._http.get("assets/data/" + source.source + ".json")
                 .subscribe(res => {
                     let result;
                     this.formdataval[c].sourceval = result = res;
@@ -892,7 +893,7 @@ this._http.post(link, source)
         if (this.selectedproductid != '') {
             this._http.post(link, data).subscribe((res: any) => {
                 // console.log('ok',res);
-                if (res.stasus == 'success') {
+                if (res.status == 'success') {
                     const link1 = this._commonservice.nodesslurl + 'addorupdatedata?token=' + this.cookeiservice.get('jwttoken');
                     let data = {
                         source: 'leads',
@@ -916,7 +917,7 @@ this._http.post(link, source)
         return re.test(email);
         }
 
-    leadsMarketingEmail(val: any) {
+    leadsMarketingEmail(val: any,  template:TemplateRef<any>) {
         // console.log(this.sendLeadEmailForm.value);
         // return;
         var emails = this.sendLeadEmailForm.value.email.split(',');
@@ -943,6 +944,12 @@ this._http.post(link, source)
                 if (res.status == 'error') {
                 console.log(res);
                     this.emailexist = res.msg;
+                } else if(res.status == 'success') {
+                    this.openFlag = 0;
+                    this.modalRef1 = this.modal.show(template, { class: 'successmodal' });
+                    setTimeout(() => {
+                        this.modalRef1.hide();
+                    }, 2000);
                 }
                 this.emailexist = '';
             })

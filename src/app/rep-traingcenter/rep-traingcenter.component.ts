@@ -44,6 +44,7 @@ export class RepTraingcenterComponent implements OnInit {
   public notdoneparentcat:any=[];
   public ngclassflag=0;
   public currentcategoryname='';
+  public not_launch:any={};
   public curitem:any=null;
   public cureentcursor:any=0;
   public flg:any=1;
@@ -160,6 +161,8 @@ let routeData: any;
         if(this.trainingcategory[c]._id==this.cid){
         console.log('huio',this.cid,this.trainingcategory[c]);
         this.currentcategoryname=this.trainingcategory[c].categoryname;
+        this.not_launch = this.trainingcategory[c];
+        console.log(this.not_launch,'+++++');
         } 
         if($.inArray(this.trainingcategory[c]._id,this.donelesson)!=-1 && this.trainingcategory[c].parentcategory.length>0){  
             //dpcat.push(this.trainingcategory[c].parentcategory);
@@ -230,6 +233,8 @@ let routeData: any;
                         if(this.trainingcategory[c]._id==this.cid){
                         console.log('huio',this.cid,this.trainingcategory[c]);
                         this.currentcategoryname=this.trainingcategory[c].categoryname;
+                        this.not_launch = this.trainingcategory[c];
+                        console.log(this.not_launch,'+++++');
                         } 
                         if($.inArray(this.trainingcategory[c]._id,this.donelesson)!=-1 && this.trainingcategory[c].parentcategory.length>0){  
                             //dpcat.push(this.trainingcategory[c].parentcategory);
@@ -430,7 +435,7 @@ let routeData: any;
                 console.log('lasttrainingid-'+lasttrainingid);
                 console.log('item._id-'+item._id);
                 console.log('item-');
-                console.log(item);
+                // console.log(item);
                 if(lasttrainingid == item._id){
                     if (this.staticcalenderaccess == false) {
                         this.cal_access();
@@ -438,7 +443,7 @@ let routeData: any;
                     if (this.initial != 100) {
                         this.onboardingTraning();
                     }
-                    console.log(item);
+                    console.log('item');
                     let nextnotdonecategory :any = this.getNextNotDoneTrainingCategory(item.trainingcategory);
                     console.log('nextnotdonecategory==',nextnotdonecategory);
                     this.cid = nextnotdonecategory._id;

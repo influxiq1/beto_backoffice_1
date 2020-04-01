@@ -7,36 +7,36 @@ import { Component, OnInit } from '@angular/core';
 
 })
 export class TranningcategorymanagementComponent implements OnInit {
-public formdata:any;
-public datasource:any;
-public tabledatalis:any[];
-public sourcecondition:any={};
+  public formdata: any;
+  public datasource: any;
+  public tabledatalis: any[];
+  public sourcecondition: any = {};
 
   constructor() {
-  this.tabledatalis=[
-    {value:'id',name:'Id',role:0,func:'',class:'id',type:'#'},
-    {value:'categoryname',name:'Training Title',role:0,func:'',class:'categoryname',type:'text'},
-    {value:'parentcat',name:'Parent Category',role:0,func:'',class:'parentcat',type:'text'},
-    {value:'description',name:'Description',role:0,func:'',class:'description',type:'text'},
-    {value:'priority',name:'Priority',role:0,func:'',class:'priority',type:'text'},
-    {value:'type1',name:'Type',role:0,func:'',class:'type',type:'text'},
-    // { value: 'only_productname', name: 'Products ', role: 0, func: '', class: 'productname', type: 'text' },
-    // {value:'roleaccess',name:'Role Access',role:0,func:'',class:'roleaccess',type:'text'},
-    {value:'status',name:'Status',role:0,func:'',class:'status',type:'checkbox',editrole:['admin']},
-  ];
-  this.formdata=[
-    {inputtype:'text',name:'categoryname',label:'Training Title',placeholder:'Enter Training Title',validationrule:{required:true},validationerrormsg:'is required'},
-    {inputtype:'textarea',name:'description',label:'Description',placeholder:'Enter Description',validationrule:{required:true},validationerrormsg:'is required'},
-    {inputtype:'text',name:'priority',label:'Priority',placeholder:'Enter Priority',validationrule:{required:true},validationerrormsg:'is required'},
-    {inputtype:'select',name:'type1',label:'Training Type',defaultchoice:'Select Training',sourceview:{source:'tranning','condition':{'status':true}},sourcetype:'static',selectvalue:'name',selectid:'name',validationrule:{required:true},validationerrormsg:'is required'},
-    {inputtype:'select',name:'parentcategory',label:'Parent Category',defaultchoice:'Select Category',sourceview:'tranningcategory_view_new',sourcetype:'',selectvalue:'categoryname',selectid:'_id'},
+    this.tabledatalis = [
+      { value: 'id', name: 'Id', role: 0, func: '', class: 'id', type: '#' },
+      { value: 'categoryname', name: 'Training Title', role: 0, func: '', class: 'categoryname', type: 'text' },
+      { value: 'parentcat', name: 'Parent Category', role: 0, func: '', class: 'parentcat', type: 'text' },
+      { value: 'description', name: 'Description', role: 0, func: '', class: 'description', type: 'text' },
+      { value: 'priority', name: 'Priority', role: 0, func: '', class: 'priority', type: 'text' },
+      { value: 'type1', name: 'Type', role: 0, func: '', class: 'type', type: 'text' },
+      // { value: 'only_productname', name: 'Products ', role: 0, func: '', class: 'productname', type: 'text' },
+      // {value:'roleaccess',name:'Role Access',role:0,func:'',class:'roleaccess',type:'text'},
+      { value: 'status', name: 'Status', role: 0, func: '', class: 'status', type: 'checkbox', editrole: ['admin'] },
+    ];
+    this.formdata = [
+      { inputtype: 'text', name: 'categoryname', label: 'Training Title', placeholder: 'Enter Training Title', validationrule: { required: true }, validationerrormsg: 'is required' },
+      { inputtype: 'textarea', name: 'description', label: 'Description', placeholder: 'Enter Description', validationrule: { required: true }, validationerrormsg: 'is required' },
+      { inputtype: 'text', name: 'priority', label: 'Priority', placeholder: 'Enter Priority', validationrule: { required: true }, validationerrormsg: 'is required' },
+      { inputtype: 'select', name: 'type1', label: 'Training Type', defaultchoice: 'Select Training', sourceview: { source: 'tranning', 'condition': { 'status': true } }, sourcetype: 'static', selectvalue: 'name', selectid: 'name', validationrule: { required: true }, validationerrormsg: 'is required' },
+      { inputtype: 'select', name: 'parentcategory', label: 'Parent Category', defaultchoice: 'Select Category', sourceview: { source: 'tranningcategory_view_new' }, sourcetype: '', selectvalue: 'categoryname', selectid: '_id' },
 
-    // {inputtype:'select',name:'roleaccess',label:'Roles can Access',defaultchoice:'Select Roles',sourceview:'roles',sourcetype:'static',selectvalue:'name',selectid:'id',validationrule:{required:true},validationerrormsg:'is required',multiple:true},
-    // {inputtype:'hidden',name:'type',label:"type",value:'tranning'},
-    {inputtype:'select',name:'product',label:'Products',defaultchoice:'Select a Product',sourceview:{source:'products','condition':{'status':true}},multiple:true,selectvalue:'productname',selectid:'_id',validationrule:{required:true},validationerrormsg:'is required'},
-    {inputtype:'checkbox',name:'status',label:'Status',value:false},
-  ];
-    this.datasource={table:'tranningcategory',objarr:['parentcategory']};
+      // {inputtype:'select',name:'roleaccess',label:'Roles can Access',defaultchoice:'Select Roles',sourceview:'roles',sourcetype:'static',selectvalue:'name',selectid:'id',validationrule:{required:true},validationerrormsg:'is required',multiple:true},
+      // {inputtype:'hidden',name:'type',label:"type",value:'tranning'},
+      { inputtype: 'select', name: 'product', label: 'Products', defaultchoice: 'Select a Product', sourceview: { source: 'products', 'condition': { 'status': true } }, multiple: true, selectvalue: 'productname', selectid: '_id', validationrule: { required: true }, validationerrormsg: 'is required' },
+      { inputtype: 'checkbox', name: 'status', label: 'Status', value: false },
+    ];
+    this.datasource = { table: 'tranningcategory', objarr: ['parentcategory'] };
   }
 
   ngOnInit() {

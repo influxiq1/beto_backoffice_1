@@ -115,7 +115,8 @@
   <!--  <h2> Training </h2>-->
   <div class="traing_innerwrapper">
     <div class="training_leftpart" [ngClass]="putclass()">
-      <h2>{{currentcategoryname}} </h2>
+      <h2>{{currentcategoryname}}</h2>
+      <p *ngIf="not_launch.product_data[0].not_launch != 'undefined' && not_launch.product_data[0].not_launch == true"> Date of launch : {{not_launch.product_data[0].launch_date | date}}</p>
 
       <!--  <div *ngIf="this.sorteddatalist[this.sorteddatalist.length-3]">
       <carousel>
@@ -539,16 +540,19 @@
               <!--  *ngIf="selpcat==itemp.catid"-->
               <ng-container *ngFor="let item of notdonecategory">
 
-                <li *ngIf="itemp.catid==item.parentcategory">
+                <li *ngIf="itemp.catid==item.parentcategory"
+                [ngClass]="(item.product_data[0].not_launch === true)?'my-class1':'my-class2'">
                   <ng-container *ngIf="initial != 100">
                     <a (click)="showmodal(initialTraning)"
                       href="javascript:void(0)"> <span><img (click)="cid=item._id;getdatalist()"
                           src="assets/images/filemanager_icon.png"></span> {{item.categoryname}}</a>
+                          <ng-container *ngIf="item.product_data[0].not_launch === true"><p style="color: black;">Date of launch :- {{item.product_data[0].launch_date | date}}</p></ng-container>
                   </ng-container>
                   <ng-container *ngIf="initial >= 100">
                     <a (click)="cid=item._id;getdatalist(item.categoryname);gettraininglist()"
                       href="javascript:void(0)"> <span><img (click)="cid=item._id;getdatalist()"
                           src="assets/images/filemanager_icon.png"></span> {{item.categoryname}}</a>
+                          <ng-container *ngIf="item.product_data[0].not_launch === true"><p style="color: black;">Date of launch :- {{item.product_data[0].launch_date | date}}</p></ng-container>
                   </ng-container>
                 </li>
               </ng-container>
@@ -572,16 +576,18 @@
               <!--  *ngIf="selpcat==itemp.catid"-->
               <ng-container *ngFor="let item of donecategory">
 
-                <li *ngIf="itemp.catid==item.parentcategory">
+                <li *ngIf="itemp.catid==item.parentcategory" [ngClass]="(item.product_data[0].not_launch === true)?'my-class1':'my-class2'">
                   <ng-container *ngIf="initial >= 100">
                     <a (click)="cid=item._id;getdatalist();gettraininglist();"
                       href="javascript:void(0)"> <span><img src="assets/images/filemanager_icon.png"></span>
                       {{item.categoryname}}</a>
+                      <ng-container *ngIf="item.product_data[0].not_launch === true"><p style="color: black;">Date of launch :- {{item.product_data[0].launch_date | date}}</p></ng-container>
                   </ng-container>
                   <ng-container *ngIf="initial != 100">
                     <a (click)="showmodal(initialTraning)"
                       href="javascript:void(0)"> <span><img src="assets/images/filemanager_icon.png"></span>
                       {{item.categoryname}}</a>
+                      <ng-container *ngIf="item.product_data[0].not_launch === true"><p style="color: black;">Date of launch :- {{item.product_data[0].launch_date | date}}</p></ng-container>
                   </ng-container>
                 </li>
               </ng-container>

@@ -408,7 +408,7 @@
                         <div class="form-group">
                             <label> Email Id</label>
                             <input class="form-control" type="text" [formControl]="dataFormForLead.controls['email']"
-                                readonly >
+                            [ngClass]="(leaddata.email.length < 2)?'':'readonly'"  >
                         </div>
 
                         <div class="form-group">

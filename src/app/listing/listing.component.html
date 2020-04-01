@@ -159,7 +159,7 @@
                                 <span class="inner_actionblock_wrapper" *ngIf="router.url=='/manage-leads' && cookeiservice.get('usertype') == 'rep'">
                                 <ng-container *ngIf="openFlag == 1">
                                 <span>
-                                <form [formGroup]="sendLeadEmailForm" (ngSubmit)="leadsMarketingEmail(sendLeadEmailForm.value)">
+                                <form [formGroup]="sendLeadEmailForm" (ngSubmit)="leadsMarketingEmail(sendLeadEmailForm.value, sucessmodalforemail)">
                                     <!-- <input type="text" placeholder="Enter Email" [(ngModel)]="filterval6.email">
                                     <span class="error" *ngIf="filterval6.email == null && leadIsSubmit == 1">Email is Required</span> -->
                                     <input formControlName="email" placeholder="Email Address" class="emailfill1">
@@ -179,7 +179,7 @@
                                 </form>
                             </span>
                             </ng-container>
-                                <button class="openclosereview" (click)=openModal()><ng-container *ngIf="openFlag == 0">Open</ng-container><ng-container *ngIf="openFlag == 1">Close</ng-container> Review</button>
+                                <button class="openclosereview" (click)=openModal()><ng-container *ngIf="openFlag == 0">Send Marketing Review !</ng-container><ng-container *ngIf="openFlag == 1">Close</ng-container></button>
                             </span>
                        
                        
@@ -972,7 +972,7 @@
                         Required</span>
                     <div class="form-group row form-groupbtndiv">
 
-                        <button (click)="marketingreview(selectedlead._id, sucessmodalforemail)">Submit</button>
+                        <button (click)="marketingreview(selectedlead._id, sucessmodalforemail)">send</button>
                         <button (click)="modalRef2.hide();selectedproductid=''"> cancel</button>
                         <div class="clearfix"></div>
 
@@ -1006,7 +1006,7 @@
                         Required</span>
                     <div class="form-group row form-groupbtndiv">
 
-                        <button (click)="contractReview(selectedlead._id, sucessmodalforemail)">Book</button>
+                        <button (click)="contractReview(selectedlead._id, sucessmodalforemail)">send</button>
                         <button (click)="modalRef2.hide();selectedproductid=''"> cancel</button>
                         <div class="clearfix"></div>
 
