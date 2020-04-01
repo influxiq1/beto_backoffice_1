@@ -183,3 +183,13 @@
                background: -ms-linear-gradient(top, rgba(69,232,24,1) 0%, rgba(5,158,18,1) 100%)!important;
                background: linear-gradient(to bottom, rgba(69,232,24,1) 0%, rgba(5,158,18,1) 100%)!important;
                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45e818', endColorstr='#059e12', GradientType=0 )!important;}
+
+
+               .training_leftpartlaunchtext{display: block;
+                    text-align: center;
+                    margin: 10px 0;
+                    background: #f1eeee;
+                    padding: 10px;
+                    border: solid 1px #e1e1e1;
+                    color: #00a8ef;
+                    font-size: 22px;}

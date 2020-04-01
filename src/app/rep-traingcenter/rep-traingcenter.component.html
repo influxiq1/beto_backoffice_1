@@ -116,7 +116,7 @@
   <div class="traing_innerwrapper">
     <div class="training_leftpart" [ngClass]="putclass()">
       <h2>{{currentcategoryname}}</h2>
-      <p *ngIf="not_launch.product_data[0].not_launch != 'undefined' && not_launch.product_data[0].not_launch == true"> Date of launch : {{not_launch.product_data[0].launch_date | date}}</p>
+      <div class="training_leftpartlaunchtext" *ngIf="not_launch.product_data[0].not_launch != 'undefined' && not_launch.product_data[0].not_launch == true"> Date of launch : {{not_launch.product_data[0].launch_date | date}}</div>
 
       <!--  <div *ngIf="this.sorteddatalist[this.sorteddatalist.length-3]">
       <carousel>
@@ -543,9 +543,8 @@
                 <li *ngIf="itemp.catid==item.parentcategory"
                 [ngClass]="(item.product_data[0].not_launch === true)?'my-class1':'my-class2'">
                   <ng-container *ngIf="initial != 100">
-                    <div class="traininedivblock">
-                    <a (click)="showmodal(initialTraning)"
-                      href="javascript:void(0)"> <span><img (click)="cid=item._id;getdatalist()"
+                    <div class="traininedivblock" (click)="showmodal(initialTraning)"> 
+                    <a href="javascript:void(0)"> <span><img (click)="cid=item._id;getdatalist()"
                           src="assets/images/filemanager_icon.png"></span>  {{item.categoryname}} 
                         </a>
                           <ng-container *ngIf="item.product_data[0].not_launch === true"><p class="pdatetext">Date of launch :- {{item.product_data[0].launch_date | date}}</p></ng-container>
@@ -554,9 +553,8 @@
                         
                   </ng-container>
                   <ng-container *ngIf="initial >= 100">
-                  <div class="traininedivblock">
-                    <a (click)="cid=item._id;getdatalist(item.categoryname);gettraininglist()"
-                      href="javascript:void(0)"> <span><img (click)="cid=item._id;getdatalist()"
+                  <div class="traininedivblock" (click)="cid=item._id;getdatalist(item.categoryname);gettraininglist()">
+                    <a  href="javascript:void(0)"> <span><img (click)="cid=item._id;getdatalist()"
                           src="assets/images/filemanager_icon.png"></span>  {{item.categoryname}} 
                         </a>
                          
