@@ -28,7 +28,7 @@ export class ResourcecategoryComponent implements OnInit {
       {inputtype:'text',name:'categoryname',label:'Category Name',placeholder:'Enter Category Name',validationrule:{required:true},validationerrormsg:'is required'},
       {inputtype:'textarea',name:'description',label:'Description',placeholder:'Description',validationrule:{required:true},validationerrormsg:'is required'},
       {inputtype:'number',name:'priority',label:'Priority',placeholder:'Enter Priority',validationrule:{required:true},validationerrormsg:'is required'},
-      {inputtype:'select',name:'product',label:'Products',defaultchoice:'Select a Product',sourceview:{source:'null','condition':{'userid':this.cookieservice.get('userid')}},multiple:true,selectvalue:'product_name',selectid:'product',validationrule:{required:true},validationerrormsg:'is required'},
+      {inputtype:'select',name:'product',label:'Products',defaultchoice:'Select a Product',sourceview:{source:'products','condition':{}},multiple:true,selectvalue:'productname',selectid:'_id',validationrule:{required:true},validationerrormsg:'is required'},
       {inputtype:'checkbox',name:'status',label:'Status',value:false}
     ];
     this.datasource={table:'resourcecategory',objarr:[]};
