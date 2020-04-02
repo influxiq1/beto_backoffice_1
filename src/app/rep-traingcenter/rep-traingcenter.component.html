@@ -116,7 +116,7 @@
   <div class="traing_innerwrapper">
     <div class="training_leftpart" [ngClass]="putclass()">
       <h2>{{currentcategoryname}}</h2>
-      <div class="training_leftpartlaunchtext" *ngIf="not_launch.product_data[0].not_launch != 'undefined' && not_launch.product_data[0].not_launch == true"> Date of launch : {{not_launch.product_data[0].launch_date | date}}</div>
+      <div class="training_leftpartlaunchtext" *ngIf="not_launch.product_data[0].not_launch != 'undefined' && not_launch.product_data[0].not_launch == true"> This opportunity has a future launch date {{not_launch.product_data[0].launch_date | date}}. The innovation of our technologies and partners is well worth the preparation. Be an early adapter and get your training done early. By doing so you will gain access to the earliest developments when we launch this opportunity.</div>
 
       <!--  <div *ngIf="this.sorteddatalist[this.sorteddatalist.length-3]">
       <carousel>
@@ -548,7 +548,7 @@
                           src="assets/images/filemanager_icon.png"></span>  {{item.categoryname}} 
                         </a>
                           <ng-container *ngIf="item.product_data[0].not_launch === true"><p class="pdatetext">Date of launch :- {{item.product_data[0].launch_date | date}}</p></ng-container>
-                        
+                          <ng-container *ngIf="item.product_data[0].not_launch != true"><p class="pdatetext">Launched</p></ng-container>
                         </div> 
                         
                   </ng-container>
@@ -559,6 +559,7 @@
                         </a>
                          
                           <ng-container *ngIf="item.product_data[0].not_launch === true"><p class="pdatetext">Date of launch :- {{item.product_data[0].launch_date | date}}</p></ng-container>
+                          <ng-container *ngIf="item.product_data[0].not_launch != true"><p class="pdatetext">Launched</p></ng-container>
                         
                         </div>
                         </ng-container>
@@ -599,6 +600,7 @@
                       {{item.categoryname}}</a>
                       <ng-container *ngIf="item.product_data[0].not_launch === true"><p style="color: black;">Date of launch :- {{item.product_data[0].launch_date | date}}</p></ng-container>
                   </ng-container>
+                  <ng-container *ngIf="item.product_data[0].not_launch != true"><p class="pdatetext">Launched</p></ng-container>
                 </li>
               </ng-container>
 
