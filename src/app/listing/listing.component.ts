@@ -1200,6 +1200,8 @@ this._http.post(link, source)
       }
 
     onUploadOutput(control: any, i, output: UploadOutput): void {
+        console.log(control);
+        // return;
         if (output.type === 'allAddedToQueue') {
             if (this.router.url == '/belk-upload') {
                 const event: UploadInput = {
@@ -1210,23 +1212,32 @@ this._http.post(link, source)
                 this.uploadInput.emit(event);
             } 
             if(this.router.url != '/belk-upload') {
+                let data = {
+                    bucketname: control.img_record.bucketname,
+                    type: control.img_record.type
+                }
                 const event: UploadInput = {
                     type: 'uploadAll',
-                    url: this._commonservice.uploadurl_old + 'uploads',
+                    url: this._commonservice.nodesslurl +'uploads?path='+control.img_record.path+'&prefix='+control.img_record.prefix,
                     method: 'POST',
+                    data: data
                 };
                 this.uploadInput.emit(event);
             };
         } else if (output.type === 'addedToQueue' && typeof output.file !== 'undefined') {
             if (output.file.response != "") {
                 this.files = [];
+                console.log(output, '++++ outputs')
                 this.files.push(output.file);
                 this.lengthis[i] = this.files.length;
                 this.percentageis[i] = this.files[0].progress.data.percentage;
             }
         } else if (output.type === 'uploading' && typeof output.file !== 'undefined') {
+            
+            console.log(output, '++++ uploading');
             const index = this.files.findIndex(file => typeof output.file !== 'undefined' && file.id === output.file.id);
             this.files[index] = output.file;
+
             this.lengthis[i] = this.files.length;
             this.percentageis[i] = this.files[0].progress.data.percentage;
         } else if (output.type === 'removed') {
@@ -1244,7 +1255,7 @@ this._http.post(link, source)
         }
     }
     addtodataform(control: any, i) {
-        console.log(control, i,'+++++')
+        // console.log(control, i,'+++++')
         this.nameis[i] = this.files[0].name;
         if (this.files[0].response !=undefined && this.router.url == '/belk-upload') {
             this.csvHeaderAllData = this.files[0].response;
