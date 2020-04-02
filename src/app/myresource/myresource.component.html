@@ -10,8 +10,11 @@
   <div>
 
       <div class="main_divbody" *ngFor="let item of resources| orderBy:'priority';let i=index;"> <!--:'reverse'-->
-       <div class="inner_resources_block_head" id={{item.categoryname}}> {{item.categoryname}} <ng-container *ngIf="item.product_data != null && item.product_data[0] != 'undefined' && item.product_data[0].launch_date != null && item.product_data[0].launch_date != 'undefined'"> Date of launch :- {{item.product_data[0].launch_date | date}} </ng-container></div>
-          <div class="inner_resources_block">
+       <div class="inner_resources_block_head" id={{item.categoryname}}> {{item.categoryname}}  </div>   
+        <div class="inner_resources_block_head_newcon">
+        <ng-container *ngIf="item.product_data != null && item.product_data[0] != 'undefined' && item.product_data[0].launch_date != null && item.product_data[0].launch_date != 'undefined'"> <span>Date of launch :- {{item.product_data[0].launch_date | date}} </span></ng-container></div>
+      
+       <div class="inner_resources_block">
 
               <div *ngFor="let item1 of item.resource">
 
