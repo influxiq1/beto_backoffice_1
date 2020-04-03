@@ -588,19 +588,30 @@
               <ng-container *ngFor="let item of donecategory">
 
                 <li *ngIf="itemp.catid==item.parentcategory" [ngClass]="(item.product_data[0].not_launch === true)?'my-class1':'my-class2'">
+                 
+
                   <ng-container *ngIf="initial >= 100">
-                    <a (click)="cid=item._id;getdatalist();gettraininglist();"
-                      href="javascript:void(0)"> <span><img src="assets/images/filemanager_icon.png"></span>
+                    <div class="traininedivblock" (click)="cid=item._id;getdatalist();gettraininglist();">
+                    <a  href="javascript:void(0)"> <span><img src="assets/images/filemanager_icon.png"></span>
                       {{item.categoryname}}</a>
-                      <ng-container *ngIf="item.product_data[0].not_launch === true"><p style="color: black;">Date of launch :- {{item.product_data[0].launch_date | date}}</p></ng-container>
-                  </ng-container>
+                      <ng-container *ngIf="item.product_data[0].not_launch === true"><p class="pdatetext">Date of launch :- {{item.product_data[0].launch_date | date}}</p></ng-container>
+                    </div>
+                    </ng-container>
+
+
+                    <div class="traininedivblock"  >
                   <ng-container *ngIf="initial != 100">
-                    <a (click)="showmodal(initialTraning)"
-                      href="javascript:void(0)"> <span><img src="assets/images/filemanager_icon.png"></span>
+                   
+                    <a  (click)="showmodal(initialTraning)" href="javascript:void(0)"> <span><img src="assets/images/filemanager_icon.png"></span>
                       {{item.categoryname}}</a>
-                      <ng-container *ngIf="item.product_data[0].not_launch === true"><p style="color: black;">Date of launch :- {{item.product_data[0].launch_date | date}}</p></ng-container>
-                  </ng-container>
-                  <ng-container *ngIf="item.product_data[0].not_launch != true"><p class="pdatetext">Launched</p></ng-container>
+                      <ng-container *ngIf="item.product_data[0].not_launch === true"><p class="pdatetext">Date of launch :- {{item.product_data[0].launch_date | date}}</p></ng-container>
+                  
+                           </ng-container>
+
+                           <ng-container *ngIf="item.product_data[0].not_launch != true"><p class="pdatetext">Launched</p></ng-container>
+                          </div>  
+                   
+               
                 </li>
               </ng-container>
 
