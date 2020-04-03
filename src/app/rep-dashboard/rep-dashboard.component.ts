@@ -27,6 +27,7 @@ export class RepDashboardComponent implements OnInit, AfterViewInit {
   public mdstocktrainingpercentage:any ;
   public is_consultant:any;
   public share_link: any = [];
+  public sales_decks:any;
   constructor(@Inject(WINDOW) private window: Window, public _commonservice: Commonservices, private router: Router, public _http: HttpClient, public modal: BsModalService, public cookeiservice: CookieService) {
 
     window.scrollTo(1000, 0);
@@ -160,6 +161,14 @@ export class RepDashboardComponent implements OnInit, AfterViewInit {
   }, 15000);
   }
   ngOnInit() {
+    const link = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
+    this._http.post(link,{source:'sales-decks_view'}).subscribe((res:any) => {
+      console.log(res,'+++res');
+      this.sales_decks = res.res;
+    })
+
+
+
     let link2 = this._commonservice.nodesslurl + 'complete_traning_catagory_by_user';
     this._http.post(link2, {
       "condition": { "userid": this.cookeiservice.get('userid') }
@@ -178,7 +187,7 @@ export class RepDashboardComponent implements OnInit, AfterViewInit {
               // return;
             }
           }
-          console.log('calenderaccess+++++----++++',this.share_link)
+          // console.log('calenderaccess+++++----++++',this.share_link)
         }
       });
   }
