@@ -2874,6 +2874,8 @@ text-align: center;}
 /* 
  .manageleads .admin_table_wrapper td:nth-of-type(10){ text-align: center;}  */
 
+ .mytranningcategory .search_content button { padding: 0 10px!important;}
+
  .pagecountblockclsbody {
     display: block;
     text-align: center;

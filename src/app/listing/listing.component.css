@@ -148,7 +148,7 @@ modal-container .modal-content {
 
   .search_content button {
     min-width: 50px!important;
-    padding: 0px 0 0 0!important;
+    padding: 0px 10px!important;
     text-align: center;
 }
   @media screen and (max-width: 1199px){
