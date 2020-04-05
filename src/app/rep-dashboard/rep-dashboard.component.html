@@ -159,7 +159,7 @@
     <div class="rep_dashboard_newblock3_sub">
       <h6>{{item.categoryname}}</h6> <ng-container *ngIf="item.product_data != null && item.product_data[0].not_launch == true"> <h6>Date of launch :- {{item.product_data[0].launch_date | date}}</h6> <i class="fa fa-exclamation-circle" aria-hidden="true" (click)="launchDetails(item.product_data[0].launch_date,launchDetailsModal)"></i></ng-container>
       <ng-container *ngIf="item.product_data == null || item.product_data[0].not_launch != true"> <h6>Launched</h6></ng-container>
-      <img src="{{item.file3.basepath}}/{{item.file3.data.path}}/{{item.file3.data.fileservername}}" alt="#">
+     <span class="SalesDeckimg"> <img src="{{item.file3.basepath}}/{{item.file3.data.path}}/{{item.file3.data.fileservername}}" alt="#"></span>
       <a href="{{item.file2.basepath}}/{{item.file2.data.path}}/{{item.file2.data.fileservername}}
       " target="_blank">Download in PDF</a>
       <a href="{{item.file1.basepath}}/{{item.file1.data.path}}/{{item.file1.data.fileservername}}

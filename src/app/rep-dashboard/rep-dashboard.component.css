@@ -28,7 +28,79 @@
     line-height: 37px;
     border-radius: 5px; border: solid 1px #4c4c4c!important;}
  
+.SalesDeckimg{ height: 498px; overflow:hidden;     display: block;}
 
+
+@media screen and (max-width: 1880px){
+    .SalesDeckimg{ height: 470px;}
+}
+
+@media screen and (max-width: 1800px){
+    .SalesDeckimg{ height: 450px;}
+}
+
+@media screen and (max-width: 1740px){
+    .SalesDeckimg{ height: 430px;}
+}
+
+@media screen and (max-width: 1660px){
+    .SalesDeckimg{ height: 410px;}
+}
+
+@media screen and (max-width: 1580px){
+    .SalesDeckimg{ height: 390px;}
+}
+
+@media screen and (max-width: 1500px){
+    .SalesDeckimg{ height: 360px;}
+}
+
+@media screen and (max-width: 1400px){
+    .SalesDeckimg{ height: 340px;}
+}
+
+@media screen and (max-width: 1320px){
+    .SalesDeckimg{ height: 320px;}
+}
+
+@media screen and (max-width: 1240px){
+    .SalesDeckimg{ height: 300px;}
+}
+
+@media screen and (max-width: 1160px){
+    .SalesDeckimg{ height: 280px;}
+}
+
+@media screen and (max-width: 1080px){
+    .SalesDeckimg{ height: 260px;}
+}
+
+@media screen and (max-width: 1000px){
+    .SalesDeckimg{ height: 240px;}
+}
+
+@media screen and (max-width: 930px){
+    .SalesDeckimg{ height: 220px;}
+}
+
+@media screen and (max-width: 860px){
+    .SalesDeckimg{ height: 210px;}
+}
+
+@media screen and (max-width: 820px){
+    .SalesDeckimg{ height: 200px;}
+}
+@media screen and (max-width: 790px){
+    .SalesDeckimg{ height: 190px;}
+}
+
+@media screen and (max-width: 760px){
+    .SalesDeckimg{ height: 180px;}
+}
+
+@media screen and (max-width: 720px){
+    .SalesDeckimg{ height: auto;}
+}
 
 
     @media screen and (max-width: 580px){
