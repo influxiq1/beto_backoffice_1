@@ -48,9 +48,13 @@ export class RepDashboardComponent implements OnInit, AfterViewInit {
     }
    
   }
-  goToMyResource(val:any){
-    console.log(val);
-    this.router.navigateByUrl('/myresource/'+this.cookeiservice.get('userid')+'/'+val)
+  goToMyResource(val: any) {
+    // console.log(val);
+    if (val != null) {
+      val = val.replace(/ /gi, "_");
+      // console.log('+++++', val);
+      this.router.navigateByUrl('/myresource/' + this.cookeiservice.get('userid') + '/' + val)
+    }
   }
 
   trainingpercentage(){
@@ -63,7 +67,7 @@ export class RepDashboardComponent implements OnInit, AfterViewInit {
     .subscribe(res=>{
       let result:any;
       result = res;
-      console.log('++++++++++++++++++++++++++++++ trainingcategorypercent', res)
+      // console.log('++++++++++++++++++++++++++++++ trainingcategorypercent', res)
       if(result.data[0] !=null && result.data[0].traininglessonpercent !=null)this.awstrainingpercentage = result.data[0].traininglessonpercent;
     })
   }
@@ -74,13 +78,13 @@ export class RepDashboardComponent implements OnInit, AfterViewInit {
       "trainingcategory" : this._commonservice.mdstocktrainingid,
       "user_id" : this.userId
     };
-    console.log(data);
-    console.log(this._commonservice.mdstocktrainingid);
+    // console.log(data);
+    // console.log(this._commonservice.mdstocktrainingid);
     this._http.post(link,data)
     .subscribe(res=>{
       let result:any;
       result = res;
-      console.log('------------------- mdstocktrainingpercentage', res)
+      // console.log('------------------- mdstocktrainingpercentage', res)
       if(result.data[0]!=null && result.data[0].traininglessonpercent!=null )this.mdstocktrainingpercentage = result.data[0].traininglessonpercent;
     })
   }
@@ -116,8 +120,8 @@ export class RepDashboardComponent implements OnInit, AfterViewInit {
           if (this.repDetailsNew.length > 0 && this.repDetailsNew[0].trainingpercentage >= 100 && this.repDetailsNew[0].is_discovery == false) {
             setTimeout(() => {
               this.link.nativeElement.click();
-              console.log(this.link);
-              console.log('clicked');
+              // console.log(this.link);
+              // console.log('clicked');
             }, 50);
           }
           else {
@@ -133,7 +137,7 @@ export class RepDashboardComponent implements OnInit, AfterViewInit {
                   let result: any;
                   result = res;
 
-                  console.log("user_parent_category_percent",result.res);
+                  // console.log("user_parent_category_percent",result.res);
                   // if (result.resc >0) {
                   for (let i in result.res) {
                     if (result.res[i].trainingpercent == 100) {
@@ -163,7 +167,7 @@ export class RepDashboardComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     const link = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
     this._http.post(link,{source:'sales-decks_view'}).subscribe((res:any) => {
-      console.log(res,'+++res');
+      // console.log(res,'+++res');
       this.sales_decks = res.res;
     })
 
@@ -174,7 +178,7 @@ export class RepDashboardComponent implements OnInit, AfterViewInit {
       "condition": { "userid": this.cookeiservice.get('userid') }
     })
       .subscribe((res: any) => {
-        console.log("++")
+        // console.log("++")
         let training_lesson_count_val: any = res.data.training_lesson_count;
         let complete_traning_catagory_by_user_val: any = res.data.complete_traning_catagory_by_user;
         for (const item of training_lesson_count_val) {

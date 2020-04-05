@@ -127,22 +127,22 @@
 
   <p>The following are the Sales Deck Downloads for each of the products that we have. We suggest that you download each of the Decks onto your desktop computer as well as your tablet if you are out visiting companies. </p>
 
-  <!-- <ng-container *ngFor="let item of sales_decks">
+  <ng-container *ngFor="let item of sales_decks">
     <div class="rep_dashboard_newblock3_sub">
-      <h6>UTA</h6>
+      <h6>{{item.categoryname}}</h6>
       <img src="{{item.file3.basepath}}/{{item.file3.data.path}}/{{item.file3.data.fileservername}}" alt="#">
-      <a href="https://betoparedesbackendfiles.s3.us-east-2.amazonaws.com/UniversalTechAssociatesPowerPoint+Representation++PPT.pdf
+      <a href="{{item.file2.basepath}}/{{item.file2.data.path}}/{{item.file2.data.fileservername}}
       " target="_blank">Download in PDF</a>
-      <a href="https://betoparedesbackendfiles.s3.us-east-2.amazonaws.com/UniversalTechAssociatesPowerPoint+Representation++PPT.pptx
+      <a href="{{item.file1.basepath}}/{{item.file1.data.path}}/{{item.file1.data.fileservername}}
       " target="_blank">Download in PowerPoint</a>
   
-      <a (click)="goToMyResource('Universal_Tech_Associates')">Program Resources </a>
+      <a (click)="goToMyResource(item.categoryname)">Program Resources </a>
   
       <a href="https://betoparedesmedia.go.customprintcenter.com/" target="_blank">Print Material</a>
     </div>
-  </ng-container> -->
+  </ng-container>
 
-  <div class="rep_dashboard_newblock3_sub">
+  <!-- <div class="rep_dashboard_newblock3_sub">
     <h6>UTA</h6>
     <img src="../../assets/images/repdashboard_files/UTA/UTA.jpg" alt="#">
     <a href="https://betoparedesbackendfiles.s3.us-east-2.amazonaws.com/UniversalTechAssociatesPowerPoint+Representation++PPT.pdf
@@ -220,7 +220,7 @@
     <a href="https://betoparedesbackendfiles.s3.us-east-2.amazonaws.com/Monetize365+Deck.pptx" target="_blank">Download in PowerPoint</a>
     <a href="javascript:void(0)"  >Program Resources </a>
     <a href="javascript:void(0)"  >Print Material</a>
-  </div>
+  </div> -->
 
 
 </div>

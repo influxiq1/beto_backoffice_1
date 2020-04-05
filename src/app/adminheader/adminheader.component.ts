@@ -116,7 +116,7 @@ export class AdminheaderComponent implements OnInit {
       "condition": { "userid": this.cookie.get('userid') }
     })
       .subscribe((res: any) => {
-        console.log("++")
+        // console.log("++")
         let training_lesson_count_val: any = res.data.training_lesson_count;
         let complete_traning_catagory_by_user_val: any = res.data.complete_traning_catagory_by_user;
         for (const item of training_lesson_count_val) {
@@ -153,8 +153,8 @@ export class AdminheaderComponent implements OnInit {
     let data: any= {"email":email}
     this._http.post(link, data)
       .subscribe(res => {
-        console.log('Mail send successful');
-        console.log(res);
+        // console.log('Mail send successful');
+        // console.log(res);
       })
   }
 
@@ -171,7 +171,7 @@ export class AdminheaderComponent implements OnInit {
           
           this.repDetailsNew = result.data;
           if (this.repDetailsNew[0] != null && this.repDetailsNew[0].calenderaccess != null) {
-          console.log('calenderaccess+++++++++++++',result)
+          // console.log('calenderaccess+++++++++++++',result)
             this.cookie.set('calenderaccess', this.repDetailsNew[0].calenderaccess);
             this.calenderaccess = this.repDetailsNew[0].calenderaccess;
           } else if (this.repDetailsNew[0] == 'undefined' || this.repDetailsNew[0] == null) {
@@ -180,7 +180,7 @@ export class AdminheaderComponent implements OnInit {
               "condition": { "userid": this.cookie.get('userid') }
             })
               .subscribe((res: any) => {
-                console.log("++")
+                // console.log("++")
                 let training_lesson_count_val: any = res.data.training_lesson_count;
                 let complete_traning_catagory_by_user_val: any = res.data.complete_traning_catagory_by_user;
                 for (const item of training_lesson_count_val) {
@@ -188,7 +188,7 @@ export class AdminheaderComponent implements OnInit {
                   for (const complete_traning of complete_traning_catagory_by_user_val) {
                     // console.log(complete_traning);
                     if (item._id == complete_traning.trainingcategory && item.count >= complete_traning.lessondone && complete_traning.trainingcategory != "5e60865df4a08401e0e00e6c") {
-                      console.log('calenderaccess+++++----++++')
+                      // console.log('calenderaccess+++++----++++')
                       this.gameplanButton = 1;
                       this.calenderaccess = 1;
                       this.cookie.set('calenderaccess', '1');
@@ -376,7 +376,7 @@ export class AdminheaderComponent implements OnInit {
       });
   }
   gototrainingsectionwithcat() {
-    console.log(this.initial)
+    // console.log(this.initial)
     if (this.initial != 100 || this.cookie.get('calenderaccess')) {
       var link = 'reptrainingcenter/5e60865df4a08401e0e00e6c';
       this.router.navigate([link]);
