@@ -22,6 +22,7 @@ export class RepDashboardComponent implements OnInit, AfterViewInit {
   public recid: any;
   public modalRef: BsModalRef;
   public userId: any;
+  public launchDate: any;
   public calenderaccess:any;
   public awstrainingpercentage:any ;
   public mdstocktrainingpercentage:any ;
@@ -102,6 +103,15 @@ export class RepDashboardComponent implements OnInit, AfterViewInit {
     document.body.removeChild(selBox);
 }
   ngAfterViewInit() {
+  }
+
+  launchDetails(val:any, template: TemplateRef<any>) {
+    console.log(val);
+    this.launchDate = val;
+    this.modalRef = this.modal.show(template);
+    setTimeout(() => {
+    this.modalRef.hide();       //to hide the modal in 10 sec
+  }, 2000);
   }
 
   userReport(){
@@ -187,13 +197,13 @@ export class RepDashboardComponent implements OnInit, AfterViewInit {
           for (const complete_traning of complete_traning_catagory_by_user_val) {
             // console.log(complete_traning);
             if (item._id == complete_traning.trainingcategory && item.count >= complete_traning.lessondone && complete_traning.trainingcategory != "5e60865df4a08401e0e00e6c") {
-              this.share_link.push([{trainingcategory:complete_traning.trainingcategory, product_id: item.product[0]}]);
+              this.share_link.push({ product_id: item.product[0], product_name: item.product_name});
               this.cookeiservice.set('calenderaccess', '1');
               // return;
             }
           }
-          // console.log('calenderaccess+++++----++++',this.share_link)
         }
+        // console.log('calenderaccess+++++----++++',this.share_link)
       });
   }
   getRepDetails() {

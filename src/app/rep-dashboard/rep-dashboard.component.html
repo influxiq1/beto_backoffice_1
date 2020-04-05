@@ -69,7 +69,35 @@
     </div>
   </div>
 </div>
-<div class="rep_dashboard_wrapper2_btn_wrapper asnewclass" *ngIf="awstrainingpercentage!=null && (awstrainingpercentage==100 || awstrainingpercentage>100)">
+<span *ngIf="share_link != null">
+<ng-container *ngFor="let item of share_link">
+  <!-- <h1>{{item[0] | json}}</h1> -->
+<div class="rep_dashboard_wrapper2_btn_wrapper asnewclass">
+  <div class="rep_dashboard_wrapper2_btn_wrapper_sub">
+    <div class="sherelinkwrapper">
+      <div class="ascol ascol1">
+        <p>{{item.product_name}} Marketing Video</p>
+      </div>
+      <div class="ascol ascol2">
+        <div class="urllink">
+          <a style="pointer-events: none;cursor: default;" href="https://marketing.betoparedes.com/marketing-review/{{item.product_id}}/{{userId}}">https://marketing.betoparedes.com/marketing-review/{{item.product_id}}/{{userId}}</a>
+        </div>
+          <button class="urlcopybtn" (click)="copyText('https://marketing.betoparedes.com/marketing-review/'+item.product_id+'/'+userId)"><i class="fa fa-link" aria-hidden="true"></i></button>
+      </div>
+      <div class="ascol ascol3">
+          <a target="_blank" href="https://www.facebook.com/sharer.php?u=https://marketing.betoparedes.com/marketing-review/{{item.product_id}}/{{userId}}" class="icon-button facebook"><i class="fa fa-facebook"></i></a>
+          <!-- <a href="#" class="icon-button google-plus"><i class="fa fa-twitter"></i></a>         -->
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://marketing.betoparedes.com/marketing-review/{{item.product_id}}/{{userId}}" target="_blank" class="icon-button linkedin"><i class="fa fa-linkedin"></i></a>
+          <a href="https://twitter.com/intent/tweet?url=https://marketing.betoparedes.com/marketing-review/{{item.product_id}}/{{userId}}"  target="_blank" class="icon-button twitter"><i class="fa fa-twitter"></i></a>
+          <a href="https://www.tumblr.com/widgets/share/tool?shareSource=legacy&canonicalUrl=https://marketing.betoparedes.com/marketing-review/{{item.product_id}}/{{userId}}" target="_blank" class="icon-button tumblr"><i class="fa fa-tumblr"></i></a>
+      </div>
+     
+    </div>
+  </div>
+</div>
+</ng-container>
+</span>
+<!-- <div class="rep_dashboard_wrapper2_btn_wrapper asnewclass" *ngIf="awstrainingpercentage!=null && (awstrainingpercentage==100 || awstrainingpercentage>100)">
   <div class="rep_dashboard_wrapper2_btn_wrapper_sub">
     <div class="sherelinkwrapper">
       <div class="ascol ascol1" style="width:52.9% !important">
@@ -83,11 +111,11 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <!-- this block use for MD Stock sign up link start -->
 
-<div class="rep_dashboard_wrapper2_btn_wrapper asnewclass" *ngIf="mdstocktrainingpercentage!=null && (mdstocktrainingpercentage==100 || mdstocktrainingpercentage>100)">
+<!-- <div class="rep_dashboard_wrapper2_btn_wrapper asnewclass" *ngIf="mdstocktrainingpercentage!=null && (mdstocktrainingpercentage==100 || mdstocktrainingpercentage>100)">
   <div class="rep_dashboard_wrapper2_btn_wrapper_sub">
     <div class="sherelinkwrapper">
       <div class="ascol ascol1" style="width:52.9% !important">
@@ -101,7 +129,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 <!-- this block use for MD Stock sign up link end -->
 
 
@@ -129,7 +157,7 @@
 
   <ng-container *ngFor="let item of sales_decks">
     <div class="rep_dashboard_newblock3_sub">
-      <h6>{{item.categoryname}}</h6> <ng-container *ngIf="item.product_data != null && item.product_data[0].not_launch == true"> <h6>Date of launch :- {{item.product_data[0].launch_date | date}}</h6></ng-container>
+      <h6>{{item.categoryname}}</h6> <ng-container *ngIf="item.product_data != null && item.product_data[0].not_launch == true"> <h6>Date of launch :- {{item.product_data[0].launch_date | date}}</h6> <i class="fa fa-exclamation-circle" aria-hidden="true" (click)="launchDetails(item.product_data[0].launch_date,launchDetailsModal)"></i></ng-container>
       <ng-container *ngIf="item.product_data == null || item.product_data[0].not_launch != true"> <h6>Launched</h6></ng-container>
       <img src="{{item.file3.basepath}}/{{item.file3.data.path}}/{{item.file3.data.fileservername}}" alt="#">
       <a href="{{item.file2.basepath}}/{{item.file2.data.path}}/{{item.file2.data.fileservername}}
@@ -260,3 +288,17 @@
 
 
   <button style="display: none;" #modalopenlink class="openmodal" (click)="openModal(trainingCompletedModal)">Open Modal</button>
+
+
+
+  <ng-template #launchDetailsModal>
+    <div class="modal-body brandmanagement_modal successmodal_listing">
+      <div class="logo_wrapper">
+        <img src="assets/images/logo.png">
+      </div>
+      <div class="btn_cnt">
+        This opportunity has a future launch date {{launchDate | date}}. The innovation of our technologies and partners is well worth the preparation. Be an early adapter and get your training done early. By doing so you will gain access to the earliest developments when we launch this opportunity.</div>
+    </div>
+    <div>
+    </div>
+  </ng-template>

@@ -3,6 +3,7 @@ import { Router, ActivatedRoute} from '@angular/router';
 import {Commonservices} from '../app.commonservices' ;
 import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
  declare var $: any;
 
 @Component({
@@ -16,9 +17,11 @@ export class MyresourceComponent implements OnInit {
   public resources:any;
   public catid:any;
   public catname: any;
+  public launchDate: any;
+  public modalRef: BsModalRef;
     orderbyquery: any;
 
-    constructor(public cookie:CookieService,public router:Router,private _commonservices: Commonservices,private _http: HttpClient, public route:ActivatedRoute) {
+    constructor(public cookie:CookieService,public router:Router,private _commonservices: Commonservices,private _http: HttpClient, public route:ActivatedRoute, public modal: BsModalService) {
   }
 
   ngOnInit() {
@@ -32,6 +35,14 @@ export class MyresourceComponent implements OnInit {
             }
         })
       this.orderbyquery = 'firstname';
+  }
+  launchDetails(val:any, template: TemplateRef<any>) {
+    console.log(val);
+    this.launchDate = val;
+    this.modalRef = this.modal.show(template);
+    setTimeout(() => {
+    this.modalRef.hide();       //to hide the modal in 10 sec
+  }, 2000);
   }
 
   
