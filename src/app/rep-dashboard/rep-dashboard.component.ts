@@ -169,6 +169,7 @@ export class RepDashboardComponent implements OnInit, AfterViewInit {
     this._http.post(link,{source:'sales-decks_view'}).subscribe((res:any) => {
       // console.log(res,'+++res');
       this.sales_decks = res.res;
+      // console.log(this.sales_decks[1].product_data[0].length,'+++__++__+')
     })
 
 
