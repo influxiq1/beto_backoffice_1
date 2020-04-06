@@ -215,6 +215,38 @@
                             </div>
 
                         </div>
+                        
+                <!-- added by himadri -->
+                <span *ngIf="share_link != null">
+                    <ng-container *ngFor="let item of share_link">
+                      <!-- <h1>{{item[0] | json}}</h1> -->
+                    <div class="rep_dashboard_wrapper2_btn_wrapper asnewclass">
+                      <div class="rep_dashboard_wrapper2_btn_wrapper_sub">
+                        <div class="sherelinkwrapper">
+                          <div class="ascol ascol1">
+                            <p>{{item.product_name}} Marketing Video</p>
+                          </div>
+                          <div class="ascol ascol2">
+                            <div class="urllink">
+                              <a style="pointer-events: none;cursor: default;" href="https://marketing.betoparedes.com/marketing-review/{{item.product_id}}/{{userId}}">https://marketing.betoparedes.com/marketing-review/{{item.product_id}}/{{userId}}</a>
+                            </div>
+                              <button class="urlcopybtn" (click)="copyText('https://marketing.betoparedes.com/marketing-review/'+item.product_id+'/'+userId)"><i class="fa fa-link" aria-hidden="true"></i></button>
+                          </div>
+                          <div class="ascol ascol3">
+                              <a target="_blank" href="https://www.facebook.com/sharer.php?u=https://marketing.betoparedes.com/marketing-review/{{item.product_id}}/{{userId}}" class="icon-button facebook"><i class="fa fa-facebook"></i></a>
+                              <!-- <a href="#" class="icon-button google-plus"><i class="fa fa-twitter"></i></a>         -->
+                              <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://marketing.betoparedes.com/marketing-review/{{item.product_id}}/{{userId}}" target="_blank" class="icon-button linkedin"><i class="fa fa-linkedin"></i></a>
+                              <a href="https://twitter.com/intent/tweet?url=https://marketing.betoparedes.com/marketing-review/{{item.product_id}}/{{userId}}"  target="_blank" class="icon-button twitter"><i class="fa fa-twitter"></i></a>
+                              <a href="https://www.tumblr.com/widgets/share/tool?shareSource=legacy&canonicalUrl=https://marketing.betoparedes.com/marketing-review/{{item.product_id}}/{{userId}}" target="_blank" class="icon-button tumblr"><i class="fa fa-tumblr"></i></a>
+                          </div>
+                         
+                        </div>
+                      </div>
+                    </div>
+                    </ng-container>
+                    </span>
+
+                    <!-- added by himadri -->
                     </div>
 
                     <div class="table-responsive admin_table_wrapper">
@@ -541,6 +573,11 @@
                        
                     </div>
                 </div>
+
+
+
+
+
                 <ng-container *ngIf="sourcelimitval != null && sourcelimitval != ''" >
                 <span style="margin-top:20px; display:block;">
                     <div class="pagecountblock">

@@ -20,6 +20,7 @@ declare var $: any;
     providers: [Commonservices],
 })
 export class ListingComponent implements OnInit {
+    public share_link:any = [];
     public csvHeader: any;
     sendLeadEmailForm: FormGroup;
     public csvHeaderAllData: any = '';
@@ -169,6 +170,30 @@ export class ListingComponent implements OnInit {
     }
 
     ngOnInit() {
+
+
+        let link2 = this._commonservice.nodesslurl + 'complete_traning_catagory_by_user';
+        this._http.post(link2, {
+          "condition": { "userid": this.cookeiservice.get('userid') }
+        })
+          .subscribe((res: any) => {
+            // console.log("++")
+            let training_lesson_count_val: any = res.data.training_lesson_count;
+            let complete_traning_catagory_by_user_val: any = res.data.complete_traning_catagory_by_user;
+            for (const item of training_lesson_count_val) {
+              // console.log(item);
+              for (const complete_traning of complete_traning_catagory_by_user_val) {
+
+                if (item._id == complete_traning.trainingcategory && item.count >= complete_traning.lessondone && complete_traning.trainingcategory != "5e60865df4a08401e0e00e6c") {
+                    this.share_link.push({ product_id: item.product[0], product_name: item.product_name});
+                  }
+              }
+            }
+          });
+
+
+
+
         this.sendLeadEmailForm= this.formgroup.group({
             'email': ['', Validators.compose([Validators.required, Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])],
             'product_id':['',Validators.required]
