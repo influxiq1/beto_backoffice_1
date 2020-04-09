@@ -12,7 +12,14 @@
       <ng-container class="main_divbody" *ngFor="let item of resources| orderBy:'priority';let i=index;"> <!--:'reverse'-->
        <div class="inner_resources_block_head" id={{item.categoryname}}> {{item.categoryname}}  </div>   
         <div class="inner_resources_block_head_newcon">
-        <ng-container *ngIf="item.product_data != null && item.product_data[0] != 'undefined' && item.product_data[0].launch_date != null && item.product_data[0].launch_date != 'undefined'"> <span>Date of launch :- {{item.product_data[0].launch_date | date}} </span> <i class="fa fa-exclamation-circle" aria-hidden="true" (click)="launchDetails(item.product_data[0].launch_date,launchDetailsModal)"></i></ng-container></div>
+          
+        <ng-container *ngIf="item.product_data != null && item.product_data[0] != 'undefined' && item.product_data[0].launch_date != null && item.product_data[0].launch_date != 'undefined'">
+          <span>Date of launch :- {{item.product_data[0].launch_date | date}} 
+           <i class="fa fa-exclamation-circle" aria-hidden="true" (click)="launchDetails(item.product_data[0].launch_date,launchDetailsModal)"></i>
+          </span>
+          </ng-container>
+          
+          </div>
       
        <div class="inner_resources_block">
 

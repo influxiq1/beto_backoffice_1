@@ -1631,6 +1631,10 @@
 
 
 @media screen and (max-width:720px) {
+
+    .rep_dashboard_newblock3_sub h6 { text-align: center;}
+    .rep_dashboard_newblock3_sub .launchedtext{ text-align: center; padding-top: 0px;}
+
     .rep_dashboard_newblock3_sub {
         width: 100%;  margin: 10px 0;
     }
