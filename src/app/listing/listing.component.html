@@ -217,7 +217,7 @@
                         </div>
                         
                 <!-- added by himadri -->
-                <span *ngIf="share_link != null">
+                <span *ngIf="share_link != null && router.url=='/repdashboard'">
                     <ng-container *ngFor="let item of share_link">
                       <!-- <h1>{{item[0] | json}}</h1> -->
                     <div class="rep_dashboard_wrapper2_btn_wrapper asnewclass">
