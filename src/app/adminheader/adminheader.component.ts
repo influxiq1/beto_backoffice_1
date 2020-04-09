@@ -176,7 +176,7 @@ export class AdminheaderComponent implements OnInit {
           // console.log('calenderaccess+++++++++++++',result)
             this.cookie.set('calenderaccess', this.repDetailsNew[0].calenderaccess);
             this.calenderaccess = this.repDetailsNew[0].calenderaccess;
-          } else if (this.router.url == '/repdashboard' && (typeof(this.repDetailsNew[0] )== 'undefined' || this.repDetailsNew[0] == null)) {
+          } else if ((typeof(this.repDetailsNew[0] )== 'undefined' || this.repDetailsNew[0] == null)) {
             let link2 = this._commonservices.nodesslurl + 'complete_traning_catagory_by_user';
             this._http.post(link2, {
               "condition": { "userid": this.cookie.get('userid') }
