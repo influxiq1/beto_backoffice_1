@@ -58,7 +58,7 @@
     "ngx-uploader": "^7.1.0",
     "nodemailer": "^5.1.1",
     "rxjs": "~6.3.3",
-    "sweetalert2": "^9.10.9",
+    "sweetalert2": "^9.10.10",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
   },

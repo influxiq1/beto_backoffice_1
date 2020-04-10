@@ -2405,6 +2405,11 @@ padding-top: 25px;
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe', GradientType=0 );  border:  solid 1px #ddd;}
 .account_inner_wrapperbg1{ background: url("../images/useraccountsetting_bgnew.png") no-repeat 890px bottom; padding: 15px;}
 
+.swal2-popup{ border: 2px solid #00a8ef; padding: 25px;}
+
+.swal2-title{    font-family: 'RalewayBold';     text-transform: capitalize!important;
+    color: #000!important;}
+
 
 @media screen and (max-width:1650px) {
     .account_inner_wrapperbg1{ background-position: 780px bottom;}
