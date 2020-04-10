@@ -110,7 +110,7 @@ export class RepDashboardComponent implements OnInit, AfterViewInit {
       icon: 'success',
       title: 'copied to clipboard',
       showConfirmButton: false,
-      timer: 1500
+      timer:1500
     })
 }
   ngAfterViewInit() {
