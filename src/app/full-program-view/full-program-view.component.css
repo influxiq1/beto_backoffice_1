@@ -1409,10 +1409,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#27bbe8', end
       .fpv_new_bannerblock_wrapper h2{ font-size:44px; line-height:46px; display:block; color:#fff; margin:0; padding:0; font-family: 'RalewayBold';}
      .fpv_new_bannerblock_wrapper h3{ font-size:18px; line-height:24px; display:block; color:#fff; font-weight:normal; margin:18px 0; padding:0;  font-family: 'RalewayRegular';}
      
-     .fpv_newbanner_menu{ display: flex;
+     .fpv_newbanner_menu{ display: flex; 
       flex-wrap: wrap; background:#fff; padding:0.1%; border-radius:5px; box-shadow: 0 0 3px #6f6b6b;}
       
-      .fpv_newbanner_menu span{ display:block;  width:19.8%; border-radius:5px; margin:0.1%;  padding:35px 1%; text-align:center; font-size:18px; color:#fefefe; font-family: 'RalewaySemiBold';}
+      .fpv_newbanner_menu span{ display:block; cursor: pointer;  width:19.8%; border-radius:5px; margin:0.1%;  padding:35px 1%; text-align:center; font-size:18px; color:#fefefe; font-family: 'RalewaySemiBold';}
       
      
       
