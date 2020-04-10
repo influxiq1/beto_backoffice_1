@@ -6,6 +6,8 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from "ngx-bootstrap/modal/bs-modal-ref.service";
 import { CookieService } from 'ngx-cookie-service';
 import { WINDOW } from '@ng-toolkit/universal';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+
 
 @Component({
   selector: 'app-rep-dashboard',
@@ -101,6 +103,15 @@ export class RepDashboardComponent implements OnInit, AfterViewInit {
     selBox.select();
     document.execCommand('copy');
     document.body.removeChild(selBox);
+
+
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'copied to clipboard',
+      showConfirmButton: false,
+      timer: 15000
+    })
 }
   ngAfterViewInit() {
   }
@@ -174,6 +185,36 @@ export class RepDashboardComponent implements OnInit, AfterViewInit {
     this.modalRef.hide();       //to hide the modal in 10 sec
   }, 15000);
   }
+//   yy(){
+
+//     let timerInterval
+// Swal.fire({
+//   title: 'Auto close alert!',
+//   html: 'I will close in <b></b> milliseconds.',
+//   timer: 2000,
+//   timerProgressBar: true,
+//   onBeforeOpen: () => {
+//     Swal.showLoading()
+//     timerInterval = setInterval(() => {
+//       const content = Swal.getContent()
+//       if (content) {
+//         const b = content.querySelector('b')
+//         if (b) {
+//           b.textContent = Swal.getTimerLeft()
+//         }
+//       }
+//     }, 100)
+//   },
+//   onClose: () => {
+//     clearInterval(timerInterval)
+//   }
+// }).then((result) => {
+//   /* Read more about handling dismissals below */
+//   if (result.dismiss === Swal.DismissReason.timer) {
+//     console.log('I was closed by the timer')
+//   }
+// })
+//   }
   ngOnInit() {
     const link = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
     this._http.post(link,{source:'sales-decks_view'}).subscribe((res:any) => {
