@@ -2407,8 +2407,10 @@ padding-top: 25px;
 
 .swal2-popup{ border: 2px solid #00a8ef; padding: 25px;}
 
-.swal2-title{    font-family: 'RalewayBold';     text-transform: capitalize!important;
-    color: #000!important;}
+.swal2-success{display: none!important;} 
+
+.swal2-title{ font-family: 'RalewayBold';   text-transform: capitalize!important;
+    color: #000!important; background: url("../images/success_popupicon.png") no-repeat center top!important; background-size: 120px; padding-top: 145px!important;}
 
 
 @media screen and (max-width:1650px) {
