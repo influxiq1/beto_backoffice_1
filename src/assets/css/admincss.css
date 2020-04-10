@@ -2163,11 +2163,14 @@
 
 .rep_dashboard_newblock3_sub h6 {
     font-family: 'OpenSansBold';
-    font-size:20px; width: 100vw; height: 60px; display: table-cell; text-align: center; vertical-align: middle;;
+    font-size:20px; width: 100vw; height: 60px; display: table-cell; text-align: left; vertical-align: middle;;
     color: #fff;
-   background: #000; padding: 5px;
+   background: #000; padding: 5px; padding-left: 10px;
 
 }
+
+.rep_dashboard_newblock3_sub .launchedtext{    font-size: 14px; 
+    color: #0fb349; text-align: right;  padding-right: 10px;}
 
 .rep_dashboard_newblock3_sub a{    
     height: 44px;
