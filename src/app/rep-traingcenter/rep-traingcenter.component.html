@@ -116,7 +116,7 @@
   <div class="traing_innerwrapper">
     <div class="training_leftpart" [ngClass]="putclass()">
       <h2>{{currentcategoryname}}</h2>
-      <div class="training_leftpartlaunchtext" *ngIf="not_launch.product_data[0].not_launch != 'undefined' && not_launch.product_data[0].not_launch == true"> This opportunity has a future launch date {{not_launch.product_data[0].launch_date | date}}. The innovation of our technologies and partners is well worth the preparation. Be an early adapter and get your training done early. By doing so you will gain access to the earliest developments when we launch this opportunity.</div>
+      <div class="training_leftpartlaunchtext" *ngIf="not_launch != 'null' && not_launch.product_data != 'undefined' &&not_launch.product_data[0].not_launch != 'undefined' && not_launch.product_data[0].not_launch == true"> This opportunity has a future launch date {{not_launch.product_data[0].launch_date | date}}. The innovation of our technologies and partners is well worth the preparation. Be an early adapter and get your training done early. By doing so you will gain access to the earliest developments when we launch this opportunity.</div>
 
       <!--  <div *ngIf="this.sorteddatalist[this.sorteddatalist.length-3]">
       <carousel>

@@ -81,13 +81,10 @@ export class RepDashboardComponent implements OnInit, AfterViewInit {
       "trainingcategory" : this._commonservice.mdstocktrainingid,
       "user_id" : this.userId
     };
-    // console.log(data);
-    // console.log(this._commonservice.mdstocktrainingid);
     this._http.post(link,data)
     .subscribe(res=>{
       let result:any;
       result = res;
-      // console.log('------------------- mdstocktrainingpercentage', res)
       if(result.data[0]!=null && result.data[0].traininglessonpercent!=null )this.mdstocktrainingpercentage = result.data[0].traininglessonpercent;
     })
   }

@@ -32,7 +32,7 @@ export class MakeContractComponent implements OnInit {
     this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
 
     this.makeContentForm = this.formBuilder.group({
-      clauses: ['', Validators.required],
+      contentTop: ['', Validators.required],
       notesMsg:['']
     });
     this.route.params.subscribe(params => {
@@ -46,10 +46,10 @@ export class MakeContractComponent implements OnInit {
     this.route.data.forEach((data:any ) => {
       // console.log('json',data.results.res);
       this.datalist = data.results.res[0];
-    if (this.datalist.clauses != null && this.datalist.clauses != '') {
-      this.makeContentForm.controls['clauses'].patchValue(this.datalist.clauses);
+    // if (this.datalist.clauses != null && this.datalist.clauses != '') {
+      this.makeContentForm.controls['contentTop'].patchValue(this.datalist.contentTop);
       this.makeContentForm.controls['notesMsg'].patchValue(this.datalist.notesByCM);
-    }
+    // }
 
     // console.log('json',this.datalist.contentTop);
    });
@@ -77,7 +77,7 @@ export class MakeContractComponent implements OnInit {
         notes: this.datalist.notes,
         notesByCM:this.makeContentForm.value.notesMsg,
         notesByCM_date: Date.now(),
-        clauses: this.makeContentForm.value.clauses,
+        // clauses: this.makeContentForm.value.clauses,
         status: 'send_to_rep',
         rep_id: this.datalist.rep_id,
         rep_email: this.datalist.rep_email,
@@ -86,7 +86,7 @@ export class MakeContractComponent implements OnInit {
         lead_id: this.datalist.lead_id,
         contract_manager_id: this.cookeiservice.get('userid'),
         contentTop: this.datalist.contentTop,
-        contentBottiom: this.datalist.contentBottiom,
+        // contentBottiom: this.datalist.contentBottiom,
         contract_content_notes: this.datalist.contract_content_notes
       }
       const link = this._commonservice.nodesslurl + 'addorupdatedata?token=' + this.cookeiservice.get('jwttoken');
@@ -101,7 +101,7 @@ export class MakeContractComponent implements OnInit {
         notes: this.datalist.notes,
         ModifiedNotesByRep:this.makeContentForm.value.notesMsg,
         ModifiedByRep_date: Date.now(),
-        clauses: this.makeContentForm.value.clauses,
+        // clauses: this.makeContentForm.value.clauses,
         status: 'ask_for_modification',
         rep_id: this.datalist.rep_id,
         rep_email: this.datalist.rep_email,
@@ -110,7 +110,7 @@ export class MakeContractComponent implements OnInit {
         lead_id: this.datalist.lead_id,
         // contract_manager_id: this.cookeiservice.get('userid'),
         contentTop: this.datalist.contentTop,
-        contentBottiom: this.datalist.contentBottiom,
+        // contentBottiom: this.datalist.contentBottiom,
         contract_content_notes: this.datalist.contract_content_notes,
         contract_manager_id: this.datalist.contract_manager_id
       }

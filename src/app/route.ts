@@ -97,6 +97,8 @@ const appRoutes: Routes = [
      
      {path: 'contract-manager-list', component: ContractManagerListComponent, resolve : {results: TestresolveService},data: { requestcondition: { source: 'contract_manager_list', condition: {}}, endpoint: 'datalist'}},
 
+     {path: 'contract-manager-list-rep', component: ContractManagerListComponent, resolve : {results: TestresolveService},data: { requestcondition: { source: 'contract_manager_list', condition: {"rep_id_object":"rep_id_object"}}, endpoint: 'datalist'}},
+
      {path: 'contract-manager-list-pending', component: ContractManagerListComponent, resolve : {results: TestresolveService},data: { requestcondition: { source: 'contract_manager_list', condition: {"status":"request"}}, endpoint: 'datalist'}},
 
      {path: 'make-contract/:_id', component: MakeContractComponent, resolve : {results: TestresolveService},data: { requestcondition: { source: 'test_contract', condition: {"_id":'_id'}}, endpoint: 'datalist'}},
@@ -124,7 +126,7 @@ const appRoutes: Routes = [
     { path: 'reptrainingcenter', component: RepTraingcenterComponent},
     // { path: 'reptrainingcenter/:cid', component: RepTraingcenterComponent}, // cat id
     { path: 'reptrainingcenter/:cid', component: RepTraingcenterComponent,resolve : {results: TestresolveService},data: { requestcondition: { trainingcategory:{}, userid:{} }, endpoint:'training_category_foruser'}},
-    { path: 'reptrainingcenter/:cid/:lid', component: RepTraingcenterComponent}, // lesson id
+    { path: 'reptrainingcenter/:cid/:lid', component: RepTraingcenterComponent,resolve : {results: TestresolveService},data: { requestcondition: { trainingcategory:{}, userid:{} }, endpoint:'training_category_foruser'}}, // lesson id
     { path:'trial', component: TrialsComponent},
     { path:'trainingsectionlist', component: TrainingsectionlistComponent},
     { path:'trainingsection', component: TrainingsectionComponent},

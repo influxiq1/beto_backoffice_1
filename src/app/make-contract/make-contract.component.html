@@ -22,38 +22,41 @@
 
 
     <form [formGroup]="makeContentForm" (ngSubmit)="makeContentFormSubmit()">
-      <label>Content Header :</label>
+      <label>Contract :</label>
       <div class="newconleft_con1 newconleft_con1html">
-         
-           <p [innerHTML]="safeHtml(datalist.contentTop)"></p> </div>
+        <ck-editor formControlName="contentTop" [config]="editorconfig" (keyup)="issubmit=0">
+        </ck-editor>
+          
+        <!-- <p [innerHTML]="safeHtml(datalist.contentTop)"></p> -->
+           </div>
         <!-- <div class="newconleft_con1">
            <textarea type="text" formControlName="clauses" (keyup)="issubmit=0">
            </textarea>
           <span class="error" style="color:red"
           *ngIf="!makeContentForm.controls['clauses'].valid && makeContentForm.controls['clauses'].touched  && issubmit==1">Clauses
           are required</span></div> -->
-          <label>Clauses :</label>
+          <!-- <label>Clauses :</label>
           <div *ngIf="cookeiservice.get('usertype') == 'contract_manager'">
            
-          <ck-editor formControlName="clauses" [config]="editorconfig" (keyup)="issubmit=0">
+          <ck-editor formControlName="contentTop" [config]="editorconfig" (keyup)="issubmit=0">
           </ck-editor>
           <span class="error" style="color:red"
-            *ngIf="!makeContentForm.controls['clauses'].valid && makeContentForm.controls['clauses'].touched  && issubmit==1">Clauses
+            *ngIf="!makeContentForm.controls['contentTop'].valid && makeContentForm.controls['contentTop'].touched  && issubmit==1">Clauses
             are required</span>
-          </div>
+          </div> -->
 
-          <span *ngIf="cookeiservice.get('usertype') != 'contract_manager'">
+          <!-- <span *ngIf="cookeiservice.get('usertype') != 'contract_manager'">
           <label>Content Main :</label>
           <div class="newconleft_con1 newconleft_con1html">
            
             <p [innerHTML]="safeHtml(datalist.clauses)"></p>
            </div>
-          </span>
-          <label>Content Footer :</label>
+          </span> -->
+          <!-- <label>Content Footer :</label>
           <div class="newconleft_con1 newconleft_con1html">
            
             <p [innerHTML]="safeHtml(datalist.contentBottiom)"></p>
-           </div>
+           </div> -->
 
            <div class="newconleft_con1">
             <textarea formControlName="notesMsg" placeholder="Notes" type="text"></textarea>
@@ -61,7 +64,7 @@
 
             <div class="newconleft_con1 newconleft_con1_bar">
                <button *ngIf="cookeiservice.get('usertype') != 'rep' && (datalist.status == 'request' || datalist.status == 'ask_for_modification' )" type="submit" class="sendbtnnewcon">Send For Rep</button>
-               <button *ngIf="cookeiservice.get('usertype') != 'contract_manager'" type="submit" class="sendbtnnewcon">Ask For Modification </button>
+               <button *ngIf="cookeiservice.get('usertype') != 'contract_manager' && datalist.status != 'sends_Signed_Contract_to_Rep' && datalist.status != 'send_to_lead'" type="submit" class="sendbtnnewcon">Ask For Modification </button>
                <button *ngIf="datalist.status == 'send_to_rep' && cookeiservice.get('usertype') == 'rep'" type="button" class="sendbtnnewcon" (click)="sendToLead()">Send To Lead</button>
                <button type="button" class="sendbtnnewcon" routerLink="/contract-manager-list">Cancel</button>
                </div>
@@ -89,9 +92,19 @@
         <p *ngIf="datalist.date !=null"><strong>Date: </strong> {{datalist.date}}</p>
         <hr> -->
         
-        <p *ngIf="datalist.contract_manager_name !=null"><strong>Notes By Contract Manager: </strong>{{datalist.contract_manager_name}}</p>
-        <p *ngIf="datalist.contract_content_notes !=null"><strong>Notes: </strong>{{datalist.contract_content_notes}}</p>
-        <p *ngIf="datalist.CM_added_by !=null"><strong>Date: </strong>{{datalist.CM_added_by}}</p>
+        <!-- <p *ngIf="datalist.contract_manager_name !=null"><strong>Notes By Contract Manager: </strong>{{datalist.contract_manager_name}}</p> -->
+        <div class="messageblockcls">
+          <p *ngIf="datalist.contract_manager_name !=null"><span class="managernamecls"><strong>{{datalist.contract_manager_name}} </strong> :</span> {{datalist.notesByCM}}</p>
+          <p *ngIf="datalist.CM_added_by !=null" class="dateclsnw"><strong>Date: </strong>{{datalist.CM_added_by}}</p>
+        </div>
+
+        <div class="messageblockcls">
+          <p *ngIf="datalist.rep_name !=null"><span class="managernamecls"><strong>{{datalist.rep_name}} </strong> :</span> {{datalist.notes}}</p>
+          <p *ngIf="datalist.CM_added_by !=null" class="dateclsnw"><strong>Date: </strong>{{datalist.date}}</p>
+        </div>
+        
+        <!-- <p *ngIf="datalist.notesByCM !=null"><strong>Notes: </strong>{{datalist.notesByCM}}</p> -->
+        
        <hr>
         
         <p *ngIf="datalist.ModifiedNotesByRep !=null && datalist.rep_name !=null"><strong>Modified By Rep: </strong>{{datalist.rep_name}}</p>

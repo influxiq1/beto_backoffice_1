@@ -30,7 +30,7 @@ export class ContractAddEditComponent implements OnInit {
 
     this.contractForm = this.formBuilder.group({
       contentTop: ['', Validators.required],
-      contentBottiom: ['', Validators.required],
+      // contentBottiom: ['', Validators.required],
       product_id: ['', Validators.required],
       notes: [''],
       status:['']
@@ -47,7 +47,7 @@ export class ContractAddEditComponent implements OnInit {
     });
 
     const link = this._commonservices.nodesslurl + 'datalist?token=' + this._cookieservice.get('jwttoken');
-    this._http.post(link, { source: 'products' })
+    this._http.post(link, { source: 'products',"condition": {"status":true}  })
       .subscribe((res: any) => {
         this.productList = res.res;
         console.log(this.productList);
@@ -115,7 +115,7 @@ export class ContractAddEditComponent implements OnInit {
           datalist2=res.res;
           // this.dataForm.controls['id'].patchValue(datalist2[0]._id);
           this.contractForm.controls['contentTop'].patchValue(datalist2[0].contentTop);
-          this.contractForm.controls['contentBottiom'].patchValue(datalist2[0].contentBottiom);
+          // this.contractForm.controls['contentBottiom'].patchValue(datalist2[0].contentBottiom);
           this.contractForm.controls['product_id'].patchValue(datalist2[0].product_id);
           this.contractForm.controls['notes'].patchValue(datalist2[0].notes);
           this.contractForm.controls['status'].patchValue(datalist2[0].status);
