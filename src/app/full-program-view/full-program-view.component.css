@@ -5,7 +5,7 @@
 
 
 
-.fpv_block1{ background:url(../../assets/images/FPV_page1_bg.jpg) no-repeat left top; background-size:cover; margin:0; padding:0; } 
+/* .fpv_block1{ background:url(../../assets/images/FPV_page1_bg.jpg) no-repeat left top; background-size:cover; margin:0; padding:0; } 
 
 .fpv_block1  .fpv_block1_wrapper{ background:url(../../assets/images/FPV_page1_img.png) no-repeat right bottom;   padding:50px;}
 
@@ -125,9 +125,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#27bbe8', end
 
 .fpv_block4 li{ list-style:none; background:url(../../assets/images/FPV_page1_icon1.png) no-repeat left 10px; font-size:28px; color:#1c2b35; padding:0 0 0 35px; margin:0 0 12px 0;   }
 
-/* .fpv_block4 li strong{font-family: 'RalewayBold';  } */
+  .fpv_block4 li strong{font-family: 'RalewayBold';  }  
 
-.fpv_block4 h5{ font-size:28px; color:#1c2b35; text-transform:uppercase; font-family: 'RalewayBold'; line-height:32px; width:1120px; border-left:solid 8px #00b3ff; margin:10px 0 0 0; padding:0; padding-left:35px;}
+  .fpv_block4 h5{ font-size:28px; color:#1c2b35; text-transform:uppercase; font-family: 'RalewayBold'; line-height:32px; width:1120px; border-left:solid 8px #00b3ff; margin:10px 0 0 0; padding:0; padding-left:35px;}
 
 
 .fpv_block5{ background:url(../../assets/images/FPV_page2_bg.jpg) no-repeat; background-size:cover;  padding:50px;}	
@@ -450,7 +450,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#27bbe8', end
 .fpv_block1_top_text {
     width: 50%;}
 	
-	/* .fpv_block1_top_text span{ font-size:35px;} */
+ 
 	
 	.fpv_block1 ul{ width:1100px;}
 	
@@ -466,8 +466,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#27bbe8', end
 	.fpv_block8 li{ font-size:28px;}
 	
 	
-	/*.fpv_block8NEW li{ font-size:28px; margin: 30px 0 0 0;}
-	.fpv_block8NEW li label{ font-size:26px; margin: 30px 0 0 0;}*/
+ 
 	
 	.fpv_block13 h4{ width:990px;}
 	
@@ -1386,7 +1385,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#27bbe8', end
 }
 
 
-}
+}   */
 
 
 
@@ -1406,8 +1405,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#27bbe8', end
      .fpv_new_bannerblock_wrapper{ display:block; background:url(../../assets/images/fpv_newnewbanner.png) no-repeat right top; height:410px; padding:20px 640px 20px 35px}
      
      
-      .fpv_new_bannerblock_wrapper h2{ font-size:44px; line-height:46px; display:block; color:#fff; margin:0; padding:0; font-family: 'RalewayBold';}
-     .fpv_new_bannerblock_wrapper h3{ font-size:18px; line-height:24px; display:block; color:#fff; font-weight:normal; margin:18px 0; padding:0;  font-family: 'RalewayRegular';}
+      .fpv_new_bannerblock_wrapper h2{ font-size:44px; line-height:46px; display:block; color:#fff; margin:0; padding:0;  }
+     .fpv_new_bannerblock_wrapper h3{ font-size:18px; line-height:24px; display:block; color:#fff; font-weight:normal; margin:18px 0; padding:0;   }
      
      .fpv_newbanner_menu{ display: flex; 
       flex-wrap: wrap; background:#fff; padding:0.1%; border-radius:5px; box-shadow: 0 0 3px #6f6b6b;}
@@ -1569,6 +1568,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#27bbe8', end
     }
     
     @media(max-width:1199px) {
+
+        
      .fpv_new_bannerblock_wrapper{ background-position:center bottom!important; padding:25px 15px 450px 15px; height:auto;}
      
      .fpv_new_bannerblock_wrapper h2{ width:100%; text-align:center;}
@@ -1588,3 +1589,1018 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#27bbe8', end
         width: 99.8%;}
      }
       /*-------------------4/10/2020 end -----------------*/
+
+
+      /*-------------------4/13/2020-----------------*/
+ 
+ 
+ .fpv_new_block1{ background:url(../../assets/images/fpv_newblock_bg1.jpg) no-repeat left top; background-size:cover; overflow:hidden;}
+ 
+ .fpv_new_block1_wrapper{ background:url(../../assets/images/fpv_newblock_img1.png) no-repeat left bottom; width:1600px; margin:0 auto; padding:36px 0; padding-left:940px;}
+  .fpv_new_block1_wrapper h2{ margin:0 0 8px 0; background:url(../../assets/images/fpv_newblock_icon1.png) no-repeat left 6px; padding:0 0 0 34px; font-size:40px; line-height:42px; color:#262626;  }
+  
+    .fpv_new_block1_wrapper label{ margin:0 0 8px 0; background:url(../../assets/images/fpv_newblock_icon2.png) no-repeat left 4px; padding:0 0 0 34px; font-size:18px; line-height:22px; color:#1c2b35; display:block;  }
+  .fpv_new_block1_wrapper label:nth-of-type(1){ margin-top:20px;}
+  
+    .fpv_new_block1_wrapper h4{ margin:15px 0;   padding:0 0 0 0; font-size:30px; color:#262626;    line-height:32px; }
+	
+	
+	
+	.fpv_new_block2{background:url(../../assets/images/fpv_newblock2_bg2.jpg) no-repeat left top; background-size:cover; overflow:hidden;}
+	
+	
+	.fpv_new_block2body{background:url(../../assets/images/fpv_newblock2_bg1.png) no-repeat right bottom;}
+	
+	
+	.fpv_new_block2_wrapper{ width:1600px; margin:0 auto; padding:35px 0; }
+	
+	.fpv_new_block2_left{ width:52%; float:left;}
+	
+	.fpv_new_block2_right{ width:45%; float:right;}
+	.fpv_new_block2_left h1{font-size:40px; line-height:42px; color:#262626;   margin:0; padding:0; text-transform:uppercase;}
+	
+	.fpv_new_block2_left h4{font-size:36px; line-height:38px; color:#fff;  margin:12px 0;     padding: 10px 8px 6px 8px;   text-transform:uppercase; text-shadow:0 0 2px #0e537b; background: rgba(29,184,231,1);
+background: -moz-linear-gradient(top, rgba(29,184,231,1) 0%, rgba(27,139,209,1) 100%);
+background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(29,184,231,1)), color-stop(100%, rgba(27,139,209,1)));
+background: -webkit-linear-gradient(top, rgba(29,184,231,1) 0%, rgba(27,139,209,1) 100%);
+background: -o-linear-gradient(top, rgba(29,184,231,1) 0%, rgba(27,139,209,1) 100%);
+background: -ms-linear-gradient(top, rgba(29,184,231,1) 0%, rgba(27,139,209,1) 100%);
+background: linear-gradient(to bottom, rgba(29,184,231,1) 0%, rgba(27,139,209,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1db8e7', endColorstr='#1b8bd1', GradientType=0 ); }
+
+.fpvnew_block2_group{ background:#fff; box-shadow: 0 0 5px #64d0df; margin-bottom:19px; border-left:solid 12px #1ca4dd; padding:20px;}
+
+.fpvnew_block2_group h2{ margin:0 0 15px 0; padding:0; background:url(../../assets/images/fpv_newblock2_icon2.jpg) repeat-x left 5px;}
+
+.fpvnew_block2_group h2 span{ background:#fff; display:inline-block; font-size:30px; color:#1c2b35;  padding-right:10px;  }
+
+.fpvnew_block2_group_con{ display:table; width:100%; vertical-align:bottom;}
+.fpvnew_block2_group_con img{ float:left; margin:10px 20px 0 0;}
+.fpvnew_block2_group_con img:last-of-type{ margin-right:0px;}	
+
+.fpvnew_block2_group:nth-of-type(1) img{ margin-top:45px;}
+.fpvnew_block2_group:nth-of-type(1) img:nth-of-type(3){ margin-top:0px;}
+
+.fpv_new_block2_right ul{ margin:0; padding:0;}
+
+.fpv_new_block2_right ul li{  margin:0 0 10px 0; background:url(../../assets/images/fpv_newblock_icon2.png) no-repeat left 4px; padding:0 0 0 34px; font-size:18px; line-height:22px; color:#1c2b35; display:block;  }
+
+.fpv_new_block2_right .imglicon {
+    background-position: left 22px!important
+}
+
+.fpv_new_block2_right .imglicon span{  float:left; padding:20px 20px 0 0;}
+.fpv_new_block2_right .imglicon img{  float:left;     width: 200px;}
+
+.fpv_new_block2_right .imglicon2{ background:none; border-top:solid 1px #c1c7cf; border-bottom:solid 1px #c1c7cf; padding:10px 0!important;}
+
+.fpv_new_block2_right .imglicon2 img{     margin: 5px 15px 5px 0;
+    width: 240px;}
+
+.fpv_new_block2_right h1{ position:relative;  background: rgba(246,218,34,1);
+background: -moz-linear-gradient(top, rgba(246,218,34,1) 0%, rgba(254,191,2,1) 100%);
+background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(246,218,34,1)), color-stop(100%, rgba(254,191,2,1)));
+background: -webkit-linear-gradient(top, rgba(246,218,34,1) 0%, rgba(254,191,2,1) 100%);
+background: -o-linear-gradient(top, rgba(246,218,34,1) 0%, rgba(254,191,2,1) 100%);
+background: -ms-linear-gradient(top, rgba(246,218,34,1) 0%, rgba(254,191,2,1) 100%);
+background: linear-gradient(to bottom, rgba(246,218,34,1) 0%, rgba(254,191,2,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6da22', endColorstr='#febf02', GradientType=0 ); border-radius:8px 8px 8px 0; padding:15px 10px 10px 10px; font-size:40px; line-height:42px; color:#fff;  margin: 0 0 28px 0;   text-transform:uppercase; text-shadow:0 0 2px #927009;} 
+
+.fpv_new_block2_right h1:after{ content:''; display:block; background:url(../../assets/images/fpv_newblock2_icon.jpg) no-repeat left top; width:10px; height:6px; position:absolute; left:0; bottom: -6px; }
+
+.fpv_new_block3{ background:url(../../assets/images/fpv_newblock3_bg3.jpg) no-repeat left top; background-size:cover;}
+.fpv_new_block3body{ background:url(../../assets/images/fpv_newblock3_bg2.png) no-repeat left top; background-size:cover;}
+
+.fpv_new_block3_body2{ background:url(../../assets/images/fpv_newblock3_bg3.jpg) no-repeat left top; background-size:cover; overflow:hidden;}
+/* .fpv_new_block3_body2{ background:url(../../assets/images/fpv_newblock3_bg3.png) no-repeat left top; background-size:100%; overflow:hidden;}
+
+ */
+
+.fpv_new_block3_wrapper{ width:1600px; margin:0 auto;}
+
+.fpv_new_block3_wrappercon{ padding:50px 0 50px 730px;}
+
+.fpv_new_block3span{ display:block; width:49%; float:left;}
+
+.fpv_new_block3span:nth-of-type(2){ float:right;}
+
+ .fpv_new_block3span label{ margin:0 0 8px 0; background:url(../../assets/images/fpv_newblock_icon2.png) no-repeat left 4px; padding:0 0 0 34px; font-size:18px; line-height:22px; color:#1c2b35; display:block;  }
+ 
+ 
+ .fpv_new_block3_wrapper h2 {
+    font-size: 40px;
+    line-height: 42px;
+    color: #262626; 
+    margin: 0 0 20px 0;
+    padding: 0;
+    text-transform: uppercase;
+}
+
+.fpv_new_block4{background: rgba(255,255,255,1);
+background: -moz-linear-gradient(-45deg, rgba(255,255,255,1) 0%, rgba(230,230,233,1) 100%);
+background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(100%, rgba(230,230,233,1)));
+background: -webkit-linear-gradient(-45deg, rgba(255,255,255,1) 0%, rgba(230,230,233,1) 100%);
+background: -o-linear-gradient(-45deg, rgba(255,255,255,1) 0%, rgba(230,230,233,1) 100%);
+background: -ms-linear-gradient(-45deg, rgba(255,255,255,1) 0%, rgba(230,230,233,1) 100%);
+background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(230,230,233,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e6e6e9', GradientType=1 );}
+
+.fpv_new_block4_body{ background:url(../../assets/images/fpv_newblock4_bg.png) no-repeat right bottom; overflow:hidden;}
+
+.fpv_new_block4_wrapper{ width:1600px; margin:40px auto;}
+
+
+ .fpv_new_block4_wrapper h2 {
+    font-size: 40px;
+    line-height: 42px;
+    color: #262626; 
+    margin: 0 0 20px 0;
+    padding: 0;
+    text-transform: uppercase;
+}
+
+.fpv_new_block4_con1{ width:1400px;}
+
+.fpv_new_block4_left1{ width:49%; float:left;}
+.fpv_new_block4_right1{width:49%; float:right;}
+
+
+
+.fpv_new_block4_left1 h3{ position:relative;  background: rgba(246,218,34,1);
+background: -moz-linear-gradient(top, rgba(246,218,34,1) 0%, rgba(254,191,2,1) 100%);
+background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(246,218,34,1)), color-stop(100%, rgba(254,191,2,1)));
+background: -webkit-linear-gradient(top, rgba(246,218,34,1) 0%, rgba(254,191,2,1) 100%);
+background: -o-linear-gradient(top, rgba(246,218,34,1) 0%, rgba(254,191,2,1) 100%);
+background: -ms-linear-gradient(top, rgba(246,218,34,1) 0%, rgba(254,191,2,1) 100%);
+background: linear-gradient(to bottom, rgba(246,218,34,1) 0%, rgba(254,191,2,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6da22', endColorstr='#febf02', GradientType=0 ); border-radius:8px 8px 8px 0; padding:15px 10px 10px 10px; font-size:33px; line-height:35px; color:#fff;   margin: 0 0 28px 0;   text-transform:uppercase; text-shadow:0 0 2px #927009;} 
+
+.fpv_new_block4_left1 h3:after{ content:''; display:block; background:url(../../assets/images/fpv_newblock4_icon1.png) no-repeat left top; width:10px; height:6px; position:absolute; left:0; bottom: -6px; }
+
+.fpv_new_block4_right1 h3{ position:relative; background: rgba(184,214,34,1);
+background: -moz-linear-gradient(top, rgba(184,214,34,1) 0%, rgba(115,187,60,1) 100%);
+background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(184,214,34,1)), color-stop(100%, rgba(115,187,60,1)));
+background: -webkit-linear-gradient(top, rgba(184,214,34,1) 0%, rgba(115,187,60,1) 100%);
+background: -o-linear-gradient(top, rgba(184,214,34,1) 0%, rgba(115,187,60,1) 100%);
+background: -ms-linear-gradient(top, rgba(184,214,34,1) 0%, rgba(115,187,60,1) 100%);
+background: linear-gradient(to bottom, rgba(184,214,34,1) 0%, rgba(115,187,60,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b8d622', endColorstr='#73bb3c', GradientType=0 ); border-radius:8px 8px 8px 0; padding:15px 10px 10px 10px; font-size:33px; line-height:35px; color:#fff;   margin: 0 0 28px 0;   text-transform:uppercase; text-shadow:0 0 2px #457c1c;} 
+
+.fpv_new_block4_right1 h3:after{ content:''; display:block; background:url(../../assets/images/fpv_newblock4_icon2.png) no-repeat left top; width:10px; height:6px; position:absolute; left:0; bottom: -6px; }
+
+
+ .fpv_new_block4_con1 label{ margin:0 0 8px 0; background:url(../../assets/images/fpv_newblock_icon2.png) no-repeat left 4px; padding:0 0 0 34px; font-size:18px; line-height:22px; color:#1c2b35; display:block;  }
+ 
+ .fpv_new_block4_con1 label span{ color:#f65607;}
+ 
+ .fpv_new_block4_con2{ width:1000px; display:flex; padding-top: 30px;}
+ 
+ .fpv_new_block4_left2{ border-left:solid 6px #00c6ff; padding:0 0 0 22px; font-size:18px; color:#1c2b35; text-transform:uppercase;  } 
+
+.fpv_new_block4_left2 p{ margin:0; padding:0;}
+
+.fpv_new_block4_left2:nth-of-type(1){ padding-right:100px;}
+
+
+.fpv_new_block5{ background:#fafdfd; overflow:hidden}
+
+.fpv_new_block5_body{ background:url(../../assets/images/fpv_newblock5_bg.png) no-repeat left bottom; background-size:80%; padding-bottom:25px;}
+
+.fpv_new_block5_wrapper{ width:1600px; margin:40px auto;}
+
+ .fpv_new_block5_wrapper h1 {
+    font-size: 40px;
+    line-height: 42px;
+    color: #262626; 
+    margin: 0 0 20px 0;
+    padding: 0;
+    text-transform: uppercase;
+}
+
+.fpv_new_block5_left{ width:48%; float:left;}
+
+.fpv_new_block5_right{ width:50%; float:right;} 
+
+
+ .fpv_new_block5_left label{ margin:0 0 30px 0; background:url(../../assets/images/fpv_newblock_icon2.png) no-repeat left 4px; padding:0 0 0 34px; font-size:18px; line-height:22px; color:#1c2b35; display:block;  }
+ 
+.fpv_new_block5_group{ background:#fff; box-shadow: 0 0 5px #64d0df; margin-bottom:8px;  padding:20px;}
+
+.fpv_new_block5_group_wrapper{ display:flex;}
+
+.fpv_new_block5_group_left{ width:300px;}
+
+.fpv_new_block5_group_left img{ max-width:100%;}
+
+.fpv_new_block5_group_right{ width:70%; padding-left:30px;}
+
+.fpv_new_block5_group_right label{     display: block;
+    font-size: 28px;
+    color: #1c2b35;
+    line-height: 30px;}
+
+.fpv_new_block5_group_right label p{ font-size:24px; margin:0; padding:0;}
+
+.fpv_new_block5_group_right span{ display:block;    font-size:24px; color:#1c2b35;}
+
+
+.fpv_new_block6{ background:#f9f9fa url(../../assets/images/fpv_newblock6_bg.png) no-repeat right top; overflow:hidden; padding:36px 0;}
+
+.fpv_new_block6_wrapper{ width:1600px; margin:0 auto;}
+
+.fpv_new_block6_wrapper_text{ width:940px;}
+
+ .fpv_new_block6_wrapper h2 {
+    font-size: 40px;
+    line-height: 42px;
+    color: #262626;
+    
+    margin: 0 0 20px 0;
+    padding: 0;
+    text-transform: uppercase;
+}
+
+
+.fpv_new_block6_wrapper h3 {
+    border-left: solid 6px #00c6ff;
+    padding: 0 0 0 22px; margin:30px 0 0 0;  font-size:18px; line-height:24px; color:#191919;}
+	
+	.fpv_new_block6_wrapper h3 strong{ display:block;    text-transform:uppercase;}
+	
+	.fpv_new_block6_wrapper h3  p{ margin:0; padding:26px 0 0 0;}
+	
+	.fpv_new_block7{background: rgba(192,228,240,1);
+background: -moz-linear-gradient(-45deg, rgba(192,228,240,1) 0%, rgba(240,244,245,1) 53%, rgba(192,228,240,1) 100%);
+background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(192,228,240,1)), color-stop(53%, rgba(240,244,245,1)), color-stop(100%, rgba(192,228,240,1)));
+background: -webkit-linear-gradient(-45deg, rgba(192,228,240,1) 0%, rgba(240,244,245,1) 53%, rgba(192,228,240,1) 100%);
+background: -o-linear-gradient(-45deg, rgba(192,228,240,1) 0%, rgba(240,244,245,1) 53%, rgba(192,228,240,1) 100%);
+background: -ms-linear-gradient(-45deg, rgba(192,228,240,1) 0%, rgba(240,244,245,1) 53%, rgba(192,228,240,1) 100%);
+background: linear-gradient(135deg, rgba(192,228,240,1) 0%, rgba(240,244,245,1) 53%, rgba(192,228,240,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c0e4f0', endColorstr='#c0e4f0', GradientType=1 );}
+	
+	.fpv_new_block7body{ background:url(../../assets/images/fpv_newblock7_bg.png) no-repeat left top; overflow:hidden;}
+	
+	.fpv_new_block7_wrapper{ width:1600px; margin:0 auto; padding:40px 0;}
+	
+	.fpv_new_block7_wrapper_text{ width:800px; float:right;}
+
+
+ .fpv_new_block7_wrapper_text h2 {
+    font-size: 40px;
+    line-height: 42px;
+    color: #262626; 
+    margin: 0 0 20px 0;
+    padding: 0;
+    text-transform: uppercase;
+}
+
+
+ .fpv_new_block7_wrapper_text label{ margin:0 0 30px 0; background:url(../../assets/images/fpv_newblock_icon2.png) no-repeat left 4px; padding:0 0 0 34px; font-size:18px; line-height:22px; color:#1c2b35; display:block; }
+ 
+ 
+ .fpv_new_block8{ background: #f7f7f5 url(../../assets/images/fpv_newblock8_bg.png) no-repeat right top; overflow:hidden;}
+ 
+ .fpv_new_block8_wrapper{ width:1600px; margin:0 auto; padding:40px 0;}
+ 	.fpv_new_block8_text{ width:980px;  }
+	
+	.fpv_new_block8_text h2 {
+    font-size: 34px;
+    line-height: 38px;
+    color: #fff; 
+    margin:0 0 12px 0;
+    padding: 10px 8px 6px 8px;
+    text-transform: uppercase;
+    text-shadow: 0 0 2px #0e537b;
+    background: rgba(29,184,231,1);
+    background: -moz-linear-gradient(top, rgba(29,184,231,1) 0%, rgba(27,139,209,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(29,184,231,1)), color-stop(100%, rgba(27,139,209,1)));
+    background: -webkit-linear-gradient(top, rgba(29,184,231,1) 0%, rgba(27,139,209,1) 100%);
+    background: -o-linear-gradient(top, rgba(29,184,231,1) 0%, rgba(27,139,209,1) 100%);
+    background: -ms-linear-gradient(top, rgba(29,184,231,1) 0%, rgba(27,139,209,1) 100%);
+    background: linear-gradient(to bottom, rgba(29,184,231,1) 0%, rgba(27,139,209,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1db8e7', endColorstr='#1b8bd1', GradientType=0 );
+}
+
+ .fpv_new_block8_text label{ margin:15px 0; background:url(../../assets/images/fpv_newblock_icon2.png) no-repeat left 4px; padding:0 0 0 34px; font-size:18px; line-height:22px; color:#1c2b35; display:block;  }
+ 
+  .fpv_new_block8_text p{ margin:0 0 30px 0; background:url(../../assets/images/fpv_newblock8_icon.png) no-repeat left 4px; padding:0 0 0 34px; margin:15px 0 15px 34px; font-size:18px; line-height:22px; color:#1c2b35; display:block;  }
+  
+  
+  .fpv_new_block9{background: rgba(192,228,240,1);
+    background: -moz-linear-gradient(-45deg, rgba(192,228,240,1) 0%, rgba(240,244,245,1) 53%, rgba(192,228,240,1) 100%);
+    background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(192,228,240,1)), color-stop(53%, rgba(240,244,245,1)), color-stop(100%, rgba(192,228,240,1)));
+    background: -webkit-linear-gradient(-45deg, rgba(192,228,240,1) 0%, rgba(240,244,245,1) 53%, rgba(192,228,240,1) 100%);
+    background: -o-linear-gradient(-45deg, rgba(192,228,240,1) 0%, rgba(240,244,245,1) 53%, rgba(192,228,240,1) 100%);
+    background: -ms-linear-gradient(-45deg, rgba(192,228,240,1) 0%, rgba(240,244,245,1) 53%, rgba(192,228,240,1) 100%);
+    background: linear-gradient(135deg, rgba(192,228,240,1) 0%, rgba(240,244,245,1) 53%, rgba(192,228,240,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c0e4f0', endColorstr='#c0e4f0', GradientType=1 );
+} 
+
+.fpv_new_block9body{ background:url(../../assets/images/fpv_newblock9_bg.png) no-repeat left bottom; overflow:hidden;}
+
+.fpv_new_block9_wrapper{ width:1600px; margin:36px auto;}
+.fpv_new_block9_text{ width:730px; float:right;}
+
+.fpv_new_block9_text h2 {
+    font-size: 34px;
+    line-height: 38px;
+    color: #fff; 
+    margin: 12px 0;
+    padding: 10px 8px 6px 8px;
+    text-transform: uppercase;
+    text-shadow: 0 0 2px #0e537b;
+    background: rgba(29,184,231,1);
+    background: -moz-linear-gradient(top, rgba(29,184,231,1) 0%, rgba(27,139,209,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(29,184,231,1)), color-stop(100%, rgba(27,139,209,1)));
+    background: -webkit-linear-gradient(top, rgba(29,184,231,1) 0%, rgba(27,139,209,1) 100%);
+    background: -o-linear-gradient(top, rgba(29,184,231,1) 0%, rgba(27,139,209,1) 100%);
+    background: -ms-linear-gradient(top, rgba(29,184,231,1) 0%, rgba(27,139,209,1) 100%);
+    background: linear-gradient(to bottom, rgba(29,184,231,1) 0%, rgba(27,139,209,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1db8e7', endColorstr='#1b8bd1', GradientType=0 );
+}
+
+
+.fpv_new_block9_text label {
+    margin: 18px 0;
+    background: url(../../assets/images/fpv_newblock_icon2.png) no-repeat left 4px;
+    padding: 0 0 0 34px;
+    font-size: 18px;
+    line-height: 22px;
+    color: #1c2b35;
+    display: block;
+    
+}
+
+
+.fpv_new_block9_text p {
+    margin: 18px 0; 
+    padding: 0 ;
+    font-size: 18px;
+    line-height: 22px;
+    color: #1c2b35;
+    display: block;
+   
+}
+
+
+.fpv_new_block10{ background:#eaeae9 url(../../assets/images/fpv_newblock10_bg.png) no-repeat right top; overflow:hidden;}
+
+.fpv_new_block10_wrapper{ width:1600px; margin:36px auto;}
+
+.fpv_new_block10_text{ width:880px;}
+
+
+.fpv_new_block10_text h2 {
+    font-size: 40px;
+    line-height: 42px;
+    color: #262626; 
+    margin: 0 0 5px 0;
+    padding: 0;
+    text-transform: uppercase;
+}
+ 
+ 
+ .fpv_new_block10_text p { margin:20px 0;
+    border-left: solid 6px #00c6ff;
+    padding: 0 0 0 14px;
+    font-size: 18px;
+    color: #1c2b35; 
+}
+  .fpv_new_block10_text span{ display:block;  font-size:20px; color:#00a5dd; margin:20px 0; line-height:24px;}
+  .fpv_new_block10_text strong{ display:block;   font-size:20px; color:#fb8752; margin:20px 0; line-height:24px;}
+  
+  
+  .fpv_new_block11_wrapper{ width:1600px; margin:0 auto;   }
+  
+  .fpv_new_block11{background: rgba(192,236,253,1);
+background: -moz-linear-gradient(-45deg, rgba(192,236,253,1) 0%, rgba(225,246,255,1) 29%, rgba(218,245,255,1) 71%, rgba(180,218,238,1) 100%);
+background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(192,236,253,1)), color-stop(29%, rgba(225,246,255,1)), color-stop(71%, rgba(218,245,255,1)), color-stop(100%, rgba(180,218,238,1)));
+background: -webkit-linear-gradient(-45deg, rgba(192,236,253,1) 0%, rgba(225,246,255,1) 29%, rgba(218,245,255,1) 71%, rgba(180,218,238,1) 100%);
+background: -o-linear-gradient(-45deg, rgba(192,236,253,1) 0%, rgba(225,246,255,1) 29%, rgba(218,245,255,1) 71%, rgba(180,218,238,1) 100%);
+background: -ms-linear-gradient(-45deg, rgba(192,236,253,1) 0%, rgba(225,246,255,1) 29%, rgba(218,245,255,1) 71%, rgba(180,218,238,1) 100%);
+background: linear-gradient(135deg, rgba(192,236,253,1) 0%, rgba(225,246,255,1) 29%, rgba(218,245,255,1) 71%, rgba(180,218,238,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c0ecfd', endColorstr='#b4daee', GradientType=1 ); overflow:hidden;}
+
+.fpv_new_block11_text1{ background:url(../../assets/images/fpv_newblock11_bg1.png) no-repeat left top; overflow:hidden; padding-bottom:40px; padding-top:40px;  }
+
+.fpv_new_block11_text2{ background:url(../../assets/images/fpv_newblock11_bg2.png) no-repeat right top; overflow:hidden; padding-bottom:40px; padding-bottom:20px;}
+ 
+ .fpv_new_block11_wrapper_text1{ width:1070px; float:right;}
+  .fpv_new_block11_wrapper_text2{ width:1070px;   }
+  
+  
+  .fpv_new_block11_wrapper h2 {
+    font-size: 32px;
+    line-height: 38px;
+    color: #fff; 
+    margin: 0;
+    padding: 10px 8px 6px 8px;
+    text-transform: uppercase;
+    text-shadow: 0 0 2px #0e537b;
+    background: rgba(29,184,231,1);
+    background: -moz-linear-gradient(top, rgba(29,184,231,1) 0%, rgba(27,139,209,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(29,184,231,1)), color-stop(100%, rgba(27,139,209,1)));
+    background: -webkit-linear-gradient(top, rgba(29,184,231,1) 0%, rgba(27,139,209,1) 100%);
+    background: -o-linear-gradient(top, rgba(29,184,231,1) 0%, rgba(27,139,209,1) 100%);
+    background: -ms-linear-gradient(top, rgba(29,184,231,1) 0%, rgba(27,139,209,1) 100%);
+    background: linear-gradient(to bottom, rgba(29,184,231,1) 0%, rgba(27,139,209,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1db8e7', endColorstr='#1b8bd1', GradientType=0 );
+}
+
+.fpv_new_block11_wrapper p{     font-size: 18px;
+    color: #1c2b35;  margin:0; padding:8px 0;}
+
+  @media(max-width:1880px) {
+  .fpv_new_block2body{background-size: 780px;}
+  
+  .fpv_new_block11_wrapper_text1 {
+    width: 1000px; 
+}
+  }
+    @media(max-width:1860px) {
+.fpv_new_block4_con1 {
+    width: 1340px;
+}
+  }
+  
+    @media(max-width:1760px) {
+	.fpv_new_block7_wrapper_text {
+    width: 720px;}
+	
+	.fpv_new_block9_text {
+    width: 670px;}
+	
+	.fpv_new_block11_wrapper_text1 {
+    width: 950px;
+}
+.fpv_new_block11_wrapper_text2 {
+    width: 960px;
+}
+	
+	}
+
+    @media(max-width:1660px) {
+  .fpv_new_block4_con1 {
+    width: 1200px;
+}
+.fpv_new_block5_group_right label{ font-size:26px;}
+
+.fpv_new_block5_group_right span{ font-size:18px;}
+
+.fpv_new_block5_group_right label p{ font-size:18px;}
+  
+  
+  .fpv_new_block11_wrapper_text1 {
+    width: 890px;
+}
+  }
+  
+  
+  @media(max-width:1620px) {
+
+    .fpvnew_block2_group:nth-of-type(1) img :nth-of-type(3) {
+        margin-top: 10px;
+    }
+
+    .fpvnew_block2_group:nth-of-type(1) img{
+        margin-top: 10px;
+    }
+
+   .fpv_new_block1_wrapper{    width: 1300px;
+    background-size: 700px;
+    padding-left: 0;}
+  .fpv_new_block1_wrapper label{ margin-left:740px;}
+   .fpv_new_block1_wrapper h4{margin-left:740px;}
+   
+   .fpv_new_block2_wrapper{ width:1300px; }
+   
+   .fpv_new_block3_wrapper{ width:1300px; margin:0 auto;}
+   
+   .fpv_new_block3body {
+    background-position: -350px top;
+}
+.fpv_new_block3_wrappercon {
+    padding: 50px 0 50px 630px;
+}
+	.fpv_new_block4_wrapper{ width:1300px; } 
+	
+	
+	.fpv_new_block4_con1 {
+    width: 1060px;
+}
+
+.fpv_new_block4_con2 {
+    width: 840px;}
+
+
+.fpv_new_block5_wrapper{ width:1300px;} 	
+
+.fpv_new_block6_wrapper{ width:1300px;} 
+
+.fpv_new_block6_wrapper_text {
+    width: 730px;
+}
+
+.fpv_new_block7_wrapper{ width:1300px; }
+
+.fpv_new_block7body{ background-position:-30% top;}
+
+.fpv_new_block7_wrapper_text {
+    width: 670px;
+}
+
+ .fpv_new_block8_wrapper{ width:1300px; }
+ 	.fpv_new_block8_text{ width:770px;  }
+	
+	 .fpv_new_block9_wrapper{ width:1300px;}
+	 .fpv_new_block9_text {
+    width: 480px;
+}
+
+
+.fpv_new_block10_wrapper{ width:1300px;  }
+
+.fpv_new_block10_text{ width:650px;}
+
+.fpv_new_block11_wrapper {
+    width: 1300px;
+    margin: 0 auto;
+}
+
+.fpv_new_block11_wrapper_text1 {
+    width: 740px;
+}
+
+.fpv_new_block11_text1{ padding-bottom:0px;}
+.fpv_new_block11_wrapper_text2 {
+    width: 800px;
+}
+ }
+ 
+   @media(max-width:1500px) {
+ 
+ .fpv_new_block3body{ background-position:-210px top;}
+ 
+ 
+ .fpv_new_block7body {
+    background-position: -40% top;
+}
+.fpv_new_block7_wrapper_text {
+    width: 630px;
+}
+ 
+ .fpv_new_block8_text {
+    width: 680px;
+}
+.fpv_new_block9body { 
+    background-position: -70px bottom;
+}
+
+.fpv_new_block11_text2 { 
+    background-position: 117% top;
+}
+.fpv_new_block11_text1 { 
+    background-position: -10% top;
+}
+ }
+ @media(max-width:1440px) {
+ .fpv_new_block4_con1 {
+    width: 880px;
+}
+.fpv_new_block4_con2 {
+    width: 743px;
+}
+
+.fpv_new_block6_wrapper_text {
+    width: 680px;
+}
+.fpv_new_block10_text {
+    width: 560px;
+}
+ }
+ 
+ 
+  @media(max-width:1400px) {
+ .fpv_new_block3body {
+    background-position: -350px top;
+}
+
+.fpv_new_block6 { 
+    background-position: 120% top;
+}
+
+.fpv_new_block7body {
+    background-position: -120% top;
+}
+.fpv_new_block7_wrapper_text {
+    width: 710px;
+}
+.fpv_new_block9body {
+    background-position: -190px bottom;
+}
+.fpv_new_block9_text {
+    width: 554px;
+}
+
+.fpv_new_block11_text1 {
+    background-position: -20% top;
+}
+
+}
+ 
+  @media(max-width:1320px) {
+   .fpv_new_block1_wrapper{    width: 1190px; }
+   .fpv_new_block2_wrapper{ width:1190px; }
+   
+   .fpv_new_block3_wrapper{ width:1190px; }
+   
+ .fpv_new_block3body {
+    background-position: -380px top;}
+	
+	.fpv_new_block4_wrapper{ width:1190px; } 
+	
+	.fpv_new_block4_left2:nth-of-type(1) {
+    padding-right: 40px;
+}
+
+.fpv_new_block4_con2 {
+    width: 685px;
+}
+
+
+.fpv_new_block5_wrapper{ width:1190px;} 
+
+.fpv_new_block6_wrapper{ width:1190px;} 
+
+.fpv_new_block6 {
+    background-position: 140% top;
+}
+
+.fpv_new_block7_wrapper{ width:1190px; }
+
+.fpv_new_block7_wrapper_text {
+    width: 630px;
+}
+
+
+.fpv_new_block8_wrapper{ width:1190px; }
+ 	.fpv_new_block8_text {
+    width: auto;
+}
+
+.fpv_new_block8_text label{ width:500px;}
+	.fpv_new_block8_text p{ width:500px;}
+	
+	.fpv_new_block8{ background-position:right bottom;}
+	
+	.fpv_new_block9body {
+    background-position: -290px bottom;
+}
+.fpv_new_block9_wrapper {
+    width: 1190px;
+}
+
+.fpv_new_block10_wrapper {
+    width: 1190px;
+}
+
+.fpv_new_block10 {  
+    background-position: 125% top;
+}
+
+.fpv_new_block11_wrapper {
+    width: 1190px;
+    margin: 0 auto;
+}
+
+.fpv_new_block11_text1 {
+    background-position: -30% top;
+}
+.fpv_new_block11_text2 {
+    background-position: 137% top;
+}
+}
+
+@media (max-width: 1240px){
+.fpv_new_block7body {
+    background-position: -175% top;
+}
+
+.fpv_new_block11_text1 {
+    background-position: -35% top;
+}
+ 
+  
+}
+
+
+ @media(max-width:1199px) {
+  .fpv_new_block1_wrapper{ background-size:100%; background-position:center bottom; width:auto; padding:25px 25px 84% 25px;  }
+  
+   .fpv_new_block1_wrapper label{ margin-left:0px;}
+   .fpv_new_block1_wrapper h4{margin-left:0px;} 
+   
+   .fpv_new_block2body{ width:auto;  padding:25px 25px 24% 25px;}
+   .fpv_new_block2_left{ width:100%; float:none;}
+	
+	.fpv_new_block2_right{ width:100%; float:none; margin-top:25px;}
+	
+		.fpv_new_block2_left{ width:100%; float:none;}
+	
+	.fpv_new_block2_right{ width:100%; float:none;}
+	
+	.fpv_new_block2_wrapper{ padding:0px;}
+	
+	.fpv_new_block2_wrapper {
+    width: 100%;
+}
+   .fpv_new_block3_wrapper{ width:auto; }
+   
+   .fpv_new_block3_wrappercon {
+    padding: 25px;
+}
+
+.fpv_new_block3{ background:none!important;}
+
+.fpv_new_block3_body2{    background-position: -790px 0;}
+
+.fpv_new_block3body{ background-image:none; background: rgba(246,246,246,1);
+background: -moz-linear-gradient(top, rgba(246,246,246,1) 0%, rgba(237,237,237,1) 100%);
+background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(246,246,246,1)), color-stop(100%, rgba(237,237,237,1)));
+background: -webkit-linear-gradient(top, rgba(246,246,246,1) 0%, rgba(237,237,237,1) 100%);
+background: -o-linear-gradient(top, rgba(246,246,246,1) 0%, rgba(237,237,237,1) 100%);
+background: -ms-linear-gradient(top, rgba(246,246,246,1) 0%, rgba(237,237,237,1) 100%);
+background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(237,237,237,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f6f6', endColorstr='#ededed', GradientType=0 );}
+
+
+.fpv_new_block3span{ float:none; width:100%;}
+
+.fpv_new_block4_wrapper{ width:auto; padding:0 25px; margin-bottom:0px; } 
+
+
+.fpv_new_block4_body { 
+    background-position: right bottom;
+    background-size: 100%;
+    padding-bottom: 85%;
+}
+
+.fpv_new_block4_wrapper h2 br{ display:none;}
+
+.fpv_new_block4_con1 {
+    width: 100%;
+}
+.fpv_new_block4_left1 {
+    width: 100%;
+    float: none;
+}
+
+.fpv_new_block4_right1 {
+    width: 100%;
+    float: none; margin-top:25px;
+}
+
+.fpv_new_block4_con2 {
+    width: 100%;
+    display: block;
+}
+
+.fpv_new_block4_left2:nth-of-type(1){ padding-right:0px; margin-bottom:25px;}
+
+.fpv_new_block5_wrapper{ width:auto; margin-bottom:0px; padding:0 25px;} 
+
+.fpv_new_block5_left {
+    width: 100%;
+    float: none;
+}
+
+.fpv_new_block5_right {
+    width: 100%;
+    float: none;
+}
+
+.fpv_new_block5_body{ background-size:100%; padding-bottom:30%;}
+
+.fpv_new_block6_wrapper{ width:auto; padding:0 25px;} 
+
+.fpv_new_block6 {
+    background-position: right bottom;
+    background-size: 100%;
+    padding-bottom: 68%;
+}
+.fpv_new_block6_wrapper_text {
+    width: 100%;
+}
+
+.fpv_new_block7_wrapper{ width:auto; padding:0 25px; }
+
+
+.fpv_new_block7body {
+    background-position: center top; background-size:100%; padding-top:56%;
+}
+.fpv_new_block7_wrapper_text {
+    width: auto;
+}
+
+.fpv_new_block8_wrapper{ width:auto; padding:0 25px; padding-top: 35px; }
+ 
+
+.fpv_new_block8_text label{ width:auto;}
+	.fpv_new_block8_text p{ width:auto;}
+	
+	.fpv_new_block8{ background-position:right bottom; background-size:100%; padding-bottom:68%;}
+	
+	.fpv_new_block9_wrapper {
+    width: auto;
+    padding: 0 25px;     margin-bottom: 0px;
+}
+.fpv_new_block9body {
+    background-position: left bottom;
+    background-size: 100%;
+    padding-bottom: 57%;
+}
+
+.fpv_new_block9_text {
+    width: 100%;
+    float: none;
+}
+
+.fpv_new_block10_wrapper {
+    width: auto; padding:0 25px; margin-bottom:0px;
+}
+
+.fpv_new_block10 {  
+    background-position: center bottom; background-size:100%; padding-bottom:80%;
+}
+.fpv_new_block10_text {
+    width: 100%;
+    float: none;
+}
+
+.fpv_new_block11_wrapper {
+    width: auto;
+    margin: 0 auto;
+    padding: 0 25px;
+}
+
+.fpv_new_block11_text1 {
+    background-position: center bottom;
+    background-size: 100%;
+    padding-bottom: 75%;
+}
+.fpv_new_block11_wrapper_text1 {
+    width: auto;
+    float: none;
+}
+
+.fpv_new_block11_text2 {
+    background-position: left bottom;
+    background-size: 100%;
+    padding-bottom: 58%;
+}
+.fpv_new_block11_wrapper_text2 {
+    width: auto;
+}
+ }
+ 
+  @media(max-width:980px) {
+ .fpv_new_block2body {
+    width: auto;
+    padding: 25px 25px 34% 25px;
+}
+
+.fpvnew_block2_group:nth-of-type(1) img {
+    margin-top: 0;
+}
+
+.fpvnew_block2_group_con img:last-of-type{ margin:5px;}
+.fpvnew_block2_group_con img {
+    float: none;
+    margin: 5px; max-width:100%;
+}
+.fpvnew_block2_group:nth-of-type(1) img {
+    margin: 5px;
+}
+.fpvnew_block2_group:nth-of-type(1) img:nth-of-type(3) {
+    margin: 5px;
+}
+
+.fpv_new_block2_right ul li img{ max-width:100%;}
+
+.fpv_new_block5_body {
+    background-size: 150%;
+    padding-bottom: 50%;
+}
+}
+  @media(max-width:780px) {
+ .fpv_new_block2body {
+    width: auto;
+    padding: 25px 25px 60% 25px;
+}
+.fpv_new_block7body {
+    background-position: center top;
+    background-size: 140%;
+    padding-top: 78%;
+}
+.fpv_new_block8 {
+    background-position: right bottom;
+    background-size: 130%;
+    padding-bottom: 88%;
+}
+}
+ 
+  @media(max-width:640px) {
+  .fpv_new_block1_wrapper h2{font-size:30px; line-height:32px; background-position:left 3px; }
+  
+   .fpv_new_block2body {
+    width: auto;
+    padding: 25px 25px 58% 25px; background-size:100%;
+}
+
+.fpv_new_block3span {
+    display: block;
+    width: 100%;
+    float: left;
+}
+
+.fpv_new_block5_group_wrapper {
+    display: block; text-align:center;
+}
+.fpv_new_block5_group_left {
+    width: auto;
+}
+.fpv_new_block5_group_right {
+    width: 100%;
+    padding-left: 0;
+    padding-top: 25px;
+}
+
+
+  }
+  
+    @media(max-width:520px) {
+	.fpv_new_block2_right .imglicon img {
+    display: block;
+    float: none;
+}
+
+.fpv_new_block2_right .imglicon span {
+    display: block;
+    float: none;
+    padding: 0;
+}
+
+.fpv_new_block2_right .imglicon {
+    background-position: left 3px;
+}
+.fpv_new_block2_right ul li img{ max-width:100%;}
+
+.fpv_new_block2_right h1{font-size:30px; line-height:32px; }
+.fpv_new_block2_left h4 {
+    font-size: 32px;
+    line-height: 34px;}
+	
+	.fpv_new_block2_left h1{font-size:30px; line-height:32px; }
+	
+	.fpv_new_block5_wrapper h1{font-size:30px; line-height:32px;}
+	
+	.fpv_new_block4_wrapper h2{font-size:30px; line-height:32px;}
+	
+	.fpv_new_block6_wrapper h2{font-size:30px; line-height:32px;}
+.fpv_new_block7_wrapper_text h2{font-size:30px; line-height:32px;}
+
+.fpv_new_block10_text h2{font-size:30px; line-height:32px;}
+
+.fpv_new_block3_wrapper h2 {font-size:30px; line-height:32px;}
+	}
+	
+  
+    
+ 
+  /*-------------------4/13/2020 end -----------------*/
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
