@@ -126,7 +126,7 @@
                   <label style="color: #00c314; font-family: 'OpenSansRegular'; margin-top: 5px; " *ngIf="percentageis!=100 && errormg==''">Upload Percentage:{{percentageis}}%</label>
 
                   <div class="upload_v">
-                  <img width="auto" height="auto" controls *ngIf="percentageis==100 && servernameis!=null && errormg==''" src="{{_commonservices.uploadsslurl}}{{servernameis}}">
+                  <img width="auto" height="auto" controls *ngIf="percentageis==100 && servernameis!=null && errormg==''" src="{{servernameis.basepath}}/{{servernameis.data.path}}/{{servernameis.data.fileservername}}">
                 </div>
                 </div>
                 <span class="error" *ngIf="!dataForm.controls['imageservername'].valid && dataForm.controls['imageservername'].touched && issubmit==1 ">Upload an image!</span>

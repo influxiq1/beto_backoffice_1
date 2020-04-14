@@ -84,9 +84,10 @@ import { UsergoogleeventComponent } from './usergoogleevent/usergoogleevent.comp
 import { SalesDecksComponent } from './sales-decks/sales-decks.component';
 const appRoutes: Routes = [
     { path: '', redirectTo:'/login', pathMatch: 'full' },
+    { path: '', component:  LoginComponent},
     {path: 'videolibrary', component: VideoLibraryComponent},
     {path: 'belk-upload', component: CrmBelkUploadComponent},
-    {path: 'lead-contract/:_id', component: LeadContractComponent, resolve : {results: TestresolveService},data: { requestcondition: { source: 'send_to_lead', condition: {"_id":"_id"}}, endpoint: 'datalist'}},
+    {path: 'lead-contract/:_id', component: LeadContractComponent, resolve : {results: TestresolveService},data: { requestcondition: { source: 'send_to_lead', condition: {"_id":"_id"}}, endpoint: 'forleaddata'}},
     {path: 'lead-list/:_id', component: BulkLeadListComponent, resolve : {results: TestresolveService},data: { requestcondition: { source: 'csv_upload_view', condition: {"id_object":"id_object", "skip":0}}, endpoint: 'leadlist'}},
     {path: 'add-contract', component: ContractAddEditComponent},
     {path: 'edit-contract/:id', component: ContractAddEditComponent},

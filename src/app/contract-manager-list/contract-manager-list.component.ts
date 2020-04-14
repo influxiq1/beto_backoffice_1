@@ -15,7 +15,7 @@ declare var $: any;
   providers : [Commonservices]
 })
 export class ContractManagerListComponent implements OnInit {
-
+  public d:any = new Date();
   public loader = 0;
   daterangepickerOptions = {
     format: 'MM/DD/YYYY',
@@ -34,11 +34,12 @@ public selecteditem;
 public placeholderforselect = 0; 
 public placeholderforselectStatus = 0; 
 public message;
- headElements = ['ID', 'Date', 'Product Name', 'Rep Name', 'Lead Name', 'Contract Manager Name', 'Status','Requeste By', 'Notes'];
+ headElements = ['ID', 'Date', 'Product Name', 'Rep Name', 'Lead Name', 'Contract Manager Name', 'Status','Request By', 'Notes'];
 public productList: any = [];
 public statusList: any = [{val:'send_to_rep', name:"Send To Rep"},{val:'ask_for_modification',name:'Ask For Modification'},{val:'send_to_lead',name:'Send To Lead'},{val:'sends_Signed_Contract_to_Rep',name:'Signed'},{val:'request',name:'Request'}];
 public prodSelect: any = 0;
 public statusSelect: any = 0;
+public requestBy: any = 0;
 public filterValForName: any;
 public filterval5: any = '';
 public start_date: any = '';
@@ -67,6 +68,9 @@ public indexCount: number;
           // console.log('asDraft', item)
         } else{
           dataall.push(data.results.res[item])
+          // if (this.d.setDate(this.d.getDate()-3 >= data.results.res[item].created_request_at)) {
+          //   console.log(this.d.setDate(this.d.getDate()-3 <= data.results.res[item].created_request_at))
+          // }
         }
         
       }
@@ -79,16 +83,16 @@ public indexCount: number;
    this.getproduct();
   }
   statusSearchbyval(val: any){
-    this.loader = 1;
+    
     console.log(val);
-    if (val != undefined && val != null && val.length > 0) {
+    if (val != undefined && val != null && val != '') {
+      this.loader = 1;
       let data: any = {
         "source":"contract_manager_list",
-        "condition":{
-          "status":val
-        }
+        "condition":val
       }
 
+      console.log(data);
       const link = this._commonservice.nodesslurl+'datalist?token='+this.cookeiservice.get('jwttoken');
           this._http.post(link,data).subscribe((res:any) => {
               this.loader =0;
@@ -101,16 +105,15 @@ public indexCount: number;
                 } else{
                   dataall.push(res.res[item])
                 }
-                
               }
               this.datalist = dataall;
           });
     }
   }
   productSearchbyval(val: any){
-    this.loader = 1;
     console.log(val);
     if (val != undefined && val != null && val.length > 0) {
+      this.loader = 1;
       let data: any = {
         "source":"contract_manager_list",
         "condition":{

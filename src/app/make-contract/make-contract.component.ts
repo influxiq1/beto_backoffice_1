@@ -31,10 +31,10 @@ export class MakeContractComponent implements OnInit {
 
     this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
 
-    this.makeContentForm = this.formBuilder.group({
-      contentTop: ['', Validators.required],
-      notesMsg:['']
-    });
+    // this.makeContentForm = this.formBuilder.group({
+    //   contentTop: ['', Validators.required],
+    //   notesMsg:['']
+    // });
     this.route.params.subscribe(params => {
       this.recid = params['_id'];
       // console.log(this.recid);
@@ -46,9 +46,14 @@ export class MakeContractComponent implements OnInit {
     this.route.data.forEach((data:any ) => {
       // console.log('json',data.results.res);
       this.datalist = data.results.res[0];
+      this.makeContentForm = this.formBuilder.group({
+        contentTop: [this.datalist.contentTop, Validators.required],
+        notesMsg:[this.datalist.notesByCM]
+      });
     // if (this.datalist.clauses != null && this.datalist.clauses != '') {
-      this.makeContentForm.controls['contentTop'].patchValue(this.datalist.contentTop);
-      this.makeContentForm.controls['notesMsg'].patchValue(this.datalist.notesByCM);
+      // console.log(this.datalist.contentTop)
+      // this.makeContentForm.controls['contentTop'].patchValue(this.datalist.contentTop);
+      // this.makeContentForm.controls['notesMsg'].patchValue(this.datalist.notesByCM);
     // }
 
     // console.log('json',this.datalist.contentTop);
@@ -85,7 +90,7 @@ export class MakeContractComponent implements OnInit {
         product_id: this.datalist.product_id,
         lead_id: this.datalist.lead_id,
         contract_manager_id: this.cookeiservice.get('userid'),
-        contentTop: this.datalist.contentTop,
+        contentTop: this.makeContentForm.value.contentTop,
         // contentBottiom: this.datalist.contentBottiom,
         contract_content_notes: this.datalist.contract_content_notes
       }
@@ -109,7 +114,7 @@ export class MakeContractComponent implements OnInit {
         product_id: this.datalist.product_id,
         lead_id: this.datalist.lead_id,
         // contract_manager_id: this.cookeiservice.get('userid'),
-        contentTop: this.datalist.contentTop,
+        contentTop: this.makeContentForm.value.contentTop,
         // contentBottiom: this.datalist.contentBottiom,
         contract_content_notes: this.datalist.contract_content_notes,
         contract_manager_id: this.datalist.contract_manager_id

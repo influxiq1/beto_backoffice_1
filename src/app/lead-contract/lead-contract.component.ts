@@ -1,7 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
-import { BsModalService } from 'ngx-bootstrap';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { Commonservices } from '../app.commonservices';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -16,11 +16,14 @@ import { CookieService } from 'ngx-cookie-service';
 export class LeadContractComponent implements OnInit {
 public all_data: any;
 public modalref: any
+modalRef1: BsModalRef;
 public today: any = new Date;
 public degitalSignForm: FormGroup;
 public degitalSignFormSubmitFlug: boolean = false;
 public agreementForm: FormGroup;
 public agreementFormSubmitFlug: boolean = false;
+public isSubmit:number;
+
   constructor(
     public route: ActivatedRoute,
     protected _sanitizer: DomSanitizer,
@@ -38,7 +41,7 @@ public agreementFormSubmitFlug: boolean = false;
    });
 
    this.degitalSignForm = this.formBuilder.group({
-    fullName:   [ null, [ Validators.required, Validators.maxLength(150) ] ],
+    fullName:   [ '', [ Validators.required, Validators.maxLength(150) ] ],
   });
   }
   safeHtml(html) {
@@ -52,32 +55,46 @@ public agreementFormSubmitFlug: boolean = false;
   degitalSignFormSubmit() {
     this.degitalSignFormSubmitFlug = true;
     if(this.degitalSignForm.valid) {
-      /* Set Default Value */
-      console.log(this.degitalSignForm.value.fullName)
-
-      const link = this._commonservice.nodesslurl + 'addorupdatedata?token=' + this.cookeiservice.get('jwttoken');
+      this.isSubmit = 1;
+      this.modalref.hide();
+      this.degitalSignForm.reset();
+    }
+  }
+  submitSign(template: TemplateRef<any>, val: any){
+    let status1: any;
+    if (val == 1) {
+      status1 = 'sends_Signed_Contract_to_Rep';
+    } else {
+      status1 = 'decline'
+    }
+    if (this.isSubmit == 1 ) {
+    const link = this._commonservice.nodesslurl + 'addorupdate_for_lead';
       this._http.post(link,  { source: 'contract_repote', data: {
        id: this.all_data._id,
        notes: this.all_data.notes,
        notesByCM:this.all_data.notesByCM,
-       status:'sends_Signed_Contract_to_Rep',
+       status: status1,
        product: this.all_data.product,
+       contentTop:this.all_data.contentTop,
        product_id: this.all_data.product_id,
        lead_id:this.all_data.lead_id,
        lead_digital_signature:this.degitalSignForm.value.fullName,
        lead_digital_signature_date:new Date().getTime(),
        contract_manager_id: this.all_data.contract_manager_id,
        rep_id:this.all_data.rep_id,
-       updated_by: this.cookeiservice.get('userid')
+      //  updated_by: this.cookeiservice.get('userid')
         }})
           .subscribe((res: any) => { 
-              if (res.status == 'success') {
-              this.router.navigateByUrl('/contract-manager-list');
-          }
-          });
+            this.isSubmit == 0;
+              if (res.status == 'success' && val == 1) {
 
-      this.modalref.hide();
-      this.degitalSignForm.reset();
+                this.modalRef1 = this.modalservices.show(template, { class: 'successmodal' });
+                window.open('https://api.influxhostserver.com/download?file='+res.filename);
+                setTimeout(() => {
+                    this.modalRef1.hide();
+                }, 4000);
+          }
+          });   
     }
   }
   hideDigitalSignModal() {

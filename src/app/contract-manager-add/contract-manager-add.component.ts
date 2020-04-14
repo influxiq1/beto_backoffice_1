@@ -235,7 +235,7 @@ export class ContractManagerAddComponent implements OnInit {
             for(let c in this.allcontract) {
                 if(this.allcontract[c].product_name != null && this.allcontract[c].product_name.toLowerCase().indexOf(keyword.toLowerCase())>-1) {
                     this.contractSuggestion.push(this.allcontract[c]);
-                    console.log('call firstname');
+                    console.log('call firstname',this.contractSuggestion);
                 }
             }
         } else {
@@ -253,7 +253,8 @@ export class ContractManagerAddComponent implements OnInit {
     }
 
     selectcontract(contractData) {
-        this.loader = true;
+        console.log(contractData)
+        // this.loader = true;
         if( this.recid == null || this.recid == '') {
             this.contractForm.patchValue({    
             product: contractData.product_name
@@ -266,7 +267,7 @@ export class ContractManagerAddComponent implements OnInit {
 
         const link = this._commonservice.nodesslurl + 'lead_and_product';
         this._http.post(link, {  "product_id": contractData.product_id }).subscribe((res:any) => {
-            this.loader = false;
+            // this.loader = false;
             this.leadname = res.data.lead_list;
             // this.contract_manager_list = res.data.contract_manager_list;
             if (res.res =="success" && this.recid !=null && this.recid !='') {

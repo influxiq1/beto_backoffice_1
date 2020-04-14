@@ -195,8 +195,12 @@ export class TrainingsectionComponent implements OnInit {
     if (output.type === 'allAddedToQueue') {
       const event:UploadInput = {
         type: 'uploadAll',
-        url: this._commonservices.nodesslurl + 'uploads',
+        url: this._commonservices.nodesslurl + 'uploads?path=backoffice_bp_lesson_add&prefix=la',
         method: 'POST',
+        data:{
+          bucketname: 'crmfiles.influxhostserver',
+          type:''
+        }
       };
       this.uploadInput.emit(event);
     } else if (output.type === 'addedToQueue' && typeof output.file !== 'undefined') {
@@ -213,8 +217,8 @@ export class TrainingsectionComponent implements OnInit {
       this.files[index] = output.file;
       this.lengthis = this.files.length;
       this.percentageis = this.files[0].progress.data.percentage;
-      console.log('this.files==================');
-      console.log(this.files);
+      // console.log('this.files==================');
+      // console.log(this.files);
     } else if (output.type === 'removed') {
       this.files = this.files.filter((file:UploadFile) => file !== output.file);
     } else if (output.type === 'dragOver') {
@@ -224,13 +228,14 @@ export class TrainingsectionComponent implements OnInit {
     } else if (output.type === 'drop') {
       this.dragOver = false;
     }
-    console.log('files-');
-    console.log(this.files);
+    // console.log('files-');
+    // console.log(this.files);
     if(this.files.length>0 && this.files[0].name!=null && this.files[0].response != null){
       this.lengthis = this.files.length;
       this.percentageis = this.files[0].progress.data.percentage;
       this.nameis = this.files[0].name;
       this.servernameis = this.files[0].response;
+      // console.log(this.servernameis,'servernameis++')
       if(this.dataForm.value['filetype']=='file'){
         this.last = this.files[0].name.substring(this.files[0].name.lastIndexOf(".") + 1, this.files[0].name.length);
         if(this.last!='doc' && this.last!='docx'  && this.last!='pdf' && this.last!='ppt' && this.last!='pptx' && this.last!='txt' && this.last!='xls' ){
@@ -260,11 +265,11 @@ export class TrainingsectionComponent implements OnInit {
       }
       else if(this.dataForm.value['filetype']=='audio'){
 
-        console.log('in audio patch block');
-        console.log(this.files);
-        console.log(this.files[0].type);
+        // console.log('in audio patch block');
+        // console.log(this.files);
+        // console.log(this.files[0].type);
         if(this.files[0].type.indexOf('audio')==-1){
-          console.log('in error , wrong audio file uploader ..');
+          // console.log('in error , wrong audio file uploader ..');
           console.log('No');
           this.errormg='in error , wrong audio file uploader ..';
         }

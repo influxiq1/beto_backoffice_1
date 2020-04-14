@@ -302,33 +302,39 @@ export class LoginComponent implements OnInit {
       }
   }
   ngOnInit() {
-setTimeout(() => {
-  if(this.cookeiservice.get('userid')){
-    switch(this.cookeiservice.get('usertype')) {
-      case 'rep':
-        this.router.navigate(['/repdashboard']);
-        break;
-      case 'regional_recruiter':
-        this.router.navigate(['/regionaldashboard']);
-        break;
-      case 'admin':
-        this.router.navigate(['/dashboard']);
-        break;
-      case 'contract_manager':
-        this.router.navigate(['/contract/dashboard']);
-        break;
-    }
-  }else{
-    console.log('in login','noo cookie');
-  }
-}, 500);
-    this.dataForm = this.kp.group({
-      email: ['', Validators.compose([Validators.required, LoginComponent.customValidator])],
-      password: ['', Validators.compose([Validators.required])],
-    });
     this.route.params.subscribe(params => {
       //this.recid = params['id'];
       this.type = params['type'];
+    });
+    setTimeout(() => {
+      if (this.cookeiservice.get('userid')) {
+        switch (this.cookeiservice.get('usertype')) {
+          case 'rep':
+            if (typeof(this.type) != 'undefined' && this.type != null ) {
+              this.type = this.type.replace(/-/gi, "/");
+              console.log('rep',this.type);
+              this.router.navigateByUrl(this.type);
+            } else {
+              this.router.navigate(['/repdashboard']);
+            }
+            break;
+          case 'regional_recruiter':
+            this.router.navigate(['/regionaldashboard']);
+            break;
+          case 'admin':
+            this.router.navigate(['/dashboard']);
+            break;
+          case 'contract_manager':
+            this.router.navigate(['/contract/dashboard']);
+            break;
+        }
+      } else {
+        console.log('in login', 'noo cookie');
+      }
+    }, 100);
+    this.dataForm = this.kp.group({
+      email: ['', Validators.compose([Validators.required, LoginComponent.customValidator])],
+      password: ['', Validators.compose([Validators.required])],
     });
   }
   static customValidator(inputemail): any {
@@ -389,8 +395,14 @@ setTimeout(() => {
             return;
           }
           if(result.res[0].status==1) {
-            this.router.navigate(['/repdashboard']);
-            return;
+            if (typeof(this.type) != 'undefined' && this.type != null ) {
+              this.type = this.type.replace(/-/gi, "/");
+              console.log('rep',this.type);
+              this.router.navigateByUrl(this.type);
+            } else {
+              this.router.navigate(['/repdashboard']);
+              return;
+            }
           }
           if(result.res[0].signup_step2==1 && result.res[0].contractstep==null && result.res[0].reptraininglessonstep==null) this.router.navigate(['/contract']);
           if(result.res[0].signup_step2==1 && result.res[0].contractstep==1 && result.res[0].reptraininglessonstep==null) this.router.navigate(['/reptrainingcenter']);
@@ -477,8 +489,15 @@ setTimeout(() => {
                   return;
                 }
                 if(result.item[0].status==1) {
+                /*** auto login ****/ 
+                if (typeof(this.type) != 'undefined' && this.type != null ) {
+                  this.type = this.type.replace(/-/gi, "/");
+                  console.log('rep',this.type);
+                  this.router.navigateByUrl(this.type);
+                } else {
                   this.router.navigate(['/repdashboard']);
                   return;
+                }
                 }
                 if(result.item[0].signup_step2==1 && result.item[0].contractstep==null && result.item[0].reptraininglessonstep==null) this.router.navigate(['/contract']);
                 if(result.item[0].signup_step2==1 && result.item[0].contractstep==1 && result.item[0].reptraininglessonstep==null) this.router.navigate(['/reptrainingcenter']);

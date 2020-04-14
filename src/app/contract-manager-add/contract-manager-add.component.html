@@ -47,7 +47,7 @@
 
                     <div class="col-sm-12 ngcontainerdiv" *ngIf="contractSuggestionFlug" >
                         <ng-container *ngFor="let l of contractSuggestion;let i = index;" >
-                            <p *ngIf="l.traininglessonpercent != null" (click)="selectcontract(l);" class="contract-option">{{l.product_name}}</p>
+                            <p (click)="selectcontract(l);" class="contract-option">{{l.product_name}}</p>
                         </ng-container>
                     </div>
                     <span class="error"

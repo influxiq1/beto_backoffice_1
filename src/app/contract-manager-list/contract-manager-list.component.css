@@ -138,3 +138,14 @@
       }
     }
     
+  .bgcolorgreen {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      color: green;
+  }
+
+  .bgcolorblack {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: black;
+}

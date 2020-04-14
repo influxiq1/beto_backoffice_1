@@ -85,7 +85,7 @@
                     </div>
                     <div *ngIf="item.filetype=='image'">
                       {{item.imagelocalname }}<br/>
-                      <img width="320" height="240" src="{{_Commonservices.uploadsslurl}}{{item.imageservername}}">
+                      <img width="320" height="240" src="{{item.imageservername.basepath}}/{{item.imageservername.data.path}}/{{item.imageservername.data.fileservername}}">
                     </div>
 
 
@@ -220,6 +220,7 @@
 
 <ng-template #templatecommon>
   <div class="modal-body ">
+    <img src="assets/images/betologo.png" alt="" style="display: block; width: 280px; margin: 15px auto;">
     <h1>{{message}}</h1>
   </div>
 </ng-template>
