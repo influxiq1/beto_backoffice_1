@@ -312,7 +312,7 @@ export class LoginComponent implements OnInit {
           case 'rep':
             if (typeof(this.type) != 'undefined' && this.type != null ) {
               this.type = this.type.replace(/-/gi, "/");
-              console.log('rep',this.type);
+              // console.log('rep',this.type);
               this.router.navigateByUrl(this.type);
             } else {
               this.router.navigate(['/repdashboard']);
@@ -329,7 +329,7 @@ export class LoginComponent implements OnInit {
             break;
         }
       } else {
-        console.log('in login', 'noo cookie');
+        // console.log('in login', 'noo cookie');
       }
     }, 100);
     this.dataForm = this.kp.group({
@@ -356,7 +356,7 @@ export class LoginComponent implements OnInit {
     .subscribe(res=>{
       let result:any;
       result = res;
-      console.log(result);
+      // console.log(result);
       if (result.resc == 1 && result.res!=null && result.res[0]!=null  ) {
         if(result.res[0].status == 1) {
           this.cookeiservice.set('jwttoken', this.cookeiservice.get('jwttoken'));
@@ -448,7 +448,7 @@ export class LoginComponent implements OnInit {
                     this.router.navigate(['/contract/dashboard']);
                   }
               this.cookeiservice.set('viewonlyaccess', result.item[0].viewonlyaccess);
-              console.log(result.item[0]);
+              // console.log(result.item[0]);
               if(result.item[0].status == 1 || result.item[0].status == true) {
                 if(result.item[0].is_contract_signed == null && result.item[0].type == 'rep') {
                   setTimeout(() => {
@@ -457,7 +457,7 @@ export class LoginComponent implements OnInit {
                   this.router.navigate(['/agreement']);
                   return ;
                 }
-                console.log(result.item[0]);
+                // console.log(result.item[0]);
                 setTimeout(() => {
                   this.cookeiservice.set('jwttoken', result.token);
                   this.cookeiservice.set('userid', result.item[0]._id);
@@ -492,7 +492,7 @@ export class LoginComponent implements OnInit {
                 /*** auto login ****/ 
                 if (typeof(this.type) != 'undefined' && this.type != null ) {
                   this.type = this.type.replace(/-/gi, "/");
-                  console.log('rep',this.type);
+                  // console.log('rep',this.type);
                   this.router.navigateByUrl(this.type);
                 } else {
                   this.router.navigate(['/repdashboard']);

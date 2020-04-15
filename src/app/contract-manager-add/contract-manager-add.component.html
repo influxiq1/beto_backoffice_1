@@ -62,7 +62,7 @@
 
                     <select [formControl]="contractForm.controls['lead']" class="form-control" (change)="selectproductfunc($event)">
                         <option value="">Select a Lead</option>
-                        <option *ngFor="let i of leadname;" value="{{ i._id }}">{{ i.firstname }} {{ i.lastname }}
+                        <option *ngFor="let i of leadname;" value="{{ i._id }}">{{ i.firstname }} {{ i.lastname }}  ({{i.email}})
                         </option>
                     </select>
                     <span class="error"

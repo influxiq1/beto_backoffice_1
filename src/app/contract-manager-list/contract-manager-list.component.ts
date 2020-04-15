@@ -85,7 +85,7 @@ public indexCount: number;
   statusSearchbyval(val: any){
     
     console.log(val);
-    if (val != undefined && val != null && val != '') {
+    if (val != undefined && val != null && val != '' && val != 0) {
       this.loader = 1;
       let data: any = {
         "source":"contract_manager_list",

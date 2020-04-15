@@ -70,8 +70,9 @@ export class ContractListComponent implements OnInit {
   }
 
   searchProduct(val) {
-    this.loader = 1;
-    console.log(val);
+    // console.log(val);
+    if (val != undefined && val != null && val != '' && val != 0) {
+      this.loader = 1;
     const link = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
     this._http.post(link, {
       source: 'contractDetails_view', "condition": {
@@ -83,6 +84,7 @@ export class ContractListComponent implements OnInit {
       this.datalist = result.res;
       this.loader = 0;
     });
+  }
   }
 
   editRow(val: any, st) {
