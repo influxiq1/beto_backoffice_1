@@ -397,58 +397,63 @@ public bookNowStatus:boolean = true;
                 });
 
   }
-  booknowmodal_appointmentlist(val: any = {}, template2:TemplateRef<any>){
+  booknowmodal_appointmentlist(val: any = {}, template2: TemplateRef<any>) {
     // console.log(this.googleeventval);
     // console.log(val);
-    val.prvslot = this.googleeventval.prvslot;
-    val.prv_id = this.googleeventval.prv_id;
-    // console.log(val,"======+++++")
+    val.refresh_token = this.cookeiservice.get('refreshtoken'),
+      val.organizerid = [val.useremail];
+      val.oldstartdate = this.googleeventval.startdate;
+      val.oldtimezone = this.googleeventval.eventdata.timezone;
+      val.attendees = this.googleeventval.attendeesarr;
+      val.eid = this.googleeventval._id;
+      val.name = this.googleeventval.name;
+      val.leaddata = this.googleeventval.leaddata;
+      val.productid = val.userproducts;
+      val.closername = this.googleeventval.closername;
+      val.closeremail = this.googleeventval.closeremail;
+      val.prvslot = this.googleeventval.prvslot;
+      val.prv_id = this.googleeventval.prv_id;
     let timeZone = val.timezone;
-    timeZone = timeZone.slice(0,6);
-    // console.log(timeZone,'+++++');
-    let start_time =  (moment(this.slotdata.startdate + 'T' + this.slotdata.slots[this.itemidval].trim() + ':00').format('YYYY-MM-DDTHH:mm:ss')+timeZone);
-    let end_time =(moment(this.slotdata.startdate + 'T' + this.slotdata.slots[this.itemidval].trim() + ':00').add(this.slotdata.timespan, 'minutes').format('YYYY-MM-DDTHH:mm:ss')+timeZone);
-        
-    // let start = val.startdate+'T'+val.starttime+':00'+timeZone;
-    // let end = val.startdate+'T'+val.endtime+':00'+timeZone;
-    // console.log('=======',start_time,end_time)
+    timeZone = timeZone.slice(0, 6);
+    let start_time = (moment(this.slotdata.startdate + 'T' + this.slotdata.slots[this.itemidval].trim() + ':00').format('YYYY-MM-DDTHH:mm:ss') + timeZone);
+    let end_time = (moment(this.slotdata.startdate + 'T' + this.slotdata.slots[this.itemidval].trim() + ':00').add(this.slotdata.timespan, 'minutes').format('YYYY-MM-DDTHH:mm:ss') + timeZone);
 
-
-    let link1 = 'https://gapi.betoparedes.com/check_ability.php?refresh_token='+this.googleeventval.refresh_token+'&start='+start_time+'&end='+ end_time;
+    let link1 = 'https://gapi.betoparedes.com/check_ability.php?refresh_token=' + this.googleeventval.refresh_token + '&start=' + start_time + '&end=' + end_time;
     // console.log(link1)
 
     this._http.get(link1)
-    .subscribe((response:any) => {
-      // console.log(response);
-      // this.slotDataStatus = response;
-      if (response == 0) {
-        let link = "https://gapi.betoparedes.com/updateevent.php?event="+this.googleeventval.googleevent+"&start="+start_time+"&end="+end_time+"&refresh_token="+this.googleeventval.refresh_token+"&summary="+val.meetingwith;
-        // console.log(val);
-        val.booked_by = this.cookeiservice.get('userid');
-        // return;
+      .subscribe((response: any) => {
 
-        this._http.get(link)
-        .subscribe((res:any) => {
-          // console.log(res.status);
-            if (res.status == 'success') {
-              this.modalRef2 = this.modal.show(template2);
-              setTimeout(() => {
-                this.modalRef2.hide();
-              }, 1000);
-              let link1 = this._commonservices.nodesslurl + 'rescheduletocalendar';
-              this._http.post(link1, val)
-          .subscribe((res1:any) => {
-            // console.log(res1);
-          })
-            }
-          });
-      }
-    })
+        // console.log(response);
+        // this.slotDataStatus = response;
+        if (response == 0) {
+          let link = "https://gapi.betoparedes.com/updateevent.php?event=" + this.googleeventval.googleevent + "&start=" + start_time + "&end=" + end_time + "&refresh_token=" + this.googleeventval.refresh_token + "&summary=" + val.meetingwith;
+          // console.log(val);
+          val.booked_by = this.cookeiservice.get('userid');
+          // return;
+          this._http.get(link)
+            .subscribe((res: any) => {
+              // console.log(res.status);
+              if (res.status == 'success') {
+                this.modalRef2 = this.modal.show(template2);
+                setTimeout(() => {
+                  this.modalRef2.hide();
+                }, 1000);
+                let link1 = this._commonservices.nodesslurl + 'rescheduletocalendar';
+                this._http.post(link1, val)
+                  .subscribe((res1: any) => {
+                    this.router.navigate(['/appointmentlist']);
+                    // console.log(res1);
+                  })
+              }
+            });
+        }
+      })
 
 
 
 
- 
+
   }
 
 // functions to delete and add form group
@@ -731,3 +736,6 @@ showformat(stdt){
   }
 
 }
+
+
+

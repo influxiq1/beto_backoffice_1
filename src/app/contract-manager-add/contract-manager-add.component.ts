@@ -7,6 +7,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { CookieService } from 'ngx-cookie-service';
 import { WINDOW } from '@ng-toolkit/universal';
+import { error } from 'util';
 
 declare var moment:any;
 @Component({
@@ -253,6 +254,7 @@ export class ContractManagerAddComponent implements OnInit {
     }
 
     selectcontract(contractData) {
+        let productval: any = contractData;
         console.log(contractData)
         // this.loader = true;
         if( this.recid == null || this.recid == '') {
@@ -274,6 +276,8 @@ export class ContractManagerAddComponent implements OnInit {
                 this.selectproductfunc(contractData.product_id );
                 this.selectcontractmanagerfunc(contractData.product_id );
             }
+        }, error => {
+            this.selectcontract(productval); 
         });
         
         this.cookeiservice.set('product_id', contractData.product_id);

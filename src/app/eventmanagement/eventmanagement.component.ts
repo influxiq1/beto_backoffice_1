@@ -72,7 +72,7 @@ export class EventmanagementComponent implements OnInit {
       {inputtype:'hidden',name:'userid',label:"userid",placeholder:"Enter userid",value:this.cookieservice.get('userid')}
     ];
     this.datasource={table:'events',objarr:['userid']};
-    this.sourcelimit = { 'skip':0, 'limit':25, 'page_count': 1};
+    this.sourcelimit = { 'skip':0, 'limit':10, 'page_count': 1};
   }
 
   ngOnInit() {

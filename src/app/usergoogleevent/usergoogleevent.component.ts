@@ -19,7 +19,7 @@ export class UsergoogleeventComponent implements OnInit {
           { value: 'end', name: 'End', role: 0, func: '', class: 'type', type: 'text' },
           { value: 'insertedon', name: 'Insertedon ', role: 0, func: '', class: 'insertedon', type: 'unixTime' }
         ];
-        this.sourcelimit = { 'skip':0, 'limit':25, 'page_count': 1};
+        this.sourcelimit = { 'skip':0, 'limit':10, 'page_count': 1};
      }
   
   ngOnInit() {

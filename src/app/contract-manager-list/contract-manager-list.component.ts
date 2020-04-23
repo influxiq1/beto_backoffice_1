@@ -46,6 +46,13 @@ public start_date: any = '';
 public end_date: any = '';
 public notes_list: any = '';
 public indexCount: number;
+public sourcelimit: any = {"skip":0,"limit":10,"page_count":1};
+public dataListCount: any = '';
+public dataListPageCount: any = '';
+public sourceDetails: any = {
+  "source":'contract_manager_list',
+  "sourcecondition":{}
+}
 
   constructor(public _commonservice:Commonservices,
    public cookeiservice: CookieService,
@@ -60,7 +67,7 @@ public indexCount: number;
 
     this.route.data.forEach((data:any ) => {
       // this.datalist = data.results.res;
-      // console.log(this.datalist);
+      console.log(data.results.res);
       let dataall: any = [];
       for (let item in data.results.res) {
         if (data.results.res[item].status == 'asDraft' && data.results.res[item].rep_id != this.cookeiservice.get('userid')) {
@@ -78,10 +85,67 @@ public indexCount: number;
    });
   //  console.log((this.datalist[0].contentTop));
 
-   
+  this.getDataListCount();
 
    this.getproduct();
   }
+  getdatalist() {
+    // console.log(this.sourcelimit.page_count);
+    this.sourcelimit.skip = (this.sourcelimit.page_count - 1) * this.sourcelimit.limit;
+    let data = { "source": "contract_manager_list", "condition": {}, "sourcelimit": this.sourcelimit }
+    const link = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
+    this._http.post(link, data).subscribe((res: any) => {
+      console.log(res.res, 'sourcelimit')
+      let dataall: any = [];
+      for (let item in res.res) {
+        if (res.res[item].status == 'asDraft' && res.res[item].rep_id != this.cookeiservice.get('userid')) {
+          res.res.splice(item,1)
+          // console.log('asDraft', item)
+        } else{
+          dataall.push(res.res[item])
+        }
+        
+      }
+      this.datalist = dataall;
+    })
+  }
+
+  getDataListCount(){
+    // console.log(this.sourceconditionval,"this.sourceconditionval")
+    const link = this._commonservice.nodesslurl + 'datalistcount?token=' + this.cookeiservice.get('jwttoken');
+    this._http.post(link, { source: this.sourceDetails.source, condition: this.sourceDetails.sourcecondition})
+        .subscribe((res:any) => {
+            this.dataListCount = res.resc;
+            this.dataListPageCount = Math.ceil(this.dataListCount / this.sourcelimit.limit)
+            // console.log(this.dataListPageCount);
+        });
+
+}
+nextPage(flag: string = null) {
+  console.log('ffdffd')
+    if(flag == 'prev' && this.sourcelimit.page_count > 1) {
+        this.sourcelimit.page_count--;
+        console.log(this.sourcelimit.page_count);
+    }
+    if(flag == null && this.sourcelimit.page_count < (this.dataListCount / this.sourcelimit.page_count )) {
+        this.sourcelimit.page_count++;
+        console.log(this.sourcelimit.page_count)
+    }
+    this.getdatalist();
+  }
+  getPageData(){
+      console.log(this.sourcelimit.limit, this.sourcelimit.page_count)
+      if (this.sourcelimit.limit != 0 && this.sourcelimit.limit != null && this.sourcelimit.page_count != 0 && this.sourcelimit.page_count != null) {
+        this.getdatalist();
+        this.getDataListCount();
+      }
+  }
+
+
+
+
+
+
   statusSearchbyval(val: any){
     
     console.log(val);

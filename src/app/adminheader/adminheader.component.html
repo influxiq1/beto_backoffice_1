@@ -87,7 +87,7 @@
   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
     <a class="dropdown-item" [routerLink]="['/contract-manager-list']"> Contract Request List</a>
     <a class="dropdown-item" [routerLink]="['/contract-list']"> Manage Contract Content</a>
-    <a class="dropdown-item" [routerLink]="['/contract/management']"> Contract Manager</a>
+    <a class="dropdown-item" [routerLink]="['/contract/management']"> Contract Managers</a>
   </div>
 </li>
 
@@ -400,7 +400,7 @@
                 <a class="nav-link" [routerLink]="['/contract-manager-list-pending']" >pending contracts<span class="sr-only"></span></a>
               </li>
               <li class="nav-item active">
-                <a class="nav-link">closed contract list<span class="sr-only"></span></a>
+                <a class="nav-link"  [routerLink]="['/contract-manager-list-closed']">closed contract list<span class="sr-only"></span></a>
               </li>
 
             <!-- added by Himadri -->

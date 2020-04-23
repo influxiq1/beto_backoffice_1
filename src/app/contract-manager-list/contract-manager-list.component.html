@@ -15,7 +15,8 @@
   <div class="user_management_wrapper">
     <div class="user_management_inner">
 
-      <h2> Contract Request List</h2>
+      <h2 *ngIf="router.url == '/contract-manager-list'"> Contract Request List</h2>
+      <h2 *ngIf="router.url == '/contract-manager-list-pending'"> Pending Contracts</h2>
 
       <div class="inner_search_wrapper">
         <div class="inner_content_wrapper">
@@ -117,6 +118,43 @@
             <a *ngIf="cookeiservice.get('usertype') == 'rep'" class="addfrinderbtn addfrinderbtnupd"
               routerLink="/add-contract-manager">Request Contract</a>
           </div>
+
+
+          <!-- Himadri  -->
+          
+          <span *ngIf="sourcelimit != null && sourcelimit != ''">
+            <div class="pagecountblock">
+                <span role="listitem">Showing {{sourcelimit.limit}} result from
+                    <ng-container *ngIf="total_count == 0">Many.</ng-container>
+                    <ng-container *ngIf="total_count > 0">{{ total_count }}.</ng-container>
+                </span>
+            
+                
+              </div>
+              <div class="pagecountblockcls pagecountblockclsbody">
+                <span class="example-full-width">
+                  <label> Current page {{ sourcelimit.page_count }} Total page {{ dataListPageCount }}</label>
+                  <input type="number" placeholder="Total page {{ dataListPageCount }}"
+                      (keyup)="getPageData();" [(ngModel)]="sourcelimit.page_count">
+                </span>
+          
+              <span class="example-full-width">
+                  <label>Page Count</label>
+                  <input type="number" placeholder="Page data {{ sourcelimit.limit }}" (keyup)="getPageData();"
+                      [(ngModel)]="sourcelimit.limit">
+              </span>
+              </div>
+        <ul class="pagination paginationnew justify-content-center">
+            <li class="page-item prev">
+              <a class="page-link" (click)="nextPage('prev')">Previous</a>
+            </li>
+            <li class="page-item next">
+              <a class="page-link" (click)="nextPage()">Next</a>
+            </li>
+          </ul>
+        </span>
+
+
           <table mdbTable class="table">
 
             <thead>
@@ -181,6 +219,40 @@
 
       </div>
     </div>
+    <ng-container *ngIf="sourcelimit != null && sourcelimit != ''" >
+      <span style="margin-top:20px; display:block;">
+          <div class="pagecountblock">
+              <span role="listitem">Showing {{sourcelimit.limit}} result from
+                  <ng-container *ngIf="total_count == 0">Many.</ng-container>
+                  <ng-container *ngIf="total_count > 0">{{ total_count }}.</ng-container>
+              </span>
+          
+              
+            </div>
+          
+      </span>
+      <div class="pagecountblockcls pagecountblockclsbody" >
+          <span class="example-full-width">
+            <label> Current page {{ sourcelimit.page_count }} Total page {{ dataListPageCount }}</label>
+            <input type="number" placeholder="Total page {{ dataListPageCount }}"
+                (keyup)="getPageData();" [(ngModel)]="sourcelimit.page_count">
+          </span>
+    
+        <span class="example-full-width">
+            <label>Page Count</label>
+            <input type="number" placeholder="Page data {{ sourcelimit.limit }}" (keyup)="getPageData();"
+                [(ngModel)]="sourcelimit.limit">
+        </span>
+        </div>
+  <ul class="pagination paginationnew justify-content-center">
+      <li class="page-item prev">
+        <a class="page-link" (click)="nextPage('prev')">Previous</a>
+      </li>
+      <li class="page-item next">
+        <a class="page-link" (click)="nextPage()">Next</a>
+      </li>
+    </ul>
+  </ng-container>
   </div>
   <app-footer></app-footer>
 

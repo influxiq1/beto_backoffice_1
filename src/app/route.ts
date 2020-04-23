@@ -96,11 +96,13 @@ const appRoutes: Routes = [
 
      {path: 'contract-list', component: ContractListComponent, resolve : {results: TestresolveService},data: { requestcondition: { source: 'contractDetails_view', condition: {}}, endpoint: 'datalist'}},
      
-     {path: 'contract-manager-list', component: ContractManagerListComponent, resolve : {results: TestresolveService},data: { requestcondition: { source: 'contract_manager_list', condition: {}}, endpoint: 'datalist'}},
+     {path: 'contract-manager-list', component: ContractManagerListComponent, resolve : {results: TestresolveService},data: { requestcondition: { source: 'contract_manager_list', condition: {},"sourcelimit":{"skip":0,"limit":10,"page_count":1} }, endpoint: 'datalist'}},
 
-     {path: 'contract-manager-list-rep', component: ContractManagerListComponent, resolve : {results: TestresolveService},data: { requestcondition: { source: 'contract_manager_list', condition: {"rep_id_object":"rep_id_object"}}, endpoint: 'datalist'}},
+     {path: 'contract-manager-list-rep', component: ContractManagerListComponent, resolve : {results: TestresolveService},data: { requestcondition: { source: 'contract_manager_list', condition: {"rep_id_object":"rep_id_object"},"sourcelimit":{"skip":0,"limit":10,"page_count":1}}, endpoint: 'datalist'}},
 
-     {path: 'contract-manager-list-pending', component: ContractManagerListComponent, resolve : {results: TestresolveService},data: { requestcondition: { source: 'contract_manager_list', condition: {"status":"request"}}, endpoint: 'datalist'}},
+     {path: 'contract-manager-list-pending', component: ContractManagerListComponent, resolve : {results: TestresolveService},data: { requestcondition: { source: 'contract_manager_list', condition: {"status":"request"},"sourcelimit":{"skip":0,"limit":10,"page_count":1}}, endpoint: 'datalist'}},
+
+     {path: 'contract-manager-list-closed', component: ContractManagerListComponent, resolve : {results: TestresolveService},data: { requestcondition: { source: 'contract_manager_list', condition: {"status":"decline"},"sourcelimit":{"skip":0,"limit":10,"page_count":1}}, endpoint: 'datalist'}},
 
      {path: 'make-contract/:_id', component: MakeContractComponent, resolve : {results: TestresolveService},data: { requestcondition: { source: 'test_contract', condition: {"_id":'_id'}}, endpoint: 'datalist'}},
      {path: 'make-contract-edit/:_id', component: MakeContractComponent, resolve : {results: TestresolveService},data: { requestcondition: { source: 'contract_repote_view', condition: {"_id":'_id'}}, endpoint: 'datalist'}},
@@ -198,7 +200,7 @@ const appRoutes: Routes = [
 
     {path: 'full_Program_View', component: FullProgramViewComponent},
 
-    {path: 'cron-report', component: CronReportComponent},
+    {path: 'cron-report', component: CronReportComponent, resolve: {results: TestresolveService},data:{ requestcondition:{source:"cron_data_view",condition:{},sourcelimit:{"skip":0,"limit":10,"page_count":1}},endpoint:'datalist'}},
     {path: 'delete-event', component: CommonEventComponent},
     {path: 'google-event', component: UsergoogleeventComponent},
     // {path: 'marketingre_view/:product_id/:rep_id', component: MarketingreviewComponent, resolve : {results: TestresolveService},data: { requestcondition: {condition: {"rep_id":'rep_id'}}, endpoint: 'datalistforslot'}},
