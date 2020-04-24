@@ -26,7 +26,6 @@ import { TrainingsectionlistComponent } from "./trainingsectionlist/trainingsect
 import { FrontendheaderComponent } from "./frontendheader/frontendheader.component";
 import { FrontendfooterComponent } from "./frontendfooter/frontendfooter.component";
 import { FrontendhomeComponent } from "./frontendhome/frontendhome.component";
-
 import { WhoWeAreComponent } from "./who-we-are/who-we-are.component";
 import { AboutPcrTestingComponent } from "./about-pcr-testing/about-pcr-testing.component";
 import { GetStartedComponent } from "./get-started/get-started.component";
