@@ -26,7 +26,6 @@ import { TrainingsectionlistComponent } from "./trainingsectionlist/trainingsect
 import { FrontendheaderComponent } from "./frontendheader/frontendheader.component";
 import { FrontendfooterComponent } from "./frontendfooter/frontendfooter.component";
 import { FrontendhomeComponent } from "./frontendhome/frontendhome.component";
-
 import { WhoWeAreComponent } from "./who-we-are/who-we-are.component";
 import { AboutPcrTestingComponent } from "./about-pcr-testing/about-pcr-testing.component";
 import { GetStartedComponent } from "./get-started/get-started.component";
@@ -200,7 +199,7 @@ const appRoutes: Routes = [
 
     {path: 'full_Program_View', component: FullProgramViewComponent},
 
-    {path: 'cron-report', component: CronReportComponent},
+    {path: 'cron-report', component: CronReportComponent, resolve: {results: TestresolveService},data:{ requestcondition:{source:"cron_data_view",condition:{},sourcelimit:{"skip":0,"limit":10,"page_count":1}},endpoint:'datalist'}},
     {path: 'delete-event', component: CommonEventComponent},
     {path: 'google-event', component: UsergoogleeventComponent},
     // {path: 'marketingre_view/:product_id/:rep_id', component: MarketingreviewComponent, resolve : {results: TestresolveService},data: { requestcondition: {condition: {"rep_id":'rep_id'}}, endpoint: 'datalistforslot'}},

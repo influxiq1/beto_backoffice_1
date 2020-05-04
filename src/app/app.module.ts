@@ -109,6 +109,8 @@ import { CronReportComponent } from './cron-report/cron-report.component';
 import { CommonEventComponent } from './common-event/common-event.component';
 import { UsergoogleeventComponent } from './usergoogleevent/usergoogleevent.component';
 import { SalesDecksComponent } from './sales-decks/sales-decks.component';
+import { MaterialModule } from 'src/material-module';
+import { ListingModule} from 'listing-angular7';
 
 @NgModule({
   declarations: [
@@ -197,6 +199,7 @@ import { SalesDecksComponent } from './sales-decks/sales-decks.component';
 
   ],
   imports: [
+    MaterialModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     HttpClientModule,
@@ -216,6 +219,7 @@ import { SalesDecksComponent } from './sales-decks/sales-decks.component';
     TransferHttpCacheModule,
     NgtUniversalModule,
     // DemoMaterialModule,
+    ListingModule
   ],
   providers: [
     CookieService,TestresolveService,ApiService, LoaderService,
