@@ -16,6 +16,7 @@ export class ApiService {
   private _url = environment["API_URL"];*/
   // public nodesslurl = 'https://api.nexgentesting.com:6027/';
   public nodesslurl =  environment["api_url"];
+  public jwttoken = this.cookie.get('jwttoken')
 //  constructor(@Inject(WINDOW) private window: Window, @Inject(LOCAL_STORAGE) private localStorage: any, private _http: HttpClient, private _authHttp: HttpClient, public jwtHelper: JwtHelperService, private loggedinService: LoggedinService) {}
   constructor(private _http: HttpClient,public cookie:CookieService) {}
 
@@ -113,6 +114,21 @@ export class ApiService {
 
   private getEndpointUrl(endpoint:string){
       return this.nodesslurl + endpoint+'?token='+this.cookie.get('jwttoken');
+  }
+  postData1(endpoint:any, data) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': this.cookie.get('jwttoken')
+      })
+    };
+    // console.log(this.cookieService.get('jwttoken'));
+   // console.log('endpoint');
+    //console.log(endpoint);
+    //console.log('httpOptions');
+   // console.log(httpOptions);
+    var result = this._http.post(this.getEndpointUrl(endpoint), JSON.stringify(data), httpOptions).pipe(map(res => res));
+    return result;
   }
   customRequest(requestdata: any, endpoint: any) {
     // const httpOptions = {

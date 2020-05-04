@@ -16,236 +16,29 @@
 
 <app-adminheader></app-adminheader>
 
-
-<div class="nextGen_admin_mainwrapper nexgen_digital_contract">
-  <div class="page-wrapper s_getmybrand_adminlist">
-    <div class="nexgen_adminlist">
-      <div class="user_management_wrapper">
-        <div class="user_management_inner">
-          <h2 *ngIf="usertype=='admin'">User Management</h2>
-          <h2 *ngIf="consultantrole!=null && consultantrole==1">Rep Management</h2>
-
-          <div class="inner_search_wrapper">
-            <div class="inner_content_wrapper">
-              <div class="search_content">
-                <h3><span>Search by Email: </span> <input type="text" [(ngModel)]="filterval1"
-                    (keyup)="searchbyval()"><button style="padding: 0 10px!important;">search</button> </h3>
-              </div>
-              <div class="search_content">
-                <h3> <span>Search by Name: </span> <input type="text" [(ngModel)]="filterval2"
-                    (keyup)="searchbyval()"><button style="padding: 0 10px!important;">search</button> </h3>
-              </div>
-            </div>
-            <div class="clearfix"></div>
-            <input type="text" placeholder="Search..." [(ngModel)]="filterval" #listFilter (keyup)="0" class="hide">
-          </div>
-
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-12 admin_inner_wrapper">
-
-
-        <div class="clearfix"></div>
-        <div class="content_header_block">
-          <div class="clearfix"></div>
-          <div class="newblock1 ">
-            <div class="clearfix"></div>
-          </div>
-          <div class="clearfix"></div>
-        </div>
-        <div class="nexgen_admin_table">
-          <div class="action_section">
-            <div class="inner_actionblock">
-              <h3></h3>
-              <div class="clearfix"></div>
-            </div>
-          </div>
-
-          <div class="table-responsive admin_table_wrapper">
-            <div *ngIf="singleuserdata != null && singleuserdata.length> 0">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Parent Name</th>
-
-                    <th scope="col">Parent Email</th>
-
-                    <th scope="col">Date Joined</th>
-                    <!--<th scope="col">User Id</th>-->
-                    <!--      <th scope="col">Username </th>-->
-                    <th scope="col">Full Name</th>
-                    <!-- <th scope="col">Last Name</th> -->
-                    <th scope="col">A/C Type</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Phone No.</th>
-                    <th scope="col">Activities</th>
-                    <th scope="col">Status</th>
-                    <!-- <th scope="col">Calender Access</th>
-                    <th scope="col">Senior Consulting Director</th> -->
-                    <!-- <th scope="col">Contract Signed</th> -->
-                    <th scope="col"
-                      *ngIf="(usertype=='admin') || (this.consultantrole!=null && this.consultantrole==1)">Action</th>
-
-
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of singleuserdata | usersearch:listFilter.value">
-
-                    <td datalabel="Parent Name" [routerLink]="['/useraccountsetting',item._id]">
-                      <span *ngIf="item.parentname != null" >{{(item.parentname)}} </span>
-                      <span *ngIf="item.parentname == null" >N/A </span>
-                    </td>
-
-                       <td datalabel="Parent Email" [routerLink]="['/useraccountsetting',item._id]">
-                        <span  *ngIf="item.parentemail != null" >  {{(item.parentemail)}}  </span>
-                        <span  *ngIf="item.parentemail == null" >  N/A </span>
-                      </td>
-
-
-                    <td datalabel="Date Joined" [routerLink]="['/useraccountsetting',item._id]">
-                      {{commonservices.showunixtodate1(item.created_at)}} </td>
-                    <!--<td [routerLink]="['/useraccountsetting',item._id]">{{item.unique_id}}</td>-->
-                    <!--  <td [routerLink]="['/useraccountsetting',item._id]">{{item.username}}</td>-->
-                    <td datalabel="Full Name" [routerLink]="['/useraccountsetting',item._id]">{{item.firstname}}
-                      {{item.lastname}}</td>
-                    <!-- <td datalabel="Last Name" [routerLink]="['/useraccountsetting',item._id]">{{item.lastname}}</td> -->
-                    <td datalabel="Account Type" [routerLink]="['/useraccountsetting',item._id]">{{item.type}}</td>
-                    <td datalabel="Email">{{item.email}}</td>
-                    <td datalabel="Phone No.">
-
-                      <span *ngIf="item.phoneno != null">{{item.phoneno}}</span>
-                      <span *ngIf="item.phoneno == null">N/A</span>
-                    </td>
-                    <td datalabel="Training Completed">
-                      <span *ngIf="item.trainingpercentage != null && item.trainingpercentage<100">{{item.trainingpercentage.toFixed(2)}}%</span>
-                      <span *ngIf="item.trainingpercentage==100"><i class="fa fa-check"
-                          aria-hidden="true"></i></span><br>
-                      <span class="newpanclass">Onboarding Call :
-                        <span *ngIf="item.is_onboarding != null && item.is_onboarding == true"><a
-                            (click)="openModal(item,discoverCallModal,'Onboarding')">Yes</a></span>
-                        <span *ngIf="item.is_onboarding == null || item.is_onboarding == false">No</span>
-                      </span><br>
-                      <span class="newpanclass">Discovery Call :
-                        <span *ngIf="item.is_discovery != null && item.is_discovery == true"><a
-                            (click)="openModal(item,discoverCallModal,'Discovery')">Yes</a></span>
-                        <span *ngIf="item.is_discovery == null || item.is_discovery == false">No</span>
-                      </span><br>
-                      <span class="newpanclass">Contract signed:
-                        <span *ngIf="item.is_contract_signed!=null && item.is_contract_signed==1 ">Yes
-                          <a target="_blank"
-                            href="https://betoparedes.com/generate-pdf/employment-agreement/index.php?id={{item._id}}"><i
-                              class="fa fa-download" aria-hidden="true"></i></a></span>
-                        <span *ngIf="item.is_contract_signed==null || item.is_contract_signed==0 "
-                          [routerLink]="['/useraccountsetting',item._id]">No</span>
-
-                      </span><br>
-                      <span class="newpanclass">1099:
-                        <span *ngIf="item.legaldoc_fileservername!=null && item.legaldoc_fileservername!='' ">Yes
-                          <a target="_blank" href="{{fileurl}}{{item.legaldoc_fileservername}}"><i
-                              class="fa fa-download" aria-hidden="true"></i></a></span>
-                        <span *ngIf="item.legaldoc_fileservername==null || item.legaldoc_fileservername=='' ">No</span>
-
-                      </span>
-
-                    </td>
-                    <td datalabel="Status">
-                        Login Access:<span class="statusactive" *ngIf="item.status!=null && item.status==1 ">&nbsp;Active &nbsp;
-                        <span *ngIf="usertype=='admin'" class="ticon_active" (click)="togglestatus(item)"></span>
-                      </span>
-                      <span class="statusinactive" *ngIf="item.status==null || item.status==0 ">Inactive
-                        <span *ngIf="usertype=='admin'" class="ticon_inactive" (click)="togglestatus(item)"></span>
-                      </span><br>
-                      Calender Access:<span class="statusactive"
-                      *ngIf="item.calenderaccess!=null && item.calenderaccess==1 ">&nbsp;Active &nbsp;
-                      <span *ngIf="usertype=='admin'" class="ticon_active"
-                        (click)="toggleCalenderAccess(item)"></span>
-                    </span>
-                    <span class="statusinactive" *ngIf="item.calenderaccess==null || item.calenderaccess==0 ">Inactive
-                      <span *ngIf="usertype=='admin'" class="ticon_inactive"
-                        (click)="toggleCalenderAccess(item)"></span>
-                    </span>
-                    <br>
-                    Senior Consulting Director:<span class="statusactive" *ngIf="mdstockToggle!=null && mdstockToggle==1 ">&nbsp;Active
-                        &nbsp;
-                        <span *ngIf="usertype=='admin'" class="ticon_active"
-                          (click)="toggleConsultantRole(item)"></span>
-                      </span>
-                      <span class="statusinactive" *ngIf="mdstockToggle == null || mdstockToggle==0 ">Inactive
-                        <span *ngIf="usertype=='admin'" class="ticon_inactive"
-                          (click)="toggleConsultantRole(item)"></span>
-                      </span>
-                    </td>
-                    <!-- <td datalabel="Contract Signed">
-                      <span *ngIf="item.is_contract_signed!=null && item.is_contract_signed==1 ">Yes
-                        <a target="_blank"
-                          href="https://backoffice.betoparedes.com/generate-pdf/employment-agreement/index.php?id={{item._id}}"><i
-                            class="fa fa-download" aria-hidden="true"></i></a></span>
-                      <span *ngIf="item.is_contract_signed==null || item.is_contract_signed==0 "
-                        [routerLink]="['/useraccountsetting',item._id]">No</span>
-                    </td> -->
-                    <td *ngIf="usertype=='admin'" datalabel="Action">
-                      <span class=" delete_user" (click)="deletdata(item._id,commonconfirmmodal1)">delete</span>
-                      <br>
-<!-- Himadri  MDStock International Start -->
-
-
-                      <br>
-
-
-                      Have This User On <br> MDStock International:<span *ngIf=" item.ismdstoc !=null && item.ismdstoc == 1" class="statusactive">&nbsp;Active &nbsp;
-                      <span *ngIf="usertype=='admin'" class="ticon_active"
-                        (click)="inActiveToggleSignUpMdStock(item)"></span>
-                    </span>
-                    <span *ngIf="item.ismdstoc ==null || item.ismdstoc == 0" class="statusinactive" >Inactive
-                      <span *ngIf="usertype=='admin'" class="ticon_inactive"
-                        (click)="activeToggleSignUpMdStock(item)"></span>
-                    </span>
-                    <br>
-
-
-
-
-                      <!-- <span class="edit_user" (click)="getUserDetails(item.email)">Login As {{item.firstname}}
-                        {{item.lastname}}</span> -->
-                        <span class="loginclass" (click)="getUserDetails(item.email)">Login As {{item.firstname}}
-                            {{item.lastname}}</span>
-
-                            <span *ngIf="item.worked" class="loginclass" (click)="getMedicaAaparchuniti(item, medicalAparchuniti)">Medical Opportunity</span>
-                    </td>
-                    <td datalabel="Action" *ngIf="this.consultantrole!=null && this.consultantrole==1 "> <span class="loginclass" (click)="getUserDetails(item.email)">Login As {{item.firstname}}
-                        {{item.lastname}}</span></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div *ngIf="singleuserdata.length==0 || singleuserdata==null">
-              <h3 style="text-align: center;color:#00a8ef;">There is no user!</h3>
-            </div>
-          </div>
-        </div>
-
-
-        <!--Pagination-->
-
-        <div class="admin_table_pagination hide">
-          <ul class="pagination">
-            <span>Page 1 of 3</span>
-            <li><a href="#">1</a></li>
-            <li class="active"><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">Next</a></li>
-            <li><a href="#">Last</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<lib-listing *ngIf="userdata!=null && userdata.length>0" 
+  [datasource]="userdata"                                 
+  [skip]="userdata_header_skip"                         
+  [modify_header_array]="modify_header_array"
+  [apiurl]="_apiService.nodesslurl"
+  [deleteendpoint]="deleteendpoint"
+  [updateendpoint]="updateendpoint"
+  [jwttoken]="_apiService.jwttoken"
+  [date_search_source]="date_search_source"
+  [date_search_endpoint]="date_search_endpoint"
+  [sourcedata]="tablename"
+  [statusarr]="statusarray"
+  [detail_datatype]="userdata_detail_datatype"    
+  [detail_skip_array]="userdata_detail_skip"
+  [url]="custom_link"
+  [search_settings]="search_settings"
+  [searchendpoint]="searchendpoint"
+  [sortdata]="sortdata"
+  [datacollection]="datacollection"
+  [date_search_source_count]="date_search_source_count"
+  [libdata]="libdata"
+  [limitcond]="limitcond">
+</lib-listing>
 
 
 

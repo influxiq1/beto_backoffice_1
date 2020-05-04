@@ -110,6 +110,7 @@ import { CommonEventComponent } from './common-event/common-event.component';
 import { UsergoogleeventComponent } from './usergoogleevent/usergoogleevent.component';
 import { SalesDecksComponent } from './sales-decks/sales-decks.component';
 import { MaterialModule } from 'src/material-module';
+import { ListingModule} from 'listing-angular7';
 
 @NgModule({
   declarations: [
@@ -218,6 +219,7 @@ import { MaterialModule } from 'src/material-module';
     TransferHttpCacheModule,
     NgtUniversalModule,
     // DemoMaterialModule,
+    ListingModule
   ],
   providers: [
     CookieService,TestresolveService,ApiService, LoaderService,
