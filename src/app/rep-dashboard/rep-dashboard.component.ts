@@ -47,7 +47,7 @@ export class RepDashboardComponent implements OnInit, AfterViewInit {
       }
       this.is_consultant = this.cookeiservice.get('is_consultant');
       this.trainingpercentage();
-      this.trainingpercentageForMDstock();
+      // this.trainingpercentageForMDstock();
     }
    
   }

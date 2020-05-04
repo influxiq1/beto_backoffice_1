@@ -32,7 +32,7 @@ export class ResourcecategoryComponent implements OnInit {
       {inputtype:'checkbox',name:'status',label:'Status',value:false}
     ];
     this.datasource={table:'resourcecategory',objarr:[]};
-    this.sourcelimit = { 'skip':0, 'limit':25, 'page_count': 1};
+    this.sourcelimit = { 'skip':0, 'limit':10, 'page_count': 1};
   }
   ngOnInit() {
   }

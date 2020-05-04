@@ -34,13 +34,14 @@ export class ResourcesComponent implements OnInit {
       {inputtype:'select',name:'category',label:'Category Name',placeholder:'Select Category',validationrule:{required:true},validationerrormsg:'is required',sourceview:{source:'resourcecategory','condition':{'status':true}},defaultchoice:'Select a category',selectvalue:'categoryname',multiple:null,selectid:'_id'},
 
 
-      {inputtype:'file',name:'file',label:'File',placeholder:'Select File',buttonname:'Upload Resource File',validationrule:{required:true},validationerrormsg:'is required',imagefolder:'resource'},
+      {inputtype:'file',name:'file',label:'File',placeholder:'Select File',buttonname:'Upload Resource File',validationrule:{required:true},validationerrormsg:'is required',imagefolder:'resource', img_record:{path:'backoffice_bp_resource', prefix:'r' , type:'', bucketname:'crmfiles.influxhostserver'}},
       {inputtype:'hidden',name:'filelocalname',label:'filelocalname',placeholder:'filelocalname'},
+
       {inputtype:'number',name:'priority',label:'Priority',placeholder:'Enter Priority',validationrule:{required:true},validationerrormsg:'is required'},
       {inputtype:'checkbox',name:'status',label:'Status',value:false}
     ];
     this.datasource={table:'resource',objarr:['category']};
-    this.sourcelimit = { 'skip':0, 'limit':25, 'page_count': 1};
+    this.sourcelimit = { 'skip':0, 'limit':10, 'page_count': 1};
   }
   ngOnInit() {
   }

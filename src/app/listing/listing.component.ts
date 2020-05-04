@@ -609,8 +609,8 @@ setdatetonull() {
         this._http.post(link, { source: this.sourceval, condition: this.sourceconditionval})
             .subscribe((res:any) => {
                 this.dataListCount = res.resc;
-                this.dataListPageCount = Math.round(this.dataListCount / this.sourcelimitval.limit)
-                // console.log(res);
+                this.dataListPageCount = Math.ceil(this.dataListCount / this.sourcelimitval.limit)
+                // console.log(this.dataListPageCount);
             });
 
     }
@@ -618,9 +618,8 @@ setdatetonull() {
         if(flag == 'prev' && this.sourcelimitval.page_count > 1) {
             this.sourcelimitval.page_count--;
             console.log(this.sourcelimitval.page_count);
-        } 
-    
-        if(flag == null && this.sourcelimitval.page_count < this.dataListCount / this.sourcelimitval.page_count) {
+        }
+        if(flag == null && this.sourcelimitval.page_count < (this.dataListCount / this.sourcelimitval.page_count )) {
             this.sourcelimitval.page_count++;
             console.log(this.sourcelimitval.page_count)
         }
@@ -1241,6 +1240,7 @@ this._http.post(link, source)
                     bucketname: control.img_record.bucketname,
                     type: control.img_record.type
                 }
+                console.log(data,'++++++++++++++++')
                 const event: UploadInput = {
                     type: 'uploadAll',
                     url: this._commonservice.nodesslurl +'uploads?path='+control.img_record.path+'&prefix='+control.img_record.prefix,
@@ -1414,14 +1414,14 @@ this._http.post(link, source)
         }
         
     }
+
     showInputText(event:any){
         if(event.target.checked == true){
             this.inputflag = 1;
         }else this.inputflag = 0;
         
     }
-
-    
+   
     showInputText1(event:any){
         if(event.target.checked == true){
             console.log('okokok')

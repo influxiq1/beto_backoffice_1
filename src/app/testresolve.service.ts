@@ -12,7 +12,6 @@ export interface EndpointComponent {
 @Injectable()
 export class TestresolveService implements Resolve<EndpointComponent> {
     public userid:any;
-
      constructor(private _apiService: ApiService, public cookieservice: CookieService) {
         if(this.cookieservice.get('userid')!=null)
         this.userid = this.cookieservice.get('userid');
@@ -76,6 +75,16 @@ export class TestresolveService implements Resolve<EndpointComponent> {
                   //  this.router.navigateByUrl('dashboard');
                     return true;
                 }
+            },error =>{
+                this._apiService.customRequest(route.data.requestcondition, route.data.endpoint)
+                .subscribe(api_object =>{
+                    if (api_object) {
+                        return resolve(api_object);
+                    } else { // id not found
+                      //  this.router.navigateByUrl('dashboard');
+                        return true;
+                    }
+                })
             })
         });
     }

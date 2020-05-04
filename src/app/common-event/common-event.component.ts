@@ -18,7 +18,7 @@ export class CommonEventComponent implements OnInit {
           { value: 'slot', name: 'Slot', role: 0, func: '', class: 'slot', type: 'text' },
           { value: 'insertedon', name: 'Insertedon ', role: 0, func: '', class: 'insertedon', type: 'unixTime' }
         ];
-    this.sourcelimit = { 'skip':0, 'limit':25, 'page_count': 1};
+    this.sourcelimit = { 'skip':0, 'limit':10, 'page_count': 1};
      }
   ngOnInit() {
   }

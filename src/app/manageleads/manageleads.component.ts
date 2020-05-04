@@ -29,7 +29,7 @@ export class ManageleadsComponent implements OnInit {
       { inputtype: 'hidden', name: 'created_by', label: "created_by", placeholder: "Created By", value: this.cookieservice.get('userid') }
     ];
     this.datasource = { table: 'leads', objarr: ["created_by"] };
-    this.sourcelimit = { 'skip':0, 'limit':25, 'page_count': 1};
+    this.sourcelimit = { 'skip':0, 'limit':10, 'page_count': 1};
     if (this.cookieservice.get('usertype') == 'admin' ) {
       this.sourcecondition = {};
       this.hideaddval = true;

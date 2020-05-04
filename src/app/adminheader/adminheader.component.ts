@@ -73,9 +73,9 @@ export class AdminheaderComponent implements OnInit {
       this.sourceconditionval = { _id: this.idis };
       
     }
-    if (this.type == 'rep' || this.type == 'regional_recruiter') {
-      this.resourcecat();
-    }
+    // if (this.type == 'rep' || this.type == 'regional_recruiter') {
+    //   this.resourcecat();
+    // }
     if (this.cookie.get('lockdornot') == '1') {
       this.router.navigate(['/tempaccess']);
     }
@@ -172,11 +172,11 @@ export class AdminheaderComponent implements OnInit {
         } else {
           
           this.repDetailsNew = result.data;
-          if (this.repDetailsNew[0] != null && this.repDetailsNew[0].calenderaccess != null) {
+          if (this.calenderaccess == null || typeof(this.calenderaccess) == 'undefined' && this.repDetailsNew[0] != null && this.repDetailsNew[0].calenderaccess != null) {
           // console.log('calenderaccess+++++++++++++',result)
             this.cookie.set('calenderaccess', this.repDetailsNew[0].calenderaccess);
             this.calenderaccess = this.repDetailsNew[0].calenderaccess;
-          } else if ((typeof(this.repDetailsNew[0] )== 'undefined' || this.repDetailsNew[0] == null)) {
+          } else if ((this.calenderaccess == null || typeof(this.calenderaccess) == 'undefined' && typeof(this.repDetailsNew[0] )== 'undefined' || this.repDetailsNew[0] == null)) {
             let link2 = this._commonservices.nodesslurl + 'complete_traning_catagory_by_user';
             this._http.post(link2, {
               "condition": { "userid": this.cookie.get('userid') }
@@ -214,8 +214,10 @@ export class AdminheaderComponent implements OnInit {
           } else {
             //this.calenderaccess=false;
           }
-          if (this.repDetailsNew.length > 0 && this.repDetailsNew[0].trainingpercentage < 100 && this.repDetailsNew[0].is_discovery == false || this.repDetailsNew.length == 0) {
+          if (this.calenderaccess == null || typeof(this.calenderaccess) == 'undefined' && this.repDetailsNew.length > 0 && this.repDetailsNew[0].trainingpercentage < 100 && this.repDetailsNew[0].is_discovery == false || this.repDetailsNew.length == 0) {
+            console.log()
             setTimeout(() => {
+              console.log(this.repDetailsNew,'this.repDetailsNew')
               let link2 = this._commonservices.nodesslurl + 'datalist?token=' + this.cookie.get('jwttoken');
               this._http.post(link2, {
                 "condition": { "user_id_object": this.cookie.get('userid') },
@@ -226,6 +228,7 @@ export class AdminheaderComponent implements OnInit {
                   result = res;
                   for (let i in result.res) {
                     if (result.res[i].trainingpercent >= 75 && this.repDetailsNew[0] != null && (this.repDetailsNew[0].calenderaccess == 0 || this.repDetailsNew[0].calenderaccess == undefined)) {
+                      console.log(this.repDetailsNew,'this.repDetailsNew')
                       this.gameplanButton = 1;
                       this.calenderaccess = 1;
                       let link = this._commonservices.nodesslurl + 'addorupdatedata?token=' + this.cookie.get('jwttoken');

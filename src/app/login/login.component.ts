@@ -419,6 +419,8 @@ export class LoginComponent implements OnInit {
     })
   }
   dosubmit(formval,template:TemplateRef<any>) {
+    let formvalue: any = formval;
+    let templateval: any =template;
     this.issubmit=1;
     this.errormg = '';
     let x: any;
@@ -514,6 +516,7 @@ export class LoginComponent implements OnInit {
             }
             }
           }, error => {
+            this.dosubmit(formvalue, templateval);
             console.log('Oooops!');
           });
     }

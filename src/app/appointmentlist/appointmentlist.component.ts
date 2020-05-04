@@ -283,7 +283,8 @@ export class AppointmentlistComponent implements OnInit {
     console.log(val)
     this.product_id_for_modale = val.userdata.product;
     if (val.googleevent != 'N/A') {
-       this.googleevent = {"googleevent":val.googleevent, "refresh_token":val.refresh_token,"prv_id":val._id, "prvslot":val.slot}; 
+      //  this.googleevent = {"googleevent":val.googleevent, "refresh_token":val.refresh_token,"prv_id":val._id, "prvslot":val.slot, lead_id:val.lead_id, leaddata:val.leaddata}; 
+       this.googleevent = val; 
     }
     let cond = { "is_discovery": false, "is_onboarding": false, "is_qna": false, "is_custom": false, "userproducts": { "$in": val.userdata.product}, slots:{$type:'array'}, startdate:{
       $lte: moment().add(2, 'weeks').format('YYYY-MM-DD'),
