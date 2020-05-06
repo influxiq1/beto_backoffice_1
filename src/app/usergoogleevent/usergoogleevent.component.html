@@ -1,6 +1,6 @@
 <app-adminheader></app-adminheader>
 
-<div class="s_getmyoffer_adminpanel">
+<!-- <div class="s_getmyoffer_adminpanel">
   <div class="s_getmyoffer_adminpanel_inner">
     <div class="s_getmyoffer_adminpanel_inner_content_left">
     </div>
@@ -9,5 +9,28 @@
       </app-listing>
     </div>
   </div>
-</div>
+</div> -->
+
+<lib-listing *ngIf="tabledata!=null && tabledata.length>0"
+  [datasource]="tabledata"
+  [skip]="tabledata_header_skip"
+  [modify_header_array]="modify_header_array"
+  [apiurl]="_apiService.nodesslurl"
+  [deleteendpoint]="deleteendpoint"
+  [updateendpoint]="updateendpoint"
+  [jwttoken]="_apiService.jwttoken"
+  [date_search_source]="date_search_source"
+  [date_search_endpoint]="date_search_endpoint"
+  [sourcedata]="tablename"
+  [statusarr]="statusarray"
+  [detail_datatype]="tabledata_detail_datatype"
+  [detail_skip_array]="tabledata_detail_skip"
+  [search_settings]="search_settings"
+  [searchendpoint]="searchendpoint"
+  [sortdata]="sortdata"
+  [datacollection]="datacollection"
+  [date_search_source_count]="date_search_source_count"
+  [libdata]="libdata"
+  [limitcond]="limitcond">
+  </lib-listing>
 <app-footer></app-footer>

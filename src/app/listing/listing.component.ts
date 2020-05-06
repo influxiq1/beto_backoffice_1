@@ -841,7 +841,7 @@ this._http.post(link, source)
         }
          else {
              console.log(source, '++++')
-            this._http.get("assets/data/" + source.source + ".json")
+            this._http.get("assets/data/" + source + ".json")
                 .subscribe(res => {
                     let result;
                     this.formdataval[c].sourceval = result = res;

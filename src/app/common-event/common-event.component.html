@@ -1,6 +1,6 @@
-<!-- <app-adminheader></app-adminheader> -->
-
-<!-- <div class="s_getmyoffer_adminpanel">
+<app-adminheader></app-adminheader>
+<!-- 
+<div class="s_getmyoffer_adminpanel">
   <div class="s_getmyoffer_adminpanel_inner">
     <div class="s_getmyoffer_adminpanel_inner_content_left">
     </div>
@@ -10,7 +10,6 @@
     </div>
   </div>
 </div> -->
-
 <lib-listing *ngIf="tabledata!=null && tabledata.length>0" 
   [datasource]="tabledata"                                 
   [skip]="tabledata_header_skip"                         
@@ -34,5 +33,6 @@
   [libdata]="libdata"
   [limitcond]="limitcond">
 </lib-listing>
-  
-<!-- <app-footer></app-footer> -->
+
+
+<app-footer></app-footer>
