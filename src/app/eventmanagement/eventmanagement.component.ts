@@ -59,8 +59,8 @@ export class EventmanagementComponent implements OnInit {
       {inputtype:'checkbox',name:'Sat',label:'Sat',value:false, class:'daycheckbox'},
       {inputtype:'timeis',name:'start_time',label:"Start Time",placeholder:"Enter Time",validationrule:{required:true},validationerrormsg:'is required'},
       {inputtype:'timeis',name:'end_time',label:"End Time",placeholder:"Enter Time",validationrule:{required:true},validationerrormsg:'is required'},
-      {inputtype:'radio',name:'timespan',value:'90',valuelabel:'Minute',label:"",placeholder:"",validationrule:{required:true},validationerrormsg:'', class:'radioclass'},
-      {inputtype:'radio',name:'timespan',value:'60',valuelabel:'Minute',label:"Time Span",placeholder:"",validationrule:{required:true},validationerrormsg:'is required', class:'radioclass'},
+      {inputtype:'radio',name:'timespan',value:'90',valuelabel:'Minute',label:"Time Span",placeholder:"",validationrule:{required:true},validationerrormsg:'', class:'radioclass'},
+      {inputtype:'radio',name:'timespan',value:'60',valuelabel:'Minute',label:"",placeholder:"",validationrule:{required:true},validationerrormsg:'is required', class:'radioclass'},
       {inputtype:'radio',name:'timespan',value:'30',valuelabel:'Minute',label:"",placeholder:"",validationrule:{required:true},validationerrormsg:'', class:'radioclass'},
       {inputtype:'radio',name:'timespan',value:'15',valuelabel:'Minute',label:"",placeholder:"",validationrule:{required:true},validationerrormsg:'', class:'radioclass'},
       {inputtype:'select',name:'timezone',label:'Timezone',defaultchoice:'Select a Timezone',sourceview:'timezone',sourcetype:'static',selectvalue:'show',selectid:'value',validationrule:{required:true},validationerrormsg:'is required'},
@@ -74,7 +74,7 @@ export class EventmanagementComponent implements OnInit {
     this.datasource={table:'events',objarr:['userid']};
     this.sourcelimit = { 'skip':0, 'limit':10, 'page_count': 1};
   }
-
+ 
   ngOnInit() {
     this.route.params.subscribe(params =>{
 
