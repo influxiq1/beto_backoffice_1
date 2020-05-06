@@ -91,7 +91,6 @@ import { ContractManagerListComponent } from './contract-manager-list/contract-m
 import { MakeContractComponent } from './make-contract/make-contract.component';
 import { CrmBelkUploadComponent } from './crm-belk-upload/crm-belk-upload.component';
 import { LeadContractComponent } from './lead-contract/lead-contract.component';
-// import { DemoMaterialModule } from './material-module';
 
 
 
@@ -109,8 +108,8 @@ import { CronReportComponent } from './cron-report/cron-report.component';
 import { CommonEventComponent } from './common-event/common-event.component';
 import { UsergoogleeventComponent } from './usergoogleevent/usergoogleevent.component';
 import { SalesDecksComponent } from './sales-decks/sales-decks.component';
-import { MaterialModule } from 'src/material-module';
-
+import { MaterialModule } from '../material-module';
+import { ListingModule} from 'listing-angular7';
 @NgModule({
   declarations: [
     ContractReviewVideoComponent,
@@ -198,6 +197,7 @@ import { MaterialModule } from 'src/material-module';
 
   ],
   imports: [
+    ListingModule,
     MaterialModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,

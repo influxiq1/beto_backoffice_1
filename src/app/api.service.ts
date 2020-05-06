@@ -16,8 +16,10 @@ export class ApiService {
   private _url = environment["API_URL"];*/
   // public nodesslurl = 'https://api.nexgentesting.com:6027/';
   public nodesslurl =  environment["api_url"];
+  public jwttoken = this.cookie.get('jwttoken');
+
 //  constructor(@Inject(WINDOW) private window: Window, @Inject(LOCAL_STORAGE) private localStorage: any, private _http: HttpClient, private _authHttp: HttpClient, public jwtHelper: JwtHelperService, private loggedinService: LoggedinService) {}
-  constructor(private _http: HttpClient,public cookie:CookieService) {}
+  constructor(private _http: HttpClient, public cookie:CookieService) {}
 
 
  /* isTokenExpired() {
