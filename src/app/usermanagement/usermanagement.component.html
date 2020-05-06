@@ -15,7 +15,7 @@
 </div>
 
 <app-adminheader></app-adminheader>
-
+<div class="usermanagementpagecon">
 <lib-listing *ngIf="userdata!=null && userdata.length>0" 
   [datasource]="userdata"                                 
   [skip]="userdata_header_skip"                         
@@ -39,7 +39,7 @@
   [libdata]="libdata"
   [limitcond]="limitcond">
 </lib-listing>
-
+</div>
 
 
 <ng-template #formtemplate>
@@ -247,5 +247,5 @@
   
     </div>
   </ng-template>
-
+<div class="clear"></div>
 <app-footer></app-footer>
