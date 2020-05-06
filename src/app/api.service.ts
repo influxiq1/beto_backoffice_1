@@ -116,6 +116,21 @@ export class ApiService {
   private getEndpointUrl(endpoint:string){
       return this.nodesslurl + endpoint+'?token='+this.cookie.get('jwttoken');
   }
+  postData1(endpoint:any, data) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': this.cookie.get('jwttoken')
+      })
+    };
+    // console.log(this.cookieService.get('jwttoken'));
+   // console.log('endpoint');
+    //console.log(endpoint);
+    //console.log('httpOptions');
+   // console.log(httpOptions);
+    var result = this._http.post(this.getEndpointUrl(endpoint), JSON.stringify(data), httpOptions).pipe(map(res => res));
+    return result;
+  }
   customRequest(requestdata: any, endpoint: any) {
     // const httpOptions = {
     //   headers: new HttpHeaders({

@@ -44,6 +44,7 @@ export class CommonEventComponent implements OnInit {
   // public sourcelimit: any = {};
 
   tabledata: any = [];
+  
  public datasource: any = '';
 
   public status: any = [{ val: 0, 'name': 'Active' }, { val: 1, 'name': 'Inactive' }, { val: 3, 'name': 'Lock' }];   // use for status search
@@ -162,9 +163,9 @@ libdata:any={
   }
 
   sortdata:any={
-    "type":'asc',                                              //  default sort data ascend and descend (desc)
+    "type":'desc',                                              //  default sort data ascend and descend (desc)
     "field":'insertedon',                                         // default field for sorting
-    "options":['insertedon']     //  sorting fields options for this table
+    "options":['insertedon','slot']     //  sorting fields options for this table
 };
 
 date_search_source: any='admin_blog_list';                     // this is a database collection or view name
@@ -193,66 +194,34 @@ search_settings:any={
     constructor(public _apiService: ApiService, public http:HttpClient,public commonservices:Commonservices) {
         
         this.commonservices=commonservices;
-    //     this.sourcecondition = {};
-    //     this.tabledatalist = [
-    //       { value: 'id', name: 'Id', role: 0, func: '', class: 'id', type: '#' },
-    //       { value: 'email', name: 'Email', role: 0, func: '', class: 'email', type: 'text' },
-    //       { value: 'date', name: 'Date', role: 0, func: '', class: 'date', type: 'text' },
-    //       { value: 'slot', name: 'Slot', role: 0, func: '', class: 'slot', type: 'text' },
-    //       { value: 'insertedon', name: 'Insertedon ', role: 0, func: '', class: 'insertedon', type: 'unixTime' }
-    //     ];
-    // this.sourcelimit = { 'skip':0, 'limit':10, 'page_count': 1};
-
-
     this.datasource = '';
     let endpoint='getadmincommoneventlistdata';                              // for main data endpoint
     let endpointc='getadmincommoneventlistdata-count';                       // for count endpoint
     // data param for conditionlimit and search
     let data:any={
         "condition":{
-
             "limit":10,
             "skip":0
         },
         sort:{
-
             "type":'desc',                                           // defalut field sort type 
             "field":'insertedon'                                         // default sort field
         }
 
     }
 
-    // const link = this.commonservices.nodesslurl+'getadmincommoneventlistdata';
-    //     // this.http.post(link,{source:'legaldocuser_view'})
-    //     this.http.post(link,{source:'user_regional_legaldoc_view'})
-    // .subscribe((response:any)=>{
-    //     this.tabledata =response.results.res;
-    //     console.warn('blogData',this.tabledata);
-    // })
-
     let link = this.commonservices.nodesslurl + endpoint;
     let link1 = this.commonservices.nodesslurl + endpointc;
-    this.http.post(link, data)
-      .subscribe((response:any) => {
+    this.http.post(link, data).subscribe((response:any) => {
         this.tabledata =response.results.res;
           console.warn('blogData',this.tabledata);
       })
 
-      this.http.post(link1, data)
-      .subscribe((res:any) => {
+      this.http.post(link1, data).subscribe((res:any) => {
         console.log(res,' for count');
           this.date_search_source_count =res.count;
       })
 
-    // this._apiService.postData1(endpoint,data).subscribe((response:any) => {
-    //     // console.log('in constructor');
-    //     console.log(response,' for table data');
-    //     this.tabledata =response.results.res;
-    //     console.warn('blogData',this.tabledata);
-
-    // }, error => {
-    //     console.log('Oooops!');
-    // });
 
      }
   ngOnInit() {

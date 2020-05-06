@@ -218,6 +218,7 @@ import { ListingModule} from 'listing-angular7';
     TransferHttpCacheModule,
     NgtUniversalModule,
     // DemoMaterialModule,
+    ListingModule
   ],
   providers: [
     CookieService,TestresolveService,ApiService, LoaderService,
