@@ -184,7 +184,7 @@ export class ListingComponent implements OnInit {
               // console.log(item);
               for (const complete_traning of complete_traning_catagory_by_user_val) {
 
-                if (item._id == complete_traning.trainingcategory && item.count >= complete_traning.lessondone && complete_traning.trainingcategory != "5e60865df4a08401e0e00e6c") {
+                if (item._id == complete_traning.trainingcategory && item.count <= complete_traning.lessondone && complete_traning.trainingcategory != "5e60865df4a08401e0e00e6c") {
                     this.share_link.push({ product_id: item.product[0], product_name: item.product_name});
                   }
               }
@@ -827,8 +827,8 @@ this._http.post(link, source)
                         for (const item of training_lesson_count_val) {
                             // console.log(item);
                             for (const complete_traning of complete_traning_catagory_by_user_val) {
-                                // console.log(complete_traning);
-                                if (item._id == complete_traning.trainingcategory && item.count >= complete_traning.lessondone && item.product_name != null) {
+                                // console.log(item.count, '++++',complete_traning.lessondone);
+                                if (item._id == complete_traning.trainingcategory && item.count <= complete_traning.lessondone && item.product_name != null) {
                                     console.log('test success',item)
                                     alldata.push(item)
                                 }

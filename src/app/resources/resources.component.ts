@@ -30,7 +30,7 @@ export class ResourcesComponent implements OnInit {
       {inputtype:'textarea',name:'description',label:'Description',placeholder:'Description',validationrule:{required:true},validationerrormsg:'is required'},
      /* {inputtype:'select',name:'categoryname',label:'Category Name',defaultchoice:'Select Category',sourceview:'resourcecategory',sourcetype:'static',selectvalue:'categoryname',selectid:'_id',validationrule:{required:true},validationerrormsg:'is required'},*/
 
-     {inputtype:'select',name:'product',label:'Products',defaultchoice:'Select a Product',sourceview:{source:'null','condition':{'userid':this.cookieservice.get('userid')}},multiple:true,selectvalue:'product_name',selectid:'product',validationrule:{required:true},validationerrormsg:'is required'},
+    //  {inputtype:'select',name:'product',label:'Products',defaultchoice:'Select a Product',sourceview:{source:'null','condition':{'userid':this.cookieservice.get('userid')}},multiple:true,selectvalue:'product_name',selectid:'product',validationrule:{required:true},validationerrormsg:'is required'},
       {inputtype:'select',name:'category',label:'Category Name',placeholder:'Select Category',validationrule:{required:true},validationerrormsg:'is required',sourceview:{source:'resourcecategory','condition':{'status':true}},defaultchoice:'Select a category',selectvalue:'categoryname',multiple:null,selectid:'_id'},
 
 

@@ -28,8 +28,10 @@ export class ProductsComponent implements OnInit {
     'id': 'ID',
     'productname': 'Product Name',
     'description': 'Description',
-    'launch_date': '',
+    'launch date': 'Launch Date',
+    'launch_date': 'Launch Date',
     'status': 'Status',
+    'verification need': 'Verification Needed',
     'verification_need': 'Verification Needed'
 
   };
@@ -130,17 +132,7 @@ export class ProductsComponent implements OnInit {
     let link1 = this.commonservices.nodesslurl + endpointc;
     this.http.post(link, data)
       .subscribe((response: any) => {
-        for (let i=0; i<response.results.res.length; i++) {
-          let temp: any = {};
-          temp['productname'] = response.results.res[i].productname;
-          temp['description'] = response.results.res[i].description;
-          temp['launch_date'] = response.results.res[i].launch_date;
-          temp['state'] = response.results.res[i].status ? 'Active' : 'Inactive';
-          temp['verification_need'] = response.results.res[i].verification_need ? 'not required' : 'Required';
-
-          this.product_list.push(temp);
-        }
-        // this.product_list = response.results.res;
+        this.product_list = response.results.res;
         console.warn('blogData', this.product_list);
       })
 
@@ -161,7 +153,7 @@ export class ProductsComponent implements OnInit {
       { inputtype: 'checkbox', name: 'verification_need', label: 'Verification Needed', value: false },
       { inputtype: 'text', name: 'multiple_emails', label: 'Emails', placeholder: 'Enter Emails' },
     ];
-    // this.datasource = { table: 'products', objarr: [] }; 
+    this.datasource = { table: 'products', objarr: [] }; 
   }
   ngOnInit() {
   }
