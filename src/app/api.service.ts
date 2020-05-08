@@ -1,6 +1,6 @@
 import { Injectable, Inject, Component } from '@angular/core';
-import { Observable, interval, pipe } from 'rxjs';
-import { switchMap, map, takeWhile } from 'rxjs/operators';
+import { Observable, interval, pipe, throwError } from 'rxjs';
+import { switchMap, map, takeWhile, catchError } from 'rxjs/operators';
 /*import { environment } from '../../environments/environment';*/
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 /*import { JwtHelperService } from '@auth0/angular-jwt';
@@ -8,6 +8,7 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { LOCAL_STORAGE, WINDOW } from '@ng-toolkit/universal';
 import {environment} from '../environments/environment';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class ApiService {
@@ -16,10 +17,10 @@ export class ApiService {
   private _url = environment["API_URL"];*/
   // public nodesslurl = 'https://api.nexgentesting.com:6027/';
   public nodesslurl =  environment["api_url"];
-  public jwttoken = this.cookie.get('jwttoken');
+  public jwttoken = this.cookie.get('jwtToken');
 
 //  constructor(@Inject(WINDOW) private window: Window, @Inject(LOCAL_STORAGE) private localStorage: any, private _http: HttpClient, private _authHttp: HttpClient, public jwtHelper: JwtHelperService, private loggedinService: LoggedinService) {}
-  constructor(private _http: HttpClient, public cookie:CookieService) {}
+  constructor(private _http: HttpClient, public cookie:CookieService,private _snackBar: MatSnackBar) {}
 
 
  /* isTokenExpired() {
@@ -146,6 +147,23 @@ export class ApiService {
       return result;
     }
    
+  }
+// Mahitosh
+  getDataforAdminList(endpoint:any,requestdata: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': this.cookie.get('jwtToken')
+      })
+    };
+    var result = this._http.post(this.nodesslurl + endpoint, JSON.stringify(requestdata), httpOptions).pipe(catchError((error) => {this.openSnackBar(); return throwError(error);}),map(response => response));
+    return result;
+  }
+
+  openSnackBar() {
+    this._snackBar.open('Something Went Wrong ,Try Again!!', 'ok', {
+      duration: 6000,
+    });
   }
   
 

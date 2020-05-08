@@ -1,3 +1,4 @@
+import { ProductsAddEditComponent } from './products-add-edit/products-add-edit.component';
 /**
  * Created by INFLUXIQ-05 on 31-10-2018.
  */
@@ -199,6 +200,8 @@ const appRoutes: Routes = [
 
     {path: 'full_Program_View', component: FullProgramViewComponent},
 
+    {path: 'products/add' , component: ProductsAddEditComponent},
+    {path: 'products/edit/:_id' , component: ProductsAddEditComponent},
     {path: 'cron-report', component: CronReportComponent, resolve: {results: TestresolveService},data:{ requestcondition:{source:"cron_data_view",condition:{},sourcelimit:{"skip":0,"limit":10,"page_count":1}},endpoint:'datalist'}},
     {path: 'delete-event', component: CommonEventComponent},
     {path: 'google-event', component: UsergoogleeventComponent},

@@ -110,6 +110,7 @@ import { UsergoogleeventComponent } from './usergoogleevent/usergoogleevent.comp
 import { SalesDecksComponent } from './sales-decks/sales-decks.component';
 import { MaterialModule } from '../material-module';
 import { ListingModule} from 'listing-angular7';
+import { ProductsAddEditComponent } from './products-add-edit/products-add-edit.component';
 @NgModule({
   declarations: [
     ContractReviewVideoComponent,
@@ -193,7 +194,8 @@ import { ListingModule} from 'listing-angular7';
     CronReportComponent,
     CommonEventComponent,
     UsergoogleeventComponent,
-    SalesDecksComponent
+    SalesDecksComponent,
+    ProductsAddEditComponent
 
   ],
   imports: [

@@ -17,6 +17,7 @@ declare var $: any;
 export class ContractManagerListComponent implements OnInit {
   public d:any = new Date();
   public loader = 0;
+  public total_count=0;
   daterangepickerOptions = {
     format: 'MM/DD/YYYY',
     minDate: moment().format("MM/DD/YYYY"),
@@ -83,7 +84,7 @@ public sourceDetails: any = {
       }
       this.datalist = dataall;
    });
-  //  console.log((this.datalist[0].contentTop));
+   console.log((this.datalist[0].contentTop));
 
   this.getDataListCount();
 
