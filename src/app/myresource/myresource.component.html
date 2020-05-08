@@ -25,7 +25,7 @@
 
               <div *ngFor="let item1 of item.resource">
 
-                  <div  *ngIf="_commonservices.gettype(item1.file)=='PNG'">
+                  <div  *ngIf="item1._id == '5e6250178692a3662b6f3081'">
                   <div class="main_divbanner"  *ngIf="_commonservices.gettype(item1.file)=='PNG'">
                       <div class="for_content">
 
@@ -45,8 +45,8 @@
                   </div>
 
               </div>
-
               <ng-container *ngFor="let item1 of item.resource| orderBy:'priority'">
+                <ng-container *ngIf="item1._id != '5e6250178692a3662b6f3081' && item1.file.data.type == 'image'">
                 <div class="main_div">
                   <!--| orderBy:'priority':'reverse'-->
               
@@ -54,7 +54,7 @@
                   <div class="for_content">
                     <div class="img_div">
                       <!--  <p>{{_commonservices.gettype(item.file)}}</p>-->
-                      <span *ngIf="_commonservices.gettype(item1.file)=='PDF'">
+                      <!-- <span *ngIf="_commonservices.gettype(item1.file)=='PDF'">
                         <img src="../../assets/images/pdf-icon.png">
                       </span>
                       <span *ngIf="_commonservices.gettype(item1.file)=='PPT'">
@@ -74,18 +74,22 @@
                       </span>
                       <span *ngIf="_commonservices.gettype(item1.file)=='JPG'">
                         <img src="../../assets/images/jpgformat.png">
+                      </span> -->
+                      <span >
+                        <img src="../../assets/images/pdf-icon.png">
                       </span>
                       <!--<span *ngIf="_commonservices.gettype(item1.file)=='PNG'">-->
                       <!--&lt;!&ndash;<img src="../../assets/images/pngformat.png">&ndash;&gt;-->
                       <!--<img src="https://api.influxhostserver.com/download?file={{item1.file}}">-->
                       <!--</span>-->
                     </div>
-                    <p *ngIf="_commonservices.gettype(item1.file)!='PNG'">{{item1.description}}</p>
+                    <p *ngIf="item1._id != '5e6250178692a3662b6f3081' && item1.file.data.type == 'image'">{{item1.description}}</p>
                   </div>
-                  <div class="for_downbutton" *ngIf="_commonservices.gettype(item1.file)!='PNG'">
-                    <a href="{{_commonservices.uploadsslurl}}?file={{item1.file}}" target="_blank"> download now</a>
+                  <div class="for_downbutton" *ngIf="item1._id != '5e6250178692a3662b6f3081' && item1.file.data.type == 'image'">
+                    <a href="{{item1.file.basepath}}/{{item1.file.data.path}}/{{item1.file.data.fileservername}}" target="_blank"> download now</a>
                   </div>
                 </div>
+              </ng-container>
               </ng-container>
       </div>
 

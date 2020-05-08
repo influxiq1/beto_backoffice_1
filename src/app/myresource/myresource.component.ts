@@ -54,15 +54,14 @@ export class MyresourceComponent implements OnInit {
         // }
         const link = this._commonservices.nodesslurl+'datalist?token='+this.cookie.get('jwttoken');
         this._http.post(link,{source:'resourcecategory_view',condition:this.sourceconditionval})
-            .subscribe(res => {
-                let result;
-                result = res;
+            .subscribe((result:any) => {
           if(result.status=='error'){
 
           }else{
 
             this.resources = [];
             this.resources = result.res;
+            console.log(result.res);
             if (this.catname != null && this.catname != 'undefined' && this.resources.length >0) {
               setTimeout(() => {
                 var elmnt = document.getElementById(this.catname);
