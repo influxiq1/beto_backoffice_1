@@ -111,6 +111,7 @@ import { SalesDecksComponent } from './sales-decks/sales-decks.component';
 import { MaterialModule } from '../material-module';
 import { ListingModule} from 'listing-angular7';
 import { ProductsAddEditComponent } from './products-add-edit/products-add-edit.component';
+import { LoginAsARepComponent } from './login-as-a-rep/login-as-a-rep.component';
 @NgModule({
   declarations: [
     ContractReviewVideoComponent,
@@ -195,7 +196,8 @@ import { ProductsAddEditComponent } from './products-add-edit/products-add-edit.
     CommonEventComponent,
     UsergoogleeventComponent,
     SalesDecksComponent,
-    ProductsAddEditComponent
+    ProductsAddEditComponent,
+    LoginAsARepComponent
 
   ],
   imports: [

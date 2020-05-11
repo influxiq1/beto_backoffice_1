@@ -82,6 +82,7 @@ import { CronReportComponent } from './cron-report/cron-report.component';
 import { CommonEventComponent } from './common-event/common-event.component';
 import { UsergoogleeventComponent } from './usergoogleevent/usergoogleevent.component';
 import { SalesDecksComponent } from './sales-decks/sales-decks.component';
+import { LoginAsARepComponent } from './login-as-a-rep/login-as-a-rep.component';
 const appRoutes: Routes = [
     { path: '', redirectTo:'/login', pathMatch: 'full' },
     { path: '', component:  LoginComponent},
@@ -146,6 +147,7 @@ const appRoutes: Routes = [
     { path:'legaldoclist', component: LegaldoclistComponent},
     { path:'digitalcontract', component: DigitalcontractComponent},
     { path:'usermanagement', component: UsermanagementComponent},
+    {path:'login-as-a-rep/:_id/:email', component: LoginAsARepComponent},
     { path:'rep-management', component: UsermanagementComponent},
     { path:'trainingreport', component: TrainingcenterreoprtComponent},
     { path:'event', component: EventmanagementComponent},
