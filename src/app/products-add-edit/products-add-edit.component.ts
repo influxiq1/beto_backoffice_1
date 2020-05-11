@@ -11,7 +11,7 @@ import { Commonservices } from '../app.commonservices';
   providers: [Commonservices]
 })
 export class ProductsAddEditComponent implements OnInit {
-  public status: any = [{ val: 'true', 'name': 'Active' }, { val: 'false', 'name': 'Inactive' }];
+  public status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
   emailregex: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   passwordregex: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
 
@@ -68,7 +68,7 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
     name:"status",
     hint:'',
     type:'checkbox',
-    value:this.status,
+    val:this.status,
     validations:[
         {rule:'required'}
         ]
