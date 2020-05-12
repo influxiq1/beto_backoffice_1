@@ -34,13 +34,13 @@ export class UsermanagementComponent implements OnInit {
 
   public datasource: any = '';
 
-  public status: any = [{ val: 0, 'name': 'Active' }, { val: 1, 'name': 'Inactive' }, { val: 3, 'name': 'Lock' }];   // use for status search
+  public status: any = [{ val: 0, 'name': 'Active' }, { val: 1, 'name': 'Inactive' }];   // use for status search
 
-  statusarray: any = [{ val: 0, name: 'Active' }, { val: 1, name: 'Inactive' }, { val: 3, name: 'Lock' }];  //status name set
+  statusarray: any = [{ val: 0, name: 'Active' }, { val: 1, name: 'Inactive' }];  //status name set
 
-  emailarray: any = [{ val: 'sourotest222@gmail.com', name: 'sourotest222@gmail.com' }, { val: 'octtest@yopmail.com', name: 'octtest@yopmail.com' }, { val: 'septest@yopmail.com', name: 'septest@yopmail.com' }]; //Static Email search eg.
+  //emailarray: any = [{ val: 'sourotest222@gmail.com', name: 'sourotest222@gmail.com' }, { val: 'octtest@yopmail.com', name: 'octtest@yopmail.com' }, { val: 'septest@yopmail.com', name: 'septest@yopmail.com' }]; //Static Email search eg.
 
-  editroute: any = 'editroute'; // use for edit any field Navigate that page And you should be import the app-routing.module.ts   ex:- {path: 'editroute/:id', component: < "Write the class name"> },
+  //editroute: any = 'editroute'; // use for edit any field Navigate that page And you should be import the app-routing.module.ts   ex:- {path: 'editroute/:id', component: < "Write the class name"> },
 
   // use for Table Header modification 
   // Like Table head name is " firstname" => "First Name"
@@ -85,17 +85,16 @@ export class UsermanagementComponent implements OnInit {
     hideeditbutton: true,                                                  // (hide edit button)
     hidedeletebutton: true,                                               // (hide delete button)
     hideviewbutton: true,                                                 // (hide view button)
-    hidestatustogglebutton: true,                                        // (hide status toggle button)
+    hidestatustogglebutton: false,                                        // (hide status toggle button)
     hideaction: false,                                                  // (hide action column)
 
     tableheaders: ['parentname', 'fullname', 'email', 'phoneno', 'status'], //not required (table header name)
     custombuttons: [
       {
-        label: "DELETE",                                        // fb search button name
-        link: "#",                                             // fb search link
-        type: 'internallink',                                 // external link
-        //  param:[{key:'blogtitle',q:'q'}],                 // passed parameter like https://www.facebook.com/search/top/?q=VPOTips%20You%20Should%20Know%20For%20Buying%20Used%20CarsWJY
-      },
+        label: "delete",
+        toggle: "delete",
+        type: 'internallink',
+        },
       {
         label: "Login As",
         route: "login-as-a-rep",
@@ -108,14 +107,14 @@ export class UsermanagementComponent implements OnInit {
   }
 
   sortdata: any = {
-    "type": 'desc',                                              //  default sort data ascend and descend (desc)
-    "field": 'userid',                                          // default field for sorting
-    "options": ['userid']                                      //  sorting fields options for this table
+    "type": 'asc',                                              //  default sort data ascend and descend (desc)
+    "field": 'fullname',                                          // default field for sorting
+    "options": ['fullname','status']                                      //  sorting fields options for this table
   };
 
-  date_search_source: any = 'admin_blog_list';                        // this is a database collection or view name
+  date_search_source: any = 'users';                        // this is a database collection or view name
 
-  datacollection: any = 'trainingreport ';                           // data collection end point 
+  datacollection: any = 'trainingreport';                           // data collection end point 
 
   date_search_source_count: any = 0;                                // variable declare and initialize for default counting data for source count
 
@@ -129,7 +128,7 @@ export class UsermanagementComponent implements OnInit {
 
     //selectsearch:[{ label: 'Search By Status', field: 'status', values: this.status }], // this is use for  select search
 
-    textsearch: [{ label: "Search By Email", field: 'email', submit: "Search" }, { label: "Search By Full Name", field: 'fullname', submit: "Search" }],  // this is use for  text search
+    textsearch: [{ label: "Search By Email", field: 'email' }, { label: "Search By Full Name", field: 'fullname' }],  // this is use for  text search
 
     //search:[{label:"Search By Author",field:'author_search',values:this.authval}]     // this is use for  Autocomplete search
   };
@@ -147,7 +146,7 @@ export class UsermanagementComponent implements OnInit {
       },
       sort: {
         "type": 'desc',                                           // defalut field sort type 
-        "field": 'userid'                                         // default sort field
+        "field": 'fullname'                                         // default sort field
       }
 
     }

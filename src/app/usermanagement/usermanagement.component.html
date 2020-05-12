@@ -30,7 +30,7 @@
   [statusarr]="statusarray"
   [detail_datatype]="userdata_detail_datatype"    
   [detail_skip_array]="userdata_detail_skip"
-  [url]="custom_link"
+  
   [search_settings]="search_settings"
   [searchendpoint]="searchendpoint"
   [sortdata]="sortdata"
@@ -42,7 +42,7 @@
 </div>
 
 
-<ng-template #formtemplate>
+<!-- <ng-template #formtemplate>
   <div class="modal-body brandmanagement_modal newNexgen_modal">
     <h1>Add/Edit {{menuval}}</h1>
     <form novalidate (ngSubmit)="formsubmit()">
@@ -79,34 +79,34 @@
 
             <textarea *ngIf="item.inputtype=='textarea' || item.inputtype=='editor' " [name]="item.name"
               [formControl]="dataForm.controls[item.name]" class="form-control"
-              [placeholder]="item.placeholder"></textarea>
+              [placeholder]="item.placeholder"></textarea> -->
 
             <!--<date-range-picker *ngIf="item.inputtype=='daterange'" [options]="daterangepickerOptions" [class]="'col-md-12 form-control'"  (rangeSelected)="rangeSelected($event,item.name)" ></date-range-picker>-->
-            <input *ngIf="item.inputtype=='daterange' " id="inputdate{{item.name}}" [name]="item.name"
+            <!-- <input *ngIf="item.inputtype=='daterange' " id="inputdate{{item.name}}" [name]="item.name"
               [formControl]="dataForm.controls[item.name]" type="text" class="form-control"
               [placeholder]="item.placeholder"
               [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',  selectFromOtherMonth: false }" #drp="bsDaterangepicker"
-              bsDaterangepicker [minDate]="minDate">
+              bsDaterangepicker [minDate]="minDate"> -->
 
 
             <!-- <input *ngIf="item.inputtype=='daterange' " [name]="item.name" [formControl]="dataForm.controls[item.name]" type="hidden" class="form-control" [placeholder]="item.placeholder">-->
 
-            <input *ngIf="item.inputtype=='url'"
+            <!-- <input *ngIf="item.inputtype=='url'"
               pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?|^((http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
               [name]="item.name" [formControl]="dataForm.controls[item.name]" [type]="item.inputtype"
-              class="form-control" [placeholder]="item.placeholder">
+              class="form-control" [placeholder]="item.placeholder"> -->
 
 
-            <div *ngIf="item.inputtype=='image'" class="btn_submit">
+            <!-- <div *ngIf="item.inputtype=='image'" class="btn_submit"> -->
               <!-- <p>{{item.name}}</p>-->
-              <input type="hidden" [formControl]="dataForm.controls[item.name]" class="form-control">
-              <button class="" type="button" (click)="fileInput.click()">{{item.buttonname}}</button>
+              <!-- <input type="hidden" [formControl]="dataForm.controls[item.name]" class="form-control">
+              <button class="" type="button" (click)="fileInput.click()">{{item.buttonname}}</button> -->
               <!--  <input style="display: none" type="file" (change)="onFileChanged($event,item,i)" #fileInput>-->
-              <input style="display: none" type="file" (change)="fileChangeEvent($event,i)" #fileInput>
+              <!-- <input style="display: none" type="file" (change)="fileChangeEvent($event,i)" #fileInput>
 
-              <div class="imgwrapperImage">
+              <div class="imgwrapperImage"> -->
                 <!--{{i}}-->
-                <image-cropper class="image_cropper" [imageChangedEvent]="imageChangedEvent[i]"
+                <!-- <image-cropper class="image_cropper" [imageChangedEvent]="imageChangedEvent[i]"
                   [imageBase64]="unsafebase64imgdata[i]" [maintainAspectRatio]="true" [imageQuality]="99"
                   [aspectRatio]="(item.aspectRatio)" [resizeToWidth]="(item.resizeToWidth)" [outputType]="file"
                   format="png" (imageCropped)="imageCropped($event,item,i)" (imageLoaded)="imageLoaded()"
@@ -115,16 +115,16 @@
                 <img *ngIf="croppedImage[i]!=null || isedit==1" style="height: auto; width: 100%;"
                   [src]="croppedImage[i]" /><br>
                 <input *ngIf="croppedImage[i]!=null || isedit==1 " type="button" value="Save" class="button_save"
-                  (click)="saveimg(item,i,messagemodal)">
+                  (click)="saveimg(item,i,messagemodal)"> -->
                 <!--<img style="height: 314px;width: 231px"  [src]="base64imgdata" />-->
-              </div>
+              <!-- </div> -->
               <!--<div class="col-md-4 imguploadsuccess" *ngIf="item.filename!=null">
                 <img style="width: 100%" src="{{_commonservice.filepathurl}}{{item.filename}}" >
               </div>-->
-            </div>
+            <!-- </div> -->
 
 
-
+<!-- 
             <span class="error"
               *ngIf="dataForm.controls[item.name]!=null &&  item.validationrule!=null && !dataForm.controls[item.name].valid && dataForm.controls[item.name].touched">{{item.label}}
               {{item.validationerrormsg}}</span>
@@ -138,10 +138,10 @@
       </div>
     </form>
   </div>
-</ng-template>
+</ng-template> -->
 
 <!--Common confirmation modal-->
-<ng-template #commonconfirmmodal>
+<!-- <ng-template #commonconfirmmodal>
   <div class="modal-body brandmanagement_modal">
     <div class="logo_wrapper">
       <img src="assets/images/logo.png">
@@ -154,10 +154,10 @@
   </div>
   <div>
   </div>
-</ng-template>
+</ng-template> -->
 
 <!--Common message modal-->
-<ng-template #messagemodal>
+<!-- <ng-template #messagemodal>
   <div class="modal-body brandmanagement_modal">
     <div class="logo_wrapper">
       <img src="assets/images/logo.png">
@@ -165,10 +165,10 @@
     <div class="message_success">{{message}}</div>
 
   </div>
-</ng-template>
+</ng-template> -->
 
 <!--Common confirmation modal-->
-<ng-template #commonconfirmmodal1>
+<!-- <ng-template #commonconfirmmodal1>
   <div class="modal-body brandmanagement_modal successmodal_listing">
     <div class="logo_wrapper">
       <img src="assets/images/logo.png">
@@ -181,9 +181,9 @@
   </div>
   <div>
   </div>
-</ng-template>
+</ng-template> -->
 <!--Common message modal-->
-<ng-template #discoverCallModal>
+<!-- <ng-template #discoverCallModal>
   <div class="modal-body brandmanagement_modal">
     <div class="logo_wrapper">
       <img src="assets/images/logo.png">
@@ -195,7 +195,7 @@
       <div class="main_inner_content main_inner_contentnew">
 
         <div style="width: 100%" *ngIf="eventList.length>0">
-          <!-- | slice:0:2 -->
+          
           <span>
             <div style="width: 32%;float: left" class="one " *ngFor="let item of eventList;let j=index;">
               <p class="event_f_name">{{item.eventdata.meetingwith}}</p>
@@ -214,11 +214,11 @@
     </div>
 
   </div>
-</ng-template>
+</ng-template> -->
 
 
 <!--Medical aparchuniti message modal-->
-<ng-template #medicalAparchuniti>
+<!-- <ng-template #medicalAparchuniti>
     <div class="modal-body brandmanagement_modal">
       <div class="logo_wrapper">
         <img src="assets/images/logo.png">
@@ -246,6 +246,6 @@
       </div>
   
     </div>
-  </ng-template>
-<div class="clear"></div>
+  </ng-template> -->
+<!-- <div class="clear"></div> -->
 <app-footer></app-footer>
