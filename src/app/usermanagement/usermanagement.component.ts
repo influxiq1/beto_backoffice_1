@@ -137,8 +137,8 @@ export class UsermanagementComponent implements OnInit {
   constructor(public commonservices: Commonservices, public cookieservice: CookieService, public originalCookie: CookieService, public _http: HttpClient, private router: Router, public modal: BsModalService, public _apiService: ApiService) {
 
     this.datasource = '';
-    let endpoint = 'trainingreport';                              // for main data endpoint
-    let endpointc = 'trainingreport-count';                       // for count endpoint
+    let endpoint = 'usertrainingreport';                              // for main data endpoint
+    let endpointc = 'usertrainingreport-count';                       // for count endpoint
     // data param for conditionlimit and search
     let data: any = {
       "condition": {
