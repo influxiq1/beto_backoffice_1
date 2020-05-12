@@ -155,13 +155,13 @@ export class UsermanagementComponent implements OnInit {
     let link = this.commonservices.nodesslurl + endpoint;
     let link1 = this.commonservices.nodesslurl + endpointc;
     this._http.post(link, data).subscribe((response: any) => {
-      this.userdata = response.data;
+      this.userdata = response.results;
       console.warn('blogData', response);
     })
 
     this._http.post(link1, data).subscribe((res: any) => {
       console.log(res, ' for count');
-      this.date_search_source_count = res.data;
+      this.date_search_source_count = res.results;
     })
 
 
