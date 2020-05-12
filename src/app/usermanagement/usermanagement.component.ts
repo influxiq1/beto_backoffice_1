@@ -81,7 +81,7 @@ export class UsermanagementComponent implements OnInit {
   };
 
   libdata: any = {
-    updateendpoint: 'statusupdate',                                        // update endpoint set
+    updateendpoint: 'togglestatus',                                        // update endpoint set
     hideeditbutton: true,                                                  // (hide edit button)
     hidedeletebutton: true,                                               // (hide delete button)
     hideviewbutton: true,                                                 // (hide view button)
@@ -114,7 +114,7 @@ export class UsermanagementComponent implements OnInit {
 
   date_search_source: any = 'users';                        // this is a database collection or view name
 
-  datacollection: any = 'trainingreport';                           // data collection end point 
+  datacollection: any = 'usertrainingreport';                           // data collection end point 
 
   date_search_source_count: any = 0;                                // variable declare and initialize for default counting data for source count
 
@@ -124,20 +124,14 @@ export class UsermanagementComponent implements OnInit {
   // this is search block
   search_settings: any = {
 
-    //datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date",submit:"Search",  field:"created_at"}],   // this is use for  date search //created at = field in res which gives date in unix format that changes to ist using moment.js
-
-    //selectsearch:[{ label: 'Search By Status', field: 'status', values: this.status }], // this is use for  select search
-
-    textsearch: [{ label: "Search By Email", field: 'email' }, { label: "Search By Full Name", field: 'fullname' }],  // this is use for  text search
-
-    //search:[{label:"Search By Author",field:'author_search',values:this.authval}]     // this is use for  Autocomplete search
+    textsearch:[{label:"Search By Full Name",field:'fullname'},{label:"Search By Email",field:'email'}],  // this is use for  text search
   };
 
   constructor(public commonservices: Commonservices, public cookieservice: CookieService, public originalCookie: CookieService, public _http: HttpClient, private router: Router, public modal: BsModalService, public _apiService: ApiService) {
 
     this.datasource = '';
-    let endpoint = 'trainingreport';                              // for main data endpoint
-    let endpointc = 'trainingreport-count';                       // for count endpoint
+    let endpoint = 'usertrainingreport';                              // for main data endpoint
+    let endpointc = 'usertrainingreport-count';                       // for count endpoint
     // data param for conditionlimit and search
     let data: any = {
       "condition": {
@@ -154,14 +148,16 @@ export class UsermanagementComponent implements OnInit {
     let link = this.commonservices.nodesslurl + endpoint;
     let link1 = this.commonservices.nodesslurl + endpointc;
     this._http.post(link, data).subscribe((response: any) => {
-      this.userdata = response.data;
-      console.warn('blogData', response);
+      this.userdata = response.results;
+      console.warn('blogData', this.userdata);
     })
 
     this._http.post(link1, data).subscribe((res: any) => {
       console.log(res, ' for count');
-      this.date_search_source_count = res.data;
+      this.date_search_source_count = res.count;
     })
+
+   
 
 
 

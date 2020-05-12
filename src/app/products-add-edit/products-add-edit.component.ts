@@ -75,7 +75,7 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
   },
   {
     label:"Not Launched",
-   // name:"launch_date",
+    name:"launch_date",
     //hint:'has child ???',
     type:'checkbox',
     labelPosition:'after',
@@ -102,7 +102,7 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
 
 {
   label:"Verification Needed",
- // name:"launch_date",
+  name:"email_verification",
   //hint:'has child ???',
   type:'checkbox',
   labelPosition:'after',
@@ -127,6 +127,8 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
       ],
 
 } ,
+
+
 
         {
             label:"id",
