@@ -3,6 +3,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { Commonservices } from '../app.commonservices';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from './../api.service';
+import { Router } from '@angular/router';
+import { BsModalService } from "ngx-bootstrap/modal";
 
 @Component({
   selector: 'app-manageleads',
@@ -105,7 +107,7 @@ type:'internallink' // internallink link
 
 sortdata:any={
 "type":'asc', // default sort data ascend and descend (desc)
-"field":'fullname ', // default field for sorting
+"field":'fullname', // default field for sorting
 "options":['fullname'] // sorting fields options for this table
 };
 
@@ -129,7 +131,7 @@ textsearch:[{label:"Search By Name",field:'fullname'},{label:"Search By Email",f
 };
 
 
-  constructor(public cookieservice: CookieService,public _apiService: ApiService, public http:HttpClient,public commonservices:Commonservices) {
+  constructor(public commonservices: Commonservices, public cookieservice: CookieService, public originalCookie: CookieService, public _http: HttpClient, private router: Router, public modal: BsModalService, public _apiService: ApiService) {
     this.formdata = [
       { inputtype: 'text', name: 'firstname', label: 'First Name', placeholder: 'Enter First Name', validationrule: { required: true }, validationerrormsg: 'is required' },
       { inputtype: 'text', name: 'lastname', label: 'Last Name', placeholder: 'Enter Last Name', validationrule: { required: true }, validationerrormsg: 'is required' },
@@ -156,8 +158,7 @@ let data:any={
 "skip":0
 },
 sort:{
-
-"type":'desc', // defalut field sort type
+"type":'asc', // defalut field sort type
 "field":'fullname' // default sort field
 }
 
@@ -166,13 +167,13 @@ sort:{
 
 let link = this.commonservices.nodesslurl + endpoint;
 let link1 = this.commonservices.nodesslurl + endpointc;
-this.http.post(link, data)
+this._http.post(link, data)
 .subscribe((response:any) => {
 this.manageleads =response.results.res;
 console.warn('blogData',this.manageleads);
 })
 
-this.http.post(link1, data)
+this._http.post(link1, data)
 .subscribe((res:any) => {
 console.log(res,' for count');
 this.date_search_source_count =res.count;
