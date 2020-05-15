@@ -130,12 +130,12 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
 
 
 
-        {
-            label:"id",
-            name:"id",
-            type:'hidden',
-            value:""
-        }
+        // {
+        //     label:"id",
+        //     name:"id",
+        //     type:'hidden',
+        //     value:""
+        // }
     ]
 };
   }
