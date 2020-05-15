@@ -75,7 +75,7 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
   },
   {
     label:"Not Launched",
-    name:"launch_date",
+    //name:"launch_date",
     //hint:'has child ???',
     type:'checkbox',
     labelPosition:'after',
