@@ -1,3 +1,4 @@
+import { ManageLeadsEditComponent } from './manage-leads-edit/manage-leads-edit.component';
 import { ProductsAddEditComponent } from './products-add-edit/products-add-edit.component';
 /**
  * Created by INFLUXIQ-05 on 31-10-2018.
@@ -168,6 +169,7 @@ const appRoutes: Routes = [
     { path: 'test', component: TestComponent},
     { path: 'forgetpassword', component: ForgetpasswordComponent},
     { path: 'slotview', component: SlotviewComponent},
+    { path: 'manage-leads/edit/:_id' , component: ManageLeadsEditComponent},
 
     { path: 'on-boarding-call/:id', component: SlotviewComponent },
     { path: 'customevents/:slotval', component: SlotviewComponent },

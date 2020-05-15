@@ -29,14 +29,14 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
   this.update(this.ActivatedRoute.snapshot.params._id);
  // console.log("ggggggggggg",this.ActivatedRoute.snapshot.params.id);
 } else {
-  console.log("hhhhhbjhyv");
+  //console.log("hhhhhbjhyv");
   this.formdata = {
     successmessage:"Added Successfully !!", 
     redirectpath:"/products",
     submittext:"Add",
     submitactive:true, //optional, default true
     apiUrl:this._apiService.nodesslurl,
-    endpoint:'addorupdatedata',
+    endpoint:'addorupdateproduct',
    jwttoken:this._apiService.jwttoken,
     fields:[
       {
@@ -80,7 +80,7 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
     type:'checkbox',
     labelPosition:'after',
     value: null,
-    dependent:{
+    dependent:[{
 
         condval:true,
         field:{
@@ -93,7 +93,7 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
                 {rule:'required'}
                 ]
         }
-    },
+    }],
     validations:[
         {rule:'required'}
         ],
@@ -107,7 +107,7 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
   type:'checkbox',
   labelPosition:'after',
   value: null,
-  dependent:{
+  dependent:[{
 
       condval:true,
       field:{
@@ -121,7 +121,7 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
               // {rule:'minLength',value: 2}
               ]
       }
-  },
+  }],
   validations:[
       {rule:'required'}
       ],
@@ -132,7 +132,7 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
 
         {
             label:"id",
-            name:"_id",
+            name:"id",
             type:'hidden',
             value:""
         }
@@ -148,13 +148,16 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
    update(id:any){
     let endpoint = 'datalist';                         
     let data: any = {
-     "id":id
+      "source":'products',
+     "condition":{
+      "_id_object":id
+     }
     }
     
 
     this._apiService.getDataforAdminList(endpoint, data)
       .subscribe((response: any) => {
-        console.log(response.result[0].firstname);
+        console.log(response.res[0]);
         let stat:any;
         if(response.status==1){
           response.status=true;
@@ -168,7 +171,7 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
           submittext:"Edit",
           submitactive:true, //optional, default true
          apiUrl:this._apiService.nodesslurl,
-          endpoint:'addorupdatedata',
+          endpoint:'addorupdateproduct',
          jwttoken:this._apiService.jwttoken,
         
          fields:[
@@ -176,10 +179,10 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
             //heading:"This is Name Header",
             label:"Products Name",
             name:"productname",
-            value:'',
+            value:response.res[0].productname,
             type:"text",
             validations:[
-                {rule:'required'},
+                //{rule:'required'},
                 // {rule:'maxLength',value:10},
                 // {rule:'minLength',value: 2}
                 ]
@@ -188,7 +191,7 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
           //heading:"This is Name Header",
           label:"Description",
           name:"description",
-          value:'',
+          value:response.res[0].description,
           type:"textarea",
           validations:[
               {rule:'required'},
@@ -201,9 +204,9 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
         name:"status",
         hint:'',
         type:'checkbox',
-        value:this.status,
+        value:response.res[0].status,
         validations:[
-            {rule:'required'}
+          //  {rule:'required'}
             ]
       },
       {
@@ -213,22 +216,22 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
         type:'checkbox',
         labelPosition:'after',
         value: null,
-        dependent:{
+        dependent:[{
     
             condval:true,
             field:{
                 label:"Launch Date",
                 name:"launch_date",
                 type:'date',
-                value:new Date().toISOString(),
+                value:response.res[0].created_at,
                 hint:"05/05/2020",
                 validations:[
-                    {rule:'required'}
+                   // {rule:'required'}
                     ]
             }
-        },
+        }],
         validations:[
-            {rule:'required'}
+          //  {rule:'required'}
             ],
     
     } ,
@@ -239,23 +242,24 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
       type:'checkbox',
       labelPosition:'after',
       value: null,
-      dependent:{
+      dependent:[{
     
           condval:true,
           field:{
               label:"Email",
               name:"email",
               type:"text",
+              value:response.res[0].multiple_emails,
               validations:[
-                  {rule:'required'},
-                  {rule:'pattern',value: this.emailregex,message: "Must be a valid Email"}
+                 // {rule:'required'},
+                 // {rule:'pattern',value: this.emailregex,message: "Must be a valid Email"}
                   // {rule:'maxLength',value:10},
                   // {rule:'minLength',value: 2}
                   ]
           }
-      },
+      }],
       validations:[
-          {rule:'required'}
+          //{rule:'required'}
           ],
     
     } ,

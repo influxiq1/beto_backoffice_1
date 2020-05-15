@@ -156,7 +156,7 @@ export class ApiService {
         'Authorization': this.cookie.get('jwtToken')
       })
     };
-    var result = this._http.post(this.nodesslurl + endpoint, JSON.stringify(requestdata), httpOptions).pipe(catchError((error) => {this.openSnackBar(); return throwError(error);}),map(response => response));
+    var result = this._http.post(this.nodesslurl + endpoint+'?token='+this.cookie.get('jwttoken'), JSON.stringify(requestdata), httpOptions).pipe(catchError((error) => {this.openSnackBar(); return throwError(error);}),map(response => response));
     return result;
   }
 

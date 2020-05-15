@@ -112,6 +112,7 @@ import { MaterialModule } from '../material-module';
 import { ListingModule} from 'listing-angular7';
 import { ProductsAddEditComponent } from './products-add-edit/products-add-edit.component';
 import { LoginAsARepComponent } from './login-as-a-rep/login-as-a-rep.component';
+import { ManageLeadsEditComponent } from './manage-leads-edit/manage-leads-edit.component';
 @NgModule({
   declarations: [
     ContractReviewVideoComponent,
@@ -197,7 +198,8 @@ import { LoginAsARepComponent } from './login-as-a-rep/login-as-a-rep.component'
     UsergoogleeventComponent,
     SalesDecksComponent,
     ProductsAddEditComponent,
-    LoginAsARepComponent
+    LoginAsARepComponent,
+    ManageLeadsEditComponent
 
   ],
   imports: [

@@ -29,7 +29,7 @@ statusarray: any = [{val:'', name: ''}, {val: 'seen', name: 'Seen'}, {val: 'send
 
 //emailarray: any = [{val: 'sourotest222@gmail.com', name: 'sourotest222@gmail.com'}, {val: 'octtest@yopmail.com', name: 'octtest@yopmail.com'}, {val: 'septest@yopmail.com', name: 'septest@yopmail.com'}]; //Static Email search eg.
 
-editroute: any = 'editroute'; // use for edit any field Navigate that page And you should be import the app-routing.module.ts ex:- {path: 'editroute/:id', component: < "Write the class name"> },
+editroute: any = 'manage-leads/edit/'; // use for edit any field Navigate that page And you should be import the app-routing.module.ts ex:- {path: 'editroute/:id', component: < "Write the class name"> },
 
 // use for Table Header modification
 // Like Table head name is " firstname" => "First Name"
