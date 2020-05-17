@@ -75,6 +75,7 @@ limitcond:any={ // send basic limit data
 };
 
 libdata:any={
+basecondition:{created_by:this.cookieservice.get('userid')},
 updateendpoint:'statusupdate', // update endpoint set
 hideeditbutton:false, // (hide edit button)
 hidedeletebutton:false, // (hide delete button)
@@ -132,20 +133,20 @@ textsearch:[{label:"Search By Name",field:'fullname'},{label:"Search By Email",f
 
 
   constructor(public commonservices: Commonservices, public cookieservice: CookieService, public originalCookie: CookieService, public _http: HttpClient, private router: Router, public modal: BsModalService, public _apiService: ApiService) {
-    this.formdata = [
-      { inputtype: 'text', name: 'firstname', label: 'First Name', placeholder: 'Enter First Name', validationrule: { required: true }, validationerrormsg: 'is required' },
-      { inputtype: 'text', name: 'lastname', label: 'Last Name', placeholder: 'Enter Last Name', validationrule: { required: true }, validationerrormsg: 'is required' },
-      { inputtype: 'text', name: 'company', label: 'Company ', placeholder: 'Enter Company Name', validationrule: { required: true }, validationerrormsg: 'is required' },
-      { inputtype: 'email', name: 'email', label: 'Email Id(s)', placeholder: 'Enter Your Email (Put multiple values in , separated)', validationrule: { required: true, email: true }, validationerrormsg: 'is required and should be valid' },
-      { inputtype: 'textarea', name: 'address', label: 'Address', placeholder: 'Enter Address' },
-      { inputtype: 'text', name: 'phoneno', label: 'Phone No.', placeholder: 'Enter Mobile Number' },
-      { inputtype: 'text', name: 'website', label: 'Website Url.', placeholder: 'Enter Website Url ' },
-      { inputtype: 'text', name: 'mobile', label: 'Mobile No.', placeholder: 'Enter Mobile No ' },
-      {inputtype:'select',name:'product',label:'Products',defaultchoice:'Select a Product',sourceview:{source:'null','condition':{'userid':this.cookieservice.get('userid')}},multiple:true,selectvalue:'product_name',selectid:'product',validationrule:{required:true},validationerrormsg:'is required'},
-      // {inputtype:'select',name:'product',label:'Products',defaultchoice:'Select a Product',sourceview:'products',multiple:true,selectvalue:'productname',selectid:'_id',validationrule:{required:true},validationerrormsg:'is required'},
-      { inputtype: 'hidden', name: 'status', label: "status", placeholder: "status", value: 'Pending' },
-      { inputtype: 'hidden', name: 'created_by', label: "created_by", placeholder: "Created By", value: this.cookieservice.get('userid') }
-    ];
+    // this.formdata = [
+    //   { inputtype: 'text', name: 'firstname', label: 'First Name', placeholder: 'Enter First Name', validationrule: { required: true }, validationerrormsg: 'is required' },
+    //   { inputtype: 'text', name: 'lastname', label: 'Last Name', placeholder: 'Enter Last Name', validationrule: { required: true }, validationerrormsg: 'is required' },
+    //   { inputtype: 'text', name: 'company', label: 'Company ', placeholder: 'Enter Company Name', validationrule: { required: true }, validationerrormsg: 'is required' },
+    //   { inputtype: 'email', name: 'email', label: 'Email Id(s)', placeholder: 'Enter Your Email (Put multiple values in , separated)', validationrule: { required: true, email: true }, validationerrormsg: 'is required and should be valid' },
+    //   { inputtype: 'textarea', name: 'address', label: 'Address', placeholder: 'Enter Address' },
+    //   { inputtype: 'text', name: 'phoneno', label: 'Phone No.', placeholder: 'Enter Mobile Number' },
+    //   { inputtype: 'text', name: 'website', label: 'Website Url.', placeholder: 'Enter Website Url ' },
+    //   { inputtype: 'text', name: 'mobile', label: 'Mobile No.', placeholder: 'Enter Mobile No ' },
+    //   {inputtype:'select',name:'product',label:'Products',defaultchoice:'Select a Product',sourceview:{source:'null','condition':{'userid':this.cookieservice.get('userid')}},multiple:true,selectvalue:'product_name',selectid:'product',validationrule:{required:true},validationerrormsg:'is required'},
+    //   // {inputtype:'select',name:'product',label:'Products',defaultchoice:'Select a Product',sourceview:'products',multiple:true,selectvalue:'productname',selectid:'_id',validationrule:{required:true},validationerrormsg:'is required'},
+    //   { inputtype: 'hidden', name: 'status', label: "status", placeholder: "status", value: 'Pending' },
+    //   { inputtype: 'hidden', name: 'created_by', label: "created_by", placeholder: "Created By", value: this.cookieservice.get('userid') }
+    // ];
 
     this.datasource = '';
 let endpoint='getleadsmanagelistdata'; // for main data endpoint
@@ -160,7 +161,8 @@ let data:any={
 sort:{
 "type":'asc', // defalut field sort type
 "field":'fullname' // default sort field
-}
+},
+created_by:this.cookieservice.get('userid')
 
 }
 
