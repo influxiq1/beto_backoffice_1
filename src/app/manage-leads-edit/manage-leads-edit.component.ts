@@ -104,7 +104,7 @@ export class ManageLeadsEditComponent implements OnInit {
     label:"Phone No.",
     name:"phoneno",
     value:response.res[0].phoneno,
-    type:"number",
+    type:"text",
     validations:[
         {rule:'required',message: "Phone Number Needs to be required"},
          {rule:'maxLength',value:10,message: "Enter Valid Number"},

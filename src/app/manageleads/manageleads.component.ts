@@ -23,9 +23,9 @@ export class ManageleadsComponent implements OnInit {
   manageleads: any = [];
   public datasource: any = '';
 
-  //public status: any = [{ val: 0, 'name': 'Active' }, { val: 1, 'name': 'Inactive' }, { val: 3, 'name': 'Lock' }]; // use for status search
+  statusarray: any = [{ val: 0, 'name': 'Active' }, { val: 1, 'name': 'Inactive' }]; // use for status search
 
-  statusarray: any = [{ val: '', name: '' }, { val: 'seen', name: 'Seen' }, { val: 'send', name: 'Email Send' }]; //status name set
+  //statusarray: any = [{ val: '', name: '' }, { val: 'seen', name: 'Seen' }, { val: 'send', name: 'Email Send' }]; //status name set
 
   //emailarray: any = [{val: 'sourotest222@gmail.com', name: 'sourotest222@gmail.com'}, {val: 'octtest@yopmail.com', name: 'octtest@yopmail.com'}, {val: 'septest@yopmail.com', name: 'septest@yopmail.com'}]; //Static Email search eg.
 
@@ -43,19 +43,13 @@ export class ManageleadsComponent implements OnInit {
     'mobile': "Mobile No",
     'address': "Address",
     'only_productname': "Products",
+    'status': "Status",
     'emailStatus': "Manage Notes"
   };
 
-  manageleads_header_skip: any = ['_id', 'appointment_count', 'created_at', 'created_by', 'date', 'firstname', 'lastname', 'mobile', 'notescount', 'pricepoint', 'product', 'rep_name', 'status', 'youtube', 'productname']; // use for Table Header Skip
+  manageleads_header_skip: any = ['_id', 'appointment_count', 'created_at', 'created_by', 'date', 'firstname', 'lastname', 'mobile', 'notescount', 'pricepoint', 'product', 'rep_name', 'youtube', 'productname']; // use for Table Header Skip
 
   manageleads_detail_skip: any = []; // use for Table Detail Field Skip
-
-  // manageleads_detail_datatype: any = [{ // use for Table Detail inside the modal image path
-  // key: "images",
-  // value: 'image',
-  // fileurl: "http://18.222.26.198/upload/brandimages/" // Image path
-  // }];
-
   updateendpoint = 'addorupdatedata'; // updateendpoint is use for data update endpoint
 
   deleteendpoint = 'deletesingledata'; // deleteendpoint is use for data delete endpoint
@@ -107,11 +101,11 @@ export class ManageleadsComponent implements OnInit {
       updateendpoint: 'statusupdate', // update endpoint set
       hideeditbutton: false, // (hide edit button)
       hidedeletebutton: false, // (hide delete button)
-      hideviewbutton: true, // (hide view button)
-      hidestatustogglebutton: true, // (hide status toggle button)
+      hideviewbutton: false, // (hide view button)
+      hidestatustogglebutton: false, // (hide status toggle button)
       hideaction: false, // (hide action column)
   
-      tableheaders: ['fullname', 'company', 'website', 'email', 'phoneno', 'mobile', 'address', 'only_productname', 'emailStatus'], //not required (table header name)
+      tableheaders: ['fullname', 'company', 'website', 'email', 'phoneno', 'mobile', 'address', 'only_productname','status','emailStatus'], //not required (table header name)
       custombuttons: [
         {
           label: "Discovery Call", //  button name
