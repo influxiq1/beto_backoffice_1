@@ -25,15 +25,15 @@
                         placeholder="Search by Email"><button><i class="fa fa-search"
                             aria-hidden="true"></i></button> </h3>
             </div> -->
-          <div class="search_content">
+          <!-- <div class="search_content">
             <h3>
               <input type="text" placeholder="Search by Name" (keyup)="searchbyname($event.target.value)">
             </h3>
-          </div>
+          </div> -->
 
           <!-- added by himadri start product search-->
 
-          <div class="search_content">
+          <!-- <div class="search_content">
             <h3>
               <select [(ngModel)]='placeholderforselect' (click)="productSearchbyval(prodSelect)"
                 [(ngModel)]="prodSelect" required>
@@ -42,12 +42,12 @@
                   {{productval.productname}}</option>
               </select>
             </h3>
-          </div>
+          </div> -->
 
           <!-- added by himadri end product search-->
 
 <!-- added by himadri end status search-->
-          <div class="search_content">
+          <!-- <div class="search_content">
             <h3>
               <select [(ngModel)]='placeholderforselectStatus' (click)="statusSearchbyval({'status':statusSelect})"
                 [(ngModel)]="statusSelect" required>
@@ -56,12 +56,12 @@
                   {{statusval.name}}</option>
               </select>
             </h3>
-          </div>
+          </div> -->
 
 <!-- added by himadri end status search-->
 
 <!-- added by himadri end status search-->
-<div class="search_content">
+<!-- <div class="search_content">
   <h3>
     <select (click)="statusSearchbyval({'by':requestBy})"
       [(ngModel)]="requestBy" required>
@@ -70,13 +70,13 @@
       <option value="lead"> Requeste By Lead</option>
     </select>
   </h3>
-</div>
+</div> -->
 
 <!-- added by himadri end status search-->
 
           <!-- added by himadri start Date Range search-->
 
-          <span class="spanformnew">
+          <!-- <span class="spanformnew">
             <form>
               <div class="form-group form-groupnew1">
                 <input type="text" placeholder="Select Date Range" class="form-control" [(ngModel)]="filterval5"
@@ -93,7 +93,7 @@
               </div>
 
             </form>
-          </span>
+          </span> -->
 
 
           <!-- added by himadri end Date Range search-->
@@ -105,7 +105,35 @@
 
       <div class="nexgen_admin_table">
 
-        <div *ngIf="loader == 1" class="progressbarwrapper">
+        <lib-listing *ngIf="contractmanagerlist!=null && contractmanagerlist.length>0" 
+          [datasource]="contractmanagerlist"
+          [skip]="contractmanagerlist_skip"
+          [modify_header_array]="modify_header_array"
+          [apiurl]="_apiService.nodesslurl"
+          [deleteendpoint]="deleteendpoint"
+          [updateendpoint]="updateendpoint"
+          [jwttoken]="_apiService.jwttoken"
+          [date_search_source]=""
+          [date_search_endpoint]=""
+          [sourcedata]="tablename"
+          [statusarr]="statusarray"
+          [detail_datatype]="contractmanagerlist_detail_datatype"
+          [editroute]="editroute"
+          [detail_skip_array]="contractmanagerlist_detail_skip"
+          [search_settings]="search_settings"
+          [searchendpoint]="searchendpoint"
+          [sortdata]="sortdata"
+          [datacollection]="datacollection"
+          [date_search_source_count]="date_search_source_count"
+          [libdata]="libdata"
+        
+          [limitcond]="limitcond">
+</lib-listing>
+
+
+
+
+        <!-- <div *ngIf="loader == 1" class="progressbarwrapper">
           <div class="progressbar">
             <div class="stylization"></div>
           </div>
@@ -117,7 +145,7 @@
           <div class="action_section action_sectionnew aminewsearch">
             <a *ngIf="cookeiservice.get('usertype') == 'rep'" class="addfrinderbtn addfrinderbtnupd"
               routerLink="/add-contract-manager">Request Contract</a>
-          </div>
+          </div> -->
 
 
           <!-- Himadri  -->
@@ -155,7 +183,7 @@
         </span> -->
 
 
-          <table mdbTable class="table">
+          <!-- <table mdbTable class="table">
 
             <thead>
               <tr>
@@ -182,44 +210,44 @@
                 <td datalabel="by"  *ngIf="el.by == 'N/A'" >Request By Rep <br> <p [ngClass]="(d.setDate(d.getDate()-3 <= el.created_request_at))?'bgcolorgreen':'bgcolorblack'">Date:- {{el.created_request_at | date}}</p></td>
                 <td datalabel="by" *ngIf="el.by == 'lead'">Request By Lead <br> <p [ngClass]="(d.setDate(d.getDate()-3 <= el.created_request_at))?'bgcolorgreen':'bgcolorblack'">Date:- {{el.created_request_at | date}}</p></td>
                 <td datalabel="Notes" (click)="openModalData(el, showmodal)"><span
-                    class="tdfixedtext">{{el.notes}}</span></td>
+                    class="tdfixedtext">{{el.notes}}</span></td> -->
                 <!-- <td  *ngIf="cookeiservice.get('usertype') == 'contract_manager'" datalabel="edit"> -->
-                <td datalabel="edit">
+                <!-- <td datalabel="edit"> -->
                   <!-- <span class="edit_user" *ngIf=" cookeiservice.get('usertype') == 'rep' && (el.status == 'request' || el.status =='ask_for_modification')"  (click)="editRow(el)">Edit</span> -->
-                  <span class="edit_user"
+                  <!-- <span class="edit_user"
                     *ngIf=" cookeiservice.get('usertype') == 'contract_manager' && el.status =='ask_for_modification'"
                     (click)="modification(el)">Edit</span>
 
 
                   <span class="edit_user"
                     *ngIf=" cookeiservice.get('usertype') == 'rep' && el.status =='asDraft' || el.status =='request' && el.rep_id == cookeiservice.get('userid')"
-                    (click)="editRow(el)">Edit</span>
+                    (click)="editRow(el)">Edit</span> -->
 
 
                   <!-- <span class="edit_user" *ngIf="cookeiservice.get('usertype') == 'rep' && el.status == 'send_to_rep'" (click)="sendToLead(el)">Send To Lead</span> -->
                   <!-- <span class="edit_user" *ngIf="el.status != 'request' && el.status !='ask_for_modification' && cookeiservice.get('usertype') != 'contract_manager'" (click)="makeContract(el,'edit')">Ask For Modification</span> -->
-                  <span class="edit_user"
+                  <!-- <span class="edit_user"
                     *ngIf="el.status != 'request' && el.status !='ask_for_modification' && el.status !='asDraft' && cookeiservice.get('usertype') != 'contract_manager'"
                     (click)="modification(el)">View</span>
                   <span class="edit_user"
                     *ngIf="el.status =='sends_Signed_Contract_to_Rep' && (el.pdf_url != null || el.pdf_url != undefined)"
                     (click)="downloadpdf(el)"><i class="fa fa-download" aria-hidden="true"></i></span>
                   <span *ngIf=" cookeiservice.get('usertype') == 'contract_manager'  && el.status == 'request'"
-                    class="edit_user" (click)="makeContract(el,'add')">Create Contract</span>
+                    class="edit_user" (click)="makeContract(el,'add')">Create Contract</span> -->
                   <!-- <span *ngIf="el.status != 'request' && el.status !='ask_for_modification' && cookeiservice.get('usertype') != 'contract_manager'" (click)="modification(el)"><i class="fa fa-eye" style="cursor: pointer;"></i></span> -->
-
+<!-- 
                   <span *ngIf="cookeiservice.get('usertype') == 'admin'" class="edit_user"
                     (click)="deletdata(el, i,commonconfirmmodal)">Delete</span>
                 </td>
               </tr>
             </tbody>
-          </table>
+          </table> -->
 
         </div>
 
       </div>
     </div>
-    <ng-container *ngIf="sourcelimit != null && sourcelimit != ''" >
+    <!-- <ng-container *ngIf="sourcelimit != null && sourcelimit != ''" >
       <span style="margin-top:20px; display:block;">
           <div class="pagecountblock">
               <span role="listitem">Showing {{sourcelimit.limit}} result from
@@ -252,13 +280,13 @@
         <a class="page-link" (click)="nextPage()">Next</a>
       </li>
     </ul>
-  </ng-container>
+  </ng-container> -->
   </div>
   <app-footer></app-footer>
 
 
   <!--Common confirmation modal-->
-  <ng-template #commonconfirmmodal>
+  <!-- <ng-template #commonconfirmmodal>
     <div class="modal-body brandmanagement_modal successmodal_listing">
       <div class="logo_wrapper">
         <img src="assets/images/logo.png">
@@ -273,12 +301,12 @@
     </div>
     <div>
     </div>
-  </ng-template>
+  </ng-template> -->
 
 
 
   <!--Common message modal-->
-  <ng-template #messagemodal>
+  <!-- <ng-template #messagemodal>
     <div class="modal-body brandmanagement_modal">
       <div class="logo_wrapper">
         <img src="assets/images/logo.png">
@@ -288,13 +316,13 @@
 
 
     </div>
-  </ng-template>
+  </ng-template> -->
 
 
 
   <!--Common message modal-->
-  <ng-template #showmodal>
-    <!-- <div class="modal-body brandmanagement_modal"> -->
+  <!-- <ng-template #showmodal>
+ 
     <div class="newconright" style="width: 100%;">
       <h4>Note</h4>
 
@@ -320,28 +348,23 @@
       <button class="message_deny" (click)="modalRef1.hide()">close</button>
     </div> -->
     <!-- </div> -->
-  </ng-template>
+  <!-- </ng-template> --> 
 
   <!--Common message modal-->
-  <ng-template #showmodalfornotes>
+  <!-- <ng-template #showmodalfornotes>
     <div class="modal-body brandmanagement_modal">
-      <!-- <div class="logo_wrapper">
-      <img src="assets/images/logo.png">
-    </div> -->
       <p>{{notes_list.notesByCM}}</p>
       <div class="btn_cnt">
         <button class="message_deny" (click)="modalRef1.hide()">close</button>
       </div>
     </div>
-  </ng-template>
+  </ng-template> -->
 
 
   <!--Common message modal-->
-  <ng-template #showmodalforcontract>
+  <!-- <ng-template #showmodalforcontract>
     <div class="modal-body brandmanagement_modal">
-      <!-- <div class="logo_wrapper">
-      <img src="assets/images/logo.png">
-    </div> -->
+     
       <label
         style="display: block; font-weight: bold; background-color: #00a8ef; color: #333;   padding: 5px 1%; width: 100%;">Content
         Top: </label>
@@ -369,4 +392,4 @@
         <button class="message_deny messagenewbtn" (click)="modalRef1.hide();">Cancel</button>
       </div>
     </div>
-  </ng-template>
+  </ng-template> -->

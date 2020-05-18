@@ -81,6 +81,7 @@ hidedeletebutton:false, // (hide delete button)
 hideviewbutton:true, // (hide view button)
 hidestatustogglebutton:true, // (hide status toggle button)
 hideaction:false, // (hide action column)
+basecondition:{created_by:this.cookieservice.get('userid')},
 
 tableheaders:['fullname','company','website','email','phoneno','mobile','address','only_productname','emailStatus'], //not required (table header name)
 custombuttons:[
