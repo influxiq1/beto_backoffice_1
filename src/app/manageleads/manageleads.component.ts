@@ -49,7 +49,7 @@ export class ManageleadsComponent implements OnInit {
 
   manageleads_header_skip: any = ['_id', 'appointment_count', 'created_at', 'created_by', 'date', 'firstname', 'lastname', 'mobile', 'notescount', 'pricepoint', 'product', 'rep_name', 'youtube', 'productname']; // use for Table Header Skip
 
-  manageleads_detail_skip: any = []; // use for Table Detail Field Skip
+  manageleads_detail_skip: any = ['_id','created_by','product','productname','created_at','rep_name','only_productname']; // use for Table Detail Field Skip
   updateendpoint = 'addorupdatedata'; // updateendpoint is use for data update endpoint
 
   deleteendpoint = 'deletesingledata'; // deleteendpoint is use for data delete endpoint
@@ -98,6 +98,19 @@ export class ManageleadsComponent implements OnInit {
 
   constructor(public commonservices: Commonservices, public cookieservice: CookieService, public originalCookie: CookieService, public _http: HttpClient, private router: Router, public modal: BsModalService, public _apiService: ApiService) {
     this.libdata = {
+      detailview_override: [
+        { key: "firstname", val: "First Name" },
+        { key: "lastname", val: "Last Name" },
+        { key: "fullname", val: "Full Name" },
+        { key: "status", val: "Status" },
+        { key: "company", val: "Company" },
+        { key: "website", val: "Web site" },
+        { key: "mobile", val: "Mobile No" },
+        { key: "email", val: "Email Id" },
+        { key: "address", val: "Address" },
+        { key: "phoneno", val: "Phone No" },
+        { key: "date", val: "Date" },
+    ], // optional
       updateendpoint: 'statusupdate', // update endpoint set
       hideeditbutton: false, // (hide edit button)
       hidedeletebutton: false, // (hide delete button)

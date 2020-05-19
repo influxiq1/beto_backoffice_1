@@ -126,15 +126,15 @@ export class ContractManagerListComponent implements OnInit {
   // send basic sort data
   sortdata: any = {
       "type": 'desc',
-      "field": 'author',
-      "options": [ 'author']
+      "field": 'id',
+      "options": [ 'id']
   };
 
 
   // this is a database collection or view name
   date_search_source: any = 'admin_blog_list';
   // datacollection
-  datacollection: any = 'getadminbloglistdata';
+  datacollection: any = 'getcontractmanagerlist';
   //source count
   date_search_source_count: any = 0;
 
@@ -208,8 +208,8 @@ export class ContractManagerListComponent implements OnInit {
     public _apiService: ApiService) {
 
       this.datasource = '';
-      let endpoint='getleadsmanagelistdata'; // for main data endpoint
-      let endpointc='getleadsmanagelistdata-count'; // for count endpoint
+      let endpoint='getcontractmanagerlist'; // for main data endpoint
+      let endpointc='getcontractmanagerlist-count'; // for count endpoint
       // data param for conditionlimit and search
       let data:any={
       "condition":{
@@ -218,8 +218,8 @@ export class ContractManagerListComponent implements OnInit {
       "skip":0
       },
       sort:{
-      "type":'asc', // defalut field sort type
-      "field":'fullname' // default sort field
+      "type":'desc', // defalut field sort type
+      "field":'id' // default sort field
       }
       
       }

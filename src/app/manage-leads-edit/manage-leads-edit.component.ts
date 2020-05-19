@@ -52,6 +52,8 @@ export class ManageLeadsEditComponent implements OnInit {
         successmessage:"Updated Successfully !!",
         redirectpath:"/manage-leads",
         submittext:"Update",
+        canceltext: "Cancel",
+        cancelroute: '/manage-leads',
         submitactive:true, //optional, default true
        apiUrl:this._apiService.nodesslurl,
         endpoint:'addorupdateleads',
