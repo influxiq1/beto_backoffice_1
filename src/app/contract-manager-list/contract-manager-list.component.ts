@@ -44,7 +44,7 @@ export class ContractManagerListComponent implements OnInit {
   contractmanagerlist: any = [];
   public requestby: any = [{ val: 'rep_name', name: 'Request By Rep'},{ val: 'lead_fullName', name: 'Request By Led'}]
 
-  public status: any = [{ val: 'send_to_rep', name: 'Send To Rep' }, { val: 'send_to_lead', name: 'Send To Led' }, { val: 'sends_Signed_Contract_to_Rep', name: '	Ask For Modification' },{ val:2, name: 'Signed'},{ val:'request', name: 'Requested'}];
+  public status: any = [{ val: 'send_to_rep', name: 'Send To Rep' }, { val: 'send_to_lead', name: 'Send To Led' }, { val: 'sends_Signed_Contract_to_Rep', name: 'Ask For Modification' },{ val:'sends_Signed_Contract_to_Rep', name: 'Signed'},{ val:'request', name: 'Requested'}];
 
   // use for status search
 
@@ -114,11 +114,24 @@ export class ContractManagerListComponent implements OnInit {
       updateendpointmany: 'updateendpointmany',
       deleteendpointmany: 'deleteendpointmany',
       hideeditbutton: true,// all these button options are optional not mandatory
-      hidedeletebutton: true,
+      hidedeletebutton: false,
       //hideviewbutton:false,
       hidestatustogglebutton: true,
       // hideaction:true,
       tableheaders: ['date', 'product', 'rep_name', 'lead_fullName', 'contract_manager_name', 'status', 'created_by', 'notes'], //not required
+      custombuttons: [
+       
+        {
+            label: "downLoad",
+            link: "",
+            type: 'externallink',
+            paramtype: 'angular',
+            param: ['_id'],
+            cond:'status',
+            condval: 'sends_Signed_Contract_to_Rep'
+        }
+ 
+    ]
      
   }
   // send basic sort data

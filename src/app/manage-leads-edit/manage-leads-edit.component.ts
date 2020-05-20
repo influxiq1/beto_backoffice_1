@@ -24,26 +24,42 @@ export class ManageLeadsEditComponent implements OnInit {
 
   constructor(public _apiService: ApiService, public http: HttpClient,public ActivatedRoute:ActivatedRoute,public commonservices: Commonservices) {
 
-  //   let link = this.commonservices.nodesslurl + 'getproductsmanagelistdata';
-  //   let data: any = {
-  //     "condition": {
-  //       "limit": 10,
-  //       "skip": 0
-  //     },
+    //let link = this.commonservices.nodesslurl + 'datalist';
+    let endpoint = 'datalist'; // for main data endpoint
+    let data: any = {
+        "source": "products",
+        "condition": {
+            "status": true
+        }
+    
       
 
-  //   }
-  // //  let link1 = this.commonservices.nodesslurl + endpointc;
-  //   this.http.post(link, data)
-  //     .subscribe((response: any) => {
-  //            for(let i=0;i<response.results.res.length; i++) {
-  //       this.products.push(
-  //         { 'val': response.results.res[i]._id, 'name': response.results.res[i].productname}
-  //       );
-  //     }
-  //       // this.categoryVal = response.results.res;
-  //       console.log('blogData', this.products);
-  //     })
+    }
+    this._apiService.getDataforAdminList(endpoint, data).subscribe((res: any) => {
+      // console.log('in constructor');
+       console.log(res.res[9]);
+                 for(let i=0;i<res.res.length; i++) {
+        this.products.push(
+          { 'val': res.res[i]._id, 'name':res.res[i].productname}
+        );
+      }
+     // this.products = res.results.res;
+      console.warn('blogData',this.products);
+
+  }, error => {
+      console.log('Oooops!');
+  });
+  //  let link1 = this.commonservices.nodesslurl + endpointc;
+    // this.http.post(link, data)
+    //   .subscribe((response: any) => {
+    //   //        for(let i=0;i<response.results.res.length; i++) {
+    //   //   this.products.push(
+    //   //     { 'val': response.results.res[i]._id, 'name': response.results.res[i].productname}
+    //   //   );
+    //   // }
+    //     // this.categoryVal = response.results.res;
+    //     console.log('blogData', response);
+    //   })
 
    
 
@@ -68,7 +84,7 @@ export class ManageLeadsEditComponent implements OnInit {
     }
     this._apiService.getDataforAdminList(endpoint, data)
     .subscribe((response: any) => {
-      console.log(response.res[0]);
+      console.log(response);
       let stat:any;
       if(response.status==1){
         response.status=true;
@@ -167,9 +183,9 @@ export class ManageLeadsEditComponent implements OnInit {
 
   label:"Products",
   name:"product",
-  value:response.res[0].product[0],
-  //val:this.products,
-  type:"text",
+  value:response.res[0].product,
+  val:this.products,
+  type:"select",
   validations:[
       {rule:'required',message: "Products Needs to be required"}
       ]
