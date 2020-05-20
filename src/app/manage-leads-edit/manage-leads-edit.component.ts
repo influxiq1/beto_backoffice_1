@@ -1,11 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { ApiService } from './../api.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { Commonservices } from '../app.commonservices';
 
 @Component({
   selector: 'app-manage-leads-edit',
   templateUrl: './manage-leads-edit.component.html',
-  styleUrls: ['./manage-leads-edit.component.css']
+  styleUrls: ['./manage-leads-edit.component.css'],
+  providers: [Commonservices]
 })
 export class ManageLeadsEditComponent implements OnInit {
 
@@ -16,8 +19,33 @@ export class ManageLeadsEditComponent implements OnInit {
   formfieldrefresh:boolean=true;
   updatetable:boolean=true;
   formfieldrefreshdata:any=null;
+  public categoryVal:any = [];
+  public products:any = [];
 
-  constructor(public _apiService: ApiService,public ActivatedRoute:ActivatedRoute) {
+  constructor(public _apiService: ApiService, public http: HttpClient,public ActivatedRoute:ActivatedRoute,public commonservices: Commonservices) {
+
+  //   let link = this.commonservices.nodesslurl + 'getproductsmanagelistdata';
+  //   let data: any = {
+  //     "condition": {
+  //       "limit": 10,
+  //       "skip": 0
+  //     },
+      
+
+  //   }
+  // //  let link1 = this.commonservices.nodesslurl + endpointc;
+  //   this.http.post(link, data)
+  //     .subscribe((response: any) => {
+  //            for(let i=0;i<response.results.res.length; i++) {
+  //       this.products.push(
+  //         { 'val': response.results.res[i]._id, 'name': response.results.res[i].productname}
+  //       );
+  //     }
+  //       // this.categoryVal = response.results.res;
+  //       console.log('blogData', this.products);
+  //     })
+
+   
 
     //console.log(this.ActivatedRoute.snapshot.params._id)
     if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapshot.params._id !=undefined)
@@ -138,8 +166,9 @@ export class ManageLeadsEditComponent implements OnInit {
 {
 
   label:"Products",
-  name:"only_productname",
-  value:response.res[0].only_productname,
+  name:"product",
+  value:response.res[0].product[0],
+  //val:this.products,
   type:"text",
   validations:[
       {rule:'required',message: "Products Needs to be required"}

@@ -42,12 +42,13 @@ export class ContractManagerListComponent implements OnInit {
 
 
   contractmanagerlist: any = [];
+  public requestby: any = [{ val: 'rep_name', name: 'Request By Rep'},{ val: 'lead_fullName', name: 'Request By Led'}]
 
-  public status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
+  public status: any = [{ val: 'send_to_rep', name: 'Send To Rep' }, { val: 'send_to_lead', name: 'Send To Led' }, { val: 'sends_Signed_Contract_to_Rep', name: '	Ask For Modification' },{ val:2, name: 'Signed'},{ val:'request', name: 'Requested'}];
 
   // use for status search
 
-  statusarray: any = [{ val: 1, name: 'Approve' }, { val: 4, name: 'Decline' }, { val: 3, name: 'Lock' }];
+  statusarray: any = [{ val: 'send_to_rep', name: 'Send To Rep' }, { val: 'send_to_lead', name: 'Send To Led' }, { val: 'sends_Signed_Contract_to_Rep', name: '	Ask For Modification' },{ val:2, name: 'Signed'},{ val:'request', name: 'Requested'}];
 
   // use for ststic email search
   //  Example like this
@@ -63,25 +64,25 @@ export class ContractManagerListComponent implements OnInit {
 
   // Like Table head name is " firstname" => "First Name"
   modify_header_array: any = {
-      'firstname': "Date",
-      'email': 'Product Name',
-      'lastname': 'Rep Name',
-      'name': "Lead Name",
-      'blogtitle': "Contract Manager Name",
-      "created_datetime": "Status",
-      "created_date": "Request By",
-      "author": "Notes",
+      'date': "Date",
+      'product': 'Product Name',
+      'rep_name': 'Rep Name',
+      'lead_fullName': "Lead Name",
+      'contract_manager_name': "Contract Manager Name",
+      'status': "Status",
+      'created_by': "Request By",
+      'notes': "Notes",
    
   };
 
 
   // use for Table Header Skip 
-  contractmanagerlist_skip: any = ['_id'];
+  contractmanagerlist_skip: any = ['_id', 'contract_manager_id', 'created_request_at', 'lead_id', 'product_id','rep_email','rep_id',];
 
 
 
   // use for Table Detail Field Skip
-  //contractmanagerlist_detail_skip: any = ['_id', 'email', 'name', 'blogtitle', 'Blogs image'];
+  contractmanagerlist_detail_skip: any = ['_id', 'contract_manager_id', 'created_request_at', 'lead_id', 'product_id','rep_email','rep_id',];
 
 
   // updateendpoint is use for data update endpoint
@@ -95,9 +96,6 @@ export class ContractManagerListComponent implements OnInit {
 
   // searchendpoint is use for data search endpoint
   searchendpoint = 'datalist';
-
-  // use for click to another page routing path
-  click_to_add_ananother_page = '/adminlist';
 
 
 
@@ -120,7 +118,7 @@ export class ContractManagerListComponent implements OnInit {
       //hideviewbutton:false,
       hidestatustogglebutton: true,
       // hideaction:true,
-      tableheaders: ['firstname', 'email', 'lastname', 'name', 'blogtitle', 'created_datetime', 'created_date', 'author'], //not required
+      tableheaders: ['date', 'product', 'rep_name', 'lead_fullName', 'contract_manager_name', 'status', 'created_by', 'notes'], //not required
      
   }
   // send basic sort data
@@ -142,9 +140,9 @@ export class ContractManagerListComponent implements OnInit {
 
       datesearch: [{ startdatelabel: "Start Date", enddatelabel: "End Date", submit: "Search", field: "created_at" }],   // this is use for  date search
 
-      selectsearch: [{ label: 'Search By Status', field: 'status', values: this.status }], // this is use for  select search
+      selectsearch: [{ label: 'Search By Status', field: 'status', values: this.status } , { label: 'Request By', field: 'status', values: this.requestby }], // this is use for  select search
 
-      textsearch: [{ label: "Search By Name", field: 'blogtitle_search' }],  // this is use for  text search
+      textsearch: [{ label: "Search By Name", field: 'product' }],  // this is use for  text search
 
   };
 
@@ -156,47 +154,6 @@ export class ContractManagerListComponent implements OnInit {
   notpendingapplication_view: any = [];
   adminlist: any = [];
 
-
-
-//   public d:any = new Date();
-//   public loader = 0;
-//   public total_count=0;
-//   daterangepickerOptions = {
-//     format: 'MM/DD/YYYY',
-//     minDate: moment().format("MM/DD/YYYY"),
-//     noDefaultRangeSelected: true
-// }
-// bsDatepicker = {
-//     format: 'MM/DD/YYYY',
-//     minDate: moment().format("MM/DD/YYYY"),
-//     noDefaultRangeSelected: true
-// }
-//   modalRef1: BsModalRef;
-
-// public datalist: any;
-// public selecteditem;
-// public placeholderforselect = 0; 
-// public placeholderforselectStatus = 0; 
-// public message;
-//  headElements = ['ID', 'Date', 'Product Name', 'Rep Name', 'Lead Name', 'Contract Manager Name', 'Status','Request By', 'Notes'];
-// public productList: any = [];
-// public statusList: any = [{val:'send_to_rep', name:"Send To Rep"},{val:'ask_for_modification',name:'Ask For Modification'},{val:'send_to_lead',name:'Send To Lead'},{val:'sends_Signed_Contract_to_Rep',name:'Signed'},{val:'request',name:'Request'}];
-// public prodSelect: any = 0;
-// public statusSelect: any = 0;
-// public requestBy: any = 0;
-// public filterValForName: any;
-// public filterval5: any = '';
-// public start_date: any = '';
-// public end_date: any = '';
-// public notes_list: any = '';
-// public indexCount: number;
-// public sourcelimit: any = {"skip":0,"limit":10,"page_count":1};
-// public dataListCount: any = '';
-// public dataListPageCount: any = '';
-// public sourceDetails: any = {
-//   "source":'contract_manager_list',
-//   "sourcecondition":{}
-// }
 
   constructor(public commonservices:Commonservices,
    public cookeiservice: CookieService,
@@ -243,363 +200,7 @@ export class ContractManagerListComponent implements OnInit {
 
   ngOnInit() {
 
-//     this.route.data.forEach((data:any ) => {
-//       // this.datalist = data.results.res;
-//       console.log(data.results.res);
-//       let dataall: any = [];
-//       for (let item in data.results.res) {
-//         if (data.results.res[item].status == 'asDraft' && data.results.res[item].rep_id != this.cookeiservice.get('userid')) {
-//           data.results.res.splice(item,1)
-//           // console.log('asDraft', item)
-//         } else{
-//           dataall.push(data.results.res[item])
-//           // if (this.d.setDate(this.d.getDate()-3 >= data.results.res[item].created_request_at)) {
-//           //   console.log(this.d.setDate(this.d.getDate()-3 <= data.results.res[item].created_request_at))
-//           // }
-//         }
-        
-//       }
-//       this.datalist = dataall;
-//    });
-//    console.log((this.datalist[0].contentTop));
 
-//   this.getDataListCount();
-
-//    this.getproduct();
-//   }
-//   getdatalist() {
-//     // console.log(this.sourcelimit.page_count);
-//     this.sourcelimit.skip = (this.sourcelimit.page_count - 1) * this.sourcelimit.limit;
-//     let data = { "source": "contract_manager_list", "condition": {}, "sourcelimit": this.sourcelimit }
-//     const link = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
-//     this._http.post(link, data).subscribe((res: any) => {
-//       console.log(res.res, 'sourcelimit')
-//       let dataall: any = [];
-//       for (let item in res.res) {
-//         if (res.res[item].status == 'asDraft' && res.res[item].rep_id != this.cookeiservice.get('userid')) {
-//           res.res.splice(item,1)
-//           // console.log('asDraft', item)
-//         } else{
-//           dataall.push(res.res[item])
-//         }
-        
-//       }
-//       this.datalist = dataall;
-//     })
-//   }
-
-//   getDataListCount(){
-//     // console.log(this.sourceconditionval,"this.sourceconditionval")
-//     const link = this._commonservice.nodesslurl + 'datalistcount?token=' + this.cookeiservice.get('jwttoken');
-//     this._http.post(link, { source: this.sourceDetails.source, condition: this.sourceDetails.sourcecondition})
-//         .subscribe((res:any) => {
-//             this.dataListCount = res.resc;
-//             this.dataListPageCount = Math.ceil(this.dataListCount / this.sourcelimit.limit)
-//             // console.log(this.dataListPageCount);
-//         });
-
-// }
-// nextPage(flag: string = null) {
-//   console.log('ffdffd')
-//     if(flag == 'prev' && this.sourcelimit.page_count > 1) {
-//         this.sourcelimit.page_count--;
-//         console.log(this.sourcelimit.page_count);
-//     }
-//     if(flag == null && this.sourcelimit.page_count < (this.dataListCount / this.sourcelimit.page_count )) {
-//         this.sourcelimit.page_count++;
-//         console.log(this.sourcelimit.page_count)
-//     }
-//     this.getdatalist();
-//   }
-//   getPageData(){
-//       console.log(this.sourcelimit.limit, this.sourcelimit.page_count)
-//       if (this.sourcelimit.limit != 0 && this.sourcelimit.limit != null && this.sourcelimit.page_count != 0 && this.sourcelimit.page_count != null) {
-//         this.getdatalist();
-//         this.getDataListCount();
-//       }
-//   }
-
-
-
-
-
-
-//   statusSearchbyval(val: any){
-    
-//     console.log(val);
-//     if (val != undefined && val != null && val != '' && val != 0) {
-//       this.loader = 1;
-//       let data: any = {
-//         "source":"contract_manager_list",
-//         "condition":val
-//       }
-
-//       console.log(data);
-//       const link = this._commonservice.nodesslurl+'datalist?token='+this.cookeiservice.get('jwttoken');
-//           this._http.post(link,data).subscribe((res:any) => {
-//               this.loader =0;
-//               // this.datalist = res.res;
-//               let dataall: any = [];
-//               for (let item in res.res) {
-//                 if (res.res[item].status == 'asDraft' && res.res[item].rep_id != this.cookeiservice.get('userid')) {
-//                   res.res.splice(item,1)
-//                   // console.log('asDraft', item)
-//                 } else{
-//                   dataall.push(res.res[item])
-//                 }
-//               }
-//               this.datalist = dataall;
-//           });
-//     }
-//   }
-//   productSearchbyval(val: any){
-//     console.log(val);
-//     if (val != undefined && val != null && val.length > 0) {
-//       this.loader = 1;
-//       let data: any = {
-//         "source":"contract_manager_list",
-//         "condition":{
-//           "product":val
-//         }
-//       }
-
-//       const link = this._commonservice.nodesslurl+'datalist?token='+this.cookeiservice.get('jwttoken');
-//           this._http.post(link,data).subscribe((res:any) => {
-//               this.loader =0;
-//               // this.datalist = res.res;
-//               let dataall: any = [];
-//               for (let item in res.res) {
-//                 if (res.res[item].status == 'asDraft' && res.res[item].rep_id != this.cookeiservice.get('userid')) {
-//                   res.res.splice(item,1)
-//                   // console.log('asDraft', item)
-//                 } else{
-//                   dataall.push(res.res[item])
-//                 }
-                
-//               }
-//               this.datalist = dataall;
-//           });
-//     }
-//   }
-
-//   getdata() {
-//     this.loader = 1;
-//     const link = this._commonservice.nodesslurl+'datalist?token='+this.cookeiservice.get('jwttoken');
-//     this._http.post(link,{source:'contract_manager_list'}).subscribe((res:any) => {
-//       this.loader =0;
-//       this.datalist = res.res;
-//       this.route.data.forEach((data:any ) => {
-//         // this.datalist = data.results.res;
-//         // console.log(this.datalist);
-//         let dataall: any = [];
-//         for (let item in data.results.res) {
-//           if (data.results.res[item].status == 'asDraft' && data.results.res[item].rep_id != this.cookeiservice.get('userid')) {
-//             data.results.res.splice(item,1)
-//             // console.log('asDraft', item)
-//           } else{
-//             dataall.push(data.results.res[item])
-//           }
-          
-//         }
-//         this.datalist = dataall;
-//      });
-//     });
-//   }
-
-//   searchbyname(val: any) {
-//     let datalistVal: any = [];
-//     let allData = this.datalist;
-//     if (val == null || val == '') {
-//       this.datalist = allData;
-//     } else {
-//       datalistVal = [];
-//       for (let i in this.datalist) {
-
-//         if (this.datalist[i].lead_fullName != null && this.datalist[i].lead_fullName.toLowerCase().indexOf(val.toLowerCase()) > -1) {
-//           datalistVal.push(this.datalist[i]);
-//         }
-//       } 
-//       this.datalist = datalistVal;
-//     }
-//   }
-
-//   getproduct() {
-
-//     const link = this._commonservice.nodesslurl+'datalist?token='+this.cookeiservice.get('jwttoken');
-//     this._http.post(link,{source:'products',"condition": {"status":true}}).subscribe((res:any) => {
-//       this.productList = res.res;
-//     });
-//   }
-//   setdatetonull() {
-//     this.filterval5 = null;
-//     this.geteventarr();
-// }
-
-//   geteventarr() {
-//     this.loader = 1;
-//     let cond: any = '';
-
-//     if (this.filterval5 != null && this.filterval5 != '') {
-//         this.start_date = moment(this.filterval5[0]).format('YYYY/MM/DD');
-//         this.end_date = moment(this.filterval5[1]).format('YYYY/MM/DD');
-//         cond = {
-//             date: {
-//                 $lte: this.end_date,
-//                 $gte: this.start_date
-//             }
-//         };
-//         const link = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
-//         this._http.post(link, { source: 'contract_manager_list', condition: cond }).subscribe((res:any) => {
-//           this.loader = 0;
-//           this.datalist = res.res;
-//           this.route.data.forEach((data:any ) => {
-//             // this.datalist = data.results.res;
-//             let dataall: any = [];
-//             for (let item in data.results.res) {
-//               if (data.results.res[item].status == 'asDraft' && data.results.res[item].rep_id != this.cookeiservice.get('userid')) {
-//                 data.results.res.splice(item,1)
-//                 // console.log('asDraft', item)
-//               } else{
-//                 dataall.push(data.results.res[item])
-//               }
-              
-//             }
-//             this.datalist = dataall;
-//             // console.log('asDraft1', this.datalist)
-//          });
-//         });
-//     } else {
-
-//         const link = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
-//         this._http.post(link, { source: 'contract_manager_list', condition: cond }).subscribe((res:any) => {
-//           this.loader = 0;
-//           this.datalist = res.res;
-//           this.route.data.forEach((data:any ) => {
-//             // this.datalist = data.results.res;
-//             let dataall: any = [];
-//             for (let item in data.results.res) {
-//               if (data.results.res[item].status == 'asDraft' && data.results.res[item].rep_id != this.cookeiservice.get('userid')) {
-//                 data.results.res.splice(item,1)
-//                 // console.log('asDraft', item)
-//               } else{
-//                 dataall.push(data.results.res[item])
-//               }
-              
-//             }
-//             this.datalist = dataall;
-//             // console.log('asDraft1', this.datalist)
-//          });
-//         });
-//     }
-
-// }
-// sendToLead(val:any){
-// console.log(val)
-//   const link = this._commonservice.nodesslurl + 'addorupdatedata?token=' + this.cookeiservice.get('jwttoken');
-//   this._http.post(link,  { source: 'contract_repote', data: {
-//    id: val._id,
-//    notes: val.notes,
-//    notesByCM:val.notesByCM,
-//    status:'send_to_lead',
-//    product: val.product,
-//    product_id: val.product_id,
-//    lead_id:val.lead_id,
-//    contract_manager_id: val.contract_manager_id,
-//    rep_id:val.rep_id,
-//    updated_by: this.cookeiservice.get('userid')
-//     }})
-//       .subscribe((res: any) => { 
-//           if (res.status == 'success') {
-//           // this.router.navigateByUrl('/contract-manager-list');
-//       }
-//       });
-// }
-// shownotes(val: any, template: TemplateRef<any>){
-//   console.log(val);
-//   this.modalRef1 = this.modal.show(template);
-//   this.notes_list = val;
-// }
-
-//   editRow(val: any) {
-//     console.log(val);
-//     // this.modalRef1.hide();
-//     this.router.navigateByUrl('/edit-contract-manager/'+val._id);
-//   }
-//   downloadpdf(val: any){
-//     window.open('https://api.influxhostserver.com/download?file='+val.pdf_url);
-//   }
-//   modification(val: any){
-//     console.log(val);
-//     // this.modalRef1.hide();
-//     this.router.navigateByUrl('/make-contract-edit/'+val._id)
-//   }
-  
-// openModalData(val: any, template: TemplateRef<any>) {
-//   this.modalRef1 = this.modal.show(template);
-//     this.selecteditem = val;
-// }
-
-
-// safeHtml(html) {
-//   return this._sanitizer.bypassSecurityTrustHtml(html);
-// }
-
-
-// makeContract(item: any, val:string) {
-//   console.log(item);
-//   if (val == 'edit') {
-//     this.router.navigateByUrl('/make-contract-edit/'+item._id);
-//   }else{
-//     this.router.navigateByUrl('/make-contract/'+item._id);
-//   }
-// }
-// deletdata(val: any, x, template: TemplateRef<any>) {
-//   this.modalRef1 = this.modal.show(template);
-//   this.selecteditem = val;
-//   this.indexCount = x;
-//   // console.log(x)
-// }
-
-// confirmdelete(template: TemplateRef<any>) {
-//     this.modalRef1.hide();
-//     this.message = "Record deleted successfully!!";
-//     const link = this._commonservice.nodesslurl + 'deletesingledata?token=' + this.cookeiservice.get('jwttoken');
-//       this._http.post(link, { source:'contract_repote', id: this.selecteditem._id})
-//           .subscribe((res:any) => {
-//             // console.log(res);
-//             if (res.status == "success") {
-//               // this.getdata();
-//               this.datalist.splice(this.indexCount, this.indexCount + 1);
-//               this.modalRef1 = this.modal.show(template, { class: 'successmodal' });
-//             setTimeout(() => {
-//                 this.modalRef1.hide();
-//             }, 4000);
-//             }
-            
-//         }, error => {
-//             console.log('Oooops!');
-//         });
-//   }
-//   nodelete() {
-//     this.modalRef1.hide();
-//   }
-
-
-//   showdetails(val: any, value: string) {
-// console.log(val, value);
-// let source1: string;
-//     if (value == 'lead') {
-//       source1= 'leads'
-//     } else{
-//       source1= 'users'
-//     }
-//     const link = this._commonservice.nodesslurl+'datalist?token='+this.cookeiservice.get('jwttoken');
-//     if (source1 != null) {
-//       this._http.post(link,{source:source1, condition: {"_id":val}}).subscribe(res => {
-//           let result: any = res;
-//           console.log(result.res);
-//       });  
-//     }
   }
 
 }
