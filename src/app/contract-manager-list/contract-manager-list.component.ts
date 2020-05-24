@@ -92,7 +92,7 @@ export class ContractManagerListComponent implements OnInit {
   deleteendpoint = 'deletesingledata';
 
   // this is a database collection name
-  tablename = 'users';
+  tablename = 'contract_repote';
 
   // searchendpoint is use for data search endpoint
   searchendpoint = 'datalist';
@@ -153,7 +153,7 @@ export class ContractManagerListComponent implements OnInit {
 
 
   // this is a database collection or view name
-  date_search_source: any = 'admin_blog_list';
+  date_search_source: any = 'contract_repote';
   // datacollection
   datacollection: any = 'getcontractmanagerlist';
   //source count
@@ -192,6 +192,7 @@ export class ContractManagerListComponent implements OnInit {
       let endpointc='getcontractmanagerlist-count'; // for count endpoint
       // data param for conditionlimit and search
       let data:any={
+
       "condition":{
       
       "limit":10,
