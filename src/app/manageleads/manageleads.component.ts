@@ -112,15 +112,15 @@ export class ManageleadsComponent implements OnInit {
         { key: "date", val: "Date" },
     ], // optional
       updateendpoint: 'statusupdate', // update endpoint set
-    //   notes: {
-    //     label: "Notes",
-    //     addendpoint: "addnotedata",
-    //     deleteendpoint: "deletenotedata",
-    //     listendpoint: "listnotedata",
-    //     user: "5e0c80cd3a339a042de8717d",
-    //     currentuserfullname: "Debasis",
-    //     header: 'emailStatus',
-    // },
+      notes: {
+        label: "Notes",
+        addendpoint: "addnotedata",
+        deleteendpoint: "deletenotedata",
+        listendpoint: "listnotedata",
+        user:this.cookieservice.get('userid'),
+        currentuserfullname: this.cookieservice.get('fullname'),
+       // header: 'emailStatus',
+    },
       hideeditbutton: false, // (hide edit button)
       hidedeletebutton: false, // (hide delete button)
       hideviewbutton: false, // (hide view button)
@@ -175,7 +175,7 @@ console.log(this.libdata,'--------------------------------')
 
     }
     data.created_by = (this.cookieservice.get('usertype') != 'admin') ? this.cookieservice.get('userid') : '';
-    // console.log(data);
+     console.log(this.cookieservice.get('fullname'));
 
 
     let link = this.commonservices.nodesslurl + endpoint;
