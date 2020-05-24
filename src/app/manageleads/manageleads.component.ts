@@ -112,6 +112,15 @@ export class ManageleadsComponent implements OnInit {
         { key: "date", val: "Date" },
     ], // optional
       updateendpoint: 'statusupdate', // update endpoint set
+    //   notes: {
+    //     label: "Notes",
+    //     addendpoint: "addnotedata",
+    //     deleteendpoint: "deletenotedata",
+    //     listendpoint: "listnotedata",
+    //     user: "5e0c80cd3a339a042de8717d",
+    //     currentuserfullname: "Debasis",
+    //     header: 'emailStatus',
+    // },
       hideeditbutton: false, // (hide edit button)
       hidedeletebutton: false, // (hide delete button)
       hideviewbutton: false, // (hide view button)

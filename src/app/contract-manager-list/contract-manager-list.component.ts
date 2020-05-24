@@ -25,6 +25,9 @@ export class ContractManagerListComponent implements OnInit {
   placeholder: any = ['placeholder'];
   type: any = ['text'];
   name: any = ['Username'];
+  products:any =[];
+
+  
 
 
 
@@ -42,19 +45,16 @@ export class ContractManagerListComponent implements OnInit {
 
 
   contractmanagerlist: any = [];
-  public requestby: any = [{ val: 'rep_name', name: 'Request By Rep'},{ val: 'lead_fullName', name: 'Request By Led'}]
+  public requestby: any = [{ val: 'N/A', name: 'Request By Rep'},{ val: 'lead', name: 'Request By Led'}]
 
-  public status: any = [{ val: 'send_to_rep', name: 'Send To Rep' }, { val: 'send_to_lead', name: 'Send To Led' }, { val: 'sends_Signed_Contract_to_Rep', name: 'Ask For Modification' },{ val:'sends_Signed_Contract_to_Rep', name: 'Signed'},{ val:'request', name: 'Requested'}];
+  public status: any = [{ val: 'send_to_rep', name: 'Send To Rep' }, { val: 'send_to_lead', name: 'Send To Led' }, { val: 'ask_for_modification', name: 'Ask For Modification' },{ val:'sends_Signed_Contract_to_Rep', name: 'Signed'},{ val:'request', name: 'Requested'}];
 
   // use for status search
 
-  statusarray: any = [{ val: 'send_to_rep', name: 'Send To Rep' }, { val: 'send_to_lead', name: 'Send To Led' }, { val: 'sends_Signed_Contract_to_Rep', name: '	Ask For Modification' },{ val:2, name: 'Signed'},{ val:'request', name: 'Requested'}];
+  statusarray: any = [{ val: 'send_to_rep', name: 'Send To Rep' }, { val: 'send_to_lead', name: 'Send To Led' }, { val: 'ask_for_modification', name: '	Ask For Modification' },{ val: 'sends_Signed_Contract_to_Rep', name: 'Signed'},{ val:'request', name: 'Requested'}];
 
   // use for ststic email search
-  //  Example like this
-  emailarray: any = [{ val: 'sourotest222@gmail.com', name: 'sourotest222@gmail.com' }, { val: 'octtest@yopmail.com', name: 'octtest@yopmail.com' }, { val: 'septest@yopmail.com', name: 'septest@yopmail.com' }];
 
-  // use for edit any field Navigate that page And you should be import the app-routing.module.ts   ex:- {path: 'editroute/:id', component: < "Write the class name"> },
 
   //  Example like this
   editroute: any = 'editroute';
@@ -77,12 +77,12 @@ export class ContractManagerListComponent implements OnInit {
 
 
   // use for Table Header Skip 
-  contractmanagerlist_skip: any = ['_id', 'contract_manager_id', 'created_request_at', 'lead_id', 'product_id','rep_email','rep_id',];
+  contractmanagerlist_skip: any = ['_id', 'contract_manager_id','contract_manager_name_s','rep_name_s','lead_name_s','created_by_s', 'created_request_at', 'lead_id', 'product_id','rep_email','rep_id',];
 
 
 
   // use for Table Detail Field Skip
-  contractmanagerlist_detail_skip: any = ['_id', 'contract_manager_id', 'created_request_at', 'lead_id', 'product_id','rep_email','rep_id',];
+  contractmanagerlist_detail_skip: any = ['_id', 'contract_manager_id','contract_manager_name_s','rep_name_s','lead_name_s','created_by_s', 'created_request_at', 'lead_id', 'created_by','product_id','rep_email','rep_id',];
 
 
   // updateendpoint is use for data update endpoint
@@ -110,6 +110,16 @@ export class ContractManagerListComponent implements OnInit {
 
   // other data
   libdata: any = {
+    detailview_override: [
+        { key: "product", val: "Product Name" },
+        { key: "rep_name", val: "Rep Name" },
+        { key: "lead_fullName", val: "Lead Name" },
+        { key: "contract_manager_name", val: "Contract Manager Name" },
+        { key: "by", val: "Request By" },
+        { key: "notes", val: "Notes" },
+        { key: "status", val: "Status" },
+        { key: "date", val: "Date" },
+    ],
       updateendpoint: 'statusupdate',
       updateendpointmany: 'updateendpointmany',
       deleteendpointmany: 'deleteendpointmany',
@@ -123,10 +133,10 @@ export class ContractManagerListComponent implements OnInit {
        
         {
             label: "downLoad",
-            link: "",
+            link: "https://api.influxhostserver.com/download?file=contract_report_5e9490c6b00d40015cc43e12.pdf",
             type: 'externallink',
             paramtype: 'angular',
-            param: ['_id'],
+            //param: ['_id'],
             cond:'status',
             condval: 'sends_Signed_Contract_to_Rep'
         }
@@ -138,7 +148,7 @@ export class ContractManagerListComponent implements OnInit {
   sortdata: any = {
       "type": 'desc',
       "field": 'id',
-      "options": [ 'id']
+      "options": ['id']
   };
 
 
@@ -151,11 +161,11 @@ export class ContractManagerListComponent implements OnInit {
 
   search_settings: any = {
 
-      datesearch: [{ startdatelabel: "Start Date", enddatelabel: "End Date", submit: "Search", field: "created_at" }],   // this is use for  date search
+      datesearch: [{ startdatelabel: "Start Date", enddatelabel: "End Date", submit: "Search", field: "created_request_at" }],   // this is use for  date search
 
-      selectsearch: [{ label: 'Search By Status', field: 'status', values: this.status } , { label: 'Request By', field: 'status', values: this.requestby }], // this is use for  select search
+      selectsearch: [{ label: 'Search By Status', field: 'status', values: this.status } , { label: 'Request By', field: 'by', values: this.requestby } , { label: 'Search By Products', field: 'product_id', values: this.products }], // this is use for  select search
 
-      textsearch: [{ label: "Search By Name", field: 'product' }],  // this is use for  text search
+      textsearch: [{ label: "Search By Name", field: 'contract_manager_name_s' }],  // this is use for  text search
 
   };
 
@@ -208,8 +218,38 @@ export class ContractManagerListComponent implements OnInit {
       console.log(res,' for count');
       this.date_search_source_count =res.count;
       })
+
+      // Product List
+
+      let product_endpoint = 'datalist'; 
+      let dataa: any = {
+          "source": "products",
+          "condition": {
+              "status": true
+          }
+      
+        
+  
+      }
+      this._apiService.getDataforAdminList(product_endpoint, dataa).subscribe((res: any) => {
+        // console.log('in constructor');
+         console.log(res.res[9]);
+                   for(let i=0;i<res.res.length; i++) {
+          this.products.push(
+            { 'val': res.res[i]._id, 'name':res.res[i].productname}
+          );
+        }
+       // this.products = res.results.res;
+        console.warn('blogData',this.products);
+  
+    }, error => {
+        console.log('Oooops!');
+    });
+    
       
      }
+
+     
 
   ngOnInit() {
 

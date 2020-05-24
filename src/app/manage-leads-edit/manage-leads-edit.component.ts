@@ -24,7 +24,7 @@ export class ManageLeadsEditComponent implements OnInit {
 
   constructor(public _apiService: ApiService, public http: HttpClient,public ActivatedRoute:ActivatedRoute,public commonservices: Commonservices) {
 
-    //let link = this.commonservices.nodesslurl + 'datalist';
+   
     let endpoint = 'datalist'; // for main data endpoint
     let data: any = {
         "source": "products",
@@ -49,18 +49,7 @@ export class ManageLeadsEditComponent implements OnInit {
   }, error => {
       console.log('Oooops!');
   });
-  //  let link1 = this.commonservices.nodesslurl + endpointc;
-    // this.http.post(link, data)
-    //   .subscribe((response: any) => {
-    //   //        for(let i=0;i<response.results.res.length; i++) {
-    //   //   this.products.push(
-    //   //     { 'val': response.results.res[i]._id, 'name': response.results.res[i].productname}
-    //   //   );
-    //   // }
-    //     // this.categoryVal = response.results.res;
-    //     console.log('blogData', response);
-    //   })
-
+  
    
 
     //console.log(this.ActivatedRoute.snapshot.params._id)
