@@ -84,9 +84,12 @@ import { CommonEventComponent } from './common-event/common-event.component';
 import { UsergoogleeventComponent } from './usergoogleevent/usergoogleevent.component';
 import { SalesDecksComponent } from './sales-decks/sales-decks.component';
 import { LoginAsARepComponent } from './login-as-a-rep/login-as-a-rep.component';
+
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 const appRoutes: Routes = [
     { path: '', redirectTo:'/login', pathMatch: 'full' },
     { path: '', component:  LoginComponent},
+    {path: 'privacy-policy', component: PrivacyPolicyComponent},
     {path: 'videolibrary', component: VideoLibraryComponent},
     {path: 'belk-upload', component: CrmBelkUploadComponent},
     {path: 'lead-contract/:_id', component: LeadContractComponent, resolve : {results: TestresolveService},data: { requestcondition: { source: 'send_to_lead', condition: {"_id":"_id"}}, endpoint: 'forleaddata'}},

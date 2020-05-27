@@ -45,3 +45,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .marketingre_view_body_con_right_bottom_wrapper   .event_f_zone{ display: block; font-size: 16px; color: #2e2e2e; font-weight: normal; margin: 0; padding: 7px 0 0 0;}
 
 .marketingre_view_body_con_right_bottom_wrapper    p strong{ font-weight: normal;}
+
+.LIBusermanagementpagecon td .material-icons {
+    
+    margin: 5px 0 0 0;
+    float: right;
+}
+.mat-bottom-sheet-container{ border: solid 5px  #00a8ef;}
+.mat-bottom-sheet-container .mat-list-item-content{ text-align: center; background-color: #00a8ef; margin: 1px 0;}
+
+.mat-bottom-sheet-container .mat-list-item-content:hover{ text-align: center; background-color: #000; color: #fff;}
+
+.mat-list-base{ margin-top: 0px;}
