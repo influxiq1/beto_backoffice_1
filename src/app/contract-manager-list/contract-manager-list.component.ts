@@ -193,8 +193,7 @@ export class ContractManagerListComponent implements OnInit {
       // data param for conditionlimit and search
       let data:any={
 
-      "condition":{
-      
+      "condition":{ 
       "limit":10,
       "skip":0
       },
