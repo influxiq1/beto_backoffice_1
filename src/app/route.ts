@@ -147,8 +147,14 @@ const appRoutes: Routes = [
     { path:'replegaldocuments', component: ReplegaldocumentComponent},
     { path:'legaldoclist', component: LegaldoclistComponent},
     { path:'digitalcontract', component: DigitalcontractComponent},
-    { path:'usermanagement', component: UsermanagementComponent},
+
+
+    { path:'usermanagement', component: UsermanagementComponent, resolve: {results: TestresolveService},data:{ requestcondition:{"condition": {"limit": 10,"skip": 0},sort: {"type":'desc',"field":'fullname'}},endpoint:'usertrainingreport'}},
+
+
     {path:'login-as-a-rep/:_id/:email', component: LoginAsARepComponent},
+    {path:'calender-access/:_id/:calenderaccess', component: LoginAsARepComponent},
+    {path:'senior-consulting-director/:_id/:is_consultant', component: LoginAsARepComponent},
     { path:'rep-management', component: UsermanagementComponent},
     { path:'trainingreport', component: TrainingcenterreoprtComponent},
     { path:'event', component: EventmanagementComponent},

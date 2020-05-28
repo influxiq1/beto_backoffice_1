@@ -15,9 +15,23 @@ import { BsModalService } from 'ngx-bootstrap';
 export class LoginAsARepComponent implements OnInit {
 
   constructor(public commonservices: Commonservices, public cookieservice: CookieService, public originalCookie: CookieService, public _http: HttpClient, private router: Router, public modal: BsModalService,public _apiService: ApiService, public activatedRoute :ActivatedRoute) {
-    console.log(this.activatedRoute.snapshot.params._id)
-    console.log(this.activatedRoute.snapshot.params.email);
-    this.getUserDetails(this.activatedRoute.snapshot.params.email);
+    if(this.activatedRoute.snapshot.routeConfig.path == 'login-as-a-rep/:_id/:email'){
+      console.log(this.activatedRoute.snapshot.params._id)
+      console.log(this.activatedRoute.snapshot.params.email);
+       this.getUserDetails(this.activatedRoute.snapshot.params.email);
+    }
+    if (this.activatedRoute.snapshot.routeConfig.path == 'calender-access/:_id/:calenderaccess') {
+      console.log(this.activatedRoute.snapshot.params._id)
+      console.log(this.activatedRoute.snapshot.params.calenderaccess);
+      this.toggleCalenderAccess({_id: this.activatedRoute.snapshot.params._id, calenderaccess: this.activatedRoute.snapshot.params.calenderaccess})
+    }
+
+    if (this.activatedRoute.snapshot.routeConfig.path == 'senior-consulting-director/:_id/:is_consultant') {
+      console.log(this.activatedRoute.snapshot.params._id)
+      console.log(this.activatedRoute.snapshot.params.is_consultant);
+      this.toggleConsultantRole({_id: this.activatedRoute.snapshot.params._id, is_consultant: this.activatedRoute.snapshot.params.is_consultant})
+    }
+   
    }
 
   ngOnInit() {
@@ -82,6 +96,33 @@ export class LoginAsARepComponent implements OnInit {
           }
         }
       })
+  }
+
+  
+  toggleCalenderAccess(item: any) {
+    let calenderaccess: any;
+    if (item.calenderaccess != null) calenderaccess = 1 - item.calenderaccess;
+    if (item.calenderaccess == null) calenderaccess = 1;
+    const link = this.commonservices.nodesslurl + 'addorupdatedata';
+    this._http.post(link, { source: 'users', data: { id: item._id, calenderaccess: calenderaccess } })
+      .subscribe(res => {
+        this.router.navigate(['/usermanagement']);
+      }, error => {
+        console.log('Oooops!');
+      });
+  }
+
+  toggleConsultantRole(item: any) {
+    let consultantrole: any;
+    if (item.is_consultant != null) consultantrole = 1 - item.consultantrole;
+    if (item.is_consultant == null) consultantrole = 1;
+    const link = this.commonservices.nodesslurl + 'addorupdatedata';
+    this._http.post(link, { source: 'users', data: { id: item._id, is_consultant: consultantrole } })
+      .subscribe(res => {
+        this.router.navigate(['/usermanagement']);
+      }, error => {
+        console.log('Oooops!');
+      });
   }
 
 }
