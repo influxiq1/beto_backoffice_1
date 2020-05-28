@@ -13,7 +13,7 @@ import { BsModalService } from 'ngx-bootstrap';
   providers: [Commonservices]
 })
 export class LoginAsARepComponent implements OnInit {
-
+public consultantrole:any;
   constructor(public commonservices: Commonservices, public cookieservice: CookieService, public originalCookie: CookieService, public _http: HttpClient, private router: Router, public modal: BsModalService,public _apiService: ApiService, public activatedRoute :ActivatedRoute) {
     if(this.activatedRoute.snapshot.routeConfig.path == 'login-as-a-rep/:_id/:email'){
       console.log(this.activatedRoute.snapshot.params._id)
@@ -35,7 +35,7 @@ export class LoginAsARepComponent implements OnInit {
    }
 
   ngOnInit() {
-    
+    this.consultantrole = this.cookieservice.get('is_consultant'); //to know whether it is admin or senior consultant
   }
 
   

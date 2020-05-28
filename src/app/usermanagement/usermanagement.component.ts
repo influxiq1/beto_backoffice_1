@@ -46,12 +46,13 @@ export class UsermanagementComponent implements OnInit {
     'fullname': 'Full Name',
     'email': 'E mail',
     'phoneno': 'Phone No.',
-    'status': 'Status'
+    'status': 'Status',
+    'created_datetime': 'Date Joined',
+    "type": "A/C Type"
   };
 
-  userdata_header_skip: any = ['lock', 'firstname', 'regionalrecruiter_id', 'unique_id', 'created_at', 'lastname', 'reactsum', 'newhirecatsum', 'is_contract_signed', 'calenderaccess', 'type', 'is_consultant', 'affid', 'worked', 'doctorcontact', 'experience', 'visited', 'recruiter', 'trainingpercentage', 'is_discovery', 'is_onboarding', '_id']; // use for Table Header Skip 
+  userdata_header_skip: any = ['lock', 'firstname', 'regionalrecruiter_id', 'unique_id', 'created_at', 'lastname', 'reactsum', 'newhirecatsum', 'is_contract_signed', 'calenderaccess', 'is_consultant', 'affid', 'worked', 'doctorcontact', 'experience', 'visited', 'recruiter', 'trainingpercentage', 'is_discovery', 'is_onboarding', '_id']; // use for Table Header Skip 
 
-  userdata_detail_skip: any = [];   // use for Table Detail Field Skip
 
   userdata_detail_datatype: any = [{                     // use for Table Detail inside the modal image path
     key: "images",
@@ -77,15 +78,25 @@ export class UsermanagementComponent implements OnInit {
     "pagecount": 1
   };
 
+  userdata_detail_skip: any = ['_id','created_at','fullname_s'];   // use for Table Detail Field Skip
   libdata: any = {
     updateendpoint: 'togglestatus',                                        // update endpoint set
     hideeditbutton: true,                                                  // (hide edit button)
     hidedeletebutton: true,                                               // (hide delete button)
     hideviewbutton: false,                                                 // (hide view button)
     hidestatustogglebutton: false,                                        // (hide status toggle button)
-    hideaction: false,                                                  // (hide action column)
+    hideaction: false,  
+    detailview_override: [
+      { key: "is_contract_signed_m", val: "Contract signed" },
+      { key: "is_discovery", val: "Discovery Call" },
+      { key: "is_onboarding", val: "Onboarding Call" },
+      { key: "created_datetime", val: "Date Added with time" },
+      { key: "email", val: "Email" },
+      { key: "type", val: "A/C Type" },
+      {key:'fullname', val:"Name"}
+  ],                                                 // (hide action column)
 
-    tableheaders: ['parentname', 'fullname', 'email', 'phoneno', 'status'], //not required (table header name)
+    tableheaders: ['fullname', 'email', 'type', 'parentname', 'phoneno', 'status','created_datetime'], //not required (table header name)
     custombuttons: [
       {
         label: "delete",
@@ -129,7 +140,27 @@ export class UsermanagementComponent implements OnInit {
         param:['_id','is_consultant'],
         cond: 'is_consultant',
         condval: 1
-      }
+      },
+      {
+        label: "Contract downLoad",
+        link: "https://betoparedes.com/generate-pdf/employment-agreement/index.php?id=",
+        type: 'externallink',
+        paramtype: 'angular',
+        param: ['_id'],
+        cond:'is_contract_signed_m',
+        condval: 1
+    },
+    //   {
+    //     label: "Desc from api data",
+    //     type: 'action',
+    //     datatype: 'api',
+    //     endpoint: 'getblogdatabyid',
+    //     otherparam: ['is_consultant'],
+    //     //cond:'status',
+    //     //condval:0,
+    //     param: '_id',
+    //     refreshdata: true,
+    // }
     ]
   }
 
