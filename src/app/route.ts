@@ -180,6 +180,7 @@ const appRoutes: Routes = [
     { path: 'slotview', component: SlotviewComponent},
     { path: 'manage-leads/edit/:_id' , component: ManageLeadsEditComponent},
 
+    
     { path: 'on-boarding-call/:id', component: SlotviewComponent },
     { path: 'customevents/:slotval', component: SlotviewComponent },
     { path: 'customevent', component: SlotviewComponent }, 
