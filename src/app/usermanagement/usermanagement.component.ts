@@ -56,12 +56,6 @@ export class UsermanagementComponent implements OnInit {
 
   userdata_detail_skip: any = [];   // use for Table Detail Field Skip
 
-  userdata_detail_datatype: any = [{                     // use for Table Detail inside the modal image path
-    key: "images",
-    value: 'image',
-    fileurl: "http://18.222.26.198/upload/brandimages/"   // Image path          
-  }];
-
   updateendpoint = 'addorupdatedata';             // updateendpoint is use for data update endpoint
 
   deleteendpoint = 'deletesingledata';            // deleteendpoint is use for data delete endpoint
@@ -149,11 +143,11 @@ export class UsermanagementComponent implements OnInit {
     let link1 = this.commonservices.nodesslurl + endpointc;
     this._http.post(link, data).subscribe((response: any) => {
       this.userdata = response.results;
-      console.warn('blogData', this.userdata);
+     // console.warn('blogData', this.userdata);
     })
 
     this._http.post(link1, data).subscribe((res: any) => {
-      console.log(res, ' for count');
+      //console.log(res, ' for count');
       this.date_search_source_count = res.count;
     })
 

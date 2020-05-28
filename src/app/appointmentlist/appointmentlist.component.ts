@@ -89,13 +89,14 @@ export class AppointmentlistComponent implements OnInit {
       'start_time': 'Time',
       'closername': "Participant's Name",
       'phoneNumber': "Participant's Phone No.",
-      'productname': "Products"
+      'productname': "Products",
+      'userdata': "Status"
    
   };
 
 
   // use for Table Header Skip 
-  appointmentlist_skip: any = ['_id', 'attendees','booked_by','closeremail','eid','emailid', 'end_time', 'endtime_only', 'eventdata','eventuser','googleevent','id','is_custom','is_discovery','is_onboarding','leaddata','notescount','refresh_token','slot','starttime_only','summery','timespan','timezone','type','userdata','repsmsg','status'];
+  appointmentlist_skip: any = ['_id', 'attendees','booked_by','closeremail','eid','emailid', 'end_time', 'endtime_only', 'eventdata','eventuser','googleevent','id','is_custom','is_discovery','is_onboarding','leaddata','notescount','refresh_token','slot','starttime_only','summery','timespan','timezone','type','repsmsg','status'];
 
 
 
@@ -147,7 +148,7 @@ export class AppointmentlistComponent implements OnInit {
       //hideviewbutton:false,
       hidestatustogglebutton: true,
       // hideaction:true,
-      tableheaders: ['name', 'startdate', 'start_time', 'closername', 'phoneNumber', 'productname'], //not required
+      tableheaders: ['name', 'startdate', 'start_time', 'closername', 'phoneNumber', 'productname', 'userdata'], //not required
       custombuttons: [
        
         {
