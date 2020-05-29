@@ -101,7 +101,7 @@ const appRoutes: Routes = [
 
      {path: 'contract-list', component: ContractListComponent, resolve : {results: TestresolveService},data: { requestcondition: { source: 'contractDetails_view', condition: {}}, endpoint: 'datalist'}},
      
-     {path: 'contract-manager-list', component: ContractManagerListComponent, resolve : {results: TestresolveService},data: { requestcondition: { source: 'contract_manager_list', condition: {},"sourcelimit":{"skip":0,"limit":10,"page_count":1} }, endpoint: 'datalist'}},
+     {path: 'contract-manager-list', component: ContractManagerListComponent, resolve: {results: TestresolveService},data:{ requestcondition:{"condition": {"limit": 10,"skip": 0},sort: {"type":'desc',"field":'id'}},endpoint:'getcontractmanagerlist'}},
 
      {path: 'contract-manager-list-rep', component: ContractManagerListComponent, resolve : {results: TestresolveService},data: { requestcondition: { source: 'contract_manager_list', condition: {"rep_id_object":"rep_id_object"},"sourcelimit":{"skip":0,"limit":10,"page_count":1}}, endpoint: 'datalist'}},
 
@@ -180,7 +180,6 @@ const appRoutes: Routes = [
     { path: 'slotview', component: SlotviewComponent},
     { path: 'manage-leads/edit/:_id' , component: ManageLeadsEditComponent},
 
-    
     { path: 'on-boarding-call/:id', component: SlotviewComponent },
     { path: 'customevents/:slotval', component: SlotviewComponent },
     { path: 'customevent', component: SlotviewComponent }, 

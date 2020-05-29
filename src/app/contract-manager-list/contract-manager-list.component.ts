@@ -207,15 +207,21 @@ export class ContractManagerListComponent implements OnInit {
       
       let link = this.commonservices.nodesslurl + endpoint;
       let link1 = this.commonservices.nodesslurl + endpointc;
-      this._http.post(link, data)
-      .subscribe((response:any) => {
-      this.contractmanagerlist =response.results.res;
-      console.warn('blogData',this.contractmanagerlist);
-      })
+      // this._http.post(link, data)
+      // .subscribe((response:any) => {
+      // this.contractmanagerlist =response.results.res;
+      // console.warn('blogData',this.contractmanagerlist);
+      // })
+
+
+      this.route.data.forEach((data: any) => {
+        this.contractmanagerlist = data.results.results.res;
+        // console.warn('blogData11',data);
+      });
       
       this._http.post(link1, data)
       .subscribe((res:any) => {
-      console.log(res,' for count');
+      // console.log(res,' for count');
       this.date_search_source_count =res.count;
       })
 
@@ -240,7 +246,7 @@ export class ContractManagerListComponent implements OnInit {
           );
         }
        // this.products = res.results.res;
-        console.warn('blogData',this.products);
+        // console.warn('blogData',this.products);
   
     }, error => {
         console.log('Oooops!');
