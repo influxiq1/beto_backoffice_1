@@ -77,7 +77,7 @@ export class ContractManagerListComponent implements OnInit {
 
 
   // use for Table Header Skip 
-  contractmanagerlist_skip: any = ['_id', 'contract_manager_id','contract_manager_name_s','rep_name_s','lead_name_s','created_by_s', 'created_request_at', 'lead_id', 'product_id','rep_email','rep_id','request_by','created_by'];
+  contractmanagerlist_skip: any = ['_id', 'contract_manager_id','contract_manager_name_s','rep_name_s','lead_name_s','created_by_s', 'created_request_at', 'lead_id', 'product_id','rep_email','rep_id','created_by'];
 
 
 
@@ -110,16 +110,6 @@ export class ContractManagerListComponent implements OnInit {
 
   // other data
   libdata: any = {
-    detailview_override: [
-        { key: "product", val: "Product Name" },
-        { key: "rep_name", val: "Rep Name" },
-        { key: "lead_fullName", val: "Lead Name" },
-        { key: "contract_manager_name", val: "Contract Manager Name" },
-        { key: "by", val: "Request By" },
-        { key: "notes", val: "Notes" },
-        { key: "status", val: "Status" },
-        { key: "date", val: "Date" },
-    ],
       updateendpoint: 'statusupdate',
       updateendpointmany: 'updateendpointmany',
       deleteendpointmany: 'deleteendpointmany',
@@ -159,7 +149,7 @@ export class ContractManagerListComponent implements OnInit {
   sortdata: any = {
       "type": 'desc',
       "field": 'id',
-      "options": ['id']
+      "options": ['id','contract_manager_name','product']
   };
 
 
