@@ -110,40 +110,6 @@ export class ContractManagerListComponent implements OnInit {
 
   // other data
   libdata: any = {
-      updateendpoint: 'statusupdate',
-      updateendpointmany: 'updateendpointmany',
-      deleteendpointmany: 'deleteendpointmany',
-      hideeditbutton: true,// all these button options are optional not mandatory
-      hidedeletebutton: false,
-      hideviewbutton:true,
-      hidestatustogglebutton: true,
-      // hideaction:true,
-      tableheaders: ['date', 'product', 'rep_name', 'lead_fullName', 'contract_manager_name', 'status', 'request_by', 'notes'], //not required
-      custombuttons: [
-       
-        {
-            label: "downLoad",
-            link: "https://api.influxhostserver.com/download?file=contract_report_5e9490c6b00d40015cc43e12.pdf",
-            type: 'externallink',
-            paramtype: 'angular',
-            //param: ['_id'],
-            cond:'status',
-            condval: 'sends_Signed_Contract_to_Rep'
-        },
-
-        // Add on 29/05/20 by Mahitosh
-        {
-          label: "view",
-          type: 'internallink',
-          route: "make-contract-edit",
-          paramtype: 'angular',
-          param: ['_id'],
-          cond:'view_btn',
-          condval: 'view'
-      }
- 
-    ]
-     
   }
   // send basic sort data
   sortdata: any = {
@@ -187,6 +153,91 @@ export class ContractManagerListComponent implements OnInit {
     public modal: BsModalService,
     protected _sanitizer: DomSanitizer,
     public _apiService: ApiService) {
+      console.log(this.cookeiservice.get('usertype'));
+      if(this.cookeiservice.get('usertype')=='contract_manager'){
+        this.libdata ={
+          updateendpoint: 'statusupdate',
+      updateendpointmany: 'updateendpointmany',
+      deleteendpointmany: 'deleteendpointmany',
+      hideeditbutton: true,// all these button options are optional not mandatory
+      hidedeletebutton: true,
+      hideviewbutton:true,
+      hidestatustogglebutton: true,
+      // hideaction:true,
+      tableheaders: ['date', 'product', 'rep_name', 'lead_fullName', 'contract_manager_name', 'status', 'request_by', 'notes'], //not required
+      custombuttons: [
+       
+        {
+            label: "downLoad",
+            link: "https://api.influxhostserver.com/download?file=contract_report_5e9490c6b00d40015cc43e12.pdf",
+            type: 'externallink',
+            paramtype: 'angular',
+            //param: ['_id'],
+            cond:'status',
+            condval: 'sends_Signed_Contract_to_Rep'
+        },
+
+        // Add on 29/05/20 by Mahitosh
+        {
+          label: "Edit",
+          type: 'internallink',
+          route: "make-contract-edit",
+          paramtype: 'angular',
+          param: ['_id'],
+          cond:'status',
+          condval: 'ask_for_modification'
+      },
+      {
+        label: "Create Contract",
+        type: 'internallink',
+        route: "make-contract",
+        paramtype: 'angular',
+        param: ['_id'],
+        cond:'status',
+        condval: 'request'
+    }
+ 
+    ]
+        }
+      }
+      else{
+        this.libdata ={
+          updateendpoint: 'statusupdate',
+      updateendpointmany: 'updateendpointmany',
+      deleteendpointmany: 'deleteendpointmany',
+      hideeditbutton: true,// all these button options are optional not mandatory
+      hidedeletebutton: false,
+      hideviewbutton:true,
+      hidestatustogglebutton: true,
+      // hideaction:true,
+      tableheaders: ['date', 'product', 'rep_name', 'lead_fullName', 'contract_manager_name', 'status', 'request_by', 'notes'], //not required
+      custombuttons: [
+       
+        {
+            label: "downLoad",
+            link: "https://api.influxhostserver.com/download?file=contract_report_5e9490c6b00d40015cc43e12.pdf",
+            type: 'externallink',
+            paramtype: 'angular',
+            //param: ['_id'],
+            cond:'status',
+            condval: 'sends_Signed_Contract_to_Rep'
+        },
+
+        // Add on 29/05/20 by Mahitosh
+        {
+          label: "view",
+          type: 'internallink',
+          route: "make-contract-edit",
+          paramtype: 'angular',
+          param: ['_id'],
+          cond:'view_btn',
+          condval: 'view'
+      }
+ 
+    ]
+        }
+      }
+      
 
       this.datasource = '';
       let endpoint='getcontractmanagerlist'; // for main data endpoint
