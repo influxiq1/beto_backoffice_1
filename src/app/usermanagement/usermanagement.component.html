@@ -15,8 +15,20 @@
 </div>
 
 <app-adminheader></app-adminheader>
+
+<div class="user_management_wrapper">
+  
+  <div class="user_management_inner">
+
+   <h2> user management</h2>
+    
+
+
+</div>
+</div>
+
 <div class="usermanagementpagecon">
-<lib-listing *ngIf="userdata!=null && userdata.length>0" 
+<lib-listing class="LIBusermanagementpagecon" *ngIf="userdata!=null && userdata.length>0" 
   [datasource]="userdata"                                 
   [skip]="userdata_header_skip"                         
   [modify_header_array]="modify_header_array"

@@ -113,6 +113,7 @@ import { ListingModule} from 'listing-angular7';
 import { ProductsAddEditComponent } from './products-add-edit/products-add-edit.component';
 import { LoginAsARepComponent } from './login-as-a-rep/login-as-a-rep.component';
 import { ManageLeadsEditComponent } from './manage-leads-edit/manage-leads-edit.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 @NgModule({
   declarations: [
     ContractReviewVideoComponent,
@@ -199,7 +200,8 @@ import { ManageLeadsEditComponent } from './manage-leads-edit/manage-leads-edit.
     SalesDecksComponent,
     ProductsAddEditComponent,
     LoginAsARepComponent,
-    ManageLeadsEditComponent
+    ManageLeadsEditComponent,
+    PrivacyPolicyComponent
 
   ],
   imports: [

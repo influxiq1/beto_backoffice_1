@@ -144,7 +144,9 @@ body{ padding:0; margin: 0;}
     .nex_text_footer{background: #efefef; padding: 11px 0;}
     .nex_text_footer ul{text-align: center; margin-bottom: 0; padding-left: 0; }
     .nex_text_footer ul li {display: inline-block; padding: 10px; list-style: none;  font-size: 14px;}
-    .nex_text_footer ul li a{ font-family: 'RalewayMedium'; font-size: 14px; color: #616161; }
+    .nex_text_footer ul li a{ font-family: 'RalewayMedium'; font-size: 14px; color: #000; outline: none;     text-decoration: none; }
+    .nex_text_footer ul li a:hover{color: #00a8ef;}
+    
 /*Start Footer Section end*/
 .nextgen_login_wrapper {background: url("../images/login_bg.jpg") no-repeat;
     width:100vw;
@@ -1995,6 +1997,13 @@ span.loginclass {
 
 
 .mytranningcategory .search_content button { padding: 0 5px!important;}
+
+
+
+
+
+
+
 /* ------------------- avijit css end ------------------- */
 
 .contract-list-divblock{ height: 300px; overflow-y: scroll; margin: 5px 0; border: solid 1px #ccc; padding: 0px; position: relative;}
