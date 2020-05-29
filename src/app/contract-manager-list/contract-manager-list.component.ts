@@ -125,7 +125,7 @@ export class ContractManagerListComponent implements OnInit {
       deleteendpointmany: 'deleteendpointmany',
       hideeditbutton: true,// all these button options are optional not mandatory
       hidedeletebutton: false,
-      //hideviewbutton:false,
+      hideviewbutton:true,
       hidestatustogglebutton: true,
       // hideaction:true,
       tableheaders: ['date', 'product', 'rep_name', 'lead_fullName', 'contract_manager_name', 'status', 'request_by', 'notes'], //not required
@@ -139,7 +139,18 @@ export class ContractManagerListComponent implements OnInit {
             //param: ['_id'],
             cond:'status',
             condval: 'sends_Signed_Contract_to_Rep'
-        }
+        },
+
+        // Add on 29/05/20 by Mahitosh
+        {
+          label: "view",
+          type: 'internallink',
+          route: "make-contract-edit",
+          paramtype: 'angular',
+          param: ['_id'],
+          cond:'view_btn',
+          condval: 'view'
+      }
  
     ]
      

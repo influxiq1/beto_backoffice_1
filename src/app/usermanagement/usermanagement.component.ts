@@ -54,12 +54,6 @@ export class UsermanagementComponent implements OnInit {
   userdata_header_skip: any = ['lock', 'firstname', 'regionalrecruiter_id', 'unique_id', 'created_at', 'lastname', 'reactsum', 'newhirecatsum', 'is_contract_signed', 'calenderaccess', 'is_consultant', 'affid', 'worked', 'doctorcontact', 'experience', 'visited', 'recruiter', 'trainingpercentage', 'is_discovery', 'is_onboarding', '_id','parentname_s']; // use for Table Header Skip 
 
 
-  userdata_detail_datatype: any = [{                     // use for Table Detail inside the modal image path
-    key: "images",
-    value: 'image',
-    fileurl: "http://18.222.26.198/upload/brandimages/"   // Image path          
-  }];
-
   updateendpoint = 'addorupdatedata';             // updateendpoint is use for data update endpoint
 
   deleteendpoint = 'deletesingledata';            // deleteendpoint is use for data delete endpoint

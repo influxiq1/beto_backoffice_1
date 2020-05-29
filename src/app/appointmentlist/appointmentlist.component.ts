@@ -59,18 +59,6 @@ export class AppointmentlistComponent implements OnInit {
 
 
 
-  // use for Download the PDF
-
-  custom_link: any = [{
-      label: 'shatterblok',
-      url: 'http://shatterblok.com/testpdf/html2pdf/shatterblok-agreement.php?id=',
-      action: 'null'
-  }, {
-      label: 'Audiodateline',
-      url: 'http://shatterblok.com/testpdf/html2pdf/audiodeadline-agreement.php?id=',
-      action: 'null'
-  }];
-
 
   appointmentlist: any = [];
 
@@ -95,9 +83,8 @@ export class AppointmentlistComponent implements OnInit {
 
 
   // use for Table Header Skip 
-  appointmentlist_skip: any = ['_id', 'attendees','booked_by','closeremail','eid','emailid', 'end_time', 'endtime_only', 'eventdata','eventuser','googleevent','id','is_custom','is_discovery','is_onboarding','leaddata','notescount','refresh_token','slot','starttime_only','summery','timespan','timezone','type','userdata','repsmsg','status'];
-
-
+  appointmentlist_skip: any = ['_id', 'attendees','booked_by','closeremail','eid','emailid', 'end_time', 'endtime_only', 'eventdata','eventuser','googleevent','id','is_custom','is_discovery','is_onboarding','leaddata','notescount','refresh_token','slot','starttime_only','summery','timespan','timezone','type','repsmsg','status'];
+  statusarray: any = [{ val:'true', 'name':'pending'}];
 
   // use for Table Detail Field Skip
   appointmentlist_detail_skip: any = ['_id', 'attendees','booked_by','closeremail','eid','emailid', 'end_time', 'endtime_only', 'eventdata','eventuser','googleevent','id','is_custom','is_discovery','is_onboarding','leaddata','notescount','refresh_token','slot','starttime_only','summery','timespan','timezone','type','userdata'];
@@ -130,14 +117,6 @@ export class AppointmentlistComponent implements OnInit {
   libdata: any = {
     //basecondition:{"startdate":"2020-05-24"},
     // detailview_override: [
-    //     { key: "product", val: "Product Name" },
-    //     { key: "rep_name", val: "Rep Name" },
-    //     { key: "lead_fullName", val: "Lead Name" },
-    //     { key: "contract_manager_name", val: "Contract Manager Name" },
-    //     { key: "by", val: "Request By" },
-    //     { key: "notes", val: "Notes" },
-    //     { key: "status", val: "Status" },
-    //     { key: "date", val: "Date" },
     // ],
       updateendpoint: 'statusupdate',
       updateendpointmany: 'updateendpointmany',
@@ -155,9 +134,6 @@ export class AppointmentlistComponent implements OnInit {
             link: "#",
             type: 'externallink',
             paramtype: 'angular',
-            //param: ['_id'],
-            //cond:'status',
-           // condval: 'sends_Signed_Contract_to_Rep'
         }
  
     ]
@@ -218,7 +194,6 @@ export class AppointmentlistComponent implements OnInit {
         "type": "desc",
         "field": "start_time"
     }
-    
     }
     
     
