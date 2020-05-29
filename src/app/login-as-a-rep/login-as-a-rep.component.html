@@ -1,0 +1,138 @@
+<!--Discovery Call modal-->
+<ng-template #discoverycallmodal>
+    <div class="modal-body brandmanagement_modal discoverycall">
+        <div class="logo_wrapper">
+            <img src="assets/images/logo.png">
+        </div>
+        <div class="brand_messagebox">
+            <div class="form-group row" *ngIf="productlist.length > 0">
+                <label class="col-sm-12 col-form-label">Choose A Product</label>
+                <div class="col-sm-12">
+
+                    <select class="form-control" [(ngModel)]="selectedproductid">
+                        <option value="" #select>Select a Product</option>
+                        <option *ngFor="let i of productlist;" value="{{ i.product_id }}">{{ i.product_name }}
+                        </option>
+                    </select>
+                    <span class="error" *ngIf="productErrorFlag==1 && selectedproductid==''">Product Is
+                        Required</span>
+                    <div class="form-group row form-groupbtndiv">
+
+                        <button (click)="productsubmit(selectedlead._id)">Book</button>
+                        <button (click)="modalRef2.hide();selectedproductid=''"> cancel</button>
+                        <div class="clearfix"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+    </div>
+</ng-template>
+
+<!--Discovery Call modal-->
+<ng-template #discoveryVideomodal>
+    <div class="modal-body brandmanagement_modal discoverycall">
+        <div class="logo_wrapper">
+            <img src="assets/images/logo.png">
+        </div>
+        <div class="brand_messagebox">
+            <div class="form-group row">
+                <label class="col-sm-12 col-form-label" style="color: #00c0ff; font-size: 20px;">Paste Youtube Video Link</label>
+                <div class="col-sm-12">    
+                 <span   matPrefix>https://www.youtube.com/watch?v= &nbsp; </span>
+                 <input type="text" [(ngModel)]="videolink" style="width: 148px;">
+                 <div class="clear"></div>
+                </div>
+                <label class="col-sm-12 col-form-label" style="color: #00c0ff; font-size: 20px;">Choose A Product</label>
+                <div class="col-sm-12">
+
+                    <select class="form-control" [(ngModel)]="selectedproductid" multiple>
+                        <option value="">Select a Product</option>
+                        <option *ngFor="let i of productlist;" value="{{ i.product_id }}">{{ i.product_name }}
+                        </option>
+                    </select>
+                    <span class="error" *ngIf="productErrorFlag==1 && selectedproductid==''">Product Is
+                        Required</span>
+                    <div class="form-group row form-groupbtndiv">
+
+                        <button (click)="addYoutubeLink(sucessmodalforyoutube)">Upload</button>
+                        <button (click)="modalRef2.hide();selectedproductid=''"> cancel</button>
+                        <div class="clearfix"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+    </div>
+</ng-template>
+
+<!-- Makrting product list -->
+<ng-template #marktingProducMmodal>
+    <div class="modal-body brandmanagement_modal discoverycall">
+        <div class="logo_wrapper">
+            <img src="assets/images/logo.png">
+        </div>
+        <div class="brand_messagebox">
+            <div class="form-group row" *ngIf="productlist.length > 0">
+                <label class="col-sm-12 col-form-label">Choose A Product</label>
+                <div class="col-sm-12">
+
+                    <select class="form-control" [(ngModel)]="selectedproductid" multiple>
+                        <option value="">Select a Product</option>
+                        <option *ngFor="let i of productlist;" value="{{ i.product_id }}">{{ i.product_name }}
+                        </option>
+                    </select>
+                    <span class="error" *ngIf="productErrorFlag==1 && selectedproductid==''">Product Is
+                        Required</span>
+                    <div class="form-group row form-groupbtndiv">
+
+                        <button (click)="marketingreview(selectedlead._id, sucessmodalforemail)">send</button>
+                        <button (click)="modalRef2.hide();selectedproductid=''"> cancel</button>
+                        <div class="clearfix"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+    </div>
+</ng-template>
+
+
+<!-- Contract product list -->
+<ng-template #contractProducMmodal>
+    <div class="modal-body brandmanagement_modal discoverycall">
+        <div class="logo_wrapper">
+            <img src="assets/images/logo.png">
+        </div>
+        <div class="brand_messagebox">
+            <div class="form-group row" *ngIf="productlist.length > 0">
+                <label class="col-sm-12 col-form-label">Choose A Product</label>
+                <div class="col-sm-12">
+
+                    <select class="form-control" [(ngModel)]="selectedproductid" multiple>
+                        <option value="">Select a Product</option>
+                        <option *ngFor="let i of productlist;" value="{{ i.product_id }}">{{ i.product_name }}
+                        </option>
+                    </select>
+                    <span class="error" *ngIf="productErrorFlag==1 && selectedproductid==''">Product Is
+                        Required</span>
+                    <div class="form-group row form-groupbtndiv">
+
+                        <button (click)="contractReview(selectedlead._id, sucessmodalforemail)">send</button>
+                        <button (click)="modalRef2.hide();selectedproductid=''"> cancel</button>
+                        <div class="clearfix"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+    </div>
+</ng-template>

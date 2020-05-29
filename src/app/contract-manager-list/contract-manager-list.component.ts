@@ -70,19 +70,19 @@ export class ContractManagerListComponent implements OnInit {
       'lead_fullName': "Lead Name",
       'contract_manager_name': "Contract Manager Name",
       'status': "Status",
-      'created_by': "Request By",
+      'request_by': "Request By",
       'notes': "Notes",
    
   };
 
 
   // use for Table Header Skip 
-  contractmanagerlist_skip: any = ['_id', 'contract_manager_id','contract_manager_name_s','rep_name_s','lead_name_s','created_by_s', 'created_request_at', 'lead_id', 'product_id','rep_email','rep_id',];
+  contractmanagerlist_skip: any = ['_id', 'contract_manager_id','contract_manager_name_s','rep_name_s','lead_name_s','created_by_s', 'created_request_at', 'lead_id', 'product_id','rep_email','rep_id','request_by','created_by'];
 
 
 
   // use for Table Detail Field Skip
-  contractmanagerlist_detail_skip: any = ['_id', 'contract_manager_id','contract_manager_name_s','rep_name_s','lead_name_s','created_by_s', 'created_request_at', 'lead_id', 'created_by','product_id','rep_email','rep_id',];
+  contractmanagerlist_detail_skip: any = ['_id', 'contract_manager_id','contract_manager_name_s','rep_name_s','lead_name_s','created_by_s', 'created_request_at', 'lead_id', 'created_by','product_id','rep_email','rep_id','request_by'];
 
 
   // updateendpoint is use for data update endpoint
@@ -128,7 +128,7 @@ export class ContractManagerListComponent implements OnInit {
       //hideviewbutton:false,
       hidestatustogglebutton: true,
       // hideaction:true,
-      tableheaders: ['date', 'product', 'rep_name', 'lead_fullName', 'contract_manager_name', 'status', 'created_by', 'notes'], //not required
+      tableheaders: ['date', 'product', 'rep_name', 'lead_fullName', 'contract_manager_name', 'status', 'request_by', 'notes'], //not required
       custombuttons: [
        
         {

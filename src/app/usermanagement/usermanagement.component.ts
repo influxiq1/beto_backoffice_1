@@ -78,14 +78,15 @@ export class UsermanagementComponent implements OnInit {
     "pagecount": 1
   };
 
-  userdata_detail_skip: any = ['_id','created_at','fullname_s'];   // use for Table Detail Field Skip
+
+  userdata_detail_skip: any = ['_id', 'created_at', 'fullname_s'];   // use for Table Detail Field Skip
   libdata: any = {
     updateendpoint: 'togglestatus',                                        // update endpoint set
     hideeditbutton: true,                                                  // (hide edit button)
     hidedeletebutton: true,                                               // (hide delete button)
     hideviewbutton: false,                                                 // (hide view button)
     hidestatustogglebutton: false,                                        // (hide status toggle button)
-    hideaction: false,  
+    hideaction: false,
     detailview_override: [
       { key: "is_contract_signed_m", val: "Contract signed" },
       { key: "is_discovery", val: "Discovery Call" },
@@ -93,27 +94,27 @@ export class UsermanagementComponent implements OnInit {
       { key: "created_datetime", val: "Date Added with time" },
       { key: "email", val: "Email" },
       { key: "type", val: "A/C Type" },
-      {key:'fullname', val:"Name"}
-  ],                                                 // (hide action column)
+      { key: 'fullname', val: "Name" }
+    ],                                                 // (hide action column)
 
-    tableheaders: ['fullname', 'email', 'type', 'parentname', 'phoneno', 'status','created_datetime'], //not required (table header name)
+    tableheaders: ['fullname', 'email', 'type', 'parentname', 'phoneno', 'status', 'created_datetime'], //not required (table header name)
     custombuttons: [
       {
         label: "delete",
         toggle: "delete",
         type: 'internallink',
-        },
+      },
       {
         label: "Login As",
         route: "login-as-a-rep",
         type: 'internallink',
-        param:['_id','email']
+        param: ['_id', 'email']
       },
       {
         label: "Calender Access Inactive",
         route: "calender-access",
         type: 'internallink',
-        param:['_id','calenderaccess'],
+        param: ['_id', 'calenderaccess'],
         cond: 'calenderaccess',
         condval: 0
       },
@@ -121,7 +122,7 @@ export class UsermanagementComponent implements OnInit {
         label: "Calender Access Active",
         route: "calender-access",
         type: 'internallink',
-        param:['_id','calenderaccess'],
+        param: ['_id', 'calenderaccess'],
         cond: 'calenderaccess',
         condval: 1
       },
@@ -129,7 +130,7 @@ export class UsermanagementComponent implements OnInit {
         label: "Senior Consulting Director Inactive",
         route: "senior-consulting-director",
         type: 'internallink',
-        param:['_id','is_consultant'],
+        param: ['_id', 'is_consultant'],
         cond: 'is_consultant',
         condval: 0
       },
@@ -137,37 +138,25 @@ export class UsermanagementComponent implements OnInit {
         label: "Senior Consulting Director Active",
         route: "senior-consulting-director",
         type: 'internallink',
-        param:['_id','is_consultant'],
+        param: ['_id', 'is_consultant'],
         cond: 'is_consultant',
         condval: 1
       },
       {
-        label: "Contract downLoad",
-        link: "https://betoparedes.com/generate-pdf/employment-agreement/index.php?id=",
+        label: "Download Contract",
+        link: "https://betoparedes.com/generate-pdf/employment-agreement/index.php",
         type: 'externallink',
-        paramtype: 'angular',
-        param: ['_id'],
-        cond:'is_contract_signed_m',
+        param: [{ key: '_id', q: 'id' }],
+        cond: 'is_contract_signed_m',
         condval: 1
-    },
-    //   {
-    //     label: "Desc from api data",
-    //     type: 'action',
-    //     datatype: 'api',
-    //     endpoint: 'getblogdatabyid',
-    //     otherparam: ['is_consultant'],
-    //     //cond:'status',
-    //     //condval:0,
-    //     param: '_id',
-    //     refreshdata: true,
-    // }
+      },
     ]
   }
 
   sortdata: any = {
     "type": 'asc',                                              //  default sort data ascend and descend (desc)
     "field": 'fullname',                                          // default field for sorting
-    "options": ['fullname','status']                                      //  sorting fields options for this table
+    "options": ['fullname', 'status']                                      //  sorting fields options for this table
   };
 
   date_search_source: any = 'users';                        // this is a database collection or view name
@@ -182,10 +171,10 @@ export class UsermanagementComponent implements OnInit {
   // this is search block
   search_settings: any = {
 
-    textsearch:[{label:"Search By Full Name",field:'fullname_s'},{label:"Search By Email",field:'email'}],  // this is use for  text search
+    textsearch: [{ label: "Search By Full Name", field: 'fullname_s' }, { label: "Search By Email", field: 'email' }],  // this is use for  text search
   };
 
-  constructor(public commonservices: Commonservices, public cookieservice: CookieService, public originalCookie: CookieService, public _http: HttpClient, private router: Router, public modal: BsModalService, public _apiService: ApiService, public activatedRoute:ActivatedRoute) {
+  constructor(public commonservices: Commonservices, public cookieservice: CookieService, public originalCookie: CookieService, public _http: HttpClient, private router: Router, public modal: BsModalService, public _apiService: ApiService, public activatedRoute: ActivatedRoute) {
 
     this.activatedRoute.data.forEach((data: any) => {
       this.userdata = data.results.results.res;
@@ -212,7 +201,7 @@ export class UsermanagementComponent implements OnInit {
       this.date_search_source_count = res.count;
     })
 
-   
+
 
 
 

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Commonservices } from '../app.commonservices';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api.service';
 import { BsModalService } from 'ngx-bootstrap';
+import { BsModalRef } from "ngx-bootstrap/modal/bs-modal-ref.service";
 
 @Component({
   selector: 'app-login-as-a-rep',
@@ -14,6 +15,12 @@ import { BsModalService } from 'ngx-bootstrap';
 })
 export class LoginAsARepComponent implements OnInit {
 public consultantrole:any;
+public selectedlead:any={};
+public selectedproductid:any="";
+modalRef: BsModalRef;
+modalRef1: BsModalRef;
+modalRef2: BsModalRef;
+modalRef3: BsModalRef;
   constructor(public commonservices: Commonservices, public cookieservice: CookieService, public originalCookie: CookieService, public _http: HttpClient, private router: Router, public modal: BsModalService,public _apiService: ApiService, public activatedRoute :ActivatedRoute) {
     if(this.activatedRoute.snapshot.routeConfig.path == 'login-as-a-rep/:_id/:email'){
       console.log(this.activatedRoute.snapshot.params._id)
@@ -31,6 +38,11 @@ public consultantrole:any;
       console.log(this.activatedRoute.snapshot.params.is_consultant);
       this.toggleConsultantRole({_id: this.activatedRoute.snapshot.params._id, is_consultant: this.activatedRoute.snapshot.params.is_consultant})
     }
+
+
+
+    // this.openDiscoverCallModal(item,item.productname,marktingProducMmodal);
+    // this.openDiscoverCallModal(item,item.productname,contractProducMmodal);
    
    }
 
@@ -38,6 +50,118 @@ public consultantrole:any;
     this.consultantrole = this.cookieservice.get('is_consultant'); //to know whether it is admin or senior consultant
   }
 
+//   openDiscoverCallModal(leadval:any,val: any, template: TemplateRef<any>) {
+//     // console.log(leadval,'++++')
+//     this.selectedlead = leadval;
+//     this.productlist = val;
+//     setTimeout(()=>{
+//         this.modalRef2 = this.modal.show(template);
+//     },2000);
+// }
+
+  
+  marketingreview(val:any, template:TemplateRef<any>){
+    let link = this.commonservices.nodesslurl + 'marketingreview';
+    this.selectedlead.rep_id = this.cookieservice.get('userid');
+    this.selectedlead.product_ids = this.selectedproductid;
+    let data = this.selectedlead;
+    if (this.selectedproductid != '') {
+     this._http.post(link, data).subscribe((res:any) =>{
+         // console.log('ok',res);
+         if (res.status =='success') {
+             const link1 = this.commonservices.nodesslurl + 'addorupdatedata?token=' + this.cookieservice.get('jwttoken');
+             let data = {
+                 source: 'leads',
+                 data: { id: this.selectedlead._id, emailStatus:'send' }
+             };
+             this._http.post(link1, data).subscribe((res1: any) => {
+                 console.log(res1,'+++res1');
+          });
+             this.modalRef2.hide();
+             this.modalRef1 = this.modal.show(template, { class: 'successmodal' });
+             setTimeout(() => {
+                 this.modalRef1.hide();
+             }, 2000);
+         }
+     });
+    }
+ }
+
+ 
+ contractReview(val: any, template: TemplateRef<any>) {
+     let link = this.commonservices.nodesslurl + 'contractreview';
+     this.selectedlead.rep_id = this.cookieservice.get('userid');
+     this.selectedlead.product_ids = this.selectedproductid;
+     let data = this.selectedlead;
+     if (this.selectedproductid != '') {
+         this._http.post(link, data).subscribe((res: any) => {
+             // console.log('ok',res);
+             if (res.status == 'success') {
+                 const link1 = this.commonservices.nodesslurl + 'addorupdatedata?token=' + this.cookieservice.get('jwttoken');
+                 let data = {
+                     source: 'leads',
+                     data: { id: this.selectedlead._id, emailStatus: 'send' }
+                 };
+                 this._http.post(link1, data).subscribe((res1: any) => {
+                     console.log(res1, '+++res1');
+                 });
+                 this.modalRef2.hide();
+                 this.modalRef1 = this.modal.show(template, { class: 'successmodal' });
+                 setTimeout(() => {
+                     this.modalRef1.hide();
+                 }, 2000);
+             }
+         });
+     }
+ }
+
+
+//  leadsMarketingEmail(val: any,  template:TemplateRef<any>) {
+//      // console.log(this.sendLeadEmailForm.value);
+//      // return;
+//      var emails = this.sendLeadEmailForm.value.email.split(',');
+//      // console.log(val.product_id);
+//      // return;
+//      let x: any;
+//      for (x in this.sendLeadEmailForm.controls) {
+//          this.sendLeadEmailForm.controls[x].markAsTouched();
+//        }
+//      // var invalidEmails = [];
+
+//      // for (let i = 0; i < emails.length; i++) {
+//      //     if (this.validateEmail(emails[i].trim())) {
+//      //         invalidEmails.push(emails[i].trim())
+//      //     }
+//      // }
+//      // if (this.sendLeadEmailForm.valid) {
+//      console.log(this.invalidEmails)
+//      if (val.email != null && val.product_id != null) {
+//          this.leadIsSubmit = 0;
+//          let link = this._commonservice.nodesslurl + 'newleadformarketingreview';
+//          let data = {email:emails, product_id:val.product_id, rep_id: this.cookeiservice.get('userid'), created_by:this.cookeiservice.get('userid')};
+//          this._http.post(link, data).subscribe((res:any)=>{
+//              if (res.status == 'error') {
+//              console.log(res);
+//                  this.emailexist = res.msg;
+//              } else if(res.status == 'success') {
+//                  this.openFlag = 0;
+//                  this.modalRef1 = this.modal.show(template, { class: 'successmodal' });
+//                  setTimeout(() => {
+//                      this.modalRef1.hide();
+//                  }, 2000);
+//              }
+//              this.emailexist = '';
+//          })
+//      }else{
+//          this.leadIsSubmit = 1;
+//          this.openFlag = 0;
+//      }
+//      console.log(val)
+
+//  // }
+//  }
+
+ 
   
   // added by chandrani
   getUserDetails(email: any) {
@@ -125,4 +249,6 @@ public consultantrole:any;
       });
   }
 
+
+  
 }

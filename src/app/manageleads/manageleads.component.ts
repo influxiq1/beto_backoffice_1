@@ -156,7 +156,6 @@ export class ManageleadsComponent implements OnInit {
     this.libdata.basecondition = (this.cookieservice.get('usertype') != 'admin') ? { created_by: this.cookieservice.get('userid') } : { created_by: '' }
   
 
-console.log(this.libdata,'--------------------------------')
 
     this.datasource = '';
     let endpoint = 'getleadsmanagelistdata'; // for main data endpoint
@@ -183,12 +182,10 @@ console.log(this.libdata,'--------------------------------')
     this._http.post(link, data)
       .subscribe((response: any) => {
         this.manageleads = response.results.res;
-        console.warn('blogData', this.manageleads);
       })
 
     this._http.post(link1, data)
       .subscribe((res: any) => {
-        console.log(res, ' for count');
         this.date_search_source_count = res.count;
       });
   }
