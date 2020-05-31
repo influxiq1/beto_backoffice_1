@@ -92,7 +92,7 @@ export class ProductsComponent implements OnInit {
 
     //productsearch: [{ label: "Search By Product", field: 'productname', submit: "Search" }],  // this is use for  text search
 
-    textsearch:[{label:"Search By Product Name",field:'productname'},{label:"Search by Email" , field:'email'}]     // this is use for  Autocomplete search
+    textsearch:[{label:"Search By Product Name",field:'productname_s'},{label:"Search by Email" , field:'multiple_emails'}]     // this is use for  Autocomplete search
   };
 
 
