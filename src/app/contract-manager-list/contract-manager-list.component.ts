@@ -200,6 +200,52 @@ export class ContractManagerListComponent implements OnInit {
     ]
         }
       }
+      else if(this.cookeiservice.get('usertype')=='rep'){
+        this.libdata ={
+          updateendpoint: 'statusupdate',
+      updateendpointmany: 'updateendpointmany',
+      deleteendpointmany: 'deleteendpointmany',
+      hideeditbutton: true,// all these button options are optional not mandatory
+      hidedeletebutton: false,
+      hideviewbutton:true,
+      hidestatustogglebutton: true,
+      // hideaction:true,
+      tableheaders: ['date', 'product', 'rep_name', 'lead_fullName', 'contract_manager_name', 'status', 'request_by', 'notes'], //not required
+      custombuttons: [
+       
+        {
+            label: "downLoad",
+            link: "https://api.influxhostserver.com/download?file=contract_report_5e9490c6b00d40015cc43e12.pdf",
+            type: 'externallink',
+            paramtype: 'angular',
+            //param: ['_id'],
+            cond:'status',
+            condval: 'sends_Signed_Contract_to_Rep'
+        },
+
+      
+        {
+          label: "view",
+          type: 'internallink',
+          route: "make-contract-edit",
+          paramtype: 'angular',
+          param: ['_id'],
+          cond:'view_btn',
+          condval: 'view'
+      },
+      {
+        label: "Edit",
+        type: 'internallink',
+        route: "edit-contract-manager",
+        paramtype: 'angular',
+        param: ['_id'],
+        cond:'status',
+        condval: 'request'
+    }
+ 
+    ]
+        }
+      }
       else{
         this.libdata ={
           updateendpoint: 'statusupdate',
@@ -237,7 +283,6 @@ export class ContractManagerListComponent implements OnInit {
     ]
         }
       }
-      
 
       this.datasource = '';
       let endpoint='getcontractmanagerlist'; // for main data endpoint

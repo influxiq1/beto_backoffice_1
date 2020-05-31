@@ -104,8 +104,11 @@
       </div>
 
       <div class="nexgen_admin_table">
-
-        <lib-listing *ngIf="contractmanagerlist!=null && contractmanagerlist.length>0" 
+        <div *ngIf="cookeiservice.get('usertype')=='rep'">
+          <button mat-flat-button color="primary" [routerLink]="['/add-contract-manager']">Request Contract</button>
+        </div>
+        
+        <lib-listing  *ngIf="contractmanagerlist!=null && contractmanagerlist.length>0" 
           [datasource]="contractmanagerlist"
           [skip]="contractmanagerlist_skip"
           [modify_header_array]="modify_header_array"
