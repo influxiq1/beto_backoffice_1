@@ -1,7 +1,23 @@
 <app-adminheader></app-adminheader>
+<div class="user_management_wrapper">
+  
+    <div class="user_management_inner">
+  <div *ngIf="ActivatedRoute.snapshot.params._id !=null && ActivatedRoute.snapshot.params._id !=undefined">
+    <h2> products management Edit </h2>
+    <div class="inner_search_wrapper">
+       <div class="inner_content_wrapper">
+    <h3>Product Name : {{product_name}}</h3>
+    </div>
+    </div>
+  </div>
+     <h2 *ngIf="ActivatedRoute.snapshot.params._id ==null"> products management Add</h2> 
+  </div>
+  </div>
+  <div>
 <lib-showform *ngIf="formdata !=null"
 [formdata]="formdata"
 [formfieldrefresh]="formfieldrefresh"
 [formfieldrefreshdata]="formfieldrefreshdata"
 > </lib-showform>
+</div>
 <app-footer></app-footer>

@@ -179,6 +179,7 @@ const appRoutes: Routes = [
     { path: 'forgetpassword', component: ForgetpasswordComponent},
     { path: 'slotview', component: SlotviewComponent},
     { path: 'manage-leads/edit/:_id' , component: ManageLeadsEditComponent},
+    { path: 'manage-leads/add' , component: ManageLeadsEditComponent},
 
     { path: 'on-boarding-call/:id', component: SlotviewComponent },
     { path: 'customevents/:slotval', component: SlotviewComponent },

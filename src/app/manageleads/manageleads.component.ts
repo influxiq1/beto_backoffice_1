@@ -43,11 +43,10 @@ export class ManageleadsComponent implements OnInit {
     'mobile': "Mobile No",
     'address': "Address",
     'only_productname': "Products",
-    'status': "Status",
-    'emailStatus': "Manage Notes"
+    'status': "Status"
   };
 
-  manageleads_header_skip: any = ['_id', 'appointment_count', 'created_at', 'created_by', 'date', 'firstname', 'lastname', 'mobile', 'notescount', 'pricepoint', 'product', 'rep_name', 'youtube', 'productname']; // use for Table Header Skip
+  manageleads_header_skip: any = ['_id', 'appointment_count', 'created_at', 'created_by', 'date', 'firstname', 'lastname', 'mobile', 'notescount', 'pricepoint', 'product', 'rep_name', 'youtube', 'productname','emailStatus']; // use for Table Header Skip
 
   manageleads_detail_skip: any = ['_id','created_by','product','productname','created_at','rep_name','only_productname']; // use for Table Detail Field Skip
   updateendpoint = 'addorupdatedata'; // updateendpoint is use for data update endpoint
@@ -127,7 +126,7 @@ export class ManageleadsComponent implements OnInit {
       hidestatustogglebutton: false, // (hide status toggle button)
       hideaction: false, // (hide action column)
   
-      tableheaders: ['fullname', 'company', 'website', 'email', 'phoneno', 'mobile', 'address', 'only_productname','status','emailStatus'], //not required (table header name)
+      tableheaders: ['fullname', 'company', 'website', 'email', 'phoneno', 'mobile', 'address', 'only_productname','status'], //not required (table header name)
       custombuttons: [
         {
           label: "Discovery Call", //  button name

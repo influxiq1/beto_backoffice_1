@@ -15,6 +15,7 @@ export class ProductsAddEditComponent implements OnInit {
   emailregex: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   passwordregex: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
 
+  product_name:any='';
   temtdata:any='';
   // formdata
   formfieldrefresh:boolean=true;
@@ -28,12 +29,16 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
   //console.log(this.ActivatedRoute.snapshot.params.id)o
   this.update(this.ActivatedRoute.snapshot.params._id);
  // console.log("ggggggggggg",this.ActivatedRoute.snapshot.params.id);
-} else {
+} 
+else {
   //console.log("hhhhhbjhyv");
   this.formdata = {
     successmessage:"Added Successfully !!", 
     redirectpath:"/products",
-    submittext:"Add",
+    submittext:"Add Product",
+    canceltext: "Cancel",
+    cancelroute: '/products',
+    resettext:"Reset This",
     submitactive:true, //optional, default true
     apiUrl:this._apiService.nodesslurl,
     endpoint:'addorupdateproduct',
@@ -158,6 +163,7 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
 
     this._apiService.getDataforAdminList(endpoint, data)
       .subscribe((response: any) => {
+        this.product_name=response.res[0].productname;
         console.log(response.res[0]);
         let stat:any;
         if(response.status==1){
@@ -169,9 +175,10 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
        this.formdata={
           successmessage:"Updated Successfully !!",
           redirectpath:"/products",
-          submittext:"Update",
+          submittext:"Update Product",
           canceltext: "Cancel",
           cancelroute: '/products',
+          resettext:"Reset This",
           submitactive:true, //optional, default true
          apiUrl:this._apiService.nodesslurl,
           endpoint:'addorupdateproduct',

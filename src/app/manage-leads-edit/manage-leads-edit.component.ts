@@ -1,3 +1,4 @@
+import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from './../api.service';
 import { ActivatedRoute } from '@angular/router';
@@ -15,6 +16,7 @@ export class ManageLeadsEditComponent implements OnInit {
  // public status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
   emailregex: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
+  manage_leads_firstname:any='';
   public formdata:any;
   formfieldrefresh:boolean=true;
   updatetable:boolean=true;
@@ -22,7 +24,7 @@ export class ManageLeadsEditComponent implements OnInit {
   public categoryVal:any = [];
   public products:any = [];
 
-  constructor(public _apiService: ApiService, public http: HttpClient,public ActivatedRoute:ActivatedRoute,public commonservices: Commonservices) {
+  constructor(public _apiService: ApiService, public http: HttpClient,public ActivatedRoute:ActivatedRoute,public commonservices: Commonservices,public cookieservice: CookieService) {
 
    
     let endpoint = 'datalist'; // for main data endpoint
@@ -56,6 +58,138 @@ export class ManageLeadsEditComponent implements OnInit {
     if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapshot.params._id !=undefined)
     {
       this.update(this.ActivatedRoute.snapshot.params._id);
+    }else{
+      this.formdata={
+        successmessage:"Added Successfully !!",
+        redirectpath:"/manage-leads",
+        submittext:"Add Leads",
+        canceltext: "Cancel",
+        cancelroute: '/manage-leads',
+        resettext:"Reset This",
+        submitactive:true, //optional, default true
+       apiUrl:this._apiService.nodesslurl,
+        endpoint:'addorupdateleads',
+       jwttoken:this._apiService.jwttoken,
+      
+      fields:[
+        {
+            label:"First Name",
+            name:"firstname",
+            type:"text",
+            value:'',
+            validations:[
+                {rule:'required', message: "First Name Needs to be required"}
+                ]
+        },
+        {
+        
+          label:"Last Name",
+          name:"lastname",
+          type:"text",
+          value:'',
+          validations:[
+              {rule:'required',message: "Last Name Needs to be required"}
+              ]
+      },
+      {
+        
+        label:"Company",
+        name:"company",
+        type:"text",
+        value:'',
+        validations:[
+            {rule:'required',message: "Company Needs to be required"}
+            ]
+    },
+      {
+       
+        label:"Email",
+        name:"email",
+        type:"text",
+        value:'',
+        validations:[
+            {rule:'required', message: "Email field Needs to be required"},
+            {rule:'pattern',value: this.emailregex,message: "Must be a valid Email"}
+            ]
+    },
+    {
+      
+      label:"Address",
+      name:"address",
+      type:"textarea",
+      value:'',
+      validations:[
+          {rule:'required',message: "Address Needs to be required"},
+           {rule:'minLength',value: 5}
+          ]
+  },
+  {
+  
+    label:"Phone No.",
+    name:"phoneno",
+    type:"text",
+    value:'',
+    validations:[
+        {rule:'required',message: "Phone Number Needs to be required"},
+         {rule:'maxLength',value:10,message: "Enter Valid Number"},
+         {rule:'minLength',value: 10,message: "Enter Valid Number"}
+        ]
+},
+{
+
+  label:"Website Url.",
+  name:"website",
+  type:"text",
+  value:'',
+  validations:[
+      {rule:'required',message: "Website Url Needs to be required"}
+      ]
+},
+{
+
+  label:"Mobile No.",
+  name:"mobile",
+  type:"number",
+  value:'',
+  validations:[
+      {rule:'required',message: "Mobile Number Needs to be required"},
+       {rule:'maxLength',value:10,message: "Enter Valid Number"},
+       {rule:'minLength',value: 10,message: "Enter Valid Number"}
+      ]
+},
+{
+
+  label:"Products",
+  name:"product",
+  val:this.products,
+  type:"select",
+  value:'',
+  validations:[
+      {rule:'required',message: "Products Needs to be required"}
+      ]
+},
+{
+
+  label:"Created by",
+  name:"created_by",
+  type:"hidden",
+  value:this.cookieservice.get('userid'),
+  validations:[
+      //{rule:'required',message: "Products Needs to be required"}
+      ]
+},
+// {
+
+//   label:"type",
+//   name:"type",
+//   type:"text",
+//   value:'rep',
+//   validations:[
+//      // {rule:'required',message: "Products Needs to be required"}
+//       ]
+// },
+    ]
+};
     }
 
    }
@@ -73,6 +207,7 @@ export class ManageLeadsEditComponent implements OnInit {
     }
     this._apiService.getDataforAdminList(endpoint, data)
     .subscribe((response: any) => {
+      this.manage_leads_firstname=response.res[0].firstname;
       console.log(response);
       let stat:any;
       if(response.status==1){
@@ -84,9 +219,10 @@ export class ManageLeadsEditComponent implements OnInit {
      this.formdata={
         successmessage:"Updated Successfully !!",
         redirectpath:"/manage-leads",
-        submittext:"Update",
+        submittext:"Update Leads",
         canceltext: "Cancel",
         cancelroute: '/manage-leads',
+        resettext:"Reset This",
         submitactive:true, //optional, default true
        apiUrl:this._apiService.nodesslurl,
         endpoint:'addorupdateleads',
@@ -112,6 +248,15 @@ export class ManageLeadsEditComponent implements OnInit {
               {rule:'required',message: "Last Name Needs to be required"}
               ]
       },
+      {  
+        label:"Company",
+        name:"company",
+        type:"text",
+        value:response.res[0].company,
+        validations:[
+            {rule:'required',message: "Company Needs to be required"}
+            ]
+    },
       {
        
         label:"Email",
