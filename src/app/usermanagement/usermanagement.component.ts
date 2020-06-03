@@ -35,7 +35,7 @@ export class UsermanagementComponent implements OnInit {
   public datasource: any = '';
 
   public status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];   // use for status search
-
+  public type:any = [{val:'rep', 'name': 'Rep'},{val:'contract_manager', 'name': 'Contract Manager'},{val:'regional_recruiter', 'name':'Regional Recruiter'},{val:'admin', 'name':'Admin'}]
   statusarray: any = [{ val: 1, name: 'Active' }, { val: 0, name: 'Inactive' }];  //status name set
 
   //emailarray: any = [{ val: 'sourotest222@gmail.com', name: 'sourotest222@gmail.com' }]; //Static Email search eg.
@@ -48,7 +48,7 @@ export class UsermanagementComponent implements OnInit {
     'phoneno': 'Phone No.',
     'status': 'Status',
     'created_datetime': 'Date Joined',
-    "type": "A/C Type"
+    "type": "Account Type"
   };
 
   userdata_header_skip: any = ['lock', 'firstname', 'regionalrecruiter_id', 'unique_id', 'created_at', 'lastname', 'reactsum', 'newhirecatsum', 'is_contract_signed', 'calenderaccess', 'is_consultant', 'affid', 'worked', 'doctorcontact', 'experience', 'visited', 'recruiter', 'trainingpercentage', 'is_discovery', 'is_onboarding', '_id']; // use for Table Header Skip 
@@ -73,7 +73,7 @@ export class UsermanagementComponent implements OnInit {
   };
 
 
-  userdata_detail_skip: any = ['_id', 'created_at', 'fullname_s'];   // use for Table Detail Field Skip
+  userdata_detail_skip: any = ['_id', 'created_at', 'fullname_s','legaldoc_doctype','status','reactsum'];   // use for Table Detail Field Skip
   libdata: any = {
     updateendpoint: 'togglestatus',                                        // update endpoint set
     hideeditbutton: true,                                                  // (hide edit button)
@@ -87,8 +87,9 @@ export class UsermanagementComponent implements OnInit {
       { key: "is_onboarding", val: "Onboarding Call" },
       { key: "created_datetime", val: "Date Added with time" },
       { key: "email", val: "Email" },
-      { key: "type", val: "A/C Type" },
-      { key: 'fullname', val: "Name" }
+      { key: "type", val: "Account Type" },
+      { key: 'fullname', val: "Name" },
+      { key: 'phoneno' , val: "Phone Number"}
     ],                                                 // (hide action column)
 
     tableheaders: ['fullname', 'email', 'type', 'parentname', 'phoneno', 'status', 'created_datetime'], //not required (table header name)
@@ -150,7 +151,7 @@ export class UsermanagementComponent implements OnInit {
   sortdata: any = {
     "type": 'asc',                                              //  default sort data ascend and descend (desc)
     "field": 'fullname',                                          // default field for sorting
-    "options": ['fullname', 'status']                                      //  sorting fields options for this table
+    "options": ['fullname', 'status','email','parentname','created_datetime']                                      //  sorting fields options for this table
   };
 
   date_search_source: any = 'users';                        // this is a database collection or view name
@@ -164,8 +165,11 @@ export class UsermanagementComponent implements OnInit {
 
   // this is search block
   search_settings: any = {
+    datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date",submit:"Search",  field:"created_datetime"}],   
 
-    textsearch: [{ label: "Search By Full Name", field: 'fullname_s' }, { label: "Search By Email", field: 'email' }],  // this is use for  text search
+    selectsearch:[{ label: 'Search By Type', field: 'type', values: this.type }],
+
+    textsearch: [{ label: "Search By Full Name", field: 'fullname_s' }, { label: "Search By Email", field: 'email' }, { label: "Search By Parent Name", field: 'parentname_s' } , { label: "Search By Phone Number", field: 'phoneno' }],  // this is use for  text search
   };
 
   constructor(public commonservices: Commonservices, public cookieservice: CookieService, public originalCookie: CookieService, public _http: HttpClient, private router: Router, public modal: BsModalService, public _apiService: ApiService, public activatedRoute: ActivatedRoute) {
