@@ -107,6 +107,8 @@
         <div *ngIf="cookeiservice.get('usertype')=='rep'">
           <button mat-flat-button color="primary" [routerLink]="['/add-contract-manager']">Request Contract</button>
         </div>
+
+        <div class="usermanagementpagecon">
         
         <lib-listing  *ngIf="contractmanagerlist!=null && contractmanagerlist.length>0" 
           [datasource]="contractmanagerlist"
@@ -130,6 +132,7 @@
         
           [limitcond]="limitcond">
 </lib-listing>
+</div>
 
 
 
