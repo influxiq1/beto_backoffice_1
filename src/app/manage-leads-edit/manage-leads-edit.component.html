@@ -3,10 +3,12 @@
   
     <div class="user_management_inner">
   <div *ngIf="ActivatedRoute.snapshot.params._id !=null && ActivatedRoute.snapshot.params._id !=undefined">
-    <h2>  MANAGE LEADS EDIT </h2>
+    <!-- <h2>  MANAGE LEADS EDIT </h2> -->
+    <h2>Edit Details For: {{manageleads_fullname}}</h2>
     <div class="inner_search_wrapper">
        <div class="inner_content_wrapper">
-    <h3>Product Name : {{manage_leads_firstname}}</h3>
+        <br>
+    <h3>Leads Name : {{manage_leads_firstname}}</h3>
     </div>
     </div>
   </div>

@@ -73,7 +73,7 @@ export class UsermanagementComponent implements OnInit {
   };
 
 
-  userdata_detail_skip: any = ['_id', 'created_at', 'fullname_s','legaldoc_doctype','status','reactsum'];   // use for Table Detail Field Skip
+  userdata_detail_skip: any = ['_id', 'created_at', 'fullname_s','reactsum','trainingpercentage','recruiter','parentname_s','parentname','newhirecatsum','lock','is_consultant','calenderaccess'];   // use for Table Detail Field Skip
   libdata: any = {
     updateendpoint: 'togglestatus',                                        // update endpoint set
     hideeditbutton: true,                                                  // (hide edit button)
@@ -88,8 +88,10 @@ export class UsermanagementComponent implements OnInit {
       { key: "created_datetime", val: "Date Added with time" },
       { key: "email", val: "Email" },
       { key: "type", val: "Account Type" },
-      { key: 'fullname', val: "Name" },
-      { key: 'phoneno' , val: "Phone Number"}
+      { key: "legaldoc_doctype", val: "Leagal doc submission"},
+      { key: "status", val: "Status"},
+      { key: "fullname", val: "Name" },
+      { key: "phoneno" , val: "Phone Number"}
     ],                                                 // (hide action column)
 
     tableheaders: ['fullname', 'email', 'type', 'parentname', 'phoneno', 'status', 'created_datetime'], //not required (table header name)
