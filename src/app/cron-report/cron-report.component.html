@@ -10,7 +10,7 @@
     </div>
   </div>
 </div> -->
-
+<div class="usermanagementpagecon">
 <lib-listing *ngIf="tabledata!=null && tabledata.length>0" 
   [datasource]="tabledata"                                 
   [skip]="tabledata_header_skip"                         
@@ -34,7 +34,7 @@
   [libdata]="libdata"
   [limitcond]="limitcond">
 </lib-listing> 
-
+</div>
 
 <app-footer></app-footer>
 
