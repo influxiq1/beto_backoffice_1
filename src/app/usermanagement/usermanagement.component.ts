@@ -75,7 +75,7 @@ export class UsermanagementComponent implements OnInit {
 
   userdata_detail_skip: any = ['_id', 'created_at', 'fullname_s','reactsum','trainingpercentage','recruiter','parentname_s','status','parentname','newhirecatsum','lock','is_consultant','calenderaccess'];   // use for Table Detail Field Skip
   libdata: any = {
-    updateendpoint: 'togglestatus',                                        // update endpoint set
+    updateendpoint: 'statusupdatesingledata',                                        // update endpoint set
     hideeditbutton: false,                                                  // (hide edit button)
     hidedeletebutton: true,                                               // (hide delete button)
     hideviewbutton: false,                                                 // (hide view button)
