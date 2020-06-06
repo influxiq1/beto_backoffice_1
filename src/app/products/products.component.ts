@@ -20,21 +20,19 @@ export class ProductsComponent implements OnInit {
 
   public status: any = [{ val: true, 'name': 'Active' }, { val: false, 'name': 'Inactive' }];   // use for status search
 
-  statusarray: any = [{ val: true, name: 'Active' }, { val: false, name: 'Inactive' }];  //status name set
+  statusarray: any = [{ val: 'true', name: 'Active' }, { val: 'false', name: 'Inactive' }];  //status name set
   
  
   modify_header_array: any = {
-    'type': 'Type',
-    'id': 'ID',
     'productname': 'Product Name',
     'description': 'Description',
-    'launch date': 'Launch Date',
-    'status': 'Status',
-    'verification need': 'Verification Needed'
+    'launch_date': 'Launch Date',
+    'status': "Status",
+    'verification_need': 'Verification Needed'
 
   };
 
-  tabledata_header_skip: any = ['id', 'multiple_emails', 'not_launch',  'unique_id', 'created_at', '_id']; // use for Table Header Skip 
+  tabledata_header_skip: any = ['id', 'unique_id','created_at','updated_at','not_launch', 'multiple_emails', '_id']; // use for Table Header Skip 
 
   tabledata_detail_skip: any = [];   // use for Table Detail Field Skip
 
@@ -66,7 +64,7 @@ export class ProductsComponent implements OnInit {
     hidestatustogglebutton: true,                  // (hide status toggle button)
     hideaction: false,                              // (hide action column)
 
-    tableheaders: ['productname', 'description', 'launch_date', 'status', 'verification_need'], //not required (table header name)
+    tableheaders: ['productname', 'description', 'launch_date', 'status' , 'verification_need'], //not required (table header name)
     custombuttons: []
   }
 
@@ -92,9 +90,9 @@ export class ProductsComponent implements OnInit {
 
     //selectsearch:[{ label: 'Search By Status', field: 'status', values: this.status }], // this is use for  select search
 
-    productsearch: [{ label: "Search By Product", field: 'productname', submit: "Search" }],  // this is use for  text search
+    //productsearch: [{ label: "Search By Product", field: 'productname', submit: "Search" }],  // this is use for  text search
 
-    //search:[{label:"Search By Author",field:'author_search',values:this.authval}]     // this is use for  Autocomplete search
+    textsearch:[{label:"Search By Product Name",field:'productname_s'},{label:"Search by Email" , field:'multiple_emails'}]     // this is use for  Autocomplete search
   };
 
 

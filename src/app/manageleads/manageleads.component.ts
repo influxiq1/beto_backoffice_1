@@ -43,13 +43,12 @@ export class ManageleadsComponent implements OnInit {
     'mobile': "Mobile No",
     'address': "Address",
     'only_productname': "Products",
-    'status': "Status",
-    'emailStatus': "Manage Notes"
+    'status': "Status"
   };
 
-  manageleads_header_skip: any = ['_id', 'appointment_count', 'created_at', 'created_by', 'date', 'firstname', 'lastname', 'mobile', 'notescount', 'pricepoint', 'product', 'rep_name', 'youtube', 'productname']; // use for Table Header Skip
+  manageleads_header_skip: any = ['_id', 'appointment_count', 'created_at', 'created_by', 'date', 'firstname', 'lastname', 'mobile', 'notescount', 'pricepoint', 'product', 'rep_name', 'youtube', 'productname','emailStatus']; // use for Table Header Skip
 
-  manageleads_detail_skip: any = ['_id','created_by','product','productname','created_at','rep_name','only_productname']; // use for Table Detail Field Skip
+  manageleads_detail_skip: any = ['_id','created_by','product','productname','created_at','rep_name','only_productname','appointment_count','emailStatus','pricepoint','youtube','firstname','lastname']; // use for Table Detail Field Skip
   updateendpoint = 'addorupdatedata'; // updateendpoint is use for data update endpoint
 
   deleteendpoint = 'deletesingledata'; // deleteendpoint is use for data delete endpoint
@@ -99,8 +98,6 @@ export class ManageleadsComponent implements OnInit {
   constructor(public commonservices: Commonservices, public cookieservice: CookieService, public originalCookie: CookieService, public _http: HttpClient, private router: Router, public modal: BsModalService, public _apiService: ApiService) {
     this.libdata = {
       detailview_override: [
-        { key: "firstname", val: "First Name" },
-        { key: "lastname", val: "Last Name" },
         { key: "fullname", val: "Full Name" },
         { key: "status", val: "Status" },
         { key: "company", val: "Company" },
@@ -110,6 +107,7 @@ export class ManageleadsComponent implements OnInit {
         { key: "address", val: "Address" },
         { key: "phoneno", val: "Phone No" },
         { key: "date", val: "Date" },
+        { key: "notescount", val:"Notes count"}
     ], // optional
       updateendpoint: 'statusupdate', // update endpoint set
       notes: {
@@ -127,7 +125,7 @@ export class ManageleadsComponent implements OnInit {
       hidestatustogglebutton: false, // (hide status toggle button)
       hideaction: false, // (hide action column)
   
-      tableheaders: ['fullname', 'company', 'website', 'email', 'phoneno', 'mobile', 'address', 'only_productname','status','emailStatus'], //not required (table header name)
+      tableheaders: ['fullname', 'company', 'website', 'email', 'phoneno', 'mobile', 'address', 'only_productname','status'], //not required (table header name)
       custombuttons: [
         {
           label: "Discovery Call", //  button name

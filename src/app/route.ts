@@ -1,3 +1,4 @@
+import { UsermanagementAddEditComponent } from './usermanagement-add-edit/usermanagement-add-edit.component';
 import { ManageLeadsEditComponent } from './manage-leads-edit/manage-leads-edit.component';
 import { ProductsAddEditComponent } from './products-add-edit/products-add-edit.component';
 /**
@@ -154,6 +155,23 @@ const appRoutes: Routes = [
 
     { path:'usermanagement', component: UsermanagementComponent, resolve: {results: TestresolveService},data:{ requestcondition:{"condition": {"limit": 10,"skip": 0},sort: {"type":'desc',"field":'fullname'}},endpoint:'usertrainingreport'}},
 
+    { path:'usermanagement/edit/:_id', component: UsermanagementAddEditComponent,
+    resolve:
+    {
+        usereditdata: TestresolveService
+    },
+    data:
+    {
+        requestcondition:
+        {
+            "source":'users',
+                 "condition":{
+                 // "_id_object":'_id'
+                 }
+        },
+        endpoint:'datalist'
+    }
+},
 
     {path:'login-as-a-rep/:_id/:email', component: LoginAsARepComponent},
     {path:'calender-access/:_id/:calenderaccess', component: LoginAsARepComponent},
@@ -179,6 +197,8 @@ const appRoutes: Routes = [
     { path: 'forgetpassword', component: ForgetpasswordComponent},
     { path: 'slotview', component: SlotviewComponent},
     { path: 'manage-leads/edit/:_id' , component: ManageLeadsEditComponent},
+        
+    { path: 'manage-leads/add' , component: ManageLeadsEditComponent},
 
     { path: 'on-boarding-call/:id', component: SlotviewComponent },
     { path: 'customevents/:slotval', component: SlotviewComponent },

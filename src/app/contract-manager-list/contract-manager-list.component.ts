@@ -77,7 +77,7 @@ export class ContractManagerListComponent implements OnInit {
 
 
   // use for Table Header Skip 
-  contractmanagerlist_skip: any = ['_id', 'contract_manager_id','contract_manager_name_s','rep_name_s','lead_name_s','created_by_s', 'created_request_at', 'lead_id', 'product_id','rep_email','rep_id','request_by','created_by'];
+  contractmanagerlist_skip: any = ['_id', 'contract_manager_id','contract_manager_name_s','rep_name_s','lead_name_s','created_by_s', 'created_request_at', 'lead_id', 'product_id','rep_email','rep_id','created_by'];
 
 
 
@@ -110,56 +110,12 @@ export class ContractManagerListComponent implements OnInit {
 
   // other data
   libdata: any = {
-    detailview_override: [
-        { key: "product", val: "Product Name" },
-        { key: "rep_name", val: "Rep Name" },
-        { key: "lead_fullName", val: "Lead Name" },
-        { key: "contract_manager_name", val: "Contract Manager Name" },
-        { key: "by", val: "Request By" },
-        { key: "notes", val: "Notes" },
-        { key: "status", val: "Status" },
-        { key: "date", val: "Date" },
-    ],
-      updateendpoint: 'statusupdate',
-      updateendpointmany: 'updateendpointmany',
-      deleteendpointmany: 'deleteendpointmany',
-      hideeditbutton: true,// all these button options are optional not mandatory
-      hidedeletebutton: false,
-      hideviewbutton:true,
-      hidestatustogglebutton: true,
-      // hideaction:true,
-      tableheaders: ['date', 'product', 'rep_name', 'lead_fullName', 'contract_manager_name', 'status', 'request_by', 'notes'], //not required
-      custombuttons: [
-       
-        {
-            label: "downLoad",
-            link: "https://api.influxhostserver.com/download?file=contract_report_5e9490c6b00d40015cc43e12.pdf",
-            type: 'externallink',
-            paramtype: 'angular',
-            //param: ['_id'],
-            cond:'status',
-            condval: 'sends_Signed_Contract_to_Rep'
-        },
-
-        // Add on 29/05/20 by Mahitosh
-        {
-          label: "view",
-          type: 'internallink',
-          route: "make-contract-edit",
-          paramtype: 'angular',
-          param: ['_id'],
-          cond:'view_btn',
-          condval: 'view'
-      }
- 
-    ]
-     
   }
   // send basic sort data
   sortdata: any = {
       "type": 'desc',
       "field": 'id',
-      "options": ['id']
+      "options": ['id','contract_manager_name','product']
   };
 
 
@@ -197,6 +153,136 @@ export class ContractManagerListComponent implements OnInit {
     public modal: BsModalService,
     protected _sanitizer: DomSanitizer,
     public _apiService: ApiService) {
+      console.log(this.cookeiservice.get('usertype'));
+      if(this.cookeiservice.get('usertype')=='contract_manager'){
+        this.libdata ={
+          updateendpoint: 'statusupdate',
+      updateendpointmany: 'updateendpointmany',
+      deleteendpointmany: 'deleteendpointmany',
+      hideeditbutton: true,// all these button options are optional not mandatory
+      hidedeletebutton: true,
+      hideviewbutton:true,
+      hidestatustogglebutton: true,
+      // hideaction:true,
+      tableheaders: ['date', 'product', 'rep_name', 'lead_fullName', 'contract_manager_name', 'status', 'request_by', 'notes'], //not required
+      custombuttons: [
+       
+        {
+            label: "downLoad",
+            link: "https://api.influxhostserver.com/download?file=contract_report_5e9490c6b00d40015cc43e12.pdf",
+            type: 'externallink',
+            paramtype: 'angular',
+            //param: ['_id'],
+            cond:'status',
+            condval: 'sends_Signed_Contract_to_Rep'
+        },
+
+        // Add on 29/05/20 by Mahitosh
+        {
+          label: "Edit",
+          type: 'internallink',
+          route: "make-contract-edit",
+          paramtype: 'angular',
+          param: ['_id'],
+          cond:'status',
+          condval: 'ask_for_modification'
+      },
+      {
+        label: "Create Contract",
+        type: 'internallink',
+        route: "make-contract",
+        paramtype: 'angular',
+        param: ['_id'],
+        cond:'status',
+        condval: 'request'
+    }
+ 
+    ]
+        }
+      }
+      else if(this.cookeiservice.get('usertype')=='rep'){
+        this.libdata ={
+          updateendpoint: 'statusupdate',
+      updateendpointmany: 'updateendpointmany',
+      deleteendpointmany: 'deleteendpointmany',
+      hideeditbutton: true,// all these button options are optional not mandatory
+      hidedeletebutton: false,
+      hideviewbutton:true,
+      hidestatustogglebutton: true,
+      // hideaction:true,
+      tableheaders: ['date', 'product', 'rep_name', 'lead_fullName', 'contract_manager_name', 'status', 'request_by', 'notes'], //not required
+      custombuttons: [
+       
+        {
+            label: "downLoad",
+            link: "https://api.influxhostserver.com/download?file=contract_report_5e9490c6b00d40015cc43e12.pdf",
+            type: 'externallink',
+            paramtype: 'angular',
+            //param: ['_id'],
+            cond:'status',
+            condval: 'sends_Signed_Contract_to_Rep'
+        },
+
+      
+        {
+          label: "view",
+          type: 'internallink',
+          route: "make-contract-edit",
+          paramtype: 'angular',
+          param: ['_id'],
+          cond:'view_btn',
+          condval: 'view'
+      },
+      {
+        label: "Edit",
+        type: 'internallink',
+        route: "edit-contract-manager",
+        paramtype: 'angular',
+        param: ['_id'],
+        cond:'status',
+        condval: 'request'
+    }
+ 
+    ]
+        }
+      }
+      else{
+        this.libdata ={
+          updateendpoint: 'statusupdate',
+      updateendpointmany: 'updateendpointmany',
+      deleteendpointmany: 'deleteendpointmany',
+      hideeditbutton: true,// all these button options are optional not mandatory
+      hidedeletebutton: false,
+      hideviewbutton:true,
+      hidestatustogglebutton: true,
+      // hideaction:true,
+      tableheaders: ['date', 'product', 'rep_name', 'lead_fullName', 'contract_manager_name', 'status', 'request_by', 'notes'], //not required
+      custombuttons: [
+       
+        {
+            label: "downLoad",
+            link: "https://api.influxhostserver.com/download?file=contract_report_5e9490c6b00d40015cc43e12.pdf",
+            type: 'externallink',
+            paramtype: 'angular',
+            //param: ['_id'],
+            cond:'status',
+            condval: 'sends_Signed_Contract_to_Rep'
+        },
+
+        // Add on 29/05/20 by Mahitosh
+        {
+          label: "view",
+          type: 'internallink',
+          route: "make-contract-edit",
+          paramtype: 'angular',
+          param: ['_id'],
+          cond:'view_btn',
+          condval: 'view'
+      }
+ 
+    ]
+        }
+      }
 
       this.datasource = '';
       let endpoint='getcontractmanagerlist'; // for main data endpoint

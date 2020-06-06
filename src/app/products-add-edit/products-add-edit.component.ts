@@ -15,6 +15,7 @@ export class ProductsAddEditComponent implements OnInit {
   emailregex: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   passwordregex: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
 
+  product_name:any='';
   temtdata:any='';
   // formdata
   formfieldrefresh:boolean=true;
@@ -28,12 +29,16 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
   //console.log(this.ActivatedRoute.snapshot.params.id)o
   this.update(this.ActivatedRoute.snapshot.params._id);
  // console.log("ggggggggggg",this.ActivatedRoute.snapshot.params.id);
-} else {
+} 
+else {
   //console.log("hhhhhbjhyv");
   this.formdata = {
     successmessage:"Added Successfully !!", 
     redirectpath:"/products",
-    submittext:"Add",
+    submittext:"Add Product",
+    canceltext: "Cancel",
+    cancelroute: '/products',
+    resettext:"Reset This",
     submitactive:true, //optional, default true
     apiUrl:this._apiService.nodesslurl,
     endpoint:'addorupdateproduct',
@@ -68,18 +73,19 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
     name:"status",
     hint:'',
     type:'checkbox',
-    val:this.status,
+    //val:this.status,
+    value:false,
     validations:[
-        {rule:'required'}
+        //{rule:'required'}
         ]
   },
   {
     label:"Not Launched",
-    //name:"launch_date",
+    name:"not_launch",
     //hint:'has child ???',
     type:'checkbox',
     labelPosition:'after',
-    value: null,
+    value: false,
     dependent:[{
 
         condval:true,
@@ -90,32 +96,32 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
             value:new Date().toISOString(),
             hint:"05/05/2020",
             validations:[
-                {rule:'required'}
+               // {rule:'required'}
                 ]
         }
     }],
     validations:[
-        {rule:'required'}
+       // {rule:'required'}
         ],
 
 } ,
 
 {
   label:"Verification Needed",
-  name:"email_verification",
+  name:"verification_need",
   //hint:'has child ???',
   type:'checkbox',
   labelPosition:'after',
-  value: null,
+  value: false,
   dependent:[{
 
       condval:true,
       field:{
           label:"Email",
-          name:"email",
+          name:"multiple_emails",
           type:"text",
           validations:[
-              {rule:'required'},
+              //{rule:'required'},
               {rule:'pattern',value: this.emailregex,message: "Must be a valid Email"}
               // {rule:'maxLength',value:10},
               // {rule:'minLength',value: 2}
@@ -123,7 +129,7 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
       }
   }],
   validations:[
-      {rule:'required'}
+      //{rule:'required'}
       ],
 
 } ,
@@ -157,6 +163,7 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
 
     this._apiService.getDataforAdminList(endpoint, data)
       .subscribe((response: any) => {
+        this.product_name=response.res[0].productname;
         console.log(response.res[0]);
         let stat:any;
         if(response.status==1){
@@ -168,7 +175,10 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
        this.formdata={
           successmessage:"Updated Successfully !!",
           redirectpath:"/products",
-          submittext:"Edit",
+          submittext:"Update Product",
+          canceltext: "Cancel",
+          cancelroute: '/products',
+          resettext:"Reset This",
           submitactive:true, //optional, default true
          apiUrl:this._apiService.nodesslurl,
           endpoint:'addorupdateproduct',
@@ -211,11 +221,11 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
       },
       {
         label:"Not Launched",
-       // name:"launch_date",
+        name:"not_launch",
         //hint:'has child ???',
         type:'checkbox',
         labelPosition:'after',
-        value: null,
+        value: response.res[0].not_launch,
         dependent:[{
     
             condval:true,
@@ -223,7 +233,7 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
                 label:"Launch Date",
                 name:"launch_date",
                 type:'date',
-                value:response.res[0].created_at,
+                value:response.res[0].launch_date,
                 hint:"05/05/2020",
                 validations:[
                    // {rule:'required'}
@@ -237,17 +247,17 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
     } ,
     {
       label:"Verification Needed",
-     // name:"launch_date",
+      name:"verification_need",
       //hint:'has child ???',
       type:'checkbox',
       labelPosition:'after',
-      value: null,
+      value: response.res[0].verification_need,
       dependent:[{
     
           condval:true,
           field:{
               label:"Email",
-              name:"email",
+              name:"multiple_emails",
               type:"text",
               value:response.res[0].multiple_emails,
               validations:[
@@ -266,9 +276,9 @@ if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapsho
     
             {
                 label:"id",
-                name:"_id",
+                name:"id",
                 type:'hidden',
-                value:""
+                value:response.res[0]._id
             }
         ]
   }

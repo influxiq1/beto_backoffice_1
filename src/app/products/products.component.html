@@ -20,7 +20,7 @@
       </div>
       
       <div class="usermanagementpagecon">
-        <button mat-flat-button color="primary" [routerLink]="['/products/add']" class="products_addbtn">Add</button>
+        <button mat-flat-button color="primary" [routerLink]="['/products/add']" class="products_addbtn">Add Product</button>
       <lib-listing class="LIBproductmanagementpagecon" *ngIf="product_list!=null && product_list.length>0" 
         [datasource]="product_list"                                 
         [skip]="tabledata_header_skip"                         
