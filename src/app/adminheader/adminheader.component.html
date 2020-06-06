@@ -234,7 +234,7 @@
     </div>
   </li>
 
-  <li class="nav-item dropdown">
+  <li class="nav-item dropdown" *ngIf="cookie.get('usertype')!='rep'">
     <a class="nav-link dropdown-toggle" id="navbarDropdown1" role="button" data-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false"  [routerLink]="['/bulk-upload']">Upload Lead</a>
   </li>

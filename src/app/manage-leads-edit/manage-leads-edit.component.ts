@@ -27,6 +27,7 @@ export class ManageLeadsEditComponent implements OnInit {
   public categoryVal:any = [];
   public products:any = [];
 public leads_status:any =[{ val: 0,'name': 'Active' }, { val: 1, 'name': 'Inactive'}];
+public leads_statuss:any =[{ val: 0,'name': 'true' }, { val: 1, 'name': 'Inactive'}];
 
   constructor(public _apiService: ApiService, public http: HttpClient,public ActivatedRoute:ActivatedRoute,public commonservices: Commonservices,public cookieservice: CookieService) {
 

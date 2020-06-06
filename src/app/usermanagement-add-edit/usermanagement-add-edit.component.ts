@@ -12,6 +12,7 @@ export class UsermanagementAddEditComponent implements OnInit {
   formfieldrefresh: boolean = true;
   updatetable: boolean = true;
   formfieldrefreshdata: any = null;
+  public statesjson:any=[];
   //public formdata:any;
   formdata:any = {
     successmessage: "Added Successfully !!",
@@ -114,6 +115,18 @@ export class UsermanagementAddEditComponent implements OnInit {
         ]
       },
       {
+        label: "State",
+        name: "state",
+        value: '',
+        val:this.statesjson,
+        type: "select",
+        validations: [
+          //{ rule: 'required', message: "Enter Title" },
+          // {rule:'maxLength',value:10},
+          // {rule:'minLength',value: 2}
+        ]
+      },
+      {
         label: "Zip",
         name: "zip",
         value: '',
@@ -143,6 +156,14 @@ export class UsermanagementAddEditComponent implements OnInit {
     // {
     //   this.update(this.ActivatedRoute.snapshot.params._id);
     // }
+    this._apiService.getState().subscribe((response:any) => {
+      // console.log(response)
+       for (let i in response) {
+         this.statesjson.push(
+           { 'val': response[i].abbreviation, 'name': response[i].name },
+         );
+       }
+     })
   }
 
   ngOnInit() {
@@ -199,7 +220,8 @@ export class UsermanagementAddEditComponent implements OnInit {
           telephone: response.usereditdata.res[0].telephone, 
           companyname: response.usereditdata.res[0].companyname, 
           address: response.usereditdata.res[0].address, 
-          city: response.usereditdata.res[0].city, 
+          city: response.usereditdata.res[0].city,
+          state: response.usereditdata.res[0].state, 
           zip: response.usereditdata.res[0].zip, 
           // id: response.usereditdata.res[0]._id,
       

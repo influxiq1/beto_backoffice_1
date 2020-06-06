@@ -165,7 +165,10 @@ export class ApiService {
       duration: 6000,
     });
   }
- 
+  getState(){
+    var result = this._http.get("assets/data/states.json").pipe(map(response => response));
+    return result;
+  }
   
 
 
