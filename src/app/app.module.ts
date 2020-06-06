@@ -114,6 +114,7 @@ import { ProductsAddEditComponent } from './products-add-edit/products-add-edit.
 import { LoginAsARepComponent } from './login-as-a-rep/login-as-a-rep.component';
 import { ManageLeadsEditComponent } from './manage-leads-edit/manage-leads-edit.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { UsermanagementAddEditComponent } from './usermanagement-add-edit/usermanagement-add-edit.component';
 @NgModule({
   declarations: [
     ContractReviewVideoComponent,
@@ -201,7 +202,8 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     ProductsAddEditComponent,
     LoginAsARepComponent,
     ManageLeadsEditComponent,
-    PrivacyPolicyComponent
+    PrivacyPolicyComponent,
+    UsermanagementAddEditComponent
 
   ],
   imports: [

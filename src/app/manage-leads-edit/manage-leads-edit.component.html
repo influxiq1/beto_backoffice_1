@@ -15,9 +15,11 @@
      <h2 *ngIf="ActivatedRoute.snapshot.params._id ==null"> MANAGE LEADS ADD</h2> 
   </div>
   </div>
+  <div class="addformwrapper">
     <lib-showform *ngIf="formdata !=null"
     [formdata]="formdata"
     [formfieldrefresh]="formfieldrefresh"
-    [formfieldrefreshdata]="formfieldrefreshdata"
-> </lib-showform> 
+    [formfieldrefreshdata]="formfieldrefreshdata"> 
+  </lib-showform> 
+</div>
 <app-footer></app-footer>

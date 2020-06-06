@@ -34,9 +34,9 @@ export class UsermanagementComponent implements OnInit {
 
   public datasource: any = '';
 
-  public status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];   // use for status search
+  public status: any = [{ val: 0, 'name': 'Active' }, { val: 1, 'name': 'Inactive' }];   // use for status search
   public type:any = [{val:'rep', 'name': 'Rep'},{val:'contract_manager', 'name': 'Contract Manager'},{val:'regional_recruiter', 'name':'Regional Recruiter'},{val:'admin', 'name':'Admin'}]
-  statusarray: any = [{ val: 1, name: 'Active' }, { val: 0, name: 'Inactive' }];  //status name set
+  statusarray: any = [{ val: 0, name: 'Active' }, { val: 1, name: 'Inactive' }];  //status name set
 
   //emailarray: any = [{ val: 'sourotest222@gmail.com', name: 'sourotest222@gmail.com' }]; //Static Email search eg.
 
@@ -53,7 +53,7 @@ export class UsermanagementComponent implements OnInit {
 
   userdata_header_skip: any = ['lock', 'firstname', 'regionalrecruiter_id', 'unique_id', 'created_at', 'lastname', 'reactsum', 'newhirecatsum', 'is_contract_signed', 'calenderaccess', 'is_consultant', 'affid', 'worked', 'doctorcontact', 'experience', 'visited', 'recruiter', 'trainingpercentage', 'is_discovery', 'is_onboarding', '_id']; // use for Table Header Skip 
 
-
+  editroute: any = 'usermanagement/edit';
   updateendpoint = 'addorupdatedata';             // updateendpoint is use for data update endpoint
 
   deleteendpoint = 'deletesingledata';            // deleteendpoint is use for data delete endpoint
@@ -73,10 +73,10 @@ export class UsermanagementComponent implements OnInit {
   };
 
 
-  userdata_detail_skip: any = ['_id', 'created_at', 'fullname_s','reactsum','trainingpercentage','recruiter','parentname_s','parentname','newhirecatsum','lock','is_consultant','calenderaccess'];   // use for Table Detail Field Skip
+  userdata_detail_skip: any = ['_id', 'created_at', 'fullname_s','reactsum','trainingpercentage','recruiter','parentname_s','status','parentname','newhirecatsum','lock','is_consultant','calenderaccess'];   // use for Table Detail Field Skip
   libdata: any = {
     updateendpoint: 'togglestatus',                                        // update endpoint set
-    hideeditbutton: true,                                                  // (hide edit button)
+    hideeditbutton: false,                                                  // (hide edit button)
     hidedeletebutton: true,                                               // (hide delete button)
     hideviewbutton: false,                                                 // (hide view button)
     hidestatustogglebutton: false,                                        // (hide status toggle button)
@@ -89,7 +89,6 @@ export class UsermanagementComponent implements OnInit {
       { key: "email", val: "Email" },
       { key: "type", val: "Account Type" },
       { key: "legaldoc_doctype", val: "Leagal doc submission"},
-      { key: "status", val: "Status"},
       { key: "fullname", val: "Name" },
       { key: "phoneno" , val: "Phone Number"}
     ],                                                 // (hide action column)
@@ -147,13 +146,26 @@ export class UsermanagementComponent implements OnInit {
         cond: 'is_contract_signed_m',
         condval: 1
       },
+      {
+        label: "More Details",
+        type: 'action',
+        datatype: 'api',
+        endpoint: 'getuserdatabyid',
+        otherparam: [],
+        //cond:'status',
+        //condval:0,
+        param: 'id',
+        datafields: ['address','address1','address2', 'city', 'state', 'zip','_id'],
+        // refreshdata: true,
+        headermessage: 'Info',
+    }
     ]
   }
 
   sortdata: any = {
     "type": 'asc',                                              //  default sort data ascend and descend (desc)
     "field": 'fullname',                                          // default field for sorting
-    "options": ['fullname', 'status','email','parentname','created_datetime']                                      //  sorting fields options for this table
+    "options": ['fullname', 'email','parentname','created_datetime']                                      //  sorting fields options for this table
   };
 
   date_search_source: any = 'users';                        // this is a database collection or view name
@@ -169,7 +181,7 @@ export class UsermanagementComponent implements OnInit {
   search_settings: any = {
     datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date",submit:"Search",  field:"created_datetime"}],   
 
-    selectsearch:[{ label: 'Search By Type', field: 'type', values: this.type }],
+    selectsearch:[{ label: 'Search By Type', field: 'type', values: this.type },{ label: 'Search By Status', field: 'status', values: this.status }],
 
     textsearch: [{ label: "Search By Full Name", field: 'fullname_s' }, { label: "Search By Email", field: 'email' }, { label: "Search By Parent Name", field: 'parentname_s' } , { label: "Search By Phone Number", field: 'phoneno' }],  // this is use for  text search
   };

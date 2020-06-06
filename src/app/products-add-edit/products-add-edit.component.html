@@ -14,10 +14,12 @@
   </div>
   </div>
   <div>
-<lib-showform *ngIf="formdata !=null"
-[formdata]="formdata"
-[formfieldrefresh]="formfieldrefresh"
-[formfieldrefreshdata]="formfieldrefreshdata"
-> </lib-showform>
+  <div class="addformwrapper">
+    <lib-showform *ngIf="formdata !=null"
+    [formdata]="formdata"
+    [formfieldrefresh]="formfieldrefresh"
+    [formfieldrefreshdata]="formfieldrefreshdata"> 
+    </lib-showform>
+  </div>
 </div>
 <app-footer></app-footer>

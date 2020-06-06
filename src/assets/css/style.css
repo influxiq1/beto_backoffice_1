@@ -834,6 +834,69 @@ span.loginclass {
     padding: 6px;
     cursor: pointer;
 }
+/* ---------------------- start avijit css ------------------ */
+.addformwrapper .form{
+    display: block;
+    margin: 20px 0;
+    border: 1px solid #b9b8b8;
+    padding: 20px;
+    box-shadow: 0 0px 5px rgba(0,0,0,0.3);
+}
+
+.addformwrapper .form button{
+    margin: 5px 0;
+    margin-right: 5px;
+}
+.addformwrapper .form button:nth-child(1){
+    background: #00a8ef;
+}
+.addformwrapper .form button:nth-child(2){
+background: #ec6060;
+}
+.addformwrapper .form button:nth-child(3){
+    background: #0071bc;
+    }
+    .nextGen_admin_mainwrapper{
+        clear: both;
+    overflow: hidden;
+    }
+    .custom-modalbox .ng-star-inserted button{
+        background: #0990ca;
+        color: #fff;
+        margin: 10px 0;
+    }
+    .custom-modalbox .ng-star-inserted button:focus{outline: none;}
+
+    .custom-modalbox .ng-star-inserted.mat-dialog-actions button{
+        background: #262626;
+        display: block;
+        margin: 0 auto;
+        padding: 0 50px;
+    }
+    .custom-modalbox textarea{width: 100%;}
+    .custom-modalbox .mat-dialog-container{border: 5px solid #0990ca;}
+
+                      
+    .custom-modalbox .mat-list-item{                   
+        height: auto !important;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px !important;
+        margin-bottom: 10px !important;
+    }
+    .custom-modalbox .mat-list-item:nth-last-child(1){
+        border: 0;
+    }
+    .custom-modalbox .mat-subheader{
+        background: #0071bc;
+        color: #fff !important;
+        text-transform: uppercase;
+        padding: 10px 15px;
+        height: auto !important;
+}
+
+
+
+/* ---------------------- end avijit css ------------------ */
 
 @media screen and (max-width: 1840px){
 

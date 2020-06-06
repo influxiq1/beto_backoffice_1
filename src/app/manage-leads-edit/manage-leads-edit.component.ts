@@ -26,6 +26,7 @@ export class ManageLeadsEditComponent implements OnInit {
   formfieldrefreshdata:any=null;
   public categoryVal:any = [];
   public products:any = [];
+public leads_status:any =[{ val: 0,'name': 'Active' }, { val: 1, 'name': 'Inactive'}];
 
   constructor(public _apiService: ApiService, public http: HttpClient,public ActivatedRoute:ActivatedRoute,public commonservices: Commonservices,public cookieservice: CookieService) {
 
@@ -174,9 +175,9 @@ export class ManageLeadsEditComponent implements OnInit {
 {
   label:"Active",
   name:"status",
-  type:"checkbox",
-  //val:this.status,
-  value: false,
+  type:"select",
+  val:this.leads_status,
+  value: '',
   validations:[
     //{rule:'required',message:"Status Active Needs to be required"}
   ]
@@ -338,6 +339,16 @@ export class ManageLeadsEditComponent implements OnInit {
   validations:[
       {rule:'required',message: "Products Needs to be required"}
       ]
+},
+{
+  label:"Active",
+  name:"status",
+  type:"select",
+  val:this.leads_status,
+  value: response.res[0].status,
+  validations:[
+    //{rule:'required',message:"Status Active Needs to be required"}
+  ]
 },
 
         {
