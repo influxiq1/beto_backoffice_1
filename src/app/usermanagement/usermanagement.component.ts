@@ -51,7 +51,7 @@ export class UsermanagementComponent implements OnInit {
     "type": "Account Type"
   };
 
-  userdata_header_skip: any = ['lock', 'firstname', 'regionalrecruiter_id', 'unique_id', 'created_at', 'lastname', 'reactsum', 'newhirecatsum', 'is_contract_signed', 'calenderaccess', 'is_consultant', 'affid', 'worked', 'doctorcontact', 'experience', 'visited', 'recruiter', 'trainingpercentage', 'is_discovery', 'is_onboarding', '_id']; // use for Table Header Skip 
+  userdata_header_skip: any = ['lock', 'firstname', 'regionalrecruiter_id', 'unique_id', 'created_at', 'lastname', 'reactsum', 'newhirecatsum', 'is_contract_signed', 'calenderaccess', 'is_consultant', 'affid', 'worked', 'doctorcontact', 'experience', 'visited', 'recruiter', 'trainingpercentage', 'is_discovery', 'is_onboarding', '_id','parentname_s']; // use for Table Header Skip 
 
   editroute: any = 'usermanagement/edit';
   updateendpoint = 'addorupdatedata';             // updateendpoint is use for data update endpoint

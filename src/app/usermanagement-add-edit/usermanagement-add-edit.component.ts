@@ -47,17 +47,17 @@ export class UsermanagementAddEditComponent implements OnInit {
           // {rule:'minLength',value: 2}
         ]
       },
-      {
-        label: "Username",
-        name: "username",
-        value: '',
-        type: "text",
-        validations: [
-          //{ rule: 'required', message: "Enter Title" },
-          // {rule:'maxLength',value:10},
-          // {rule:'minLength',value: 2}
-        ]
-      },
+      // {
+      //   label: "Username",
+      //   name: "username",
+      //   value: '',
+      //   type: "text",
+      //   validations: [
+      //     //{ rule: 'required', message: "Enter Title" },
+      //     // {rule:'maxLength',value:10},
+      //     // {rule:'minLength',value: 2}
+      //   ]
+      // },
       {
         label: "Email",
         name: "email",
@@ -151,23 +151,36 @@ export class UsermanagementAddEditComponent implements OnInit {
       this.addidfield();
       setTimeout(()=>{
         this.getDataForCategory();
-      },50)
-      
+      },500)
     }
+
+    //   setTimeout(() => {
+    //     this.formfieldrefreshdata = {
+    //       field: 'addfromcontrol', 
+    //           value: {
+    //           label: "id",
+    //           name: "id",
+    //           type: 'hidden',
+    //           after: 'status',
+    //           value:''
+    //       }
+    //   };
+    //   },500)
+    //   this.getDataForCategory();
+    // }
    
   }
   addidfield(){
-    //setTimeout(() => {
       this.formfieldrefreshdata = {
         field: 'addfromcontrol', 
-            value: {
-            label: "id",
-            name: "id",
-            type: 'hidden',
-            after: 'zip'
-        }
+        value: {
+        label: "id",
+        name: "id",
+        type: 'hidden',
+        after: 'zip',
+        value:this.ActivatedRoute.snapshot.params._id
+    }
     };
-    // },100)
   }
 
   getDataForCategory() {
@@ -176,7 +189,7 @@ export class UsermanagementAddEditComponent implements OnInit {
       this.formdata.submittext = "Update";
       this.formdata.endpoint = 'editsingledata'
       this.ActivatedRoute.data.subscribe((response: any) => {
-        console.log("Result",response.usereditdata.res[0]._id);
+        console.log("Result",response.usereditdata.res[0]);
         //this.formfieldrefreshdata = { field: 'id', value: response.usereditdata.res[0]._id };
         let formdata: any = {
           firstname: response.usereditdata.res[0].firstname, 
@@ -188,22 +201,17 @@ export class UsermanagementAddEditComponent implements OnInit {
           address: response.usereditdata.res[0].address, 
           city: response.usereditdata.res[0].city, 
           zip: response.usereditdata.res[0].zip, 
-          id: response.usereditdata.res[0]._id,
+          // id: response.usereditdata.res[0]._id,
       
       }
     
       this.formfieldrefreshdata = { 
-        // field: 'addfromcontrol', 
-        // value: {
-        // label: "id",
-        // name: "id",
-        // type: 'text',
-        // after: 'zip',
-        // value:response.usereditdata.res[0]._id
-        // },
         formvaldata: formdata };
       }); 
       
     }
+
+
+    console.log('this.formfieldrefreshdata',this.formfieldrefreshdata)
   }
 }
