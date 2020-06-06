@@ -1705,42 +1705,19 @@ background: #ec6060;
 .main_inner_contentnew input{ box-shadow: none!important;}
 .main_inner_contentnew form{ text-align: center;}
 .main_inner_contentnew .form-group{ display: inline-block; text-align: left;  width: 300px; position: relative;  vertical-align: top;  }
-
 .form-groupbtndiv{ width: 100%!important; display: block; overflow: hidden; float: none;  text-align: center!important; margin-bottom: 0px!important; padding-bottom: 0px!important;}
-
 .form-groupbtndiv button{cursor: pointer;padding: 5px 13px 4px 13px;border: none;color: #fff;
     font-family: 'RalewayBold';font-size: 22px;text-transform: uppercase;border: none;margin-top: 10px; display: inline-block; margin-bottom: 10px;}
 .form-groupbtndiv button:focus{ box-shadow: none; }
 .form-groupbtndiv button:nth-child(1){ background: #00c0ff; }
 .form-groupbtndiv button:nth-child(2){ background: #000; margin-left: 10px; }
-
 .form-groupbtndiv button:nth-child(3){  margin-left: 10px; }
-
 .notestextarea{ width: 96%; margin-left: 2%; margin-right: 2%; margin-bottom: 15px; resize: none; padding: 10px; color: #495057;
-    background-color: #fff; 
-    border: 1px solid #ced4da;     height: 100px;}
-
-.main_inner_contentnew .form-group label {
-    font-family: 'RalewaySemiBold';
-
-    padding-right: 0; font-size: 16px;
-}
-.modal-content .booknow_button{background: #00a8ef;
-    font-size: 20px;
-    font-family: 'RalewaySemiBold';
-    text-decoration: none;
-     
-    padding: 5px 15px 4px 15px;
-    text-align: center;
-    cursor: pointer;
-    color: #fff;
-    text-transform: capitalize; border-radius: 5px; border: none;}
-
-    .modalh3{font-size: 24px;
-        font-family: 'OpenSansSemiBold'; text-align: center; margin: 0; padding: 0 0 10px 0; color: #1865a4;}
-
+    background-color: #fff; border: 1px solid #ced4da;height: 100px;}
+.main_inner_contentnew .form-group label {font-family: 'RalewaySemiBold';padding-right: 0; font-size: 16px;}
+.modal-content .booknow_button{background: #00a8ef;font-size: 20px;font-family: 'RalewaySemiBold';text-decoration: none;padding: 5px 15px 4px 15px;text-align: center;cursor: pointer;color: #fff;text-transform: capitalize; border-radius: 5px; border: none;}
+.modalh3{font-size: 24px;font-family: 'OpenSansSemiBold'; text-align: center; margin: 0; padding: 0 0 10px 0; color: #1865a4;}
 .timezone_class{ font-family: 'RalewaySemiBold'; font-size: 20px; color: #1865a4; margin: 0; padding: 0 0 15px 0; text-transform: capitalize;}
-
 
 @media screen and (max-width: 380px) {
     .main_inner_contentnew .form-group{ display: block;  width: auto; }
@@ -1749,63 +1726,19 @@ background: #ec6060;
 .user_management_wrapper .user_management_inner .inner_search_wrapper.as_inner_content_wrapper .inner_content_wrapper{width: 92%; margin: 0 auto;}
 .user_management_wrapper .user_management_inner .inner_search_wrapper.as_inner_content_wrapper .inner_content_wrapper b {display: flex;}
 .as_newcontainer{width: 1400px; margin: 0 auto;}
-.asnewtextwrapper h2{
-    margin: 0 auto;
-    padding: 27px 0;
-    text-align: center;
-    font-size: 34px;
-    color: #010b20;
-    font-family: "RalewayExtraBold";
-    text-transform: uppercase;
-    width: 90%;
-}
-.as_videomainwrapper{
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-    flex-wrap: wrap;
-}
-.as_videosubwrapper{
-    width: 30%;
-    background: #fff;
-    padding: 10px;
-    border: 1px solid #ddd;
-    box-shadow: 0 0 10px #ddd;
-    margin: 0.8%;
-}
-.as_videowrapper iframe{
-    height: 275px;
-    width: 100%;
-}
+.asnewtextwrapper h2{margin: 0 auto;padding: 27px 0;text-align: center;font-size: 34px;color: #010b20;
+    font-family: "RalewayExtraBold";text-transform: uppercase;width: 90%;}
+.as_videomainwrapper{display: flex;justify-content: center;align-items: stretch;flex-wrap: wrap;}
+.as_videosubwrapper{width: 30%;background: #fff;padding: 10px;border: 1px solid #ddd;box-shadow: 0 0 10px #ddd;margin: 0.8%;}
+.as_videowrapper iframe{height: 275px;width: 100%;}
 .as_videowrapper img{max-width: 100%; width: 100%;}
-.as_videowrapper{
-    background: #fff;
-    padding: 10px;
-    border: 1px solid #ddd;
-}
-.videotextwrapper h2{
-    font-size: 21px;
-    margin: 0;
-    padding: 10px 0;
-}
-.statusspan{
-    text-decoration: underline;
-    font-weight: bolder;
-    cursor: pointer;
-}
-.new_header .new_headers2 .navbar-nav li .blackbtn{
-    margin: 0 5px;
-    font-size: 14px;
-    margin-top: 5px;
-    background: none;
-    border: 1px solid #000;
-    color: #000;
-}
+.as_videowrapper{background: #fff;padding: 10px;border: 1px solid #ddd;}
+.videotextwrapper h2{font-size: 21px;margin: 0;padding: 10px 0;}
+.statusspan{text-decoration: underline;font-weight: bolder;cursor: pointer;}
+.new_header .new_headers2 .navbar-nav li .blackbtn{margin: 0 5px;font-size: 14px;margin-top: 5px;background: none;
+    border: 1px solid #000;color: #000;}
 .new_header .new_header2 .navbar-nav li .blackbtn:hover{background: #000; color: #fff;}
-.notdonepcat ul li a {
-    padding: 18px 10px !important;
-    font-size: 18px !important;
-    display: flex !important;
+.notdonepcat ul li a {padding: 18px 10px !important;font-size: 18px !important;display: flex !important;
 }
 .notdonepcat ul li a span {
     height: 25px;
@@ -1848,14 +1781,12 @@ background: #ec6060;
 /* ------------------- avijit css end ------------------- */
 
 .contract-list-divblock{ height: 300px; overflow-y: scroll; margin: 5px 0; border: solid 1px #ccc; padding: 0px; position: relative;}
-.modal-dialog < .brandmanagement_modal{
-    max-width: 90%!important;}
+.modal-dialog < .brandmanagement_modal{max-width: 90%!important;}
 
 
     @media (min-width: 576px){
-        .modal-dialog < .brandmanagement_modal{
-    max-width: 90%!important;
+        .modal-dialog < .brandmanagement_modal{max-width: 90%!important;
       
 }
 
-}
+}                                                                                                                                                                                                                                                                                                                                                                               
