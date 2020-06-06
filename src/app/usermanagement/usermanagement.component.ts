@@ -155,9 +155,9 @@ export class UsermanagementComponent implements OnInit {
         //cond:'status',
         //condval:0,
         param: 'id',
-        datafields: ['address','address1','address2', 'city', 'state', 'zip','_id'],
+        datafields: ['address', 'city', 'state', 'zip'],
         // refreshdata: true,
-        headermessage: 'Info',
+        headermessage: 'Address Details',
     }
     ]
   }
