@@ -109,7 +109,7 @@ export class ManageleadsComponent implements OnInit {
         { key: "date", val: "Date" },
         { key: "notescount", val:"Notes count"}
     ], // optional
-      updateendpoint: 'togglestatus', // update endpoint set
+      updateendpoint: 'togglestatusnew', // update endpoint set
       notes: {
         label: "Notes",
         addendpoint: "addnotedata",

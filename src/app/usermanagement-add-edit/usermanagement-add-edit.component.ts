@@ -32,9 +32,7 @@ export class UsermanagementAddEditComponent implements OnInit {
         value: '',
         type: "text",
         validations: [
-          //{ rule: 'required', message: "Enter Title" },
-          // {rule:'maxLength',value:10},
-          // {rule:'minLength',value: 2}
+          { rule: 'required', message: "Required First Name" },
         ]
       },
       {
@@ -43,31 +41,16 @@ export class UsermanagementAddEditComponent implements OnInit {
         value: '',
         type: "text",
         validations: [
-          //{ rule: 'required', message: "Enter Title" },
-          // {rule:'maxLength',value:10},
-          // {rule:'minLength',value: 2}
+          { rule: 'required', message: "Required Last Name" },
         ]
       },
-      // {
-      //   label: "Username",
-      //   name: "username",
-      //   value: '',
-      //   type: "text",
-      //   validations: [
-      //     //{ rule: 'required', message: "Enter Title" },
-      //     // {rule:'maxLength',value:10},
-      //     // {rule:'minLength',value: 2}
-      //   ]
-      // },
       {
         label: "Email",
         name: "email",
         value: '',
         type: "text",
         validations: [
-          //{ rule: 'required', message: "Enter Title" },
-          // {rule:'maxLength',value:10},
-          // {rule:'minLength',value: 2}
+          { rule: 'required', message: "Required Email" },
         ]
       },
       {
@@ -76,9 +59,7 @@ export class UsermanagementAddEditComponent implements OnInit {
         value: '',
         type: "text",
         validations: [
-          //{ rule: 'required', message: "Enter Title" },
-          // {rule:'maxLength',value:10},
-          // {rule:'minLength',value: 2}
+          { rule: 'required', message: "Required Phone Number" },
         ]
       },
       {
@@ -87,9 +68,7 @@ export class UsermanagementAddEditComponent implements OnInit {
         value: '',
         type: "text",
         validations: [
-          //{ rule: 'required', message: "Enter Title" },
-          // {rule:'maxLength',value:10},
-          // {rule:'minLength',value: 2}
+          { rule: 'required', message: "Required Company Name" },
         ]
       },
       {
@@ -98,9 +77,7 @@ export class UsermanagementAddEditComponent implements OnInit {
         value: '',
         type: "text",
         validations: [
-          //{ rule: 'required', message: "Enter Title" },
-          // {rule:'maxLength',value:10},
-          // {rule:'minLength',value: 2}
+          { rule: 'required', message: "Required Address" },
         ]
       },
       {
@@ -109,9 +86,7 @@ export class UsermanagementAddEditComponent implements OnInit {
         value: '',
         type: "text",
         validations: [
-          //{ rule: 'required', message: "Enter Title" },
-          // {rule:'maxLength',value:10},
-          // {rule:'minLength',value: 2}
+          { rule: 'required', message: "Required City" },
         ]
       },
       {
@@ -121,9 +96,8 @@ export class UsermanagementAddEditComponent implements OnInit {
         val:this.statesjson,
         type: "select",
         validations: [
-          //{ rule: 'required', message: "Enter Title" },
-          // {rule:'maxLength',value:10},
-          // {rule:'minLength',value: 2}
+          { rule: 'required', message: "Required State" },
+
         ]
       },
       {
@@ -132,19 +106,9 @@ export class UsermanagementAddEditComponent implements OnInit {
         value: '',
         type: "number",
         validations: [
-          //{ rule: 'required', message: "Enter Title" },
-          // {rule:'maxLength',value:10},
-          // {rule:'minLength',value: 2}
+          { rule: 'required', message: "Required Zip" },
         ]
       },
-
-
-    //   {
-    //     label:"id",
-    //     name:"id",
-    //     type:'hidden',
-    //     value:response.res[0]._id
-    // }
     ]
 
   }
@@ -152,12 +116,7 @@ export class UsermanagementAddEditComponent implements OnInit {
   
 
   constructor(public _apiService: ApiService, public ActivatedRoute: ActivatedRoute) { 
-    // if(this.ActivatedRoute.snapshot.params._id !=null && this.ActivatedRoute.snapshot.params._id !=undefined)
-    // {
-    //   this.update(this.ActivatedRoute.snapshot.params._id);
-    // }
     this._apiService.getState().subscribe((response:any) => {
-      // console.log(response)
        for (let i in response) {
          this.statesjson.push(
            { 'val': response[i].abbreviation, 'name': response[i].name },
@@ -174,21 +133,6 @@ export class UsermanagementAddEditComponent implements OnInit {
         this.getDataForCategory();
       },500)
     }
-
-    //   setTimeout(() => {
-    //     this.formfieldrefreshdata = {
-    //       field: 'addfromcontrol', 
-    //           value: {
-    //           label: "id",
-    //           name: "id",
-    //           type: 'hidden',
-    //           after: 'status',
-    //           value:''
-    //       }
-    //   };
-    //   },500)
-    //   this.getDataForCategory();
-    // }
    
   }
   addidfield(){
@@ -210,8 +154,7 @@ export class UsermanagementAddEditComponent implements OnInit {
       this.formdata.submittext = "Update";
       this.formdata.endpoint = 'editsingledata'
       this.ActivatedRoute.data.subscribe((response: any) => {
-        console.log("Result",response.usereditdata.res[0]);
-        //this.formfieldrefreshdata = { field: 'id', value: response.usereditdata.res[0]._id };
+        console.log("Result",response.usereditdata);
         let formdata: any = {
           firstname: response.usereditdata.res[0].firstname, 
           lastname: response.usereditdata.res[0].lastname, 
@@ -223,7 +166,6 @@ export class UsermanagementAddEditComponent implements OnInit {
           city: response.usereditdata.res[0].city,
           state: response.usereditdata.res[0].state, 
           zip: response.usereditdata.res[0].zip, 
-          // id: response.usereditdata.res[0]._id,
       
       }
     
