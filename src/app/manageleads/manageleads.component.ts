@@ -119,6 +119,8 @@ export class ManageleadsComponent implements OnInit {
         currentuserfullname: this.cookieservice.get('fullname'),
         header: 'emailStatus',
     },
+    updateendpointmany: 'update',
+    deleteendpointmany: 'delete',
       hideeditbutton: false, // (hide edit button)
       hidedeletebutton: false, // (hide delete button)
       hideviewbutton: false, // (hide view button)
