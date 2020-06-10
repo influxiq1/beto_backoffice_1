@@ -83,7 +83,7 @@ public leads_statuss:any =[{ val: 0,'name': 'true' }, { val: 1, 'name': 'Inactiv
             type:"text",
             value:'',
             validations:[
-                {rule:'required', message: "First Name Needs to be required"}
+                {rule:'required', message: "First Name is required"}
                 ]
         },
         {
@@ -93,7 +93,7 @@ public leads_statuss:any =[{ val: 0,'name': 'true' }, { val: 1, 'name': 'Inactiv
           type:"text",
           value:'',
           validations:[
-              {rule:'required',message: "Last Name Needs to be required"}
+              {rule:'required',message: "Last Name is required"}
               ]
       },
       {
@@ -103,7 +103,7 @@ public leads_statuss:any =[{ val: 0,'name': 'true' }, { val: 1, 'name': 'Inactiv
         type:"text",
         value:'',
         validations:[
-            {rule:'required',message: "Company Needs to be required"}
+            {rule:'required',message: "Company Name is required"}
             ]
     },
       {
@@ -113,8 +113,8 @@ public leads_statuss:any =[{ val: 0,'name': 'true' }, { val: 1, 'name': 'Inactiv
         type:"text",
         value:'',
         validations:[
-            {rule:'required', message: "Email field Needs to be required"},
-            {rule:'pattern',value: this.emailregex,message: "Must be a valid Email"}
+            {rule:'required', message: "Email Id is required"},
+            {rule:'pattern',value: this.emailregex,message: "Entre a valid Email"}
             ]
     },
     {
@@ -124,7 +124,7 @@ public leads_statuss:any =[{ val: 0,'name': 'true' }, { val: 1, 'name': 'Inactiv
       type:"textarea",
       value:'',
       validations:[
-          {rule:'required',message: "Address Needs to be required"},
+          {rule:'required',message: "Address is required"},
            {rule:'minLength',value: 5}
           ]
   },
@@ -135,7 +135,7 @@ public leads_statuss:any =[{ val: 0,'name': 'true' }, { val: 1, 'name': 'Inactiv
     type:"text",
     value:'',
     validations:[
-        {rule:'required',message: "Phone Number Needs to be required"},
+        {rule:'required',message: "Phone Number is required"},
          {rule:'maxLength',value:10,message: "Enter Valid Number"},
          {rule:'minLength',value: 10,message: "Enter Valid Number"}
         ]
@@ -147,7 +147,7 @@ public leads_statuss:any =[{ val: 0,'name': 'true' }, { val: 1, 'name': 'Inactiv
   type:"text",
   value:'',
   validations:[
-      {rule:'required',message: "Website Url Needs to be required"}
+      {rule:'required',message: "Website Url is required"}
       ]
 },
 {
@@ -157,7 +157,7 @@ public leads_statuss:any =[{ val: 0,'name': 'true' }, { val: 1, 'name': 'Inactiv
   type:"number",
   value:'',
   validations:[
-      {rule:'required',message: "Mobile Number Needs to be required"},
+      {rule:'required',message: "Mobile Number is required"},
        {rule:'maxLength',value:10,message: "Enter Valid Number"},
        {rule:'minLength',value: 10,message: "Enter Valid Number"}
       ]
@@ -170,7 +170,7 @@ public leads_statuss:any =[{ val: 0,'name': 'true' }, { val: 1, 'name': 'Inactiv
   type:"select",
   value:'',
   validations:[
-      {rule:'required',message: "Products Needs to be required"}
+      {rule:'required',message: "Products Name is required"}
       ]
 },
 {
@@ -180,7 +180,7 @@ public leads_statuss:any =[{ val: 0,'name': 'true' }, { val: 1, 'name': 'Inactiv
   val:this.leads_status,
   value: '',
   validations:[
-    //{rule:'required',message:"Status Active Needs to be required"}
+    {rule:'required',message:"Seleect Status, Active or Inactive"}
   ]
 },
 {
@@ -252,7 +252,7 @@ public leads_statuss:any =[{ val: 0,'name': 'true' }, { val: 1, 'name': 'Inactiv
             value:response.res[0].firstname,
             type:"text",
             validations:[
-                {rule:'required', message: "First Name Needs to be required"}
+                {rule:'required', message: "First Name is required"}
                 ]
         },
         {
@@ -262,7 +262,7 @@ public leads_statuss:any =[{ val: 0,'name': 'true' }, { val: 1, 'name': 'Inactiv
           value:response.res[0].lastname,
           type:"text",
           validations:[
-              {rule:'required',message: "Last Name Needs to be required"}
+              {rule:'required',message: "Last Name is required"}
               ]
       },
       {  
@@ -271,7 +271,7 @@ public leads_statuss:any =[{ val: 0,'name': 'true' }, { val: 1, 'name': 'Inactiv
         type:"text",
         value:response.res[0].company,
         validations:[
-            {rule:'required',message: "Company Needs to be required"}
+            {rule:'required',message: "Company is required"}
             ]
     },
       {
@@ -281,8 +281,8 @@ public leads_statuss:any =[{ val: 0,'name': 'true' }, { val: 1, 'name': 'Inactiv
         value:response.res[0].email,
         type:"text",
         validations:[
-            {rule:'required', message: "Email field Needs to be required"},
-            {rule:'pattern',value: this.emailregex,message: "Must be a valid Email"}
+            {rule:'required', message: "Email Id is required"},
+            {rule:'pattern',value: this.emailregex,message: "Enter a valid Email"}
             ]
     },
     {
@@ -292,7 +292,7 @@ public leads_statuss:any =[{ val: 0,'name': 'true' }, { val: 1, 'name': 'Inactiv
       value:response.res[0].address,
       type:"textarea",
       validations:[
-          {rule:'required',message: "Address Needs to be required"},
+          {rule:'required',message: "Address is required"},
            {rule:'minLength',value: 5}
           ]
   },
@@ -303,7 +303,7 @@ public leads_statuss:any =[{ val: 0,'name': 'true' }, { val: 1, 'name': 'Inactiv
     value:response.res[0].phoneno,
     type:"text",
     validations:[
-        {rule:'required',message: "Phone Number Needs to be required"},
+        {rule:'required',message: "Phone Number is required"},
          {rule:'maxLength',value:10,message: "Enter Valid Number"},
          {rule:'minLength',value: 10,message: "Enter Valid Number"}
         ]
@@ -315,7 +315,7 @@ public leads_statuss:any =[{ val: 0,'name': 'true' }, { val: 1, 'name': 'Inactiv
   value:response.res[0].website,
   type:"text",
   validations:[
-      {rule:'required',message: "Website Url Needs to be required"}
+      {rule:'required',message: "Website Url is required"}
       ]
 },
 {
@@ -325,7 +325,7 @@ public leads_statuss:any =[{ val: 0,'name': 'true' }, { val: 1, 'name': 'Inactiv
   value:response.res[0].mobile,
   type:"number",
   validations:[
-      {rule:'required',message: "Mobile Number Needs to be required"},
+      {rule:'required',message: "Mobile Number is required"},
        {rule:'maxLength',value:10,message: "Enter Valid Number"},
        {rule:'minLength',value: 10,message: "Enter Valid Number"}
       ]
@@ -338,7 +338,7 @@ public leads_statuss:any =[{ val: 0,'name': 'true' }, { val: 1, 'name': 'Inactiv
   val:this.products,
   type:"select",
   validations:[
-      {rule:'required',message: "Products Needs to be required"}
+      {rule:'required',message: "Products Name is required"}
       ]
 },
 {
@@ -348,7 +348,7 @@ public leads_statuss:any =[{ val: 0,'name': 'true' }, { val: 1, 'name': 'Inactiv
   val:this.leads_status,
   value: response.res[0].status,
   validations:[
-    //{rule:'required',message:"Status Active Needs to be required"}
+    {rule:'required',message:"Seleect Status, Active or Inactive"}
   ]
 },
 

@@ -9,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsermanagementAddEditComponent implements OnInit {
 
+  emailregex: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
   formfieldrefresh: boolean = true;
   updatetable: boolean = true;
   formfieldrefreshdata: any = null;
@@ -51,6 +53,7 @@ export class UsermanagementAddEditComponent implements OnInit {
         type: "text",
         validations: [
           { rule: 'required', message: "Required Email" },
+          {rule:'pattern',value: this.emailregex,message: "Entre a valid Email"}
         ]
       },
       {

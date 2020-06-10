@@ -51,7 +51,7 @@ else {
         value:'',
         type:"text",
         validations:[
-            {rule:'required'},
+            {rule:'required', message: "Products Name is required"},
             // {rule:'maxLength',value:10},
             // {rule:'minLength',value: 2}
             ]
@@ -63,7 +63,7 @@ else {
       value:'',
       type:"textarea",
       validations:[
-          {rule:'required'},
+          {rule:'required' , message: "Description is required"},
           // {rule:'maxLength',value:10},
           // {rule:'minLength',value: 2}
           ]
@@ -122,7 +122,7 @@ else {
           type:"text",
           validations:[
               //{rule:'required'},
-              {rule:'pattern',value: this.emailregex,message: "Must be a valid Email"}
+              {rule:'pattern',value: this.emailregex,message: "Enter a valid Email"}
               // {rule:'maxLength',value:10},
               // {rule:'minLength',value: 2}
               ]
@@ -192,7 +192,7 @@ else {
             value:response.res[0].productname,
             type:"text",
             validations:[
-                //{rule:'required'},
+                {rule:'required' , message: "Products Name is required"},
                 // {rule:'maxLength',value:10},
                 // {rule:'minLength',value: 2}
                 ]
@@ -204,7 +204,7 @@ else {
           value:response.res[0].description,
           type:"textarea",
           validations:[
-              {rule:'required'},
+              {rule:'required' , message: "Description is required"},
               // {rule:'maxLength',value:10},
               // {rule:'minLength',value: 2}
               ]
@@ -262,7 +262,7 @@ else {
               value:response.res[0].multiple_emails,
               validations:[
                  // {rule:'required'},
-                 // {rule:'pattern',value: this.emailregex,message: "Must be a valid Email"}
+                  {rule:'pattern',value: this.emailregex,message: "Entre a valid Email"}
                   // {rule:'maxLength',value:10},
                   // {rule:'minLength',value: 2}
                   ]
