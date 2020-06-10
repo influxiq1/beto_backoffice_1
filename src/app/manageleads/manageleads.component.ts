@@ -106,7 +106,7 @@ export class ManageleadsComponent implements OnInit {
         { key: "email", val: "Email Id" },
         { key: "address", val: "Address" },
         { key: "phoneno", val: "Phone No" },
-        { key: "date", val: "Date" },
+        { key: "date", val: "Date Added" },
         { key: "notescount", val:"Notes count"}
     ], // optional
       updateendpoint: 'togglestatusnew', // update endpoint set

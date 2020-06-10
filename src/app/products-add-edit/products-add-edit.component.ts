@@ -35,10 +35,10 @@ else {
   this.formdata = {
     successmessage:"Added Successfully !!", 
     redirectpath:"/products",
-    submittext:"Add Product",
+    submittext:"Add",
     canceltext: "Cancel",
     cancelroute: '/products',
-    resettext:"Reset This",
+    resettext:"Reset",
     submitactive:true, //optional, default true
     apiUrl:this._apiService.nodesslurl,
     endpoint:'addorupdateproduct',
@@ -175,10 +175,10 @@ else {
        this.formdata={
           successmessage:"Updated Successfully !!",
           redirectpath:"/products",
-          submittext:"Update Product",
+          submittext:"Update",
           canceltext: "Cancel",
           cancelroute: '/products',
-          resettext:"Reset This",
+          resettext:"Reset",
           submitactive:true, //optional, default true
          apiUrl:this._apiService.nodesslurl,
           endpoint:'addorupdateproduct',

@@ -67,10 +67,10 @@ public leads_statuss:any =[{ val: 0,'name': 'true' }, { val: 1, 'name': 'Inactiv
       this.formdata={
         successmessage:"Added Successfully !!",
         redirectpath:"/manage-leads",
-        submittext:"Add Leads",
+        submittext:"Add",
         canceltext: "Cancel",
         cancelroute: '/manage-leads',
-        resettext:"Reset This",
+        resettext:"Reset",
         submitactive:true, //optional, default true
        apiUrl:this._apiService.nodesslurl,
         endpoint:'addorupdateleads',
@@ -174,7 +174,7 @@ public leads_statuss:any =[{ val: 0,'name': 'true' }, { val: 1, 'name': 'Inactiv
       ]
 },
 {
-  label:"Active",
+  label:"Status",
   name:"status",
   type:"select",
   val:this.leads_status,
@@ -342,7 +342,7 @@ public leads_statuss:any =[{ val: 0,'name': 'true' }, { val: 1, 'name': 'Inactiv
       ]
 },
 {
-  label:"Active",
+  label:"Status",
   name:"status",
   type:"select",
   val:this.leads_status,

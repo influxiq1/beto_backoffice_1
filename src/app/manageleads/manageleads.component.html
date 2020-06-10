@@ -12,7 +12,7 @@
   
         <div class="user_management_inner">
       
-         <h2> MANAGE LEADS</h2>
+         <h2> LEAD LIST</h2>
           
       
       
@@ -21,7 +21,7 @@
       
       <div class="usermanagementpagecon">
         <div *ngIf="cookieservice.get('usertype')=='rep'">
-          <button mat-flat-button color="primary" [routerLink]="['/manage-leads/add']">Add Leads</button>
+          <button mat-flat-button class="leads_addbtn" color="primary" [routerLink]="['/manage-leads/add']">Add Leads</button>
         </div>
       <lib-listing *ngIf="manageleads!=null && manageleads.length>0"
         [datasource]="manageleads"
