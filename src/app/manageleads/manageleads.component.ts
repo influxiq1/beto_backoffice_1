@@ -73,7 +73,7 @@ export class ManageleadsComponent implements OnInit {
   sortdata: any = {
     "type": 'asc', // default sort data ascend and descend (desc)
     "field": 'fullname', // default field for sorting
-    "options": ['fullname','date'] // sorting fields options for this table
+    "options": ['fullname','date','status'] // sorting fields options for this table
   };
 
   date_search_source: any = 'leads'; // this is a database collection or view name
