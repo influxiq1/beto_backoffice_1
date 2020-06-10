@@ -62,7 +62,9 @@ export class ProductsComponent implements OnInit {
     hidedeletebutton: false,                         // (hide delete button)
     hideviewbutton: true,                          // (hide view button)
     hidestatustogglebutton: true,                  // (hide status toggle button)
-    hideaction: false,                              // (hide action column)
+    hideaction: false,
+    updateendpointmany: 'update',
+    deleteendpointmany: 'delete',                              // (hide action column)
 
     tableheaders: ['productname', 'description', 'launch_date', 'status' , 'verification_need'], //not required (table header name)
     custombuttons: []
@@ -88,7 +90,7 @@ export class ProductsComponent implements OnInit {
 
     //  datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date",submit:"Search",  field:"created_at"}],   // this is use for  date search //created at = field in res which gives date in unix format that changes to ist using moment.js
 
-    //selectsearch:[{ label: 'Search By Status', field: 'status', values: this.status }], // this is use for  select search
+    selectsearch:[{ label: 'Search By Status', field: 'status', values: this.status }], // this is use for  select search
 
     //productsearch: [{ label: "Search By Product", field: 'productname', submit: "Search" }],  // this is use for  text search
 

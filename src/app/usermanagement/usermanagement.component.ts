@@ -91,9 +91,11 @@ export class UsermanagementComponent implements OnInit {
       { key: "legaldoc_doctype", val: "Leagal doc submission"},
       { key: "fullname", val: "Name" },
       { key: "phoneno" , val: "Phone Number"}
-    ],                                                 // (hide action column)
+    ], 
+    updateendpointmany: 'update',
+    deleteendpointmany: 'delete',                                                // (hide action column)
 
-    tableheaders: ['fullname', 'email', 'type', 'parentname', 'phoneno', 'status', 'created_datetime'], //not required (table header name)
+    tableheaders: ['fullname', 'phoneno', 'email', 'parentname', 'type', 'created_datetime', 'status' ], //not required (table header name)
     custombuttons: [
       {
         label: "delete",

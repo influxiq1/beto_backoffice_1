@@ -61,8 +61,8 @@ export class BulkLeadListComponent implements OnInit, AfterViewInit {
     hideviewbutton: true,                          // (hide view button)
     hidestatustogglebutton: true,                  // (hide status toggle button)
     hideaction: true,                              // (hide action column)
-
-    tableheaders: ['date_added','fullName','Phone','CompanyName','Address','Web','Email','batch_name','created_by','productName'], //not required (table header name)
+    deleteendpointmany: 'delete',
+    tableheaders: ['fullName','Phone','Address','Email','productName','CompanyName','batch_name','Web','created_by','date_added'], //not required (table header name)
     custombuttons: []
   }
 

@@ -24,7 +24,7 @@ export class ManageleadsComponent implements OnInit {
   public datasource: any = '';
 
   statusarray: any = [{ val: 0, 'name': 'Active' }, { val: 1, 'name': 'Inactive' }]; // use for status search
-
+  status:any =[{ val: 0, 'name':'Active' }, { val:1, 'name': 'Inactive'}];
   //statusarray: any = [{ val: '', name: '' }, { val: 'seen', name: 'Seen' }, { val: 'send', name: 'Email Send' }]; //status name set
 
   //emailarray: any = [{val: 'sourotest222@gmail.com', name: 'sourotest222@gmail.com'}, {val: 'octtest@yopmail.com', name: 'octtest@yopmail.com'}, {val: 'septest@yopmail.com', name: 'septest@yopmail.com'}]; //Static Email search eg.
@@ -37,16 +37,17 @@ export class ManageleadsComponent implements OnInit {
 
     'fullname': "Full name",
     'company': "Company",
-    'website': "Website",
     'email': "Email Id",
     'phoneno': "Phone No",
     'mobile': "Mobile No",
     'address': "Address",
     'only_productname': "Products",
-    'status': "Status"
+    'status': "Status",
+    'date':"Date Join"
+
   };
 
-  manageleads_header_skip: any = ['_id', 'appointment_count', 'created_at', 'created_by', 'date', 'firstname', 'lastname', 'mobile', 'notescount', 'pricepoint', 'product', 'rep_name', 'youtube', 'productname','emailStatus']; // use for Table Header Skip
+  manageleads_header_skip: any = ['_id', 'appointment_count','website', 'created_at', 'created_by', 'firstname', 'lastname', 'mobile', 'notescount', 'pricepoint', 'product', 'rep_name', 'youtube', 'productname','emailStatus']; // use for Table Header Skip
 
   manageleads_detail_skip: any = ['_id','created_by','product','productname','created_at','rep_name','only_productname','appointment_count','emailStatus','pricepoint','youtube','firstname','lastname']; // use for Table Detail Field Skip
   updateendpoint = 'addorupdatedata'; // updateendpoint is use for data update endpoint
@@ -72,7 +73,7 @@ export class ManageleadsComponent implements OnInit {
   sortdata: any = {
     "type": 'asc', // default sort data ascend and descend (desc)
     "field": 'fullname', // default field for sorting
-    "options": ['fullname'] // sorting fields options for this table
+    "options": ['fullname','date'] // sorting fields options for this table
   };
 
   date_search_source: any = 'leads'; // this is a database collection or view name
@@ -86,6 +87,7 @@ export class ManageleadsComponent implements OnInit {
 
   // this is search block
   search_settings: any = {
+    selectsearch: [{ label: 'Search By Status', field: 'status' , values: this.status}],
 
     datesearch: [{ startdatelabel: "Start Date", enddatelabel: "End Date", submit: "Search", field: "created_at" }], // this is use for date search //created at = field in res which gives date in unix format that changes to ist using moment.js
 
@@ -127,7 +129,7 @@ export class ManageleadsComponent implements OnInit {
       hidestatustogglebutton: false, // (hide status toggle button)
       hideaction: false, // (hide action column)
   
-      tableheaders: ['fullname', 'company', 'website', 'email', 'phoneno', 'mobile', 'address', 'only_productname','status'], //not required (table header name)
+      tableheaders: ['fullname','email', 'phoneno', 'mobile', 'address', 'company', 'only_productname','date','status'], //not required (table header name)
       custombuttons: [
         {
           label: "Discovery Call", //  button name

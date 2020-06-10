@@ -20,9 +20,8 @@
       </div>
       
       <div class="usermanagementpagecon">
-        <div *ngIf="cookieservice.get('usertype')=='rep'">
           <button mat-flat-button class="leads_addbtn" color="primary" [routerLink]="['/manage-leads/add']">Add Leads</button>
-        </div>
+       
       <lib-listing *ngIf="manageleads!=null && manageleads.length>0"
         [datasource]="manageleads"
         [skip]="manageleads_header_skip"
