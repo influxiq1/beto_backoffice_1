@@ -84,8 +84,7 @@ export class BulkLeadListComponent implements OnInit, AfterViewInit {
   // this is search block
   search_settings: any = {
 
-    datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date",submit:"Search",  field:"created_datetime"}],   
-
+    datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date", submit:"Search1",  field:"date_added"}], 
 
     // selectsearch:[{ label: 'Search By Product', field: 'prodct_id', values: this.product_list }], // this is use for  select search
 
