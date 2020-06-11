@@ -332,7 +332,7 @@ export class ContractManagerListComponent implements OnInit {
           }
       
         
-  
+
       }
       this._apiService.getDataforAdminList(product_endpoint, dataa).subscribe((res: any) => {
         // console.log('in constructor');

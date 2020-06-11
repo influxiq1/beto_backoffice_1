@@ -23,8 +23,8 @@ export class ManageleadsComponent implements OnInit {
   manageleads: any = [];
   public datasource: any = '';
 
-  statusarray: any = [{ val: 0, 'name': 'Active' }, { val: 1, 'name': 'Inactive' }]; // use for status search
-  status:any =[{ val: 0, 'name':'Active' }, { val:1, 'name': 'Inactive'}];
+  statusarray: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }]; // use for status search
+  status:any =[{ val: 1, 'name':'Active' }, { val:0, 'name': 'Inactive'}];
   //statusarray: any = [{ val: '', name: '' }, { val: 'seen', name: 'Seen' }, { val: 'send', name: 'Email Send' }]; //status name set
 
   //emailarray: any = [{val: 'sourotest222@gmail.com', name: 'sourotest222@gmail.com'}, {val: 'octtest@yopmail.com', name: 'octtest@yopmail.com'}, {val: 'septest@yopmail.com', name: 'septest@yopmail.com'}]; //Static Email search eg.
