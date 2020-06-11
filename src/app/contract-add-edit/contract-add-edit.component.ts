@@ -21,9 +21,9 @@ export class ContractAddEditComponent implements OnInit {
   public id: any;
   public editid: any;
   public formName: string;
-  public isReadOnly:boolean;
+  public isReadOnly: boolean;
   constructor(formBuilder: FormBuilder, public _commonservices: Commonservices, public _cookieservice: CookieService, public _http: HttpClient, public route: ActivatedRoute, public router: Router) {
-    if(this._cookieservice.get('usertype') == 'rep'){
+    if (this._cookieservice.get('usertype') == 'rep') {
       this.isReadOnly = true;
     }
     this.formBuilder = formBuilder;
@@ -33,7 +33,7 @@ export class ContractAddEditComponent implements OnInit {
       // contentBottiom: ['', Validators.required],
       product_id: ['', Validators.required],
       notes: [''],
-      status:['']
+      status: ['']
     });
 
     this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
@@ -41,25 +41,25 @@ export class ContractAddEditComponent implements OnInit {
 
   ngOnInit() {
 
-    this.route.params.subscribe(params=>{
-      this.id=params['id'];
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
       console.log(this.id);
     });
 
     const link = this._commonservices.nodesslurl + 'datalist?token=' + this._cookieservice.get('jwttoken');
-    this._http.post(link, { source: 'products',"condition": {"status":true}  })
+    this._http.post(link, { source: 'products', 'condition': {'status': true}  })
       .subscribe((res: any) => {
         this.productList = res.res;
         console.log(this.productList);
       });
 
-      if(this.id!=null){
+      if (this.id != null) {
       this.formName = 'Edit';
      this.getedittrainingsection();
         } else {
           this.formName = 'Add';
         }
-    
+
   }
 
   togglestatus(item: any) {
@@ -80,13 +80,13 @@ export class ContractAddEditComponent implements OnInit {
 
     if (this.contractForm.valid) {
       let data: any;
-      data=this.contractForm.value;
-      data.created_by = this._cookieservice.get('userid')
-    if(this.editid!=null){
-      data.id=this.editid;
+      data = this.contractForm.value;
+      data.created_by = this._cookieservice.get('userid');
+    if (this.editid != null) {
+      data.id = this.editid;
     }
-      let link = this._commonservices.nodesslurl + 'addorupdatedata?token=' + this._cookieservice.get('jwttoken');
-      this._http.post(link, { source: 'contractDetails', data: data}) 
+      const link = this._commonservices.nodesslurl + 'addorupdatedata?token=' + this._cookieservice.get('jwttoken');
+      this._http.post(link, { source: 'contractDetails', data: data})
         .subscribe((res: any) => {
           console.log(res);
           if (res.status == 'success') {
@@ -96,7 +96,7 @@ export class ContractAddEditComponent implements OnInit {
         });
     }
   }
-  cancel(){
+  cancel() {
     if (this.id == '' && this.id == null) {
       this.contractForm.reset();
     }
@@ -107,12 +107,12 @@ export class ContractAddEditComponent implements OnInit {
   getedittrainingsection()  {
 
     console.log('called check');
-    const link = this._commonservices.nodesslurl+'datalist?token='+this._cookieservice.get('jwttoken');
-    this._http.post(link,{source:'contractDetails',condition:{'_id_object':this.id}})
-        .subscribe((res:any)=>{
-          
-          let datalist2=[];
-          datalist2=res.res;
+    const link = this._commonservices.nodesslurl + 'datalist?token=' + this._cookieservice.get('jwttoken');
+    this._http.post(link, {source: 'contractDetails', condition: {'_id_object': this.id}})
+        .subscribe((res: any) => {
+
+          let datalist2 = [];
+          datalist2 = res.res;
           // this.dataForm.controls['id'].patchValue(datalist2[0]._id);
           this.contractForm.controls['contentTop'].patchValue(datalist2[0].contentTop);
           // this.contractForm.controls['contentBottiom'].patchValue(datalist2[0].contentBottiom);
@@ -120,7 +120,7 @@ export class ContractAddEditComponent implements OnInit {
           this.contractForm.controls['notes'].patchValue(datalist2[0].notes);
           this.contractForm.controls['status'].patchValue(datalist2[0].status);
           this.editid = datalist2[0]._id;
-        })
+        });
 
   }
 

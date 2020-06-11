@@ -19,24 +19,22 @@ export class DashboardComponent implements OnInit {
     public totalnewhiretraining: any;
     public traininglist: any = [];
 
-    constructor(public router:Router,public http:HttpClient,public cookie:CookieService,public commonservices:Commonservices, private route: ActivatedRoute)
-    {
-
-
-        
+    constructor(public router: Router, public http: HttpClient, public cookie: CookieService, public commonservices: Commonservices, private route: ActivatedRoute) {
 
 
 
-        this.commonservices=commonservices;
-        if(this.cookie.get('userid')!=null){
+
+
+
+        this.commonservices = commonservices;
+        if (this.cookie.get('userid') != null) {
             // this.gettrainingsection();
           //  this.getreplist();
             // this.gettraininglession();
             this.getlegaldocs();
         }
     }
-    ngOnInit()
-    {
+    ngOnInit() {
         this.trainingcenterdetails();
 
         this.route.data.forEach((data) => {
@@ -85,24 +83,23 @@ export class DashboardComponent implements OnInit {
                 }
             })
     }*/
-    getlegaldocs()
-    {
-        const link = this.commonservices.nodesslurl+'datalist?token='+this.cookie.get('jwttoken');
+    getlegaldocs() {
+        const link = this.commonservices.nodesslurl + 'datalist?token=' + this.cookie.get('jwttoken');
         // this.http.post(link,{source:'legaldocuser_view'})
-        this.http.post(link,{source:'user_regional_legaldoc_view'})
-    .subscribe(res=>{
+        this.http.post(link, {source: 'user_regional_legaldoc_view'})
+    .subscribe(res => {
                 let result;
-                result=res;
+                result = res;
                // console.log('result.......');
                // console.log(result);
-                if(result.status=='error'){
+                if (result.status == 'error') {
                   // console.log('Oopsss');
-                }else {
-                    this.legaldocs=result.res;
+                } else {
+                    this.legaldocs = result.res;
                    // console.log('Get legaldocs Data');
                    // console.log(this.legaldocs);
                 }
-            })
+            });
     }
 //     gettraininglession()
 //     {
@@ -124,8 +121,7 @@ export class DashboardComponent implements OnInit {
 //                 }
 //             })
 // }
-    trainingcenterdetails()
-    {
+    trainingcenterdetails() {
         // const link = this.commonservices.nodesslurl+'datalist?token='+this.cookie.get('jwttoken');
         // this.http.post(link,{source:'user_training'})
         //     .subscribe(res=>{
@@ -136,27 +132,27 @@ export class DashboardComponent implements OnInit {
         //        // console.log(this.getonedetails);
         //     });
 
-             const link1 = this.commonservices.nodesslurl+'datalist?token='+this.cookie.get('jwttoken');
-            this.http.post(link1,{source:'training_group'})
-                .subscribe(res=>{
+             const link1 = this.commonservices.nodesslurl + 'datalist?token=' + this.cookie.get('jwttoken');
+            this.http.post(link1, {source: 'training_group'})
+                .subscribe(res => {
                     let result;
-                    result=res;
+                    result = res;
                    // console.log('training group  details');
                    // console.log(result);
 
-                    if(result['res']!=null && result['res'][0]!=null && result['res'][0]['_id']=='New Hire Trainning' ){
-                        this.totalnewhiretraining=result['res'][0]['count'];
+                    if (result['res'] != null && result['res'][0] != null && result['res'][0]['_id'] == 'New Hire Trainning' ) {
+                        this.totalnewhiretraining = result['res'][0]['count'];
                     }
 
-                    if(result['res']!=null && result['res'][0]!=null && result['res'][0]['_id']=='Rep Training' ){
-                        this.totalreptraining=result['res'][0]['count'];
+                    if (result['res'] != null && result['res'][0] != null && result['res'][0]['_id'] == 'Rep Training' ) {
+                        this.totalreptraining = result['res'][0]['count'];
                     }
-                    if(result['res']!=null && result['res'][1]!=null && result['res'][1]['_id']=='New Hire Trainning' ){
-                        this.totalnewhiretraining=result['res'][1]['count'];
+                    if (result['res'] != null && result['res'][1] != null && result['res'][1]['_id'] == 'New Hire Trainning' ) {
+                        this.totalnewhiretraining = result['res'][1]['count'];
                     }
 
-                    if(result['res']!=null && result['res'][1]!=null && result['res'][1]['_id']=='Rep Training' ){
-                        this.totalreptraining=result['res'][1]['count'];
+                    if (result['res'] != null && result['res'][1] != null && result['res'][1]['_id'] == 'Rep Training' ) {
+                        this.totalreptraining = result['res'][1]['count'];
                     }
 
                    // console.log('this.totalreptraining-'+this.totalreptraining);

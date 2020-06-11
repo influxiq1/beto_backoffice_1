@@ -12,25 +12,25 @@ export class UsersearchPipe implements PipeTransform {
         // console.log('arg' + args);
         //  console.log('value');
         //  console.log(value);
-        var val1: any = [];
-        var flag: any = 0;
+        let val1: any = [];
+        const flag: any = 0;
 
         // return null;
-        if (typeof(args)!= 'undefined') {
+        if (typeof(args) != 'undefined') {
             args = args.toLocaleLowerCase();
 
             if (args === '') {
                 return value;
             } else {
                 val1 = [];
-                let  c = 0;
+                const  c = 0;
 
                 args = args.split('|');
                 //   console.log('arg' + args);
                 //  console.log(args);
-                for (let x in args) {
+                for (const x in args) {
 
-                    let c =0;
+                    let c = 0;
                     // val1[c]=[];
                     if (args[x] != '') {
                         //  console.log('arg val ===' + args[x]);
@@ -51,18 +51,18 @@ export class UsersearchPipe implements PipeTransform {
         // return value;
     }
     callf(vals , args) {
-        let value = vals;
+        const value = vals;
 
-        var val1: any = [];
-        var flag: any = 0;
-        for (let key in vals) {
+        const val1: any = [];
+        let flag: any = 0;
+        for (const key in vals) {
 
             flag = 0;
             //  console.log('args');
             //  console.log(args);
             //  console.log('value');
             //  console.log(value[key]);
-            for (let key1 in value[key]) {
+            for (const key1 in value[key]) {
                 //   console.log(value[key][key1]);
                 if ((typeof value[key][key1] === 'string' || value[key][key1] instanceof String) &&
                     (value[key][key1].toString().toLowerCase().indexOf(args.toString().toLowerCase()) != -1)) {
@@ -84,7 +84,7 @@ export class UsersearchPipe implements PipeTransform {
         console.log('val1');
         console.log(val1);
         console.log(val1.length);
-        if(val1.length!=0) val1[0].lval=val1.length;
+        if (val1.length != 0) { val1[0].lval = val1.length; }
 
         return val1;
     }

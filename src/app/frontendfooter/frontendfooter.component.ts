@@ -1,8 +1,8 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Commonservices} from "../app.commonservices";
-import {CookieService} from "ngx-cookie-service";
+import {HttpClient} from '@angular/common/http';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Commonservices} from '../app.commonservices';
+import {CookieService} from 'ngx-cookie-service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
@@ -13,17 +13,32 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
   providers: [Commonservices]
 })
 export class FrontendfooterComponent implements OnInit {
+
+  constructor(public _http: HttpClient, es: FormBuilder, public _commonservice: Commonservices, public _cookieservice: CookieService, public modal: BsModalService) {
+    this.es = es;
+    this.serverurl = _commonservice.nodesslurl;
+  }
   public stateslist;
   public es;
   public dataForm: FormGroup;
   public serverurl;
-  public errormsg:'';
+  public errormsg: '';
   modalRef1: BsModalRef;
-  public issubmit=0;
+  public issubmit = 0;
 
-  constructor(public _http: HttpClient, es: FormBuilder, public _commonservice: Commonservices,public _cookieservice:CookieService,public modal:BsModalService) {
-    this.es = es;
-    this.serverurl = _commonservice.nodesslurl;
+  static customValidator(inputemail): any {
+    if (inputemail.pristine) {
+      return null;
+    }
+    inputemail.markAsTouched();
+    const filter = /^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/;
+    console.log(String(inputemail.value).search(filter) != -1);
+    if (String(inputemail.value).search(filter) == -1) {
+      console.log('valid');
+      return {
+        invalidemail: true
+      };
+    }
   }
 
   ngOnInit() {
@@ -39,23 +54,8 @@ export class FrontendfooterComponent implements OnInit {
     this.getstatesname();
   }
 
-  static customValidator(inputemail): any {
-    if (inputemail.pristine) {
-      return null;
-    }
-    inputemail.markAsTouched();
-    let filter = /^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/;
-    console.log(String(inputemail.value).search(filter) != -1);
-    if (String(inputemail.value).search(filter) == -1) {
-      console.log('valid');
-      return {
-        invalidemail: true
-      }
-    }
-  }
-
   getstatesname() {
-    this._http.get("assets/data/states.json")
+    this._http.get('assets/data/states.json')
         .subscribe(res => {
           let result;
           result = res;
@@ -67,13 +67,13 @@ export class FrontendfooterComponent implements OnInit {
         });
   }
 
-  dosubmit(formval,template:TemplateRef<any>) {
-    this.issubmit=1;
-    for (let x in this.dataForm.controls) {
+  dosubmit(formval, template: TemplateRef<any>) {
+    this.issubmit = 1;
+    for (const x in this.dataForm.controls) {
       this.dataForm.controls[x].markAsTouched();
     }
     if (this.dataForm.valid) {
-      let data = {
+      const data = {
         firstname: formval.firstname,
         lastname: formval.lastname,
         email: formval.email,
@@ -81,18 +81,17 @@ export class FrontendfooterComponent implements OnInit {
         message: formval.message,
         states: formval.states,
       };
-      let link = this._commonservice.nodesslurl + 'contactto';
-      this._http.post(link,{source:'contactto',data:data})
-          .subscribe(res=>{
+      const link = this._commonservice.nodesslurl + 'contactto';
+      this._http.post(link, {source: 'contactto', data: data})
+          .subscribe(res => {
             let result;
-            result=res;
-            this.issubmit=0;
-            if(result.status=='error')
-            {
-              this.errormsg=result.msg;
-            }else{
+            result = res;
+            this.issubmit = 0;
+            if (result.status == 'error') {
+              this.errormsg = result.msg;
+            } else {
               this.dataForm.reset();
-              this.modalRef1=this.modal.show(template, {class: 'conmtactusmodal'});
+              this.modalRef1 = this.modal.show(template, {class: 'conmtactusmodal'});
              /* setTimeout(() =>{
                 this.modalRef1.hide();
               },2000);*/
@@ -103,7 +102,7 @@ export class FrontendfooterComponent implements OnInit {
     }
 
   }
-    ofmodal(){
+    ofmodal() {
         this.modalRef1.hide();
     }
 }

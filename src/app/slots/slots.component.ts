@@ -1,15 +1,15 @@
 import {Component, OnInit, Input, TemplateRef, Inject} from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import {Commonservices} from "../app.commonservices";
+import {Commonservices} from '../app.commonservices';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { FormBuilder, FormGroup, Validators,FormControl, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
-import {ModalOptions} from "ngx-bootstrap";
+import {ModalOptions} from 'ngx-bootstrap';
 import { WINDOW } from '@ng-toolkit/universal';
 declare var moment;
-declare var $:any;
+declare var $: any;
 
 @Component({
   selector: 'app-slots',
@@ -18,52 +18,52 @@ declare var $:any;
 })
 export class SlotsComponent implements OnInit {
 
-  public slotdata:any;
+  public slotdata: any;
   modalRef: BsModalRef;
   public dataForm: FormGroup;
   public dataFormForLead: FormGroup;
-  public medicalform:FormGroup;
+  public medicalform: FormGroup;
   public kp;
-  public leaddata:any='';
+  public leaddata: any = '';
   public start_time;
   public end_time;
   public mydetails;
-  public slotvalue:any='';
-  public slotvalue2:any='';
-  public timezoneshow:any='';
-  public itemidval:any;
-  public mymodal:any;
+  public slotvalue: any = '';
+  public slotvalue2: any = '';
+  public timezoneshow: any = '';
+  public itemidval: any;
+  public mymodal: any;
   public modalRef2: BsModalRef;
   public modalRef1: BsModalRef;
-  public message:any;
-  public timezoneval:any='';
+  public message: any;
+  public timezoneval: any = '';
   public participantPhNumber: any;
   public participantName: any;
   public participantEmail: any;
-  public loader: boolean = false;
-  public selectedproduct:any;
-  public specialityarray:any = [];
-  public googleeventval:any = '';
+  public loader = false;
+  public selectedproduct: any;
+  public specialityarray: any = [];
+  public googleeventval: any = '';
   public slotDataStatus: any = '';
   public isflagval: any;
-  public doctorspeciality:any = [
-    {name:"Family Medicine",value:"Family Medicine"},
-    {name:"Neurology",value:"Neurology"},
-    {name:"D.O. Doctor of Osteopathy",value:"D.O. Doctor of Osteopathy"},
-    {name:"General Practice",value:"General Practice"},
-    {name:"Internal Medicine",value:"Internal Medicine"},
-    {name:"Pain Mgmt (Integrated Practice)",value:"Pain Mgmt"},
-    {name:"Primary Care",value:"Primary Care"},
-    {name:"Endocrinology",value:"Endocrinology"},
-    {name:"Integrated Speciality Groups",value:"Integrated Speciality Groups"},
-    {name:"Cardiology",value:"Cardiology"}
+  public doctorspeciality: any = [
+    {name: 'Family Medicine', value: 'Family Medicine'},
+    {name: 'Neurology', value: 'Neurology'},
+    {name: 'D.O. Doctor of Osteopathy', value: 'D.O. Doctor of Osteopathy'},
+    {name: 'General Practice', value: 'General Practice'},
+    {name: 'Internal Medicine', value: 'Internal Medicine'},
+    {name: 'Pain Mgmt (Integrated Practice)', value: 'Pain Mgmt'},
+    {name: 'Primary Care', value: 'Primary Care'},
+    {name: 'Endocrinology', value: 'Endocrinology'},
+    {name: 'Integrated Speciality Groups', value: 'Integrated Speciality Groups'},
+    {name: 'Cardiology', value: 'Cardiology'}
 ];
 
   bsDatepicker = {
     format: 'DD/MM/YYYY',
-    minDate: moment().format("DD/MM/YYYY"),
+    minDate: moment().format('DD/MM/YYYY'),
     noDefaultRangeSelected : true
-  }
+  };
 
 
   @Input()
@@ -77,7 +77,7 @@ export class SlotsComponent implements OnInit {
     this.isflagval = (item) || '<no name set>';
     // console.log(item,'++++')
   }
-  
+
   @Input()
   set itemdata(item: any) {
     this.slotdata = (item) || '<no name set>';
@@ -88,16 +88,16 @@ export class SlotsComponent implements OnInit {
     // console.log(this.googleeventval,item)
   }
 
-public bookNowStatus:boolean = true;
-  constructor(@Inject(WINDOW) private window: Window, public _commonservices:Commonservices,public modal:BsModalService,kp: FormBuilder, private cookeiservice: CookieService,public _http:HttpClient, public route: ActivatedRoute, public router: Router) {
-    if (this.route.snapshot.routeConfig.path =='marketing-review/:product_id' || this.route.snapshot.routeConfig.path =='marketing-review/:product_id/:rep_id/:lead_id') {
+public bookNowStatus = true;
+  constructor(@Inject(WINDOW) private window: Window, public _commonservices: Commonservices, public modal: BsModalService, kp: FormBuilder, private cookeiservice: CookieService, public _http: HttpClient, public route: ActivatedRoute, public router: Router) {
+    if (this.route.snapshot.routeConfig.path == 'marketing-review/:product_id' || this.route.snapshot.routeConfig.path == 'marketing-review/:product_id/:rep_id/:lead_id') {
       this.bookNowStatus = false;
     } else {
       this.bookNowStatus = true;
     }
     this.kp = kp;
     this.selectedproduct = this.cookeiservice.get('lead-product');
-    this.timezoneval=this.cookeiservice.get('timezone');
+    this.timezoneval = this.cookeiservice.get('timezone');
     this.dataForm = this.kp.group({
       /*  description: ['',Validators.required],*/
       meeting_with: [''],
@@ -111,51 +111,51 @@ public bookNowStatus:boolean = true;
     });
   }
 
-  getslot(){
+  getslot() {
 
     this.participantEmail = this.cookeiservice.get('useremail');
     this.participantName = this.cookeiservice.get('fname');
     this.participantPhNumber = this.cookeiservice.get('phone');
-    if(this.timezoneval!='' && this.timezoneval.length>2 && this.slotdata.timezone!=this.timezoneval){
-      let now = moment();
-      let tz=this.slotdata.timezone.split('|');
-      tz=tz[1];
-      //var localOffset = now.utcOffset();
+    if (this.timezoneval != '' && this.timezoneval.length > 2 && this.slotdata.timezone != this.timezoneval) {
+      const now = moment();
+      let tz = this.slotdata.timezone.split('|');
+      tz = tz[1];
+      // var localOffset = now.utcOffset();
       now.tz(tz); // your time zone, not necessarily the server's
-      let centralOffset = now.utcOffset();
-      let tz1=this.timezoneval.split('|');
-      tz1=tz1[1];
+      const centralOffset = now.utcOffset();
+      let tz1 = this.timezoneval.split('|');
+      tz1 = tz1[1];
       now.tz(tz1);
-      let centralOffset1 = now.utcOffset();
-      let diffInMinutes = centralOffset1 - centralOffset;
+      const centralOffset1 = now.utcOffset();
+      const diffInMinutes = centralOffset1 - centralOffset;
      // console.log('offset'+this.timezoneval+this.slotdata.timezone);
     //  console.log(diffInMinutes);
      // console.log(tz);
     //  console.log(tz1);
-      let a=moment(this.slotdata.startdate+'T'+this.slotdata.slots[this.itemidval].trim()+':00');
-      let starttime= moment(a).add(diffInMinutes, 'minutes').format('hh:mm A');
-      let endtime = moment(a).add(diffInMinutes, 'minutes').add(this.slotdata.timespan, 'minutes').format('hh:mm A');
-      this.slotvalue= starttime +' - '+endtime;
-      this.slotvalue2= starttime ;
-      this.timezoneshow=this.timezoneval;
+      const a = moment(this.slotdata.startdate + 'T' + this.slotdata.slots[this.itemidval].trim() + ':00');
+      const starttime = moment(a).add(diffInMinutes, 'minutes').format('hh:mm A');
+      const endtime = moment(a).add(diffInMinutes, 'minutes').add(this.slotdata.timespan, 'minutes').format('hh:mm A');
+      this.slotvalue = starttime + ' - ' + endtime;
+      this.slotvalue2 = starttime ;
+      this.timezoneshow = this.timezoneval;
 
-    }else {
+    } else {
      // console.log('no offset'+this.timezoneval+this.slotdata.timezone);
 
-      let a = moment(this.slotdata.startdate + 'T' + this.slotdata.slots[this.itemidval].trim() + ':00');
-      let starttime = a.format('hh:mm A');
-      let endtime = moment(a).add(this.slotdata.timespan, 'minutes').format('hh:mm A');
+      const a = moment(this.slotdata.startdate + 'T' + this.slotdata.slots[this.itemidval].trim() + ':00');
+      const starttime = a.format('hh:mm A');
+      const endtime = moment(a).add(this.slotdata.timespan, 'minutes').format('hh:mm A');
       this.slotvalue = starttime + ' - ' + endtime;
-        this.slotvalue2= starttime ;
-      this.timezoneshow=this.slotdata.timezone;
+        this.slotvalue2 = starttime ;
+      this.timezoneshow = this.slotdata.timezone;
     }
-    //return this.slotvalue;
+    // return this.slotvalue;
   }
 
   ngOnInit() {
     setTimeout(() => {
       this.getslot();
-    },0);
+    }, 0);
 
    // console.log('refreshtoken');
    // console.log(this.cookeiservice.get('refreshtoken').length);
@@ -210,7 +210,7 @@ public bookNowStatus:boolean = true;
           console.log('Oooops!');
         });
   }*/
-  booknowmodal(template:TemplateRef<any>, slotdata,template1:TemplateRef<any>) {
+  booknowmodal(template: TemplateRef<any>, slotdata, template1: TemplateRef<any>) {
       const config: ModalOptions = {
           backdrop: 'static',
           class: 'booknowmodal',
@@ -224,12 +224,12 @@ public bookNowStatus:boolean = true;
       };
     this.getUserDetails(slotdata.allslotsuserid);
 
-    console.log('/**/*/*/*/**/*/*/*/*/*/*/*/*/*',this.cookeiservice.get('useremail'));
+    console.log('/**/*/*/*/**/*/*/*/*/*/*/*/*/*', this.cookeiservice.get('useremail'));
     console.log(slotdata);
 
     this.mymodal = template1;
-    let leadsId: any = this.cookeiservice.get('leadsId');
-    switch(this.route.snapshot.url[0].path) {
+    const leadsId: any = this.cookeiservice.get('leadsId');
+    switch (this.route.snapshot.url[0].path) {
       case 'book-a-closer':
         console.log('BOOK A CLOSER');
         // if(slotdata.userproducts.indexOf(this._commonservices.productid)>-1)
@@ -239,9 +239,9 @@ public bookNowStatus:boolean = true;
         console.log('result.res[0]---');
 
         const link = this._commonservices.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
-        this._http.post(link, { source:'leads_view', condition: { "_id": leadsId }}).subscribe(res => {
-          let result: any = res;
-          if(this.selectedproduct == this._commonservices.productid){
+        this._http.post(link, { source: 'leads_view', condition: { '_id': leadsId }}).subscribe(res => {
+          const result: any = res;
+          if (this.selectedproduct == this._commonservices.productid) {
             this.dataForm = this.kp.group({
               meeting_with: [ slotdata.meetingwith ],
               participant: [ result.res[0].email, Validators.required ],
@@ -250,25 +250,25 @@ public bookNowStatus:boolean = true;
               repsmsg: [''],
               doctor_details: this.kp.array([
                 this.kp.group({
-                  totalpatients:[ "",Validators.required],
-                  medicare_patients:[ "" ,Validators.required],
-                  medicaid_patients:[ "", Validators.required],
-                  cash_payers:[ "", Validators.required],
-                  pvt_insuarance_patients:[ "", Validators.required],
-                  sixteen_year_patients:["",Validators.required],
-                  speciality:[""],
-                  Family_Medicine:[""],
-                  Neurology:[""],
-                  Doctor_of_Osteopathy:[""],
-                  General_Practice:[""],
-                  Internal_Medicine:[""],
-                  Pain_Mgmt:[""],
-                  Primary_Care:[""],
-                  Endocrinology:[""],
-                  Integrated_Speciality_Groups:[""],
-                  Cardiology:[""],
-                  npi:["",Validators.required],
-                  doctor_name:["",Validators.required]
+                  totalpatients: [ '', Validators.required],
+                  medicare_patients: [ '' , Validators.required],
+                  medicaid_patients: [ '', Validators.required],
+                  cash_payers: [ '', Validators.required],
+                  pvt_insuarance_patients: [ '', Validators.required],
+                  sixteen_year_patients: ['', Validators.required],
+                  speciality: [''],
+                  Family_Medicine: [''],
+                  Neurology: [''],
+                  Doctor_of_Osteopathy: [''],
+                  General_Practice: [''],
+                  Internal_Medicine: [''],
+                  Pain_Mgmt: [''],
+                  Primary_Care: [''],
+                  Endocrinology: [''],
+                  Integrated_Speciality_Groups: [''],
+                  Cardiology: [''],
+                  npi: ['', Validators.required],
+                  doctor_name: ['', Validators.required]
                 })
               ]),
               // totalpatients:[ "",Validators.required],
@@ -281,7 +281,7 @@ public bookNowStatus:boolean = true;
               // npi:["",Validators.required],
               // doctor_name:["",Validators.required],
             });
-          }else{
+          } else {
             console.log('result.res[0]');
             console.log(result.res[0]);
             console.log(result.res[0].fullname);
@@ -308,7 +308,7 @@ public bookNowStatus:boolean = true;
                 }
             };
 
-          if(result.res!=null && result.res[0]!=null)this.leaddata=result.res[0];
+          if (result.res != null && result.res[0] != null) {this.leaddata = result.res[0]; }
           setTimeout(() => {
             this.modalRef = this.modal.show(template, config);
           }, 2000);
@@ -316,8 +316,8 @@ public bookNowStatus:boolean = true;
         break;
         case 'marketing-review':
           const link1 = this._commonservices.nodesslurl + 'datalistforleaddata';
-          this._http.post(link1, { source:'leads_view', condition: { _id_object: this.route.snapshot.params['lead_id'] }}).subscribe(res => {
-            let result: any = res;
+          this._http.post(link1, { source: 'leads_view', condition: { _id_object: this.route.snapshot.params['lead_id'] }}).subscribe(res => {
+            const result: any = res;
               this.dataForm = this.kp.group({
                 meeting_with: [ slotdata.meetingwith ],
                 participant: [ result.res[0].email, Validators.required ],
@@ -336,14 +336,14 @@ public bookNowStatus:boolean = true;
         this.dataForm = this.kp.group({
           /*  description: [slotdata.description,Validators.required],*/
           meeting_with:         [ slotdata.meetingwith ],
-          participant:          [ this.cookeiservice.get('useremail'),Validators.required],
+          participant:          [ this.cookeiservice.get('useremail'), Validators.required],
           participantName:      [ this.cookeiservice.get('fullname'), Validators.required],
           participantPhNumber:  [ this.cookeiservice.get('phone'), Validators.required],
           repsmsg: [''],
           });
 
           // this.dataForm.patchValue({ participantPhNumber: this.participantPhNumber });
-          setTimeout(()=>{
+          setTimeout(() => {
             console.log(this.cookeiservice.get('fullname'));
             console.log(this.cookeiservice.get('phone'));
             this.dataForm.controls['participantPhNumber'].setValue( this.participantPhNumber );
@@ -353,7 +353,7 @@ public bookNowStatus:boolean = true;
         break;
     }
   }
-  booknowmodal_appointmentlist1(val: any = {}, template2:TemplateRef<any>){
+  booknowmodal_appointmentlist1(val: any = {}, template2: TemplateRef<any>) {
           // setTimeout(() => {
           //   this.modalRef2.hide();
           // }, 1000);
@@ -362,7 +362,7 @@ public bookNowStatus:boolean = true;
     this.modalRef2 = this.modal.show(template2);
     // console.log('pkoklk',this.leaddata ,'+++++++', val);
     const link1 = this._commonservices.nodesslurl + 'datalistforleaddata';
-    this._http.post(link1, { source:'leads_view', condition: { _id_object: this.route.snapshot.params['lead_id'] }}).subscribe((res:any) => {
+    this._http.post(link1, { source: 'leads_view', condition: { _id_object: this.route.snapshot.params['lead_id'] }}).subscribe((res: any) => {
       this.leaddata = res.res[0];
     this.dataFormForLead = this.kp.group({
       firstname: [ '', Validators.required ],
@@ -371,14 +371,14 @@ public bookNowStatus:boolean = true;
       email: [ res.res[0].email, Validators.required ],
       address: [ '', Validators.required ],
       phoneno: [ '', Validators.required ],
-      product:[res.res[0].product]
+      product: [res.res[0].product]
     });
 
     });
- 
+
   }
 
-  dosubmitForLead(template:TemplateRef<any>,template1:TemplateRef<any>){
+  dosubmitForLead(template: TemplateRef<any>, template1: TemplateRef<any>) {
       // console.log(this.dataFormForLead.value);
       let y: any;
         for (y in this.dataFormForLead.controls) {
@@ -387,11 +387,11 @@ public bookNowStatus:boolean = true;
         const link = this._commonservices.nodesslurl + 'addorupdatedata';
         this.dataFormForLead.value.id = this.leaddata._id;
             this._http.post(link, { source: 'leads', data: this.dataFormForLead.value, sourceobj: ['created_by']  })
-                .subscribe((res:any) => {
-                  if(res.status == 'success'){
+                .subscribe((res: any) => {
+                  if (res.status == 'success') {
                     this.modalRef2.hide();
                     setTimeout(() => {
-                      this.booknowmodal(template, this.slotdata,template1);
+                      this.booknowmodal(template, this.slotdata, template1);
                     }, 500);
                   }
                 });
@@ -415,10 +415,10 @@ public bookNowStatus:boolean = true;
       val.prv_id = this.googleeventval.prv_id;
     let timeZone = val.timezone;
     timeZone = timeZone.slice(0, 6);
-    let start_time = (moment(this.slotdata.startdate + 'T' + this.slotdata.slots[this.itemidval].trim() + ':00').format('YYYY-MM-DDTHH:mm:ss') + timeZone);
-    let end_time = (moment(this.slotdata.startdate + 'T' + this.slotdata.slots[this.itemidval].trim() + ':00').add(this.slotdata.timespan, 'minutes').format('YYYY-MM-DDTHH:mm:ss') + timeZone);
+    const start_time = (moment(this.slotdata.startdate + 'T' + this.slotdata.slots[this.itemidval].trim() + ':00').format('YYYY-MM-DDTHH:mm:ss') + timeZone);
+    const end_time = (moment(this.slotdata.startdate + 'T' + this.slotdata.slots[this.itemidval].trim() + ':00').add(this.slotdata.timespan, 'minutes').format('YYYY-MM-DDTHH:mm:ss') + timeZone);
 
-    let link1 = 'https://gapi.betoparedes.com/check_ability.php?refresh_token=' + this.googleeventval.refresh_token + '&start=' + start_time + '&end=' + end_time;
+    const link1 = 'https://gapi.betoparedes.com/check_ability.php?refresh_token=' + this.googleeventval.refresh_token + '&start=' + start_time + '&end=' + end_time;
     // console.log(link1)
 
     this._http.get(link1)
@@ -427,7 +427,7 @@ public bookNowStatus:boolean = true;
         // console.log(response);
         // this.slotDataStatus = response;
         if (response == 0) {
-          let link = "https://gapi.betoparedes.com/updateevent.php?event=" + this.googleeventval.googleevent + "&start=" + start_time + "&end=" + end_time + "&refresh_token=" + this.googleeventval.refresh_token + "&summary=" + val.meetingwith;
+          const link = 'https://gapi.betoparedes.com/updateevent.php?event=' + this.googleeventval.googleevent + '&start=' + start_time + '&end=' + end_time + '&refresh_token=' + this.googleeventval.refresh_token + '&summary=' + val.meetingwith;
           // console.log(val);
           val.booked_by = this.cookeiservice.get('userid');
           // return;
@@ -439,16 +439,16 @@ public bookNowStatus:boolean = true;
                 setTimeout(() => {
                   this.modalRef2.hide();
                 }, 1000);
-                let link1 = this._commonservices.nodesslurl + 'rescheduletocalendar';
+                const link1 = this._commonservices.nodesslurl + 'rescheduletocalendar';
                 this._http.post(link1, val)
                   .subscribe((res1: any) => {
                     this.router.navigate(['/appointmentlist']);
                     // console.log(res1);
-                  })
+                  });
               }
             });
         }
-      })
+      });
 
 
 
@@ -458,48 +458,48 @@ public bookNowStatus:boolean = true;
 
 // functions to delete and add form group
 removeFormControl(i) {
-  let usersArray = this.dataForm.controls.doctor_details as FormArray;
+  const usersArray = this.dataForm.controls.doctor_details as FormArray;
   usersArray.removeAt(i);
 }
 
 addFormControl() {
-  let usersArray = this.dataForm.controls.doctor_details as FormArray;
-  let arraylen = usersArray.length;
+  const usersArray = this.dataForm.controls.doctor_details as FormArray;
+  const arraylen = usersArray.length;
 
-  let newUsergroup: FormGroup = this.kp.group({
-    totalpatients:[ "",Validators.required],
-                  medicare_patients:[ "" ,Validators.required],
-                  medicaid_patients:[ "", Validators.required],
-                  cash_payers:[ "", Validators.required],
-                  pvt_insuarance_patients:[ "", Validators.required],
-                  sixteen_year_patients:["",Validators.required],
-                  speciality:[""],
-                  Family_Medicine:[""],
-                  Neurology:[""],
-                  Doctor_of_Osteopathy:[""],
-                  General_Practice:[""],
-                  Internal_Medicine:[""],
-                  Pain_Mgmt:[""],
-                  Primary_Care:[""],
-                  Endocrinology:[""],
-                  Integrated_Speciality_Groups:[""],
-                  Cardiology:[""],
-                  npi:["",Validators.required],
-                  doctor_name:["",Validators.required]
-  })
+  const newUsergroup: FormGroup = this.kp.group({
+    totalpatients: [ '', Validators.required],
+                  medicare_patients: [ '' , Validators.required],
+                  medicaid_patients: [ '', Validators.required],
+                  cash_payers: [ '', Validators.required],
+                  pvt_insuarance_patients: [ '', Validators.required],
+                  sixteen_year_patients: ['', Validators.required],
+                  speciality: [''],
+                  Family_Medicine: [''],
+                  Neurology: [''],
+                  Doctor_of_Osteopathy: [''],
+                  General_Practice: [''],
+                  Internal_Medicine: [''],
+                  Pain_Mgmt: [''],
+                  Primary_Care: [''],
+                  Endocrinology: [''],
+                  Integrated_Speciality_Groups: [''],
+                  Cardiology: [''],
+                  npi: ['', Validators.required],
+                  doctor_name: ['', Validators.required]
+  });
 
   usersArray.insert(arraylen, newUsergroup);
 }
 
 
-showformat(stdt){
+showformat(stdt) {
     return moment(stdt).format('dddd MMMM DD, YYYY');
 }
-  dosubmit(){
+  dosubmit() {
     let x: any;
     let doctor_details: any;
-    let closername:any='';
-    let closeremail:any='';
+    let closername: any = '';
+    let closeremail: any = '';
     for (x in this.dataForm.controls) {
       this.dataForm.controls[x].markAsTouched();
     }
@@ -508,22 +508,21 @@ showformat(stdt){
       // console.log(this.dataForm.value);
       // console.log(this.dataForm.valid);
       return;
-    }
-    else {
+    } else {
       this.loader = true;
       this.modaloff();
       // console.log('=============================================================');
       // console.log('valid', this.dataForm.valid);
       // console.log('valid', this.dataForm.value, this.slotdata.timespan);
-      //console.log('valid');
-      //return;
-      let link = this._commonservices.nodesslurl + 'addtocalendar';
+      // console.log('valid');
+      // return;
+      const link = this._commonservices.nodesslurl + 'addtocalendar';
 
 
       /*   {"refresh_token": "1/fkzUmqGX5zQ7Z_fn-EXa-ZM7u-DWTeiXhPJ7UiNQ3m8","start_time":"2019-05-08T10:00:00" ,"end_time":"2019-05-08T12:00:00","timezone":"America/Los_Angeles","summery":"Debasis test event !!","attendees":["debasis218@gmail.com","abc@yopmail.com"]}
          */
       // let attendeesarr=[this.cookeiservice.get('useremail')];
-      let attendeesarr = [this.dataForm.controls['participant'].value];
+      const attendeesarr = [this.dataForm.controls['participant'].value];
       //  console.log('start---');
       //  console.log(slotdata.startdate);
       /* console.log($('.startdt').val());
@@ -535,31 +534,30 @@ showformat(stdt){
          console.log(moment(this.start_time).format('HH:mm'));
          console.log(moment(this.end_time).format('HH:mm'));
          console.log(this.end_time);*/
-      let tz = this.slotdata.timezone.split('|');
+      const tz = this.slotdata.timezone.split('|');
       /*   console.log(this.slotdata.starttime);
          console.log(this.slotdata.endtime);*/
-      let ival = this.itemidval;
+      const ival = this.itemidval;
       let repmsg = '';
       let description: any = this.slotdata.description;
 
-      if (this.dataForm.controls['repsmsg'].value.length > 0 && this.route.snapshot.url[0].path!='book-a-closer') {
+      if (this.dataForm.controls['repsmsg'].value.length > 0 && this.route.snapshot.url[0].path != 'book-a-closer') {
         description += '<br /><br /><br />Notes from rep. <br />' + this.dataForm.controls['repsmsg'].value;
-      }else{
-        repmsg=this.dataForm.controls['repsmsg'].value;
-        closeremail=this.cookeiservice.get('useremail');
-        closername=this.cookeiservice.get('fullname');
-        //attendeesarr.push(this.cookeiservice.get('useremail'));
+      } else {
+        repmsg = this.dataForm.controls['repsmsg'].value;
+        closeremail = this.cookeiservice.get('useremail');
+        closername = this.cookeiservice.get('fullname');
+        // attendeesarr.push(this.cookeiservice.get('useremail'));
 
       }
 
-      if(this.dataForm.controls['doctor_details']==null || this.dataForm.controls['doctor_details'].value !=null ){
-        doctor_details='';
-      }
-      else{
-        doctor_details=this.dataForm.controls['doctor_details'].value;
+      if (this.dataForm.controls['doctor_details'] == null || this.dataForm.controls['doctor_details'].value != null ) {
+        doctor_details = '';
+      } else {
+        doctor_details = this.dataForm.controls['doctor_details'].value;
       }
 
-      let data = {
+      const data = {
         refresh_token: this.cookeiservice.get('refreshtoken'),
         organizerid: this.cookeiservice.get('organizerid'),
         /* start_time:moment($('.startdt').val()).format('YYYY-MM-DD')+'T'+moment(this.start_time).format('HH:mm:ss'),
@@ -576,7 +574,7 @@ showformat(stdt){
         name: this.dataForm.controls['participantName'].value,
         phoneNumber: this.dataForm.controls['participantPhNumber'].value,
         slots: this.slotdata.slots,
-        //nslots:this.slotdata.slots.splice(ival,1),
+        // nslots:this.slotdata.slots.splice(ival,1),
         slot: this.slotdata.slots[this.itemidval],
         doctor_details: doctor_details,
         ival: this.itemidval,
@@ -594,23 +592,23 @@ showformat(stdt){
       // console.log('data--------');
       // console.log(data.end_time+''+tz[0]);
       this.loader = true;
-      let link1 = 'https://gapi.betoparedes.com/check_ability.php?refresh_token='+this.cookeiservice.get('refreshtoken')+'&start='+data.start_time+''+tz[0] +'&end='+ data.end_time+''+tz[0];
+      const link1 = 'https://gapi.betoparedes.com/check_ability.php?refresh_token=' + this.cookeiservice.get('refreshtoken') + '&start=' + data.start_time + '' + tz[0] + '&end=' + data.end_time + '' + tz[0];
       // console.log(link1)
 
       this._http.get(link1)
-      .subscribe((res:any) => {
+      .subscribe((res: any) => {
         // console.log(res);
         this.slotDataStatus = res;
         if (res == 0) {
           this._http.post(link, data)
           .subscribe(res => {
-            let result: any = res;
+            const result: any = res;
             // console.log('result.... for google calendar');
             // console.log(result);
             this.modalRef.hide();
-            this.message = "Your Booking done successfully !!";
-            //this.modalRef=this.modal.show(this.mymodal, {class: 'successmodal'});
-  
+            this.message = 'Your Booking done successfully !!';
+            // this.modalRef=this.modal.show(this.mymodal, {class: 'successmodal'});
+
             this.cookeiservice.delete('leadsId');
             this.cookeiservice.delete('viewonlyaccess');
             switch (this.route.snapshot.url[0].path) {
@@ -624,13 +622,13 @@ showformat(stdt){
                 this.cookeiservice.delete('lead-product');
                 this.modalRef = this.modal.show(this.mymodal, {class: 'successmodal'});
                 this.route.paramMap.subscribe(params => {
-                  if(!params.get("id")) {
-                    let random = Math.floor(Math.random() * (999999 - 100000)) + 100000;
+                  if (!params.get('id')) {
+                    const random = Math.floor(Math.random() * (999999 - 100000)) + 100000;
                     // this.router.navigate(['/book-a-closer/' + random]);
                     this.router.navigate(['/repdashboard']);
                   } else {
                     this.router.navigate(['/book-a-closer']);
-  
+
                   }
                 });
                 break;
@@ -642,7 +640,7 @@ showformat(stdt){
             // setTimeout(() => {
             //   window.location.reload();
             // },5000);
-            //this.router.navigate(['/reptrainingcenter'])
+            // this.router.navigate(['/reptrainingcenter'])
           });
         } else {
           // this.modalRef.hide();
@@ -656,27 +654,27 @@ showformat(stdt){
     }
   }
   // }
-  showtime(item,eachslots){
-    var a=moment(item.startdate+'T'+eachslots.trim()+':00');
-    var starttime= a.format('hh.mm A');
-    var endtime = moment(a).add(30, 'minutes').format('hh.mm A');
-    return starttime +' - '+endtime;
+  showtime(item, eachslots) {
+    const a = moment(item.startdate + 'T' + eachslots.trim() + ':00');
+    const starttime = a.format('hh.mm A');
+    const endtime = moment(a).add(30, 'minutes').format('hh.mm A');
+    return starttime + ' - ' + endtime;
   }
-  modaloff(){
+  modaloff() {
     this.modalRef.hide();
   }
 
   /* Get user details */
   getUserDetails(id) {
-    let link:any;
+    let link: any;
     if (this.route.snapshot.routeConfig.path == 'marketing-review/:product_id/:rep_id/:lead_id') {
      link = this._commonservices.nodesslurl + 'datalistforleaddata';
     } else {
       link = this._commonservices.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
     }
-    this._http.post(link, { source:'users', condition: { _id_object: id }})
+    this._http.post(link, { source: 'users', condition: { _id_object: id }})
       .subscribe(res => {
-        let result: any = res;
+        const result: any = res;
         // console.log('===== Refresh Token =====');
         // console.log(result.res[0].refreshtoken);
         // console.log(result.res[0]);
@@ -692,22 +690,22 @@ showformat(stdt){
         // this.participantName = result.res[0].firstname + ' ' + result.res[0].lastname;
         // this.participantPhNumber = result.res[0].phoneno;
         // console.log(this.participantPhNumber);
-      })
+      });
   }
-  speciality(event:any){
+  speciality(event: any) {
     // console.log('event.target.value');
     // console.log(event.target.value);
     // console.log(event.target.checked);
-    if(event.target.checked == true){
-      if(this.specialityarray.length==0){
+    if (event.target.checked == true) {
+      if (this.specialityarray.length == 0) {
         this.specialityarray = [];
         this.specialityarray.push(event.target.value);
-      }else{
+      } else {
         this.specialityarray.push(event.target.value);
       }
     }
-    if(event.target.checked == false){
-      for( let i = 0; i < this.specialityarray.length; i++){
+    if (event.target.checked == false) {
+      for ( let i = 0; i < this.specialityarray.length; i++) {
         if ( this.specialityarray[i] === event.target.value) {
           this.specialityarray.splice(i, 1);
           i--;

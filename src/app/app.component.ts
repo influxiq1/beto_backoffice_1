@@ -20,7 +20,7 @@ export class AppComponent {
   /*title = 'nexgetest';*/
 
   public url;
-  public loading: boolean = false;
+  public loading = false;
   constructor(private router: Router) {
     /* Universal Loader for Reslove */
     this.router.events.subscribe((event: Event) => {
@@ -46,7 +46,7 @@ export class AppComponent {
   ngOnInit() {
     this.router.events.subscribe(val => {
       if (val instanceof NavigationEnd) {
-        let curUrlTree = this.router.parseUrl(this.router.url);
+        const curUrlTree = this.router.parseUrl(this.router.url);
         //  console.info(this.router.url);
         this.url = this.router.url;
 

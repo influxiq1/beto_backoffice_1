@@ -56,7 +56,7 @@
 //     console.log('in login','noo cookie');
 //   }
 // }, 500);
-  
+
 
 
 //     this.dataForm = this.kp.group({
@@ -92,7 +92,7 @@
 //       let result:any;
 //       result = res;
 //       console.log(result);
-      
+
 //       if (result.resc == 1 && result.res!=null && result.res[0]!=null  ) {
 //         if(result.res[0].status == 1) {
 //           this.cookeiservice.set('jwttoken', this.cookeiservice.get('jwttoken'));
@@ -103,7 +103,7 @@
 //             return ;
 //           }
 
-          
+
 //           this.cookeiservice.set('lockdornot', result.res[0].lock);
 //           this.cookeiservice.set('usertype', result.res[0].type);
 //           this.cookeiservice.set('useremail', result.res[0].email);
@@ -114,7 +114,7 @@
 //           }else{
 //             this.cookeiservice.set('calenderaccess', null);
 //           }
-          
+
 //           this.cookeiservice.set('fullname', result.res[0].firstname + ' ' + result.res[0].lastname);
 //           if(result.res[0].type=='admin') {
 //             this.router.navigate(['/dashboard']);
@@ -156,7 +156,7 @@
 //   }
 
 //   dosubmit(formval,template:TemplateRef<any>) {
-   
+
 //     this.issubmit=1;
 //     this.errormg = '';
 //     let x: any;
@@ -189,12 +189,12 @@
 //               console.log(result.item[0]);
 //               if(result.item[0].status == 1 || result.item[0].status == true) {
 //                 if(result.item[0].is_contract_signed == null && result.item[0].type == 'rep') {
-                  
+
 //                 setTimeout(() => {
 //                   this.cookeiservice.set('userid', result.item[0]._id);
 //                 },200);
 //                   this.router.navigate(['/agreement']);
-                  
+
 //                 console.log(result.item[0], '-------++++++++');
 //                   return ;
 //                 }
@@ -208,7 +208,7 @@
 //                   this.cookeiservice.set('phone', result.item[0].phoneno);
 //                   this.cookeiservice.set('calenderaccess', result.item[0].calenderaccess);
 //                 }, 200);
-                
+
 //                 if(result.item[0].is_consultant!=null){
 //                 this.cookeiservice.set('is_consultant', result.item[0].is_consultant);
 //               }
@@ -223,7 +223,7 @@
 //                   this.cookeiservice.set('refreshtoken', result.item[0].refreshtoken);
 //                   this.router.navigate(['/regionaldashboard']);
 //                 }
-               
+
 //               if(result.item[0].type=='rep')
 //               {
 //                 if(result.item[0].status==0) {
@@ -270,14 +270,14 @@
 
 
 
-import { Component, OnInit,TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import {Commonservices} from '../app.commonservices' ;
 import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
-import {BsModalService} from "ngx-bootstrap/modal";
-import {BsModalRef} from "ngx-bootstrap/modal/bs-modal-ref.service";
+import {BsModalService} from 'ngx-bootstrap/modal';
+import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -285,25 +285,37 @@ import {BsModalRef} from "ngx-bootstrap/modal/bs-modal-ref.service";
   providers: [Commonservices]
 })
 export class LoginComponent implements OnInit {
+  constructor(kp: FormBuilder, private router: Router, private _commonservices: Commonservices, private _http: HttpClient, private cookeiservice: CookieService, public modal: BsModalService , private route: ActivatedRoute) {
+    this.kp = kp;
+    this.serverurl = _commonservices.url;
+    this.nodesslurl = _commonservices.nodesslurl;
+    if (this.cookeiservice.get('jwttoken') == '') {
+        this.setTempToken();
+      }
+  }
   public dataForm: FormGroup;
   public kp;
   public serverurl;
   public type;
   public nodesslurl;
   public errormg: any = '';
-  public issubmit=0;
+  public issubmit = 0;
   modalRef: BsModalRef;
-  constructor(kp: FormBuilder, private router: Router, private _commonservices: Commonservices, private _http: HttpClient, private cookeiservice: CookieService,public modal:BsModalService ,private route: ActivatedRoute) {
-    this.kp = kp;
-    this.serverurl = _commonservices.url;
-    this.nodesslurl = _commonservices.nodesslurl;
-    if(this.cookeiservice.get('jwttoken') == '') {
-        this.setTempToken();
-      }
+  static customValidator(inputemail): any {
+    if (inputemail.pristine) {
+      return null;
+    }
+    inputemail.markAsTouched();
+    const filter = /^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/;
+    if (String(inputemail.value).search(filter) == -1) {
+      return {
+        invalidemail: true
+      };
+    }
   }
   ngOnInit() {
     this.route.params.subscribe(params => {
-      //this.recid = params['id'];
+      // this.recid = params['id'];
       this.type = params['type'];
     });
     setTimeout(() => {
@@ -311,7 +323,7 @@ export class LoginComponent implements OnInit {
         switch (this.cookeiservice.get('usertype')) {
           case 'rep':
             if (typeof(this.type) != 'undefined' && this.type != null ) {
-              this.type = this.type.replace(/-/gi, "/");
+              this.type = this.type.replace(/-/gi, '/');
               // console.log('rep',this.type);
               this.router.navigateByUrl(this.type);
             } else {
@@ -337,32 +349,20 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.compose([Validators.required])],
     });
   }
-  static customValidator(inputemail): any {
-    if (inputemail.pristine) {
-      return null;
-    }
-    inputemail.markAsTouched();
-    let filter = /^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/;
-    if (String(inputemail.value).search(filter) == -1) {
-      return {
-        invalidemail: true
-      }
-    }
-  }
-  getUserDetails(template:TemplateRef<any>){
-    let link = this.nodesslurl+'datalist?token=' + this.cookeiservice.get('jwttoken');
-    let data = { source: 'users', condition: {email:this.dataForm.controls['email'].value} };
-    this._http.post(link,data)
-    .subscribe(res=>{
-      let result:any;
+  getUserDetails(template: TemplateRef<any>) {
+    const link = this.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
+    const data = { source: 'users', condition: {email: this.dataForm.controls['email'].value} };
+    this._http.post(link, data)
+    .subscribe(res => {
+      let result: any;
       result = res;
       // console.log(result);
-      if (result.resc == 1 && result.res!=null && result.res[0]!=null  ) {
-        if(result.res[0].status == 1) {
+      if (result.resc == 1 && result.res != null && result.res[0] != null  ) {
+        if (result.res[0].status == 1) {
           this.cookeiservice.set('jwttoken', this.cookeiservice.get('jwttoken'));
           this.cookeiservice.set('userid', result.res[0]._id);
           this.cookeiservice.set('viewonlyaccess', result.item[0].viewonlyaccess);
-          if(result.res[0].is_contract_signed == null && result.res[0].type == 'rep') {
+          if (result.res[0].is_contract_signed == null && result.res[0].type == 'rep') {
             this.router.navigate(['/agreement']);
             return ;
           }
@@ -371,57 +371,54 @@ export class LoginComponent implements OnInit {
           this.cookeiservice.set('useremail', result.res[0].email);
           // this.cookeiservice.set('viewonlyaccess', result.item[0].viewonlyaccess);
           // console.log(result.res[0].calenderaccess);
-          if(typeof(result.res[0].calenderaccess)!=undefined && result.res[0].calenderaccess!=null){
+          if (typeof(result.res[0].calenderaccess) != undefined && result.res[0].calenderaccess != null) {
             this.cookeiservice.set('calenderaccess', result.res[0].calenderaccess);
-          }else{
+          } else {
             this.cookeiservice.set('calenderaccess', null);
           }
           this.cookeiservice.set('fullname', result.res[0].firstname + ' ' + result.res[0].lastname);
-          if(result.res[0].type=='admin') {
+          if (result.res[0].type == 'admin') {
             this.router.navigate(['/dashboard']);
           }
-          if(result.res[0].type=='regional_recruiter') {
+          if (result.res[0].type == 'regional_recruiter') {
             this.cookeiservice.set('refreshtoken', result.res[0].refreshtoken);
             this.router.navigate(['/regionaldashboard']);
           }
-        if(result.item[0].type=='contract_manager')
-        {
+        if (result.item[0].type == 'contract_manager') {
           this.router.navigate(['/contract/dashboard']);
         }
-        if(result.res[0].type=='rep')
-        {
-          if(result.res[0].status==0) {
+        if (result.res[0].type == 'rep') {
+          if (result.res[0].status == 0) {
             this.router.navigate(['/tempaccess']);
             return;
           }
-          if(result.res[0].status==1) {
+          if (result.res[0].status == 1) {
             if (typeof(this.type) != 'undefined' && this.type != null ) {
-              this.type = this.type.replace(/-/gi, "/");
-              console.log('rep',this.type);
+              this.type = this.type.replace(/-/gi, '/');
+              console.log('rep', this.type);
               this.router.navigateByUrl(this.type);
             } else {
               this.router.navigate(['/repdashboard']);
               return;
             }
           }
-          if(result.res[0].signup_step2==1 && result.res[0].contractstep==null && result.res[0].reptraininglessonstep==null) this.router.navigate(['/contract']);
-          if(result.res[0].signup_step2==1 && result.res[0].contractstep==1 && result.res[0].reptraininglessonstep==null) this.router.navigate(['/reptrainingcenter']);
-          if(result.res[0].signup_step2==1 && result.res[0].contractstep==1 && result.res[0].reptraininglessonstep==1) this.router.navigate(['/repdashboard']);
+          if (result.res[0].signup_step2 == 1 && result.res[0].contractstep == null && result.res[0].reptraininglessonstep == null) { this.router.navigate(['/contract']); }
+          if (result.res[0].signup_step2 == 1 && result.res[0].contractstep == 1 && result.res[0].reptraininglessonstep == null) { this.router.navigate(['/reptrainingcenter']); }
+          if (result.res[0].signup_step2 == 1 && result.res[0].contractstep == 1 && result.res[0].reptraininglessonstep == 1) { this.router.navigate(['/repdashboard']); }
         }
-      }
-      else{
-          this.modalRef=this.modal.show(template);
+      } else {
+          this.modalRef = this.modal.show(template);
           setTimeout(() => {
             this.modalRef.hide();
           }, 4000);
       }
       }
-    })
+    });
   }
-  dosubmit(formval,template:TemplateRef<any>) {
-    let formvalue: any = formval;
-    let templateval: any =template;
-    this.issubmit=1;
+  dosubmit(formval, template: TemplateRef<any>) {
+    const formvalue: any = formval;
+    const templateval: any = template;
+    this.issubmit = 1;
     this.errormg = '';
     let x: any;
     for (x in this.dataForm.controls) {
@@ -438,24 +435,23 @@ export class LoginComponent implements OnInit {
           .subscribe(res => {
             let result: any = {};
             result = res;
-            this.issubmit=0;
+            this.issubmit = 0;
             if (result.status == 'error') {
               this.errormg = result.msg;
             }
             if (result.status == 'success') {
               this.cookeiservice.set('userid', result.item[0]._id);
               this.cookeiservice.set('usertype', result.item[0].type);
-              if(result.item[0].type=="contract_manager")
-                  {
+              if (result.item[0].type == 'contract_manager') {
                     this.router.navigate(['/contract/dashboard']);
                   }
               this.cookeiservice.set('viewonlyaccess', result.item[0].viewonlyaccess);
               // console.log(result.item[0]);
-              if(result.item[0].status == 1 || result.item[0].status == true) {
-                if(result.item[0].is_contract_signed == null && result.item[0].type == 'rep') {
+              if (result.item[0].status == 1 || result.item[0].status == true) {
+                if (result.item[0].is_contract_signed == null && result.item[0].type == 'rep') {
                   setTimeout(() => {
                   this.cookeiservice.set('userid', result.item[0]._id);
-                  },200);
+                  }, 200);
                   this.router.navigate(['/agreement']);
                   return ;
                 }
@@ -469,31 +465,29 @@ export class LoginComponent implements OnInit {
                   this.cookeiservice.set('phone', result.item[0].phoneno);
                   this.cookeiservice.set('calenderaccess', result.item[0].calenderaccess);
                 }, 200);
-                if(result.item[0].is_consultant!=null){
+                if (result.item[0].is_consultant != null) {
                 this.cookeiservice.set('is_consultant', result.item[0].is_consultant);
-              }
-                else{
-                  this.cookeiservice.set('is_consultant',null);
+              } else {
+                  this.cookeiservice.set('is_consultant', null);
                 }
                 this.cookeiservice.set('fullname', result.item[0].firstname + ' ' + result.item[0].lastname);
-                if(result.item[0].type=='admin') {
+                if (result.item[0].type == 'admin') {
                   this.router.navigate(['/dashboard']);
                 }
-                if(result.item[0].type=='regional_recruiter') {
+                if (result.item[0].type == 'regional_recruiter') {
                   // this.cookeiservice.set('userid', result.item[0]._id);
                   this.cookeiservice.set('refreshtoken', result.item[0].refreshtoken);
                   this.router.navigate(['/regionaldashboard']);
                 }
-              if(result.item[0].type=='rep')
-              {
-                if(result.item[0].status==0) {
+              if (result.item[0].type == 'rep') {
+                if (result.item[0].status == 0) {
                   this.router.navigate(['/tempaccess']);
                   return;
                 }
-                if(result.item[0].status==1) {
-                /*** auto login ****/ 
+                if (result.item[0].status == 1) {
+                /*** auto login ****/
                 if (typeof(this.type) != 'undefined' && this.type != null ) {
-                  this.type = this.type.replace(/-/gi, "/");
+                  this.type = this.type.replace(/-/gi, '/');
                   // console.log('rep',this.type);
                   this.router.navigateByUrl(this.type);
                 } else {
@@ -501,15 +495,14 @@ export class LoginComponent implements OnInit {
                   return;
                 }
                 }
-                if(result.item[0].signup_step2==1 && result.item[0].contractstep==null && result.item[0].reptraininglessonstep==null) this.router.navigate(['/contract']);
-                if(result.item[0].signup_step2==1 && result.item[0].contractstep==1 && result.item[0].reptraininglessonstep==null) this.router.navigate(['/reptrainingcenter']);
-                if(result.item[0].signup_step2==1 && result.item[0].contractstep==1 && result.item[0].reptraininglessonstep==1) this.router.navigate(['/repdashboard']);
+                if (result.item[0].signup_step2 == 1 && result.item[0].contractstep == null && result.item[0].reptraininglessonstep == null) { this.router.navigate(['/contract']); }
+                if (result.item[0].signup_step2 == 1 && result.item[0].contractstep == 1 && result.item[0].reptraininglessonstep == null) { this.router.navigate(['/reptrainingcenter']); }
+                if (result.item[0].signup_step2 == 1 && result.item[0].contractstep == 1 && result.item[0].reptraininglessonstep == 1) { this.router.navigate(['/repdashboard']); }
               }
               // console.log('jwttoken');
               // console.log(this.cookeiservice.get('jwttoken'));
-            }
-            else{
-                this.modalRef=this.modal.show(template);
+            } else {
+                this.modalRef = this.modal.show(template);
                 setTimeout(() => {
                   this.modalRef.hide();
                 }, 4000);
@@ -524,7 +517,7 @@ export class LoginComponent implements OnInit {
   setTempToken() {
     const link = this._commonservices.nodesslurl + 'temptoken';
     this._http.post(link, { }).subscribe(res => {
-        let result:any = res;
+        const result: any = res;
         this.cookeiservice.set('jwttoken', result.token);
     });
   }

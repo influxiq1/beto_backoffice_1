@@ -20,24 +20,24 @@ export class ProductsComponent implements OnInit {
 
   public status: any = [{ val: true, 'name': 'Active' }, { val: false, 'name': 'Inactive' }];   // use for status search
 
-  statusarray: any = [{ val: 'true', name: 'Active' }, { val: 'false', name: 'Inactive' }];  //status name set
-  
- 
+  statusarray: any = [{ val: 'true', name: 'Active' }, { val: 'false', name: 'Inactive' }];  // status name set
+
+
   modify_header_array: any = {
     'productname': 'Product Name',
     'description': 'Description',
     'launch_date': 'Launch Date',
-    'status': "Status",
+    'status': 'Status',
     'verification_need': 'Verification Needed'
 
   };
 
-  tabledata_header_skip: any = ['id', 'unique_id','created_at','updated_at','not_launch', 'multiple_emails', '_id']; // use for Table Header Skip 
+  tabledata_header_skip: any = ['id', 'unique_id', 'created_at', 'updated_at', 'not_launch', 'multiple_emails', '_id']; // use for Table Header Skip
 
   tabledata_detail_skip: any = [];   // use for Table Detail Field Skip
 
-  
-  editroute = '/products/edit'
+
+  editroute = '/products/edit';
   updateendpoint = 'addorupdatedata';             // updateendpoint is use for data update endpoint
 
   deleteendpoint = 'deletesingledata';            // deleteendpoint is use for data delete endpoint
@@ -50,10 +50,10 @@ export class ProductsComponent implements OnInit {
 
   date_search_endpoint: any = 'datalist';           // date_search_endpoint is use for date search endpoint
 
-  limitcond: any = {                                 // send basic limit data 
-    "limit": 10,
-    "skip": 0,
-    "pagecount": 1
+  limitcond: any = {                                 // send basic limit data
+    'limit': 10,
+    'skip': 0,
+    'pagecount': 1
   };
 
   libdata: any = {
@@ -64,19 +64,19 @@ export class ProductsComponent implements OnInit {
     hidestatustogglebutton: true,                  // (hide status toggle button)
     hideaction: false,                              // (hide action column)
 
-    tableheaders: ['productname', 'description', 'launch_date', 'status' , 'verification_need'], //not required (table header name)
+    tableheaders: ['productname', 'description', 'launch_date', 'status' , 'verification_need'], // not required (table header name)
     custombuttons: []
-  }
+  };
 
   sortdata: any = {
-    "type": 'asc',                                              //  default sort data ascend and descend (desc)
-    "field": 'productname',                                         // default field for sorting
-    "options": ['productname']     //  sorting fields options for this table
+    'type': 'asc',                                              //  default sort data ascend and descend (desc)
+    'field': 'productname',                                         // default field for sorting
+    'options': ['productname']     //  sorting fields options for this table
   };
 
   date_search_source: any = 'products';                     // this is a database collection or view name
 
-  datacollection: any = 'getproductsmanagelistdata';                    // data collection end point 
+  datacollection: any = 'getproductsmanagelistdata';                    // data collection end point
 
   date_search_source_count: any = 0;                               // variable declare and initialize for default counting data for source count
 
@@ -88,11 +88,11 @@ export class ProductsComponent implements OnInit {
 
     //  datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date",submit:"Search",  field:"created_at"}],   // this is use for  date search //created at = field in res which gives date in unix format that changes to ist using moment.js
 
-    //selectsearch:[{ label: 'Search By Status', field: 'status', values: this.status }], // this is use for  select search
+    // selectsearch:[{ label: 'Search By Status', field: 'status', values: this.status }], // this is use for  select search
 
-    //productsearch: [{ label: "Search By Product", field: 'productname', submit: "Search" }],  // this is use for  text search
+    // productsearch: [{ label: "Search By Product", field: 'productname', submit: "Search" }],  // this is use for  text search
 
-    textsearch:[{label:"Search By Product Name",field:'productname_s'},{label:"Search by Email" , field:'multiple_emails'}]     // this is use for  Autocomplete search
+    textsearch: [{label: 'Search By Product Name', field: 'productname_s'}, {label: 'Search by Email' , field: 'multiple_emails'}]     // this is use for  Autocomplete search
   };
 
 
@@ -109,23 +109,23 @@ export class ProductsComponent implements OnInit {
     // ];
 
     this.datasource = '';
-    let endpoint = 'getproductsmanagelistdata';                              // for main data endpoint
-    let endpointc = 'getproductsmanagelistdata-count';                       // for count endpoint
+    const endpoint = 'getproductsmanagelistdata';                              // for main data endpoint
+    const endpointc = 'getproductsmanagelistdata-count';                       // for count endpoint
     // data param for conditionlimit and search
-    let data: any = {
-      "condition": {
-        "limit": 10,
-        "skip": 0
+    const data: any = {
+      'condition': {
+        'limit': 10,
+        'skip': 0
       },
       sort: {
-        "type": 'desc',                                           // defalut field sort type 
-        "field": 'productname'                                         // default sort field
+        'type': 'desc',                                           // defalut field sort type
+        'field': 'productname'                                         // default sort field
       }
 
-    }
+    };
 
-    let link = this.commonservices.nodesslurl + endpoint;
-    let link1 = this.commonservices.nodesslurl + endpointc;
+    const link = this.commonservices.nodesslurl + endpoint;
+    const link1 = this.commonservices.nodesslurl + endpointc;
     this.http.post(link, data)
       .subscribe((response: any) => {
         // for (let i=0; i<response.results.res.length; i++) {
@@ -140,13 +140,13 @@ export class ProductsComponent implements OnInit {
         // }
          this.product_list = response.results.res;
         console.warn('blogData', this.product_list);
-      })
+      });
 
     this.http.post(link1, data)
       .subscribe((res: any) => {
         console.log(res, ' for count');
         this.date_search_source_count = res.count;
-      })
+      });
 
 
 
@@ -159,7 +159,7 @@ export class ProductsComponent implements OnInit {
     //   { inputtype: 'checkbox', name: 'verification_need', label: 'Verification Needed', value: false },
     //   { inputtype: 'text', name: 'multiple_emails', label: 'Emails', placeholder: 'Enter Emails' },
     // ];
-    // this.datasource = { table: 'products', objarr: [] }; 
+    // this.datasource = { table: 'products', objarr: [] };
   }
   ngOnInit() {
   }

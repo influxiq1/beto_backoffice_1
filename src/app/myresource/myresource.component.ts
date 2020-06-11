@@ -1,4 +1,4 @@
-import { Component, OnInit,TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Router, ActivatedRoute} from '@angular/router';
 import {Commonservices} from '../app.commonservices' ;
 import { HttpClient } from '@angular/common/http';
@@ -13,58 +13,58 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
   providers: [Commonservices],
 })
 export class MyresourceComponent implements OnInit {
-  public sourceconditionval:any;
-  public resources:any;
-  public catid:any;
+  public sourceconditionval: any;
+  public resources: any;
+  public catid: any;
   public catname: any;
   public launchDate: any;
   public modalRef: BsModalRef;
     orderbyquery: any;
 
-    constructor(public cookie:CookieService,public router:Router,private _commonservices: Commonservices,private _http: HttpClient, public route:ActivatedRoute, public modal: BsModalService) {
+    constructor(public cookie: CookieService, public router: Router, private _commonservices: Commonservices, private _http: HttpClient, public route: ActivatedRoute, public modal: BsModalService) {
   }
 
   ngOnInit() {
-        this.route.params.subscribe(params=>{
-            this.catid=params['catid'];
+        this.route.params.subscribe(params => {
+            this.catid = params['catid'];
             this.resourcecat();
-            let catagoryName = params['catname'];
+            const catagoryName = params['catname'];
             if (catagoryName != null && catagoryName != 'undefined') {
-              this.catname = catagoryName.replace(/_/gi, " ");
-              console.log(this.catid,'+++++',this.catname);
+              this.catname = catagoryName.replace(/_/gi, ' ');
+              console.log(this.catid, '+++++', this.catname);
             }
-        })
+        });
       this.orderbyquery = 'firstname';
   }
-  launchDetails(val:any, template: TemplateRef<any>) {
+  launchDetails(val: any, template: TemplateRef<any>) {
     console.log(val);
     this.launchDate = val;
     this.modalRef = this.modal.show(template);
     setTimeout(() => {
-    this.modalRef.hide();       //to hide the modal in 10 sec
+    this.modalRef.hide();       // to hide the modal in 10 sec
   }, 2000);
   }
 
-  
+
     resourcecat() {
         // if(this.catid!=null){
         //     this.sourceconditionval ={category_object:this.catid};
         // }else{
-            this.sourceconditionval ={status:true};
+            this.sourceconditionval = {status: true};
         // }
-        const link = this._commonservices.nodesslurl+'datalist?token='+this.cookie.get('jwttoken');
-        this._http.post(link,{source:'resourcecategory_view',condition:this.sourceconditionval})
-            .subscribe((result:any) => {
-          if(result.status=='error'){
+        const link = this._commonservices.nodesslurl + 'datalist?token=' + this.cookie.get('jwttoken');
+        this._http.post(link, {source: 'resourcecategory_view', condition: this.sourceconditionval})
+            .subscribe((result: any) => {
+          if (result.status == 'error') {
 
-          }else{
+          } else {
 
             this.resources = [];
             this.resources = result.res;
             console.log(result.res);
-            if (this.catname != null && this.catname != 'undefined' && this.resources.length >0) {
+            if (this.catname != null && this.catname != 'undefined' && this.resources.length > 0) {
               setTimeout(() => {
-                var elmnt = document.getElementById(this.catname);
+                const elmnt = document.getElementById(this.catname);
                 elmnt.scrollIntoView({ behavior: 'smooth' });
               }, 500);
             }

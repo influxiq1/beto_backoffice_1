@@ -231,10 +231,10 @@ import { UsermanagementAddEditComponent } from './usermanagement-add-edit/userma
     ListingModule
   ],
   providers: [
-    CookieService,TestresolveService,ApiService, LoaderService,
+    CookieService, TestresolveService, ApiService, LoaderService,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
   ],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 // export class AppModule { }

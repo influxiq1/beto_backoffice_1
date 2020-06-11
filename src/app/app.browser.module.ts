@@ -84,7 +84,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
-    
+
     AppRoutingModule,
     HttpClientModule,
     routing,
@@ -103,7 +103,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserTransferStateModule,
     BrowserAnimationsModule,
   ],
-  providers: [CookieService,TestresolveService,ApiService],
+  providers: [CookieService, TestresolveService, ApiService],
   bootstrap: [AppComponent]
 })
 export class AppBrowserModule { }

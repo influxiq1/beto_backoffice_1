@@ -1,9 +1,9 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { Commonservices } from "../app.commonservices";
-import { CookieService } from "ngx-cookie-service";
-import { HttpClient } from "@angular/common/http";
-import { BsModalService } from "ngx-bootstrap/modal";
-import { BsModalRef } from "ngx-bootstrap/modal/bs-modal-ref.service";
+import { Commonservices } from '../app.commonservices';
+import { CookieService } from 'ngx-cookie-service';
+import { HttpClient } from '@angular/common/http';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api.service';
 
@@ -28,19 +28,19 @@ export class UsermanagementComponent implements OnInit {
   public consultantrole: any;
   public usertype: any;
   public fileurl: any;
-  // public mdstockToggle = 0; 
+  // public mdstockToggle = 0;
 
   userdata: any = [];
 
   public datasource: any = '';
 
   public status: any = [{ val: 0, 'name': 'Active' }, { val: 1, 'name': 'Inactive' }];   // use for status search
-  public type:any = [{val:'rep', 'name': 'Rep'},{val:'contract_manager', 'name': 'Contract Manager'},{val:'regional_recruiter', 'name':'Regional Recruiter'},{val:'admin', 'name':'Admin'}]
-  statusarray: any = [{ val: 0, name: 'Active' }, { val: 1, name: 'Inactive' }];  //status name set
+  public type: any = [{val: 'rep', 'name': 'Rep'}, {val: 'contract_manager', 'name': 'Contract Manager'}, {val: 'regional_recruiter', 'name': 'Regional Recruiter'}, {val: 'admin', 'name': 'Admin'}];
+  statusarray: any = [{ val: 0, name: 'Active' }, { val: 1, name: 'Inactive' }];  // status name set
 
-  //emailarray: any = [{ val: 'sourotest222@gmail.com', name: 'sourotest222@gmail.com' }]; //Static Email search eg.
+  // emailarray: any = [{ val: 'sourotest222@gmail.com', name: 'sourotest222@gmail.com' }]; //Static Email search eg.
 
-  //editroute: any = 'editroute'; // use for edit any field Navigate that page And you should be import the 
+  // editroute: any = 'editroute'; // use for edit any field Navigate that page And you should be import the
   modify_header_array: any = {
     'parentname': 'Parent Name',
     'fullname': 'Full Name',
@@ -48,10 +48,10 @@ export class UsermanagementComponent implements OnInit {
     'phoneno': 'Phone No.',
     'status': 'Status',
     'created_datetime': 'Date Joined',
-    "type": "Account Type"
+    'type': 'Account Type'
   };
 
-  userdata_header_skip: any = ['lock', 'firstname', 'regionalrecruiter_id', 'unique_id', 'created_at', 'lastname', 'reactsum', 'newhirecatsum', 'is_contract_signed', 'calenderaccess', 'is_consultant', 'affid', 'worked', 'doctorcontact', 'experience', 'visited', 'recruiter', 'trainingpercentage', 'is_discovery', 'is_onboarding', '_id','parentname_s']; // use for Table Header Skip 
+  userdata_header_skip: any = ['lock', 'firstname', 'regionalrecruiter_id', 'unique_id', 'created_at', 'lastname', 'reactsum', 'newhirecatsum', 'is_contract_signed', 'calenderaccess', 'is_consultant', 'affid', 'worked', 'doctorcontact', 'experience', 'visited', 'recruiter', 'trainingpercentage', 'is_discovery', 'is_onboarding', '_id', 'parentname_s']; // use for Table Header Skip
 
   editroute: any = 'usermanagement/edit';
   updateendpoint = 'addorupdatedata';             // updateendpoint is use for data update endpoint
@@ -66,14 +66,14 @@ export class UsermanagementComponent implements OnInit {
 
   date_search_endpoint: any = 'datalist';           // date_search_endpoint is use for date search endpoint
 
-  limitcond: any = {                                 // send basic limit data 
-    "limit": 10,
-    "skip": 0,
-    "pagecount": 1
+  limitcond: any = {                                 // send basic limit data
+    'limit': 10,
+    'skip': 0,
+    'pagecount': 1
   };
 
 
-  userdata_detail_skip: any = ['_id', 'created_at', 'fullname_s','reactsum','trainingpercentage','recruiter','parentname_s','status','parentname','newhirecatsum','lock','is_consultant','calenderaccess'];   // use for Table Detail Field Skip
+  userdata_detail_skip: any = ['_id', 'created_at', 'fullname_s', 'reactsum', 'trainingpercentage', 'recruiter', 'parentname_s', 'status', 'parentname', 'newhirecatsum', 'lock', 'is_consultant', 'calenderaccess'];   // use for Table Detail Field Skip
   libdata: any = {
     updateendpoint: 'statusupdatesingledata',                                        // update endpoint set
     hideeditbutton: false,                                                  // (hide edit button)
@@ -82,95 +82,95 @@ export class UsermanagementComponent implements OnInit {
     hidestatustogglebutton: false,                                        // (hide status toggle button)
     hideaction: false,
     detailview_override: [
-      { key: "is_contract_signed_m", val: "Contract signed" },
-      { key: "is_discovery", val: "Discovery Call" },
-      { key: "is_onboarding", val: "Onboarding Call" },
-      { key: "created_datetime", val: "Date Added with time" },
-      { key: "email", val: "Email" },
-      { key: "type", val: "Account Type" },
-      { key: "legaldoc_doctype", val: "Leagal doc submission"},
-      { key: "fullname", val: "Name" },
-      { key: "phoneno" , val: "Phone Number"}
+      { key: 'is_contract_signed_m', val: 'Contract signed' },
+      { key: 'is_discovery', val: 'Discovery Call' },
+      { key: 'is_onboarding', val: 'Onboarding Call' },
+      { key: 'created_datetime', val: 'Date Added with time' },
+      { key: 'email', val: 'Email' },
+      { key: 'type', val: 'Account Type' },
+      { key: 'legaldoc_doctype', val: 'Leagal doc submission'},
+      { key: 'fullname', val: 'Name' },
+      { key: 'phoneno' , val: 'Phone Number'}
     ],                                                 // (hide action column)
 
-    tableheaders: ['fullname', 'email', 'type', 'parentname', 'phoneno', 'status', 'created_datetime'], //not required (table header name)
+    tableheaders: ['fullname', 'email', 'type', 'parentname', 'phoneno', 'status', 'created_datetime'], // not required (table header name)
     custombuttons: [
       {
-        label: "delete",
-        toggle: "delete",
+        label: 'delete',
+        toggle: 'delete',
         type: 'internallink',
       },
       {
-        label: "Login As",
-        route: "login-as-a-rep",
+        label: 'Login As',
+        route: 'login-as-a-rep',
         type: 'internallink',
         param: ['_id', 'email']
       },
       {
-        label: "Calender Access Inactive",
-        route: "calender-access",
+        label: 'Calender Access Inactive',
+        route: 'calender-access',
         type: 'internallink',
         param: ['_id', 'calenderaccess'],
         cond: 'calenderaccess',
         condval: 0
       },
       {
-        label: "Calender Access Active",
-        route: "calender-access",
+        label: 'Calender Access Active',
+        route: 'calender-access',
         type: 'internallink',
         param: ['_id', 'calenderaccess'],
         cond: 'calenderaccess',
         condval: 1
       },
       {
-        label: "Senior Consulting Director Inactive",
-        route: "senior-consulting-director",
+        label: 'Senior Consulting Director Inactive',
+        route: 'senior-consulting-director',
         type: 'internallink',
         param: ['_id', 'is_consultant'],
         cond: 'is_consultant',
         condval: 0
       },
       {
-        label: "Senior Consulting Director Active",
-        route: "senior-consulting-director",
+        label: 'Senior Consulting Director Active',
+        route: 'senior-consulting-director',
         type: 'internallink',
         param: ['_id', 'is_consultant'],
         cond: 'is_consultant',
         condval: 1
       },
       {
-        label: "Download Contract",
-        link: "https://betoparedes.com/generate-pdf/employment-agreement/index.php",
+        label: 'Download Contract',
+        link: 'https://betoparedes.com/generate-pdf/employment-agreement/index.php',
         type: 'externallink',
         param: [{ key: '_id', q: 'id' }],
         cond: 'is_contract_signed_m',
         condval: 1
       },
       {
-        label: "More Details",
+        label: 'More Details',
         type: 'action',
         datatype: 'api',
         endpoint: 'getuserdatabyid',
         otherparam: [],
-        //cond:'status',
-        //condval:0,
+        // cond:'status',
+        // condval:0,
         param: 'id',
         datafields: ['address', 'city', 'state', 'zip'],
         // refreshdata: true,
         headermessage: 'Address Details',
     }
     ]
-  }
+  };
 
   sortdata: any = {
-    "type": 'asc',                                              //  default sort data ascend and descend (desc)
-    "field": 'fullname',                                          // default field for sorting
-    "options": ['fullname', 'email','parentname','created_datetime']                                      //  sorting fields options for this table
+    'type': 'asc',                                              //  default sort data ascend and descend (desc)
+    'field': 'fullname',                                          // default field for sorting
+    'options': ['fullname', 'email', 'parentname', 'created_datetime']                                      //  sorting fields options for this table
   };
 
   date_search_source: any = 'users';                        // this is a database collection or view name
 
-  datacollection: any = 'usertrainingreport';                           // data collection end point 
+  datacollection: any = 'usertrainingreport';                           // data collection end point
 
   date_search_source_count: any = 0;                                // variable declare and initialize for default counting data for source count
 
@@ -179,11 +179,11 @@ export class UsermanagementComponent implements OnInit {
 
   // this is search block
   search_settings: any = {
-    datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date",submit:"Search",  field:"created_datetime"}],   
+    datesearch: [{startdatelabel: 'Start Date', enddatelabel: 'End Date', submit: 'Search',  field: 'created_datetime'}],
 
-    selectsearch:[{ label: 'Search By Type', field: 'type', values: this.type },{ label: 'Search By Status', field: 'status', values: this.status }],
+    selectsearch: [{ label: 'Search By Type', field: 'type', values: this.type }, { label: 'Search By Status', field: 'status', values: this.status }],
 
-    textsearch: [{ label: "Search By Full Name", field: 'fullname_s' }, { label: "Search By Email", field: 'email' }, { label: "Search By Parent Name", field: 'parentname_s' } , { label: "Search By Phone Number", field: 'phoneno' }],  // this is use for  text search
+    textsearch: [{ label: 'Search By Full Name', field: 'fullname_s' }, { label: 'Search By Email', field: 'email' }, { label: 'Search By Parent Name', field: 'parentname_s' } , { label: 'Search By Phone Number', field: 'phoneno' }],  // this is use for  text search
   };
 
   constructor(public commonservices: Commonservices, public cookieservice: CookieService, public originalCookie: CookieService, public _http: HttpClient, private router: Router, public modal: BsModalService, public _apiService: ApiService, public activatedRoute: ActivatedRoute) {
@@ -193,32 +193,32 @@ export class UsermanagementComponent implements OnInit {
     });
 
     this.datasource = '';
-    let endpoint = 'usertrainingreport';                              // for main data endpoint
-    let endpointc = 'usertrainingreport-count';                       // for count endpoint
+    const endpoint = 'usertrainingreport';                              // for main data endpoint
+    const endpointc = 'usertrainingreport-count';                       // for count endpoint
     // data param for conditionlimit and search
-    let data: any = {
-      "condition": {
-        "limit": 10,
-        "skip": 0
+    const data: any = {
+      'condition': {
+        'limit': 10,
+        'skip': 0
       },
       sort: {
-        "type": 'desc',                                           // defalut field sort type 
-        "field": 'fullname'                                         // default sort field
+        'type': 'desc',                                           // defalut field sort type
+        'field': 'fullname'                                         // default sort field
       }
 
-    }
+    };
 
-    let link1 = this.commonservices.nodesslurl + endpointc;
+    const link1 = this.commonservices.nodesslurl + endpointc;
     this._http.post(link1, data).subscribe((res: any) => {
       this.date_search_source_count = res.count;
-    })
+    });
 
 
 
 
 
     this.fileurl = this.commonservices.serverfileurl;
-    this.consultantrole = this.cookieservice.get('is_consultant'); //to know whether it is admin or senior consultant
+    this.consultantrole = this.cookieservice.get('is_consultant'); // to know whether it is admin or senior consultant
     this.usertype = this.cookieservice.get('usertype');
     // this.getUserLists();
   }

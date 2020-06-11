@@ -29,7 +29,7 @@ export class AdminheaderComponent implements OnInit {
   public videoCategoryarry: any = [];
   public checkOldCookie: any;
   public oldcookiedata: any;
-  public gameplanButton:any = 0;
+  public gameplanButton: any = 0;
   public calenderaccess: any;
   private currentUrl: string;
   public initial: any = '';
@@ -41,14 +41,14 @@ export class AdminheaderComponent implements OnInit {
     const body = document.getElementsByTagName('body')[0];
     this.currentUrl = this.router.url;
     if (this.router.url == '/contract-list') {
-      body.classList.add('contactlist')
-    } else{
-      body.classList.remove('contactlist')
+      body.classList.add('contactlist');
+    } else {
+      body.classList.remove('contactlist');
     }
 
 
 
-    this.checkOldCookie = this.cookie.check('oldcookie'); //check if oldcookie exists or not;returns boolean data
+    this.checkOldCookie = this.cookie.check('oldcookie'); // check if oldcookie exists or not;returns boolean data
     if (this.cookie.check('oldcookie') == true) {
       this.oldcookiedata = JSON.parse(this.cookie.get('oldcookie'));
     }
@@ -60,18 +60,18 @@ export class AdminheaderComponent implements OnInit {
     if (this.cookie.check('jwttoken') == false || this.cookie.check('userid') == false) {
       this.router.navigate(['/']);
     } else {
-      
-      setTimeout(()=>{
+
+      setTimeout(() => {
         this.getRepDetails();
-      },500);
-      setTimeout(()=>{
+      }, 500);
+      setTimeout(() => {
         this.getrepdetails();
-      },1000);
-      
+      }, 1000);
+
       this.getvideocatagory();
 
       this.sourceconditionval = { _id: this.idis };
-      
+
     }
     // if (this.type == 'rep' || this.type == 'regional_recruiter') {
     //   this.resourcecat();
@@ -85,8 +85,8 @@ export class AdminheaderComponent implements OnInit {
 
 
   getvideocatagory() {
-    let link = this._commonservices.nodesslurl + 'datalist?token=' + this.cookie.get('jwttoken');
-    this._http.post(link, { source: "videocategory_view_with_parent", condition: { status: true } })
+    const link = this._commonservices.nodesslurl + 'datalist?token=' + this.cookie.get('jwttoken');
+    this._http.post(link, { source: 'videocategory_view_with_parent', condition: { status: true } })
       .subscribe(res => {
         let result;
         result = res;
@@ -102,11 +102,11 @@ export class AdminheaderComponent implements OnInit {
         this.videoCategoryarry = [];
       });
   }
-  
+
   ngOnInit() {
     // this.interval = setInterval(() => {
       this.getRepDetails();
-      //this.getslidervalueforimage();
+      // this.getslidervalueforimage();
     // }, 35000);
     setTimeout(() => {
       this.calenderaccessSet();
@@ -137,7 +137,7 @@ export class AdminheaderComponent implements OnInit {
   //     });
   // }
 }
-  calenderaccessSet(){
+  calenderaccessSet() {
     this.calenderaccess = this.cookie.get('calenderaccess');
   }
 
@@ -150,19 +150,19 @@ export class AdminheaderComponent implements OnInit {
   // }
 
 
-  calanderAccessMail(email: any){
+  calanderAccessMail(email: any) {
     const link = this._commonservices.nodesslurl + 'calander_access_mail';
-    let data: any= {"email":email}
+    const data: any = {'email': email};
     this._http.post(link, data)
       .subscribe(res => {
         // console.log('Mail send successful');
         // console.log(res);
-      })
+      });
   }
 
 
   getRepDetails() {
-    let link = this._commonservices.nodesslurl + 'userreport';
+    const link = this._commonservices.nodesslurl + 'userreport';
     this._http.post(link, { email: this.cookie.get('useremail') })
       .subscribe(res => {
         let result: any;
@@ -170,26 +170,26 @@ export class AdminheaderComponent implements OnInit {
         if (result.status == 'error') {
           console.log('Oopss');
         } else {
-          
+
           this.repDetailsNew = result.data;
           if (this.calenderaccess == null || typeof(this.calenderaccess) == 'undefined' && this.repDetailsNew[0] != null && this.repDetailsNew[0].calenderaccess != null) {
           // console.log('calenderaccess+++++++++++++',result)
             this.cookie.set('calenderaccess', this.repDetailsNew[0].calenderaccess);
             this.calenderaccess = this.repDetailsNew[0].calenderaccess;
-          } else if ((this.calenderaccess == null || typeof(this.calenderaccess) == 'undefined' && typeof(this.repDetailsNew[0] )== 'undefined' || this.repDetailsNew[0] == null)) {
-            let link2 = this._commonservices.nodesslurl + 'complete_traning_catagory_by_user';
+          } else if ((this.calenderaccess == null || typeof(this.calenderaccess) == 'undefined' && typeof(this.repDetailsNew[0] ) == 'undefined' || this.repDetailsNew[0] == null)) {
+            const link2 = this._commonservices.nodesslurl + 'complete_traning_catagory_by_user';
             this._http.post(link2, {
-              "condition": { "userid": this.cookie.get('userid') }
+              'condition': { 'userid': this.cookie.get('userid') }
             })
               .subscribe((res: any) => {
                 // console.log("++")
-                let training_lesson_count_val: any = res.data.training_lesson_count;
-                let complete_traning_catagory_by_user_val: any = res.data.complete_traning_catagory_by_user;
+                const training_lesson_count_val: any = res.data.training_lesson_count;
+                const complete_traning_catagory_by_user_val: any = res.data.complete_traning_catagory_by_user;
                 for (const item of training_lesson_count_val) {
                   // console.log(item);
                   for (const complete_traning of complete_traning_catagory_by_user_val) {
                     // console.log(complete_traning);
-                    if (item._id == complete_traning.trainingcategory && item.count >= complete_traning.lessondone && complete_traning.trainingcategory != "5e60865df4a08401e0e00e6c") {
+                    if (item._id == complete_traning.trainingcategory && item.count >= complete_traning.lessondone && complete_traning.trainingcategory != '5e60865df4a08401e0e00e6c') {
                       // console.log('calenderaccess+++++----++++')
                       this.gameplanButton = 1;
                       this.calenderaccess = 1;
@@ -212,30 +212,30 @@ export class AdminheaderComponent implements OnInit {
                 // }
               });
           } else {
-            //this.calenderaccess=false;
+            // this.calenderaccess=false;
           }
           if (this.calenderaccess == null || typeof(this.calenderaccess) == 'undefined' && this.repDetailsNew.length > 0 && this.repDetailsNew[0].trainingpercentage < 100 && this.repDetailsNew[0].is_discovery == false || this.repDetailsNew.length == 0) {
-            console.log()
+            console.log();
             setTimeout(() => {
-              console.log(this.repDetailsNew,'this.repDetailsNew')
-              let link2 = this._commonservices.nodesslurl + 'datalist?token=' + this.cookie.get('jwttoken');
+              console.log(this.repDetailsNew, 'this.repDetailsNew');
+              const link2 = this._commonservices.nodesslurl + 'datalist?token=' + this.cookie.get('jwttoken');
               this._http.post(link2, {
-                "condition": { "user_id_object": this.cookie.get('userid') },
-                "source": "user_parent_category_percent"
+                'condition': { 'user_id_object': this.cookie.get('userid') },
+                'source': 'user_parent_category_percent'
               })
                 .subscribe(res => {
                   let result: any;
                   result = res;
-                  for (let i in result.res) {
+                  for (const i in result.res) {
                     if (result.res[i].trainingpercent >= 75 && this.repDetailsNew[0] != null && (this.repDetailsNew[0].calenderaccess == 0 || this.repDetailsNew[0].calenderaccess == undefined)) {
-                      console.log(this.repDetailsNew,'this.repDetailsNew')
+                      console.log(this.repDetailsNew, 'this.repDetailsNew');
                       this.gameplanButton = 1;
                       this.calenderaccess = 1;
-                      let link = this._commonservices.nodesslurl + 'addorupdatedata?token=' + this.cookie.get('jwttoken');
-                      let data = {
+                      const link = this._commonservices.nodesslurl + 'addorupdatedata?token=' + this.cookie.get('jwttoken');
+                      const data = {
                         id: this.cookie.get('userid'),
                         calenderaccess: 1
-                      }
+                      };
                       this._http.post(link, { source: 'users', data: data })
                         .subscribe((res) => {
                           // added by Himadri Mail function
@@ -250,13 +250,13 @@ export class AdminheaderComponent implements OnInit {
             }, 5000);
           }
         }
-      })
+      });
   }
 
 
 //   getRepDetails() {
 //     let link = this._commonservices.nodesslurl + 'userreport';
-   
+
 //     this._http.post(link, { email: this.cookie.get('useremail') })
 //       .subscribe(res => {
 //         let result: any;
@@ -264,7 +264,7 @@ export class AdminheaderComponent implements OnInit {
 //         if (result.status == 'error') {
 //           console.log('Oopss');
 //         } else {
-          
+
 //           this.repDetailsNew = result.data;
 //           if(this.repDetailsNew[0]!=null && this.repDetailsNew[0].calenderaccess !=null ) {
 //             this.cookie.set('calenderaccess', this.repDetailsNew[0].calenderaccess);
@@ -274,7 +274,7 @@ export class AdminheaderComponent implements OnInit {
 //           }
 //           if (this.repDetailsNew.length > 0 && this.repDetailsNew[0].trainingpercentage < 100 && this.repDetailsNew[0].is_discovery == false || this.repDetailsNew.length==0){
 //             setTimeout(() => {
-              
+
 
 //             let link2 = this._commonservices.nodesslurl + 'datalist?token=' + this.cookie.get('jwttoken');
 //             this._http.post(link2, {
@@ -288,8 +288,8 @@ export class AdminheaderComponent implements OnInit {
 //                   for (let i in result.res) {
 //                     if (result.res[i].trainingpercent >= 100 && this.repDetailsNew[0]!=null && (this.repDetailsNew[0].calenderaccess == 0 || this.repDetailsNew[0].calenderaccess == undefined) ) {
 //                       this.gameplanButton = 1;
-//                       this.calenderaccess = 1; 
-  
+//                       this.calenderaccess = 1;
+
 //                       let link = this._commonservices.nodesslurl + 'addorupdatedata?token='+this.cookie.get('jwttoken');
 //           let data={
 //               id: this.cookie.get('userid'),
@@ -353,7 +353,7 @@ export class AdminheaderComponent implements OnInit {
 
   logout() {
     this.cookie.deleteAll();
-    this.cookie.deleteAll('/');  
+    this.cookie.deleteAll('/');
     setTimeout(() => {
       // window.location.href='/';
       this.router.navigateByUrl('login');
@@ -362,7 +362,7 @@ export class AdminheaderComponent implements OnInit {
 
   getrepdetails() {
     const link = this._commonservices.nodesslurl + 'getrecvalues?token=' + this.cookie.get('jwttoken');
-    var data = { _id: this.cookie.get('userid') }
+    const data = { _id: this.cookie.get('userid') };
     this._http.post(link, data)
       .subscribe(res => {
         let result: any;
@@ -383,13 +383,13 @@ export class AdminheaderComponent implements OnInit {
   gototrainingsectionwithcat() {
     // console.log(this.initial)
     if (this.initial != 100 || this.cookie.get('calenderaccess')) {
-      var link = 'reptrainingcenter/5e60865df4a08401e0e00e6c';
+      const link = 'reptrainingcenter/5e60865df4a08401e0e00e6c';
       this.router.navigate([link]);
-    }else if (this.reptraininglessondetails != null) {
-      var link = 'reptrainingcenter/' + this.reptraininglessondetails.trainingcategory;
+    } else if (this.reptraininglessondetails != null) {
+      const link = 'reptrainingcenter/' + this.reptraininglessondetails.trainingcategory;
       this.router.navigate([link]);
     } else {
-      var link = 'reptrainingcenter/5d7f23843bd1bb6d1d19359f';
+      const link = 'reptrainingcenter/5d7f23843bd1bb6d1d19359f';
       // var link = 'reptrainingcenter/5d36d7256778e75a3d6c37ce';
       //   var link = 'reptrainingcenter/5c6d54656fac495dd5c209e9';
       this.router.navigate([link]);
@@ -398,7 +398,7 @@ export class AdminheaderComponent implements OnInit {
   gotorepevents() {
     if (this.recid != null) {
       //  var link = 'repevent/'+this.recid;
-      var link = 'slotview/' + this.recid;
+      const link = 'slotview/' + this.recid;
       this.router.navigate([link]);
     }
   }
@@ -423,10 +423,9 @@ export class AdminheaderComponent implements OnInit {
       });
   }
   showphoneno(phn) {
-    phn = phn.replace(/ /g, "");
-    phn = phn.replace(/-/g, "");
-    if (phn != null) return phn.slice(0, 3) + '-' + phn.slice(3, 6) + '-' + phn.slice(6, 10);
-    else return phn;
+    phn = phn.replace(/ /g, '');
+    phn = phn.replace(/-/g, '');
+    if (phn != null) { return phn.slice(0, 3) + '-' + phn.slice(3, 6) + '-' + phn.slice(6, 10); } else { return phn; }
   }
   ngOnDestroy() {
     clearInterval(this.interval);
@@ -436,10 +435,10 @@ export class AdminheaderComponent implements OnInit {
     alert('OKK');
   }
   logBackToOldProfile() {
-    this.cookie.deleteAll();  ///deleting new cookie here to fetch old data
-    //setting old cookie
-    let link = this._commonservices.nodesslurl + 'datalist?token=' + this.oldcookiedata.jwttoken;
-    let data = { source: 'users', condition: { email: this.oldcookiedata.useremail } };
+    this.cookie.deleteAll();  /// deleting new cookie here to fetch old data
+    // setting old cookie
+    const link = this._commonservices.nodesslurl + 'datalist?token=' + this.oldcookiedata.jwttoken;
+    const data = { source: 'users', condition: { email: this.oldcookiedata.useremail } };
     this._http.post(link, data)
       .subscribe(res => {
         let result: any;
@@ -458,8 +457,9 @@ export class AdminheaderComponent implements OnInit {
             this.cookie.set('lockdornot', result.res[0].lock);
             this.cookie.set('usertype', result.res[0].type);
             this.cookie.set('useremail', result.res[0].email);
-            if(result.res[0]!=null && result.res[0].calenderaccess !=null )
+            if (result.res[0] != null && result.res[0].calenderaccess != null ) {
               this.cookie.set('calenderaccess', result.res[0].calenderaccess);
+            }
             this.cookie.set('is_consultant', result.res[0].is_consultant);
             this.cookie.set('fullname', result.res[0].firstname + ' ' + result.res[0].lastname);
             if (result.res[0].type == 'admin') {
@@ -481,18 +481,18 @@ export class AdminheaderComponent implements OnInit {
               }
 
 
-              if (result.res[0].signup_step2 == 1 && result.res[0].contractstep == null && result.res[0].reptraininglessonstep == null) this.router.navigate(['/contract']);
-              if (result.res[0].signup_step2 == 1 && result.res[0].contractstep == 1 && result.res[0].reptraininglessonstep == null) this.router.navigate(['/reptrainingcenter']);
-              if (result.res[0].signup_step2 == 1 && result.res[0].contractstep == 1 && result.res[0].reptraininglessonstep == 1) this.router.navigate(['/repdashboard']);
+              if (result.res[0].signup_step2 == 1 && result.res[0].contractstep == null && result.res[0].reptraininglessonstep == null) { this.router.navigate(['/contract']); }
+              if (result.res[0].signup_step2 == 1 && result.res[0].contractstep == 1 && result.res[0].reptraininglessonstep == null) { this.router.navigate(['/reptrainingcenter']); }
+              if (result.res[0].signup_step2 == 1 && result.res[0].contractstep == 1 && result.res[0].reptraininglessonstep == 1) { this.router.navigate(['/repdashboard']); }
             }
 
           }
         }
-      })
+      });
 
   }
 
-  gotolink(link:any){
+  gotolink(link: any) {
     this.window.open(link);
   }
 

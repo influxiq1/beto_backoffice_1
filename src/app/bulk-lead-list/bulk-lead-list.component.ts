@@ -21,37 +21,37 @@ export class BulkLeadListComponent implements OnInit, AfterViewInit {
   public datasource: any;
   public tabledatalist: any[];
   public sourcecondition: any = {};
-  public product_list: any= {};
+  public product_list: any = {};
   bulk_lead_list: any = [];
   modify_header_array: any = {
-    'date_added':'Date',
+    'date_added': 'Date',
     'fullName': 'Full Name',
-    'Phone':'Pnone Number',
-    'CompanyName':'Company Name',
-    'Address':'Address',
-    'Web':'Web',
-    'Email':'Email',
-    'batch_name':'Batch Name',
-    'created_by':'Created By',
-    'productName':'Product Name',
+    'Phone': 'Pnone Number',
+    'CompanyName': 'Company Name',
+    'Address': 'Address',
+    'Web': 'Web',
+    'Email': 'Email',
+    'batch_name': 'Batch Name',
+    'created_by': 'Created By',
+    'productName': 'Product Name',
 
 
   };
 
-  tabledata_header_skip: any = ['_id','City','County','State','Zip','added_by','created_at','id','product','rep_name','u_id','unique_id']; // use for Table Header Skip 
+  tabledata_header_skip: any = ['_id', 'City', 'County', 'State', 'Zip', 'added_by', 'created_at', 'id', 'product', 'rep_name', 'u_id', 'unique_id']; // use for Table Header Skip
 
   tabledata_detail_skip: any = [];   // use for Table Detail Field Skip
-  tablename= 'csv_upload_view';
+  tablename = 'csv_upload_view';
   searchendpoint = 'datalist';                    // searchendpoint is use for data search endpoint
 
   // click_to_add_ananother_page = '/adminlist';      // use for click to another page routing path
 
   date_search_endpoint: any = 'datalist';           // date_search_endpoint is use for date search endpoint
 
-  limitcond: any = {                                 // send basic limit data 
-    "limit": 10,
-    "skip": 0,
-    "pagecount": 1
+  limitcond: any = {                                 // send basic limit data
+    'limit': 10,
+    'skip': 0,
+    'pagecount': 1
   };
 
   libdata: any = {
@@ -62,19 +62,19 @@ export class BulkLeadListComponent implements OnInit, AfterViewInit {
     hidestatustogglebutton: true,                  // (hide status toggle button)
     hideaction: true,                              // (hide action column)
 
-    tableheaders: ['date_added','fullName','Phone','CompanyName','Address','Web','Email','batch_name','created_by','productName'], //not required (table header name)
+    tableheaders: ['date_added', 'fullName', 'Phone', 'CompanyName', 'Address', 'Web', 'Email', 'batch_name', 'created_by', 'productName'], // not required (table header name)
     custombuttons: []
-  }
+  };
 
   sortdata: any = {
-    "type": 'asc',                                              //  default sort data ascend and descend (desc)
-    "field": 'fullName',                                         // default field for sorting
-    "options": ['fullName','Email','date_added']     //  sorting fields options for this table
+    'type': 'asc',                                              //  default sort data ascend and descend (desc)
+    'field': 'fullName',                                         // default field for sorting
+    'options': ['fullName', 'Email', 'date_added']     //  sorting fields options for this table
   };
 
   date_search_source: any = 'csv_upload_view';                     // this is a database collection or view name
 
-  datacollection: any = 'getbulkleadsmanagelistdata';                    // data collection end point 
+  datacollection: any = 'getbulkleadsmanagelistdata';                    // data collection end point
 
   date_search_source_count: any = 0;                               // variable declare and initialize for default counting data for source count
 
@@ -84,11 +84,11 @@ export class BulkLeadListComponent implements OnInit, AfterViewInit {
   // this is search block
   search_settings: any = {
 
-    datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date", submit:"Search1",  field:"date_added"}], 
+    datesearch: [{startdatelabel: 'Start Date', enddatelabel: 'End Date', submit: 'Search1',  field: 'date_added'}],
 
     // selectsearch:[{ label: 'Search By Product', field: 'prodct_id', values: this.product_list }], // this is use for  select search
 
-   textsearch:[{label:"Search By Name",field:'fullName'},{label:"Search By Email",field:'Email'}]     // this is use for  Autocomplete search
+   textsearch: [{label: 'Search By Name', field: 'fullName'}, {label: 'Search By Email', field: 'Email'}]     // this is use for  Autocomplete search
   };
 
 //   elements: any = [];
@@ -109,7 +109,7 @@ export class BulkLeadListComponent implements OnInit, AfterViewInit {
 
 // public datalist: any;
 // public selecteditem;
-// public placeholderforselect = 0; 
+// public placeholderforselect = 0;
 // public message;
 //  headElements = ['ID', 'Date', 'Full Name', 'Phone', 'Company Name', 'Address', 'Web', 'Email', 'Batch Name', 'Created By', 'Product Name'];
 // public productList: any = [];
@@ -128,9 +128,9 @@ export class BulkLeadListComponent implements OnInit, AfterViewInit {
 // public allChecked_ids: any = [];
 // public rep_list: any = '';
 
-  constructor(public _commonservice:Commonservices,
+  constructor(public _commonservice: Commonservices,
    public cookeiservice: CookieService,
-    public _http:HttpClient,
+    public _http: HttpClient,
     public router: Router,
     public route: ActivatedRoute,
     public modal: BsModalService,
@@ -139,37 +139,37 @@ export class BulkLeadListComponent implements OnInit, AfterViewInit {
     //  console.log(this.route.snapshot.params._id)
 
     this.datasource = '';
-    let endpoint = 'getbulkleadsmanagelistdata';                              // for main data endpoint
-    let endpointc = 'getbulkleadsmanagelistdata-count';                       // for count endpoint
+    const endpoint = 'getbulkleadsmanagelistdata';                              // for main data endpoint
+    const endpointc = 'getbulkleadsmanagelistdata-count';                       // for count endpoint
     // data param for conditionlimit and search
-    let data: any = {
-      "condition": {
-        "limit": 10,
-        "skip": 0,
-        "_id":this.route.snapshot.params._id
+    const data: any = {
+      'condition': {
+        'limit': 10,
+        'skip': 0,
+        '_id': this.route.snapshot.params._id
       },
       sort: {
-        "type": 'desc',                                           // defalut field sort type 
-        "field": 'fullName'                                         // default sort field
+        'type': 'desc',                                           // defalut field sort type
+        'field': 'fullName'                                         // default sort field
       }
 
-    }
+    };
 
-    let link = this._commonservice.nodesslurl + endpoint;
-    let link1 = this._commonservice.nodesslurl + endpointc;
+    const link = this._commonservice.nodesslurl + endpoint;
+    const link1 = this._commonservice.nodesslurl + endpointc;
     this._http.post(link, data)
       .subscribe((response: any) => {
-     
+
          this.bulk_lead_list = response.results.res;
         console.warn('blogData', this.bulk_lead_list);
-      })
+      });
 
     this._http.post(link1, data)
       .subscribe((res: any) => {
         console.log(res.results.res, ' for count');
         this.date_search_source_count = res.results.res;
 
-      })
+      });
      }
 
   ngOnInit() {
@@ -180,7 +180,7 @@ export class BulkLeadListComponent implements OnInit, AfterViewInit {
   //     // this.headElements = Object.keys(data.results.res[0]);
   //  });
   //  console.log((this.datalist[0].contentTop));
-   //this.getproduct();
+   // this.getproduct();
   }
 
 
@@ -239,7 +239,7 @@ export class BulkLeadListComponent implements OnInit, AfterViewInit {
 //       "skip":count
 //     }
 // if (count>=25) {
-  
+
 
 //     const link = this._commonservice.nodesslurl + 'leadlist?token=' + this.cookeiservice.get('jwttoken');
 //         this._http.post(link, { source: 'csv_upload_view', condition: cond }).subscribe((res:any) => {
@@ -309,7 +309,7 @@ export class BulkLeadListComponent implements OnInit, AfterViewInit {
 //         if (this.datalist[i].fullName != null && this.datalist[i].fullName.toLowerCase().indexOf(val.toLowerCase()) > -1) {
 //           datalistVal.push(this.datalist[i]);
 //         }
-//       } 
+//       }
 //       this.datalist = datalistVal;
 //     }
 //   }
@@ -372,7 +372,7 @@ export class BulkLeadListComponent implements OnInit, AfterViewInit {
 // // //    rep_id:val.rep_id,
 // // //    updated_by: this.cookeiservice.get('userid')
 // // //     }})
-// // //       .subscribe((res: any) => { 
+// // //       .subscribe((res: any) => {
 // // //           if (res.status == 'success') {
 // // //           // this.router.navigateByUrl('/contract-manager-list');
 // // //       }
@@ -389,7 +389,7 @@ export class BulkLeadListComponent implements OnInit, AfterViewInit {
   //   // // this.modalRef1.hide();
   //   // this.router.navigateByUrl('/edit-contract-manager/'+val._id);
   // }
-  
+
 // openModalData(val: any, template: TemplateRef<any>) {
 //   // this.modalRef1 = this.modal.show(template);
 //   //   this.selecteditem = val;
@@ -431,7 +431,7 @@ export class BulkLeadListComponent implements OnInit, AfterViewInit {
 //                 this.modalRef1.hide();
 //             }, 4000);
 //             }
-            
+
 //         }, error => {
 //             console.log('Oooops!');
 //         });
@@ -454,7 +454,7 @@ export class BulkLeadListComponent implements OnInit, AfterViewInit {
 //       this._http.post(link,{source:source1, condition: {"_id":val}}).subscribe(res => {
 //           let result: any = res;
 //           console.log(result.res);
-//       });  
+//       });
 //     }
  // }
 

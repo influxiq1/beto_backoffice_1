@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Commonservices } from "../app.commonservices";
-import { HttpClient } from "@angular/common/http";
-import { CookieService } from "ngx-cookie-service";
+import { Commonservices } from '../app.commonservices';
+import { HttpClient } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { WINDOW } from '@ng-toolkit/universal';
 declare var moment;
@@ -14,24 +14,24 @@ declare var moment;
 })
 export class TempaccessComponent implements OnInit {
   public eventlist: any;
-  public dateallarr: any=[];
-  public slotarr: any=[];
-  public startarr: any=[];
-  public flag: any=30;
-  public dayarr: any=[];
-  public dayarrtemp: any=[];
-  public timearr: any=[];
-  public timezone: any=[];
+  public dateallarr: any = [];
+  public slotarr: any = [];
+  public startarr: any = [];
+  public flag: any = 30;
+  public dayarr: any = [];
+  public dayarrtemp: any = [];
+  public timearr: any = [];
+  public timezone: any = [];
   public recid: any;
-  //public flag: any=60;
+  // public flag: any=60;
   public mydetails;
   public rec;
   public recemail;
   public msgBlock: any = { flug: 'general' };
   public googleEventId: any;
 
-  constructor(@Inject(WINDOW) private window: Window, public _commonservices:Commonservices,public  _http:HttpClient,public cookeiservice:CookieService,public  route: ActivatedRoute) {
-    window.scrollTo(1000,0);
+  constructor(@Inject(WINDOW) private window: Window, public _commonservices: Commonservices, public  _http: HttpClient, public cookeiservice: CookieService, public  route: ActivatedRoute) {
+    window.scrollTo(1000, 0);
 
     // if(this.cookeiservice.get('jwttoken') == '') {
     //   this.setTempToken();
@@ -44,7 +44,7 @@ export class TempaccessComponent implements OnInit {
       this.googleEventId = params['googleEventId'];
     });
 
-    switch(this.route.snapshot.url[0].path) {
+    switch (this.route.snapshot.url[0].path) {
       case 'on-boarding-call-booked':
         this.msgBlock.flug = 'onBoardingCall';
         this.callApiService();
@@ -58,19 +58,19 @@ export class TempaccessComponent implements OnInit {
   }
 
   callApiService() {
-    if(this.cookeiservice.get('jwttoken') == '') {
+    if (this.cookeiservice.get('jwttoken') == '') {
       const link = this._commonservices.nodesslurl + 'temptoken';
       this._http.post(link, { }).subscribe(res => {
-          let result:any = res;
+          const result: any = res;
           this.cookeiservice.set('jwttoken', result.token);
           this.callApiService();
       });
     } else {
       const link = this._commonservices.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
-      let data: any = { source: 'googleevents_view', condition: { _id_object: this.googleEventId } };
+      const data: any = { source: 'googleevents_view', condition: { _id_object: this.googleEventId } };
       this._http.post(link, data).subscribe(res => {
-        let result:any = res;
-        
+        const result: any = res;
+
         /* Set data */
         this.msgBlock.name        = result.res[0].userdata.firstname + ' ' + result.res[0].userdata.lastname;
         this.msgBlock.date        = result.res[0].userdata.lastname;
@@ -84,34 +84,34 @@ export class TempaccessComponent implements OnInit {
   }
 
   getrepdetails() {
-    const link = this._commonservices.nodesslurl+'datalist?token='+this.cookeiservice.get('jwttoken');
-    this._http.post(link,{source:'users',condition:{_id_object:this.cookeiservice.get('userid')}})
+    const link = this._commonservices.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
+    this._http.post(link, {source: 'users', condition: {_id_object: this.cookeiservice.get('userid')}})
         .subscribe(res => {
-          let result:any = res;
-          if(result.status == 'error') {
+          const result: any = res;
+          if (result.status == 'error') {
           } else {
             this.mydetails = result.res;
             console.log('====== this.mydetails =========');
             console.log(this.mydetails);
-            //this.cookeiservice.set('refreshtoken', this.mydetails[0].regionalrecruiter_id);
+            // this.cookeiservice.set('refreshtoken', this.mydetails[0].regionalrecruiter_id);
 
 
-            const link = this._commonservices.nodesslurl+'datalist?token='+this.cookeiservice.get('jwttoken');
-            let data: any = { source: 'users', condition: { _id_object: this.mydetails[0].regionalrecruiter_id } };
+            const link = this._commonservices.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
+            const data: any = { source: 'users', condition: { _id_object: this.mydetails[0].regionalrecruiter_id } };
             this._http.post(link, data).subscribe(res => {
-                  let result:any;
+                  let result: any;
                   result = res;
-                  if(result.status=='error'){
-                  }else{
-                    //this.mydetails = result.res;
+                  if (result.status == 'error') {
+                  } else {
+                    // this.mydetails = result.res;
                     console.log('this.regional details');
                 //    console.log(result.res);
                     console.log(result.res[0]);
                     console.log(result.res[0].firstname);
-                    this.rec=result.res[0].firstname+" "+result.res[0].lastname;
+                    this.rec = result.res[0].firstname + ' ' + result.res[0].lastname;
                     console.log(this.rec);
-                    this.recemail=result.res[0].email;
-                    //this.cookeiservice.set('refreshtoken', result.res[0].refreshtoken);
+                    this.recemail = result.res[0].email;
+                    // this.cookeiservice.set('refreshtoken', result.res[0].refreshtoken);
                   }
                 }, error => {
                   console.log('Oooops!');
@@ -125,7 +125,7 @@ export class TempaccessComponent implements OnInit {
   setTempToken() {
     const link = this._commonservices.nodesslurl + 'temptoken';
     this._http.post(link, { }).subscribe(res => {
-        let result:any = res;
+        const result: any = res;
         this.cookeiservice.set('jwttoken', result.token);
     });
   }
