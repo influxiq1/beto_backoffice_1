@@ -32,37 +32,37 @@ if (this.ActivatedRoute.snapshot.params._id != null && this.ActivatedRoute.snaps
 } else {
   // console.log("hhhhhbjhyv");
   this.formdata = {
-    successmessage: 'Added Successfully !!',
-    redirectpath: '/products',
-    submittext: 'Add Product',
-    canceltext: 'Cancel',
+    successmessage:"Added Successfully !!", 
+    redirectpath:"/products",
+    submittext:"Add",
+    canceltext: "Cancel",
     cancelroute: '/products',
-    resettext: 'Reset This',
-    submitactive: true, // optional, default true
-    apiUrl: this._apiService.nodesslurl,
-    endpoint: 'addorupdateproduct',
-   jwttoken: this._apiService.jwttoken,
-    fields: [
+    resettext:"Reset",
+    submitactive:true, //optional, default true
+    apiUrl:this._apiService.nodesslurl,
+    endpoint:'addorupdateproduct',
+   jwttoken:this._apiService.jwttoken,
+    fields:[
       {
-        // heading:"This is Name Header",
-        label: 'Products Name',
-        name: 'productname',
-        value: '',
-        type: 'text',
-        validations: [
-            {rule: 'required'},
+        //heading:"This is Name Header",
+        label:"Products Name",
+        name:"productname",
+        value:'',
+        type:"text",
+        validations:[
+            {rule:'required', message: "Products Name is required"},
             // {rule:'maxLength',value:10},
             // {rule:'minLength',value: 2}
             ]
     },
     {
-      // heading:"This is Name Header",
-      label: 'Description',
-      name: 'description',
-      value: '',
-      type: 'textarea',
-      validations: [
-          {rule: 'required'},
+      //heading:"This is Name Header",
+      label:"Description",
+      name:"description",
+      value:'',
+      type:"textarea",
+      validations:[
+          {rule:'required' , message: "Description is required"},
           // {rule:'maxLength',value:10},
           // {rule:'minLength',value: 2}
           ]
@@ -114,14 +114,14 @@ if (this.ActivatedRoute.snapshot.params._id != null && this.ActivatedRoute.snaps
   value: false,
   dependent: [{
 
-      condval: true,
-      field: {
-          label: 'Email',
-          name: 'multiple_emails',
-          type: 'text',
-          validations: [
-              // {rule:'required'},
-              {rule: 'pattern', value: this.emailregex, message: 'Must be a valid Email'}
+      condval:true,
+      field:{
+          label:"Email",
+          name:"multiple_emails",
+          type:"text",
+          validations:[
+              //{rule:'required'},
+              {rule:'pattern',value: this.emailregex,message: "Enter a valid Email"}
               // {rule:'maxLength',value:10},
               // {rule:'minLength',value: 2}
               ]
@@ -171,39 +171,39 @@ if (this.ActivatedRoute.snapshot.params._id != null && this.ActivatedRoute.snaps
           response.status = false;
         }
         console.log(response.status);
-       this.formdata = {
-          successmessage: 'Updated Successfully !!',
-          redirectpath: '/products',
-          submittext: 'Update Product',
-          canceltext: 'Cancel',
+       this.formdata={
+          successmessage:"Updated Successfully !!",
+          redirectpath:"/products",
+          submittext:"Update",
+          canceltext: "Cancel",
           cancelroute: '/products',
-          resettext: 'Reset This',
-          submitactive: true, // optional, default true
-         apiUrl: this._apiService.nodesslurl,
-          endpoint: 'addorupdateproduct',
-         jwttoken: this._apiService.jwttoken,
-
-         fields: [
+          resettext:"Reset",
+          submitactive:true, //optional, default true
+         apiUrl:this._apiService.nodesslurl,
+          endpoint:'addorupdateproduct',
+         jwttoken:this._apiService.jwttoken,
+        
+         fields:[
           {
-            // heading:"This is Name Header",
-            label: 'Products Name',
-            name: 'productname',
-            value: response.res[0].productname,
-            type: 'text',
-            validations: [
-                // {rule:'required'},
+            //heading:"This is Name Header",
+            label:"Products Name",
+            name:"productname",
+            value:response.res[0].productname,
+            type:"text",
+            validations:[
+                {rule:'required' , message: "Products Name is required"},
                 // {rule:'maxLength',value:10},
                 // {rule:'minLength',value: 2}
                 ]
         },
         {
-          // heading:"This is Name Header",
-          label: 'Description',
-          name: 'description',
-          value: response.res[0].description,
-          type: 'textarea',
-          validations: [
-              {rule: 'required'},
+          //heading:"This is Name Header",
+          label:"Description",
+          name:"description",
+          value:response.res[0].description,
+          type:"textarea",
+          validations:[
+              {rule:'required' , message: "Description is required"},
               // {rule:'maxLength',value:10},
               // {rule:'minLength',value: 2}
               ]
@@ -261,7 +261,7 @@ if (this.ActivatedRoute.snapshot.params._id != null && this.ActivatedRoute.snaps
               value: response.res[0].multiple_emails,
               validations: [
                  // {rule:'required'},
-                 // {rule:'pattern',value: this.emailregex,message: "Must be a valid Email"}
+                  {rule:'pattern',value: this.emailregex,message: "Entre a valid Email"}
                   // {rule:'maxLength',value:10},
                   // {rule:'minLength',value: 2}
                   ]

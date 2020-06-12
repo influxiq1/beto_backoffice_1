@@ -38,7 +38,7 @@ export class BulkLeadListComponent implements OnInit, AfterViewInit {
 
   };
 
-  tabledata_header_skip: any = ['_id', 'City', 'County', 'State', 'Zip', 'added_by', 'created_at', 'id', 'product', 'rep_name', 'u_id', 'unique_id']; // use for Table Header Skip
+  tabledata_header_skip: any = ['_id','City','County','State','Zip','added_by','created_at','id','product','rep_name','u_id','unique_id','productNamesearch']; // use for Table Header Skip 
 
   tabledata_detail_skip: any = [];   // use for Table Detail Field Skip
   tablename = 'csv_upload_view';
@@ -61,15 +61,15 @@ export class BulkLeadListComponent implements OnInit, AfterViewInit {
     hideviewbutton: true,                          // (hide view button)
     hidestatustogglebutton: true,                  // (hide status toggle button)
     hideaction: true,                              // (hide action column)
-
-    tableheaders: ['date_added', 'fullName', 'Phone', 'CompanyName', 'Address', 'Web', 'Email', 'batch_name', 'created_by', 'productName'], // not required (table header name)
+    deleteendpointmany: 'delete',
+    tableheaders: ['fullName','Phone','Address','Email','productName','CompanyName','batch_name','Web','created_by','date_added'], //not required (table header name)
     custombuttons: []
   };
 
   sortdata: any = {
-    'type': 'asc',                                              //  default sort data ascend and descend (desc)
-    'field': 'fullName',                                         // default field for sorting
-    'options': ['fullName', 'Email', 'date_added']     //  sorting fields options for this table
+    "type": 'asc',                                              //  default sort data ascend and descend (desc)
+    "field": 'fullName',                                         // default field for sorting
+    "options": ['fullName','Email','date_added','CompanyName']     //  sorting fields options for this table
   };
 
   date_search_source: any = 'csv_upload_view';                     // this is a database collection or view name
@@ -88,7 +88,7 @@ export class BulkLeadListComponent implements OnInit, AfterViewInit {
 
     // selectsearch:[{ label: 'Search By Product', field: 'prodct_id', values: this.product_list }], // this is use for  select search
 
-   textsearch: [{label: 'Search By Name', field: 'fullName'}, {label: 'Search By Email', field: 'Email'}]     // this is use for  Autocomplete search
+   textsearch:[{label:"Search By Name",field:'fullName_s'},{label:"Search By Email",field:'Email'},{label:"Search By Product Name",field:'productNamesearch'}]     // this is use for  Autocomplete search
   };
 
 //   elements: any = [];
@@ -166,8 +166,8 @@ export class BulkLeadListComponent implements OnInit, AfterViewInit {
 
     this._http.post(link1, data)
       .subscribe((res: any) => {
-        console.log(res.results.res, ' for count');
-        this.date_search_source_count = res.results.res;
+        console.log(res.count, ' for count');
+        this.date_search_source_count = res.count;
 
       });
      }

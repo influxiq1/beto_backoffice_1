@@ -82,18 +82,20 @@ export class UsermanagementComponent implements OnInit {
     hidestatustogglebutton: false,                                        // (hide status toggle button)
     hideaction: false,
     detailview_override: [
-      { key: 'is_contract_signed_m', val: 'Contract signed' },
-      { key: 'is_discovery', val: 'Discovery Call' },
-      { key: 'is_onboarding', val: 'Onboarding Call' },
-      { key: 'created_datetime', val: 'Date Added with time' },
-      { key: 'email', val: 'Email' },
-      { key: 'type', val: 'Account Type' },
-      { key: 'legaldoc_doctype', val: 'Leagal doc submission'},
-      { key: 'fullname', val: 'Name' },
-      { key: 'phoneno' , val: 'Phone Number'}
-    ],                                                 // (hide action column)
+      { key: "is_contract_signed_m", val: "Contract signed" },
+      { key: "is_discovery", val: "Discovery Call" },
+      { key: "is_onboarding", val: "Onboarding Call" },
+      { key: "created_datetime", val: "Date Added with time" },
+      { key: "email", val: "Email" },
+      { key: "type", val: "Account Type" },
+      { key: "legaldoc_doctype", val: "Leagal doc submission"},
+      { key: "fullname", val: "Name" },
+      { key: "phoneno" , val: "Phone Number"}
+    ], 
+    updateendpointmany: 'update',
+    deleteendpointmany: 'delete',                                                // (hide action column)
 
-    tableheaders: ['fullname', 'email', 'type', 'parentname', 'phoneno', 'status', 'created_datetime'], // not required (table header name)
+    tableheaders: ['fullname', 'phoneno', 'email', 'parentname', 'type', 'created_datetime', 'status' ], //not required (table header name)
     custombuttons: [
       {
         label: 'delete',

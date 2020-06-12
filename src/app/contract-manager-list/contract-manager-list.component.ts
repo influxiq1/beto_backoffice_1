@@ -164,7 +164,7 @@ export class ContractManagerListComponent implements OnInit {
       hideviewbutton: true,
       hidestatustogglebutton: true,
       // hideaction:true,
-      tableheaders: ['date', 'product', 'rep_name', 'lead_fullName', 'contract_manager_name', 'status', 'request_by', 'notes'], // not required
+      tableheaders: ['date','contract_manager_name', 'product', 'rep_name', 'lead_fullName', 'request_by', 'notes','status'], //not required
       custombuttons: [
 
         {
@@ -209,7 +209,7 @@ export class ContractManagerListComponent implements OnInit {
       hideviewbutton: true,
       hidestatustogglebutton: true,
       // hideaction:true,
-      tableheaders: ['date', 'product', 'rep_name', 'lead_fullName', 'contract_manager_name', 'status', 'request_by', 'notes'], // not required
+      tableheaders: ['date','contract_manager_name', 'product', 'rep_name', 'lead_fullName', 'request_by', 'notes','status'], //not required
       custombuttons: [
 
         {
@@ -254,7 +254,7 @@ export class ContractManagerListComponent implements OnInit {
       hideviewbutton: true,
       hidestatustogglebutton: true,
       // hideaction:true,
-      tableheaders: ['date', 'product', 'rep_name', 'lead_fullName', 'contract_manager_name', 'status', 'request_by', 'notes'], // not required
+      tableheaders: ['date','contract_manager_name', 'product', 'rep_name', 'lead_fullName', 'request_by', 'notes','status'], //not required
       custombuttons: [
 
         {
@@ -328,10 +328,10 @@ export class ContractManagerListComponent implements OnInit {
           'condition': {
               'status': true
           }
+      
+        
 
-
-
-      };
+      }
       this._apiService.getDataforAdminList(product_endpoint, dataa).subscribe((res: any) => {
         // console.log('in constructor');
          console.log(res.res[9]);
