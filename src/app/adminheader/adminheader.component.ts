@@ -463,7 +463,8 @@ export class AdminheaderComponent implements OnInit {
             this.cookie.set('is_consultant', result.res[0].is_consultant);
             this.cookie.set('fullname', result.res[0].firstname + ' ' + result.res[0].lastname);
             if (result.res[0].type == 'admin') {
-              this.router.navigate(['/dashboard']);
+              // this.router.navigate(['/dashboard']);
+              this.router.navigate(['/usermanagement']);
             }
             if (result.res[0].type == 'regional_recruiter') {
               this.cookie.set('refreshtoken', result.res[0].refreshtoken);
