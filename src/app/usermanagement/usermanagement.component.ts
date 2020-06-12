@@ -34,9 +34,9 @@ export class UsermanagementComponent implements OnInit {
 
   public datasource: any = '';
 
-  public status: any = [{ val: 0, 'name': 'Active' }, { val: 1, 'name': 'Inactive' }];   // use for status search
+  public status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];   // use for status search
   public type:any = [{val:'rep', 'name': 'Rep'},{val:'contract_manager', 'name': 'Contract Manager'},{val:'regional_recruiter', 'name':'Regional Recruiter'},{val:'admin', 'name':'Admin'}]
-  statusarray: any = [{ val: 0, name: 'Active' }, { val: 1, name: 'Inactive' }];  //status name set
+  statusarray: any = [{ val: 1, name: 'Active' }, { val: 0, name: 'Inactive' }];  //status name set
 
   //emailarray: any = [{ val: 'sourotest222@gmail.com', name: 'sourotest222@gmail.com' }]; //Static Email search eg.
 

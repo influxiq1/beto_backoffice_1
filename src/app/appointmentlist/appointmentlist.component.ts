@@ -49,28 +49,13 @@ export class AppointmentlistComponent implements OnInit {
   status_gretterthan_zero: any;
   pendingapplication_view: any;
   joquuserlist: any;
-  custombutton: any = { label: 'my tree', fields: ['type', 'name', '_id'], url: 'http://localhost:4200/affiliate-tree' };
+ // custombutton: any = { label: 'my tree', fields: ['type', 'name', '_id'], url: 'http://localhost:4200/affiliate-tree' };
   placeholder: any = ['placeholder'];
   type: any = ['text'];
   name: any = ['Username'];
   products:any =[];
-
-  
-
-
-
-
   appointmentlist: any = [];
 
-
-
-  //  Example like this
-  editroute: any = 'editroute';
-
-
-  // use for Table Header modification 
-
-  // Like Table head name is " firstname" => "First Name"
   modify_header_array: any = {
       'name': "Organizer's Name",
       'startdate': 'Date Set',
@@ -121,6 +106,15 @@ export class AppointmentlistComponent implements OnInit {
       updateendpoint: 'statusupdate',
       updateendpointmany: 'updateendpointmany',
       deleteendpointmany: 'deleteendpointmany',
+      notes: {
+        label: "Notes",
+        addendpoint: "addnotedata",
+        deleteendpoint: "deletenotedata",
+        listendpoint: "listnotedata",
+        user:this.cookeiservice.get('userid'),
+        currentuserfullname: this.cookeiservice.get('fullname'),
+        header: 'notescount',
+    },
       hideeditbutton: true,// all these button options are optional not mandatory
       hidedeletebutton: false,
       //hideviewbutton:false,
@@ -130,11 +124,17 @@ export class AppointmentlistComponent implements OnInit {
       custombuttons: [
        
         {
-            label: "cancle",
+            label: "Cancle",
             link: "#",
-            type: 'externallink',
+            type: 'internallink',
             paramtype: 'angular',
-        }
+        },
+        {
+          label: "Reschedule",
+          link: "#",
+          type: 'internallink',
+          paramtype: 'angular',
+      }
  
     ]
      
