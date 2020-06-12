@@ -72,19 +72,19 @@ export class AppointmentlistComponent implements OnInit {
 
   // Like Table head name is " firstname" => "First Name"
   modify_header_array: any = {
-      'name': 'Organizer\'s Name',
-      'startdate': 'Date Set',
-      'start_time': 'Time',
-      'closername': 'Participant\'s Name',
-      'phoneNumber': 'Participant\'s Phone No.',
-      'productname': 'Products'
+    'name': 'Organizer\'s Name',
+    'startdate': 'Date Set',
+    'start_time': 'Time',
+    'closername': 'Participant\'s Name',
+    'phoneNumber': 'Participant\'s Phone No.',
+    'productname': 'Products'
 
   };
 
 
   // use for Table Header Skip
   appointmentlist_skip: any = ['_id', 'attendees', 'booked_by', 'closeremail', 'eid', 'emailid', 'end_time', 'endtime_only', 'eventdata', 'eventuser', 'googleevent', 'id', 'is_custom', 'is_discovery', 'is_onboarding', 'leaddata', 'notescount', 'refresh_token', 'slot', 'starttime_only', 'summery', 'timespan', 'timezone', 'type', 'repsmsg', 'status'];
-  statusarray: any = [{ val: 'true', 'name': 'pending'}];
+  statusarray: any = [{ val: 'true', 'name': 'pending' }];
 
   // use for Table Detail Field Skip
   appointmentlist_detail_skip: any = ['_id', 'attendees', 'booked_by', 'closeremail', 'eid', 'emailid', 'end_time', 'endtime_only', 'eventdata', 'eventuser', 'googleevent', 'id', 'is_custom', 'is_discovery', 'is_onboarding', 'leaddata', 'notescount', 'refresh_token', 'slot', 'starttime_only', 'summery', 'timespan', 'timezone', 'type', 'userdata'];
@@ -108,42 +108,42 @@ export class AppointmentlistComponent implements OnInit {
   date_search_endpoint: any = 'datalist';
   // send basic limit data
   limitcond: any = {
-      'limit': 10,
-      'skip': 0,
-      'pagecount': 1
+    'limit': 10,
+    'skip': 0,
+    'pagecount': 1
   };
 
   // other data
   libdata: any = {
-    // basecondition:{"startdate":"2020-05-24"},
+    // basecondition:{"startdate": moment().subtract(1, 'days').format('YYYY-MM-DD') },
     // detailview_override: [
     // ],
-      updateendpoint: 'statusupdate',
-      updateendpointmany: 'updateendpointmany',
-      deleteendpointmany: 'deleteendpointmany',
-      hideeditbutton: true, // all these button options are optional not mandatory
-      hidedeletebutton: false,
-      // hideviewbutton:false,
-      hidestatustogglebutton: true,
-      // hideaction:true,
-      tableheaders: ['name', 'startdate', 'start_time', 'closername', 'phoneNumber', 'productname'], // not required
-      custombuttons: [
+    updateendpoint: 'statusupdate',
+    updateendpointmany: 'updateendpointmany',
+    deleteendpointmany: 'deleteendpointmany',
+    hideeditbutton: true, // all these button options are optional not mandatory
+    hidedeletebutton: false,
+    // hideviewbutton:false,
+    hidestatustogglebutton: true,
+    // hideaction:true,
+    tableheaders: ['name', 'startdate', 'start_time', 'closername', 'phoneNumber', 'productname'], // not required
+    custombuttons: [
 
-        {
-            label: 'cancle',
-            link: '#',
-            type: 'externallink',
-            paramtype: 'angular',
-        }
+      {
+        label: 'cancle',
+        link: '#',
+        type: 'externallink',
+        paramtype: 'angular',
+      }
 
     ]
 
   };
   // send basic sort data
   sortdata: any = {
-      'type': 'desc',
-      'field': 'start_time',
-      'options': ['start_time']
+    'type': 'desc',
+    'field': 'start_time',
+    'options': ['start_time']
   };
 
 
@@ -156,7 +156,7 @@ export class AppointmentlistComponent implements OnInit {
 
   search_settings: any = {
 
-      textsearch: [{ label: 'Search By Name', field: 'name' }, { label: 'Search By Lead Name', field: 'leaddata' }, { label: 'Search By Lead Email', field: 'emailid' }, { label: 'Search By Closer Name', field: 'closername' }],  // this is use for  text search
+    textsearch: [{ label: 'Search By Name', field: 'name' }, { label: 'Search By Lead Name', field: 'leaddata' }, { label: 'Search By Lead Email', field: 'emailid' }, { label: 'Search By Closer Name', field: 'closername' }],  // this is use for  text search
 
   };
 
@@ -181,35 +181,7 @@ export class AppointmentlistComponent implements OnInit {
     //       });
 
     this.datasource = '';
-    const endpoint = 'getappointmentlist'; // for main data endpoint
-    const endpointc = 'getappointmentlist-count'; // for count endpoint
-    // data param for conditionlimit and search
-    const data: any = {
-
-      'condition': {
-        'limit': 10,
-        'skip': 0
-    },
-    'sort': {
-        'type': 'desc',
-        'field': 'start_time'
-    }
-    };
-
-
-    const link = this._commonservice.nodesslurl + endpoint;
-    const link1 = this._commonservice.nodesslurl + endpointc;
-    this._http.post(link, data)
-    .subscribe((response: any) => {
-    this.appointmentlist = response.results.res;
-    console.warn('blogData', this.appointmentlist);
-    });
-
-    this._http.post(link1, data)
-    .subscribe((res: any) => {
-    console.log(res, ' for count');
-    this.date_search_source_count = res.count;
-    });
+    this.seteventtime(1);
   }
 
   // settimezone(){
@@ -341,7 +313,7 @@ export class AppointmentlistComponent implements OnInit {
 
 
   ngOnInit() {
-    this.getgoogleevents();
+    // this.getgoogleevents();
   }
   getgoogleevents() {
     let sourcecondition;
@@ -421,7 +393,76 @@ export class AppointmentlistComponent implements OnInit {
   seteventtime(val) {
     this.activeFlag = val;
     this.futureevent = val;
-    this.getgoogleevents();
+    if (val == 0) {
+      this.getdata({
+
+        'condition': {
+          'limit': 10,
+          'skip': 0,
+          "cond": {
+            startdate: { $lt: moment().format('YYYY-MM-DD') }, is_canceled: { $ne: 1 }}
+        },
+        'sort': {
+          'type': 'desc',
+          'field': 'start_time'
+        }
+      })
+    } else if(val == 1) {
+      this.getdata({
+
+        'condition': {
+          'limit': 10,
+          'skip': 0,
+          "cond": {
+            startdate: { $gt: moment().subtract(1, 'days').format('YYYY-MM-DD')},
+            is_canceled: { $ne: 1 }
+          }
+        },
+        'sort': {
+          'type': 'desc',
+          'field': 'start_time'
+        }
+      })
+    } else {
+      this.getdata({
+
+        'condition': {
+          'limit': 10,
+          'skip': 0,
+          "cond": {
+            is_canceled: { $eq: 1 }
+          }
+        },
+        'sort': {
+          'type': 'desc',
+          'field': 'start_time'
+        }
+      })
+    }
+    
+  }
+
+
+  getdata(data){
+    const endpoint = 'getappointmentlist'; // for main data endpoint
+    const endpointc = 'getappointmentlist-count'; // for count endpoint
+    // data param for conditionlimit and search
+    
+
+
+    const link = this._commonservice.nodesslurl + endpoint;
+    const link1 = this._commonservice.nodesslurl + endpointc;
+    this._http.post(link, data)
+      .subscribe((response: any) => {
+        this.appointmentlist = response.results.res;
+        console.warn('blogData', this.appointmentlist);
+      });
+
+    this._http.post(link1, data)
+      .subscribe((res: any) => {
+        console.log(res, ' for count');
+        this.date_search_source_count = res.count;
+      });
   }
   // added by Chandrani
   // notesdata(val: any, template: TemplateRef<any>) {
@@ -457,17 +498,17 @@ export class AppointmentlistComponent implements OnInit {
     let sourcecondition;
     if (this.cookeiservice.get('usertype') == 'admin') {
       // if (this.futureevent == 1) {
-        // sourcecondition = { startdate: { $gt: moment().subtract(1, 'days').format('YYYY-MM-DD') }, is_canceled: 1 };
-        sourcecondition = { is_canceled: 1 };
+      // sourcecondition = { startdate: { $gt: moment().subtract(1, 'days').format('YYYY-MM-DD') }, is_canceled: 1 };
+      sourcecondition = { is_canceled: 1 };
       // }
       // else {
       //   sourcecondition = { is_canceled: 1 };
       // }
     } else if (this.cookeiservice.get('usertype') == 'rep') {
       // if (this.futureevent == 1) {
-        sourcecondition = {
-          booked_by: this.cookeiservice.get('userid'), is_canceled: 1
-        };
+      sourcecondition = {
+        booked_by: this.cookeiservice.get('userid'), is_canceled: 1
+      };
       // }
       //  else {
       //   sourcecondition = {
@@ -477,9 +518,9 @@ export class AppointmentlistComponent implements OnInit {
       // }
 
     } else {
-        sourcecondition = {
-          eventuser_object: this.cookeiservice.get('userid'), is_canceled: 1
-        };
+      sourcecondition = {
+        eventuser_object: this.cookeiservice.get('userid'), is_canceled: 1
+      };
     }
     // sourcecondition={unique_id:35920};
     const link = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
