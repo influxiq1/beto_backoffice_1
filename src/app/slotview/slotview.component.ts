@@ -1,6 +1,6 @@
-import { Component, OnInit,TemplateRef, Inject } from '@angular/core';
+import { Component, OnInit, TemplateRef, Inject } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { FormBuilder, FormGroup, Validators,FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Commonservices } from '../app.commonservices' ;
 import { HttpClient } from '@angular/common/http';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -9,7 +9,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { WINDOW } from '@ng-toolkit/universal';
 
 
-declare var moment:any;
+declare var moment: any;
 // window['moment-range'].extendMoment(moment);
 
 @Component({
@@ -21,72 +21,72 @@ declare var moment:any;
 
 export class SlotviewComponent implements OnInit {
   public allslots;
-  public timezoneval:any;
-  public recid:any;
-  public refreshtoken:any;
-  public timezone:any=[];
-  public closeremails:any=[];
-  public filterval5:any;
-  public blockHeaderFooterBlock: boolean = true;
+  public timezoneval: any;
+  public recid: any;
+  public refreshtoken: any;
+  public timezone: any = [];
+  public closeremails: any = [];
+  public filterval5: any;
+  public blockHeaderFooterBlock = true;
   public daterangepickerOptions = {
     startDate: '15/08/2019',
     endDate: '31/12/2019',
     format: 'MM/DD/YYYY',
-    minDate: moment().format("MM/DD/YYYY"),
+    minDate: moment().format('MM/DD/YYYY'),
     noDefaultRangeSelected: true,
-   }
+   };
    public headerText: any = {};
    public slotval: any ;
-   public slotView: boolean = true;
+   public slotView = true;
 
    public closerLeadForm: FormGroup;
-   public medicalform:FormGroup;
-   public closerLeadFormSubmitFlug: boolean = false;
+   public medicalform: FormGroup;
+   public closerLeadFormSubmitFlug = false;
    public allLeads: any;
    public leadsSuggestion: any = [];
-   public leadsSuggestionFlug: boolean = false;
+   public leadsSuggestionFlug = false;
    public products: any = [];
-   public timeSpanView: boolean = false;
-   public timeSpanVal: any = "15";
-   public loader: boolean = false;
-   public modalReference : BsModalRef;
-   public selectedlead:any;
-   public selectedproduct:any;
-   
+   public timeSpanView = false;
+   public timeSpanVal: any = '15';
+   public loader = false;
+   public modalReference: BsModalRef;
+   public selectedlead: any;
+   public selectedproduct: any;
 
-  constructor(@Inject(WINDOW) private window: Window, public _commonservice:Commonservices, private router: Router, public _http:HttpClient, public modal:BsModalService, public cookeiservice: CookieService, private route: ActivatedRoute, private formBuilder: FormBuilder) {
-    window.scrollTo(1000,0);
-    this._commonservice =_commonservice;
 
-      this._http.get("assets/data/timezone.json")
+  constructor(@Inject(WINDOW) private window: Window, public _commonservice: Commonservices, private router: Router, public _http: HttpClient, public modal: BsModalService, public cookeiservice: CookieService, private route: ActivatedRoute, private formBuilder: FormBuilder) {
+    window.scrollTo(1000, 0);
+    this._commonservice = _commonservice;
+
+      this._http.get('assets/data/timezone.json')
           .subscribe(res => {
               let result;
-              this.timezone=result = res;
-              this.timezoneval=this.cookeiservice.get('timezone');
+              this.timezone = result = res;
+              this.timezoneval = this.cookeiservice.get('timezone');
           }, error => {
               console.log('Oooops!');
-              //this.formdataval[c].sourceval = [];
+              // this.formdataval[c].sourceval = [];
           });
 
     /* Agreement Form Control */
     this.closerLeadForm = this.formBuilder.group({
         leads:      [ null, [ Validators.required, Validators.maxLength(200) ] ],
-        product:    [ "", [ Validators.required, Validators.maxLength(200) ] ],
+        product:    [ '', [ Validators.required, Validators.maxLength(200) ] ],
       });
 
-     
+
   }
 
 
-  goback(){
+  goback() {
       this.router.navigateByUrl('/repdashboard');
   }
 
-  settimezone(){
-      this.cookeiservice.set('timezone',this.timezoneval);
-      setTimeout(()=>{
+  settimezone() {
+      this.cookeiservice.set('timezone', this.timezoneval);
+      setTimeout(() => {
         this.geteventarr();
-      },1000);
+      }, 1000);
     //   this.window.location.reload();
     }
     ngOnInit() {
@@ -96,8 +96,8 @@ export class SlotviewComponent implements OnInit {
             this.slotval = params['slotval'];
 
 
-            if(this.cookeiservice.get('userid')) {
-                if( this.recid != null) {
+            if (this.cookeiservice.get('userid')) {
+                if ( this.recid != null) {
                     this.get_refreshtoken_of_this_rec();
                     this.getUserDetails(this.recid);
                 }
@@ -106,73 +106,73 @@ export class SlotviewComponent implements OnInit {
                 this.blockHeaderFooterBlock = false;
                 const link = this._commonservice.nodesslurl + 'temptoken';
                 this._http.post(link, { }).subscribe(res => {
-                    let result:any = res;
+                    const result: any = res;
                     this.cookeiservice.set('jwttoken', result.token);
 
                     this.getUserDetails(this.recid);
                     this.geteventarr();
-                })
+                });
             }
 
-            if(params['leadid']!=null && params['pid']!=null){
+            if (params['leadid'] != null && params['pid'] != null) {
 
                 this.closerLeadForm.controls['product'].patchValue(params['pid']);
                 this.closerLeadForm.controls['leads'].patchValue(params['leadid']);
-                this.cookeiservice.set('leadsId',params['leadid']);
+                this.cookeiservice.set('leadsId', params['leadid']);
                 this.closerLeadFormSubmit();
-                console.log('form logs',this.closerLeadForm.value);
+                console.log('form logs', this.closerLeadForm.value);
             }
         });
     }
 
-    get_refreshtoken_of_this_rec(){
-        const link = this._commonservice.nodesslurl+'datalist?token='+this.cookeiservice.get('jwttoken');
-        this._http.post(link,{source:'users',condition:{_id_object:this.recid}}).subscribe(res => {
-            let result: any = res;
-            if(result.res.length > 0) {
+    get_refreshtoken_of_this_rec() {
+        const link = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
+        this._http.post(link, {source: 'users', condition: {_id_object: this.recid}}).subscribe(res => {
+            const result: any = res;
+            if (result.res.length > 0) {
                 this.refreshtoken = result.res[0].refreshtoken;
-                console.log('ddd',result.res[0]);
+                console.log('ddd', result.res[0]);
             }
-            
+
             this.cookeiservice.set('refreshtoken', this.refreshtoken);
         });
     }
-    setdatetonull(){
+    setdatetonull() {
         this.filterval5 = null;
         this.geteventarr();
     }
-    geteventarr(){
+    geteventarr() {
         let cond: any;
-        switch(this.route.snapshot.url[0].path) {
+        switch (this.route.snapshot.url[0].path) {
             case 'on-boarding-call':
                 this.headerText.hedaerH4 = 'Select your On-Boarding Call Appointment as per your convenience.';
                 this.headerText.span = 'Please select your Time Zone carefully to eliminate any confusion. Your scheduled appointment will be confirmed and mailed to you accordingly.';
-                if(this.filterval5!=null && this.filterval5 != '') {
-                    cond = { "is_onboarding": true, slots:{$type:'array'}, startdate:{
+                if (this.filterval5 != null && this.filterval5 != '') {
+                    cond = { 'is_onboarding': true, slots: {$type: 'array'}, startdate: {
                         $lte: moment(this.filterval5[1]).format('YYYY-MM-DD'),
                         $gte: moment(this.filterval5[0]).format('YYYY-MM-DD')
                     }};
                 } else {
-                    cond = { "is_onboarding": true, slots:{$type:'array'}, startdate:{
+                    cond = { 'is_onboarding': true, slots: {$type: 'array'}, startdate: {
                         $lte: moment().add(2, 'weeks').format('YYYY-MM-DD'),
                         $gt: moment().subtract(1, 'days').format('YYYY-MM-DD')
                     }};
                 }
                 break;
             case 'customevents':
-                    this.cookeiservice.delete('useremail')
-                    //this.cookeiservice.set('useremail', null);
+                    this.cookeiservice.delete('useremail');
+                    // this.cookeiservice.set('useremail', null);
                 this.headerText.hedaerH4 = 'SCHEDULE A CALL WITH BETO PAREDES. <br/>' +
-                    'Please feel free to schedule a '+this.slotval+'-minute call with me here on my calendar. You will be provided with a conference dial in number and webcast if needed for the call. <br/>' +
+                    'Please feel free to schedule a ' + this.slotval + '-minute call with me here on my calendar. You will be provided with a conference dial in number and webcast if needed for the call. <br/>' +
                     '<b style="color:red">BE SURE TO ADD YOUR EMAIL ADDRESS SO THE INVITATION IS SENT TO YOU</b> <br>';
                 this.headerText.span = 'Please select your Time Zone carefully to eliminate any confusion. Your scheduled appointment will be confirmed and mailed to you accordingly.';
-                if(this.filterval5!=null && this.filterval5 != '') {
-                    cond = {"timespan":this.slotval.toString(), "is_custom": true, slots:{$type:'array'}, startdate:{
+                if (this.filterval5 != null && this.filterval5 != '') {
+                    cond = {'timespan': this.slotval.toString(), 'is_custom': true, slots: {$type: 'array'}, startdate: {
                         $lte: moment(this.filterval5[1]).format('YYYY-MM-DD'),
                         $gte: moment(this.filterval5[0]).format('YYYY-MM-DD')
                     }};
                 } else {
-                    cond = {"timespan":this.slotval, "is_custom": true, slots:{$type:'array'}, startdate:{
+                    cond = {'timespan': this.slotval, 'is_custom': true, slots: {$type: 'array'}, startdate: {
                         $lte: moment().add(2, 'weeks').format('YYYY-MM-DD'),
                         $gt: moment().subtract(1, 'days').format('YYYY-MM-DD')
                     }};
@@ -185,13 +185,13 @@ export class SlotviewComponent implements OnInit {
                 this.headerText.hedaerH4 = 'Please feel free to schedule up to an hour conference call with me here on my calendar. You will be provided with a conference dial in number and webcast if needed for the call. <br/>' +
                     '<b style="color:red">BE SURE TO ADD YOUR EMAIL ADDRESS SO THE INVITATION IS SENT TO YOU</b> <br>';
                 this.headerText.span = 'Please select your Time Zone carefully to eliminate any confusion. Your scheduled appointment will be confirmed and mailed to you accordingly.';
-                if(this.filterval5!=null && this.filterval5 != '') {
-                    cond = {"is_custom": true, "timespan": this.timeSpanVal, slots:{$type:'array'}, startdate:{
+                if (this.filterval5 != null && this.filterval5 != '') {
+                    cond = {'is_custom': true, 'timespan': this.timeSpanVal, slots: {$type: 'array'}, startdate: {
                         $lte: moment(this.filterval5[1]).format('YYYY-MM-DD'),
                         $gte: moment(this.filterval5[0]).format('YYYY-MM-DD')
                     }};
                 } else {
-                    cond = {"is_custom": true, "timespan": this.timeSpanVal, slots:{$type:'array'}, startdate:{
+                    cond = {'is_custom': true, 'timespan': this.timeSpanVal, slots: {$type: 'array'}, startdate: {
                         $lte: moment().add(2, 'weeks').format('YYYY-MM-DD'),
                         $gt: moment().subtract(1, 'days').format('YYYY-MM-DD')
                     }};
@@ -201,13 +201,13 @@ export class SlotviewComponent implements OnInit {
             case 'discovery-call':
                 this.headerText.hedaerH4 = 'Select your Discovery Call Appointment as per your convenience.';
                 this.headerText.span = 'Please select your Time Zone carefully to eliminate any confusion. Your scheduled appointment will be confirmed and mailed to you accordingly.';
-                if(this.filterval5!=null && this.filterval5 != '') {
-                    cond = { "is_discovery": true, slots:{$type:'array'}, startdate:{
+                if (this.filterval5 != null && this.filterval5 != '') {
+                    cond = { 'is_discovery': true, slots: {$type: 'array'}, startdate: {
                         $lte: moment(this.filterval5[1]).format('YYYY-MM-DD'),
                         $gte: moment(this.filterval5[0]).format('YYYY-MM-DD')
                     }};
                 } else {
-                    cond = { "is_discovery": true, slots:{$type:'array'}, startdate:{
+                    cond = { 'is_discovery': true, slots: {$type: 'array'}, startdate: {
                         $lte: moment().add(2, 'weeks').format('YYYY-MM-DD'),
                         $gt: moment().subtract(1, 'days').format('YYYY-MM-DD')
                     }};
@@ -215,84 +215,84 @@ export class SlotviewComponent implements OnInit {
                 break;
             case 'book-a-closer':
 
-                if(!this.closerLeadForm.valid) {
+                if (!this.closerLeadForm.valid) {
                     this.getLeads();
                     this.slotView = false;
                     return ;
-                }else{
-                    this.slotView=true;
+                } else {
+                    this.slotView = true;
                 }
-                console.log('slotview',this.slotView);
+                console.log('slotview', this.slotView);
                 this.headerText.hedaerH4 = 'Select your Closer Call Appointment as per your convenience.';
                 this.headerText.span = 'Please select your Time Zone carefully to eliminate any confusion. Your scheduled appointment will be confirmed and mailed to you accordingly.';
-                this.cookeiservice.set('lead-product',this.closerLeadForm.value.product);
-                if(this.filterval5!=null && this.filterval5 != '') {
-                    cond = { "is_discovery": false, "is_onboarding": false, "is_qna": false, "is_custom": false, "userproducts": { "$in": [ this.closerLeadForm.value.product ] }, slots:{$type:'array'}, startdate:{
+                this.cookeiservice.set('lead-product', this.closerLeadForm.value.product);
+                if (this.filterval5 != null && this.filterval5 != '') {
+                    cond = { 'is_discovery': false, 'is_onboarding': false, 'is_qna': false, 'is_custom': false, 'userproducts': { '$in': [ this.closerLeadForm.value.product ] }, slots: {$type: 'array'}, startdate: {
                         $lte: moment(this.filterval5[1]).format('YYYY-MM-DD'),
                         $gte: moment(this.filterval5[0]).format('YYYY-MM-DD')
                     }};
                 } else {
-                    cond = { "is_discovery": false, "is_onboarding": false, "is_qna": false, "is_custom": false, "userproducts": { "$in": [ this.closerLeadForm.value.product ] }, slots:{$type:'array'}, startdate:{
+                    cond = { 'is_discovery': false, 'is_onboarding': false, 'is_qna': false, 'is_custom': false, 'userproducts': { '$in': [ this.closerLeadForm.value.product ] }, slots: {$type: 'array'}, startdate: {
                         $lte: moment().add(2, 'weeks').format('YYYY-MM-DD'),
                         $gt: moment().subtract(1, 'days').format('YYYY-MM-DD')
                     }};
-                    console.log('cond',cond);
+                    console.log('cond', cond);
                 }
                 break;
             case 'question-and-answer-call':
                 this.headerText.hedaerH4 = 'Select your Question and Answar Appointment as per your convenience.';
                 this.headerText.span = 'Please select your Time Zone carefully to eliminate any confusion. Your scheduled appointment will be confirmed and mailed to you accordingly.';
-                if(this.filterval5!=null && this.filterval5 != '') {
-                    cond = { "is_qna": true, slots:{$type:'array'}, startdate:{
+                if (this.filterval5 != null && this.filterval5 != '') {
+                    cond = { 'is_qna': true, slots: {$type: 'array'}, startdate: {
                         $lte: moment(this.filterval5[1]).format('YYYY-MM-DD'),
                         $gte: moment(this.filterval5[0]).format('YYYY-MM-DD')
                     }};
                 } else {
-                    cond = { "is_qna": true, slots:{$type:'array'}, startdate:{
+                    cond = { 'is_qna': true, slots: {$type: 'array'}, startdate: {
                         $lte: moment().add(2, 'weeks').format('YYYY-MM-DD'),
                         $gt: moment().subtract(1, 'days').format('YYYY-MM-DD')
                     }};
                 }
                 break;
             default:
-                if(this.filterval5!=null && this.filterval5 != '') {
-                   
+                if (this.filterval5 != null && this.filterval5 != '') {
+
                     // let spl = this.filterval5.split('/');
 
                     // let spl_modified = spl[2]+'-'+spl[0]+'-'+spl[1];
-                    if(this.recid == null) {
-                        cond = { allslotsuserid_object:this.cookeiservice.get('userid'),slots:{$type:'array'},    startdate:{
+                    if (this.recid == null) {
+                        cond = { allslotsuserid_object: this.cookeiservice.get('userid'), slots: {$type: 'array'},    startdate: {
                             $lte: moment(this.filterval5[1]).format('YYYY-MM-DD'),
                             $gt: moment(this.filterval5[0]).format('YYYY-MM-DD')
                         }
                     };
                     } else {
                         cond = {
-                            allslotsuserid_object:this.recid,slots:{$type:'array'},   startdate:{
+                            allslotsuserid_object: this.recid, slots: {$type: 'array'},   startdate: {
                                 $lte: moment(this.filterval5[1]).format('YYYY-MM-DD'),
                                 $gt: moment(this.filterval5[0]).format('YYYY-MM-DD')
                             }
                         };
                     }
                 } else {
-                    if(this.recid == null) {
-                        cond = { allslotsuserid_object:this.cookeiservice.get('userid'),slots:{$type:'array'}, startdate:{
+                    if (this.recid == null) {
+                        cond = { allslotsuserid_object: this.cookeiservice.get('userid'), slots: {$type: 'array'}, startdate: {
                             $lte: moment().add(1, 'months').format('YYYY-MM-DD'),
                             $gt: moment().subtract(1, 'days').format('YYYY-MM-DD')
                         }};
                     } else {
-                        cond={allslotsuserid_object:this.recid,slots:{$type:'array'},startdate:{
+                        cond = {allslotsuserid_object: this.recid, slots: {$type: 'array'}, startdate: {
                             $lte: moment().add(1, 'months').format('YYYY-MM-DD'),
                             $gt: moment().subtract(1, 'days').format('YYYY-MM-DD')
                         }};
                     }
                 }
         }
-        
+
 
         const link = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
-        this._http.post(link,{source:'eventdayarr_events',condition:cond}).subscribe(res => {
-            let result:any = res;
+        this._http.post(link, {source: 'eventdayarr_events', condition: cond}).subscribe(res => {
+            const result: any = res;
             this.allslots = result.res;
             // console.log('allslots',this.allslots,this.allslots.length);
             // for(let ekey in this.allslots){
@@ -311,7 +311,7 @@ export class SlotviewComponent implements OnInit {
 
             //         // console.log({startdate:this.allslots[ekey].startdate,'useremail': this.allslots[ekey].useremail, timezone:this.allslots[ekey].timezone, slots:this.allslots[ekey].slots});
             //         for (const keycnt in this.allslots[ekey].slots) {
-                        
+
             //             for (const key in res.res) {
             //                 if(this.allslots[ekey].startdate == res.res[key].startdate){
             //                     // console.log('true',res.res[key].start);
@@ -319,7 +319,7 @@ export class SlotviewComponent implements OnInit {
             //                     let moe=moment(res.res[key].end);
             //                     // console.log(mos.tz('America/Los_Angeles').format('ha z'),mos.tz('America/New_York').format('ha z'),this.allslots[ekey].timezone);
             //                     let tz=this.allslots[ekey].timezone.split('|');
-            //                     // console.log(res.res[key].start,'tzs'); 
+            //                     // console.log(res.res[key].start,'tzs');
             //                     // console.log(this.allslots[ekey].startdate + " " + this.allslots[ekey].slots[keycnt] + " " + tz[0],'tze',res.res[key].start,'tzs',tz[1]);
 
             //                     startdate = this.allslots[ekey].startdate + "" + this.allslots[ekey].slots[keycnt]+ "" + tz[0];
@@ -385,7 +385,7 @@ export class SlotviewComponent implements OnInit {
             // //     $lte: moment(this.filterval5[1]).format('YYYY-MM-DD'),
             // //     $gte: moment(this.filterval5[0]).format('YYYY-MM-DD')
             // // }};
-            // console.log('dddd.....',uniquearrayval,this.closeremails.length,this.closeremails); 
+            // console.log('dddd.....',uniquearrayval,this.closeremails.length,this.closeremails);
         });
     }
  /* ngOnInit() {
@@ -415,64 +415,64 @@ export class SlotviewComponent implements OnInit {
                 result = res;
                 this.refreshtoken=result.res[0].refreshtoken;
               //  console.log('===========================================');
-                console.log('this.refreshtoken ' + this.refreshtoken, result.res[0]); 
+                console.log('this.refreshtoken ' + this.refreshtoken, result.res[0]);
                 this.cookeiservice.set('refreshtoken', this.refreshtoken);
             })
     }*/
-  showtime(item,eachslots){
+  showtime(item, eachslots) {
    // console.log(moment(item.startdate+'T'+eachslots.trim()+':00')); //.format('HH.mm')
    // console.log(tm);
    // console.log(moment(tm).format('hh:mm A'));
   //   console.log(moment(tm).add(30, 'minutes').format());
   //  return tm+' - '+moment(tm).add(span, 'minutes').format();
-      var a=moment(item.startdate+'T'+eachslots.trim()+':00');
-    var starttime= a.format('hh.mm A');
-      var endtime = moment(a).add(30, 'minutes').format('hh.mm A');
-      return starttime +' - '+endtime;
+      const a = moment(item.startdate + 'T' + eachslots.trim() + ':00');
+    const starttime = a.format('hh.mm A');
+      const endtime = moment(a).add(30, 'minutes').format('hh.mm A');
+      return starttime + ' - ' + endtime;
   }
 
   /* Get user details */
   getUserDetails(id) {
-      //alert(id);
-      if(id!=null) {
+      // alert(id);
+      if (id != null) {
           const link = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
           this._http.post(link, {source: 'users', condition: {_id_object: id}})
               .subscribe(res => {
-                  let result: any = res;
+                  const result: any = res;
                   this.cookeiservice.set('useremail', result.res[0].email);
                   this.cookeiservice.set('phone', result.res[0].telephone);
-                  this.cookeiservice.set('fname', result.res[0].firstname+" "+result.res[0].lastname);
-                  console.log("Checking:   ", this.cookeiservice.get('useremail'));
+                  this.cookeiservice.set('fname', result.res[0].firstname + ' ' + result.res[0].lastname);
+                  console.log('Checking:   ', this.cookeiservice.get('useremail'));
               });
       }
   }
 
     /* Get Leads */
     getLeads() {
-        let userId: any = this.cookeiservice.get('userid');
+        const userId: any = this.cookeiservice.get('userid');
         const link = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
-        this._http.post(link, { source:'leads_view_for_users', condition: { "created_by_object": userId }}).subscribe(res => {
-            let result: any = res;
+        this._http.post(link, { source: 'leads_view_for_users', condition: { 'created_by_object': userId }}).subscribe(res => {
+            const result: any = res;
             this.allLeads = result.res;
             console.log(this.allLeads);
         });
     }
 
     /* Leads auto complete */
-    leadsSuggest(event:any) {
+    leadsSuggest(event: any) {
         this.leadsSuggestion = [];
-        let keyword: any = this.closerLeadForm.value.leads;
-        if(keyword.length > 0) {
+        const keyword: any = this.closerLeadForm.value.leads;
+        if (keyword.length > 0) {
             this.leadsSuggestionFlug = true;
-            for(let c in this.allLeads) {
-                if(this.allLeads[c].firstname != null && this.allLeads[c].firstname.toLowerCase().indexOf(keyword.toLowerCase())>-1) {
+            for (const c in this.allLeads) {
+                if (this.allLeads[c].firstname != null && this.allLeads[c].firstname.toLowerCase().indexOf(keyword.toLowerCase()) > -1) {
                     this.leadsSuggestion.push(this.allLeads[c]);
                     console.log('call firstname');
-                } else if(this.allLeads[c].lastname != null && this.allLeads[c].lastname.toLowerCase().indexOf(keyword.toLowerCase())>-1){
+                } else if (this.allLeads[c].lastname != null && this.allLeads[c].lastname.toLowerCase().indexOf(keyword.toLowerCase()) > -1) {
                     this.leadsSuggestion.push(this.allLeads[c]);
                     console.log('call lastname');
-                    
-                } 
+
+                }
             }
         } else {
             this.leadsSuggestionFlug = false;
@@ -482,14 +482,14 @@ export class SlotviewComponent implements OnInit {
     /* closerLeadForm */
     closerLeadFormSubmit() {
         this.closerLeadFormSubmitFlug = true;
-        if(this.closerLeadForm.valid) {
+        if (this.closerLeadForm.valid) {
             this.slotView = true;
             this.geteventarr();
         }
     }
 
     selectLeads(leadsData) {
-        this.closerLeadForm.patchValue({    
+        this.closerLeadForm.patchValue({
             leads: leadsData.firstname + ' ' + leadsData.lastname
         });
         this.cookeiservice.set('leadsId', leadsData._id);
@@ -498,19 +498,19 @@ export class SlotviewComponent implements OnInit {
         this.leadsSuggestion = [];
         this.selectedlead = leadsData;
     }
-    selectproductfunc(event:any){
+    selectproductfunc(event: any) {
         console.log(event.target.value);
-        for(let i in this.products){
-            if(this.products[i].product_id == event.target.value){
+        for (const i in this.products) {
+            if (this.products[i].product_id == event.target.value) {
                 this.selectedproduct = this.products[i];
             }
         }
-        
+
 
     }
 
-    // added by chandrani 
-    openLeadDetailsModal(item:any,template:TemplateRef<any>){
+    // added by chandrani
+    openLeadDetailsModal(item: any, template: TemplateRef<any>) {
         this.modalReference = this.modal.show(template);
     }
 

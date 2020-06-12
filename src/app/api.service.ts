@@ -16,11 +16,11 @@ export class ApiService {
   private domain =  environment["API_URL"];
   private _url = environment["API_URL"];*/
   // public nodesslurl = 'https://api.nexgentesting.com:6027/';
-  public nodesslurl =  environment["api_url"];
-  public jwttoken = this.cookie.get('jwttoken')
+  public nodesslurl =  environment['api_url'];
+  public jwttoken = this.cookie.get('jwttoken');
 
 //  constructor(@Inject(WINDOW) private window: Window, @Inject(LOCAL_STORAGE) private localStorage: any, private _http: HttpClient, private _authHttp: HttpClient, public jwtHelper: JwtHelperService, private loggedinService: LoggedinService) {}
-  constructor(private _http: HttpClient, public cookie:CookieService,private _snackBar: MatSnackBar) {}
+  constructor(private _http: HttpClient, public cookie: CookieService, private _snackBar: MatSnackBar) {}
 
 
  /* isTokenExpired() {
@@ -38,18 +38,18 @@ export class ApiService {
       this.getRefreshCognitoTokens()
     }
 
-  } 
- 
+  }
+
   //ON SUBMIT CHECK IF TOKEN NEEDED REFRESHING
   getRefreshCognitoTokens(){
 
     console.log('API_SERVICE WE REFRESHED THE TOKENS')
     let body = new URLSearchParams();
-    body.set('grant_type', 'refresh_token'); 
+    body.set('grant_type', 'refresh_token');
     body.set('client_id', environment["pool_app_client_id"]);
     body.set('refresh_token', localStorage.getItem('refresh_token'));
 
-    
+
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/x-www-form-urlencoded',
@@ -82,42 +82,42 @@ export class ApiService {
     var result = this.getRefreshCognitoTokens()
     return result
   }*/
- 
-  getData(endpoint:string){
-    var result = this._http.get(this.getEndpointUrl(endpoint)).pipe(map(res => res));
+
+  getData(endpoint: string) {
+    const result = this._http.get(this.getEndpointUrl(endpoint)).pipe(map(res => res));
 
 		return result;
-  } //end getData
+  } // end getData
 
-  
-  postData(endpoint:string, source, condition){
-      var result =this._http.post(this.getEndpointUrl(endpoint),{source:source,condition:condition}/*JSON.stringify(data)*/).pipe(map(res => res));
+
+  postData(endpoint: string, source, condition) {
+      const result = this._http.post(this.getEndpointUrl(endpoint), {source: source, condition: condition}/*JSON.stringify(data)*/).pipe(map(res => res));
       return result;
-  } //end postData
-  
-  
-  putData(endpoint:string,data,id:string,is_cache_buster=true){
-    if (is_cache_buster==true){
-      let ran = Math.floor(Math.random() * 10000) + 1;
-      var cache_buster = '?cache=' + ran.toString();
+  } // end postData
+
+
+  putData(endpoint: string, data, id: string, is_cache_buster= true) {
+    if (is_cache_buster == true) {
+      const ran = Math.floor(Math.random() * 10000) + 1;
+      const cache_buster = '?cache=' + ran.toString();
       endpoint = endpoint + cache_buster;
     }
-  
-    var result =this._http.put(this.getEndpointUrl(endpoint)+'/'+id,JSON.stringify(data)).pipe(map(res => res));
-  
+
+    const result = this._http.put(this.getEndpointUrl(endpoint) + '/' + id, JSON.stringify(data)).pipe(map(res => res));
+
     return result;
-  } //end putData
- 
-  
+  } // end putData
+
+
   // deleteData(endpoint:string,id:string){
   //   var result = this._http.delete(this.getEndpointUrl(endpoint)+"/"+id).pipe(map(res => res));
 	// 	return result;
   // } //end deleteData
 
-  private getEndpointUrl(endpoint:string){
-      return this.nodesslurl + endpoint+'?token='+this.cookie.get('jwttoken');
+  private getEndpointUrl(endpoint: string) {
+      return this.nodesslurl + endpoint + '?token=' + this.cookie.get('jwttoken');
   }
-  postData1(endpoint:any, data) {
+  postData1(endpoint: any, data) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -126,10 +126,10 @@ export class ApiService {
     };
     // console.log(this.cookieService.get('jwttoken'));
    // console.log('endpoint');
-    //console.log(endpoint);
-    //console.log('httpOptions');
+    // console.log(endpoint);
+    // console.log('httpOptions');
    // console.log(httpOptions);
-    var result = this._http.post(this.getEndpointUrl(endpoint), JSON.stringify(data), httpOptions).pipe(map(res => res));
+    const result = this._http.post(this.getEndpointUrl(endpoint), JSON.stringify(data), httpOptions).pipe(map(res => res));
     return result;
   }
   customRequest(requestdata: any, endpoint: any) {
@@ -139,24 +139,24 @@ export class ApiService {
     //     'Authorization': this.cookie.get('jwttoken')
     //   })
     // };
-    if (this.cookie.get('jwttoken') !=null && this.cookie.get('jwttoken') !='') {
-      var result = this._http.post( this.nodesslurl+endpoint+'?token='+this.cookie.get('jwttoken'), requestdata).pipe(map(res => res));
+    if (this.cookie.get('jwttoken') != null && this.cookie.get('jwttoken') != '') {
+      const result = this._http.post( this.nodesslurl + endpoint + '?token=' + this.cookie.get('jwttoken'), requestdata).pipe(map(res => res));
     return result;
-    }else{
-      var result = this._http.post( this.nodesslurl+endpoint, requestdata).pipe(map(res => res));
+    } else {
+      const result = this._http.post( this.nodesslurl + endpoint, requestdata).pipe(map(res => res));
       return result;
     }
-   
+
   }
 // Mahitosh
-  getDataforAdminList(endpoint:any,requestdata: any) {
+  getDataforAdminList(endpoint: any, requestdata: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': this.cookie.get('jwtToken')
       })
     };
-    var result = this._http.post(this.nodesslurl + endpoint+'?token='+this.cookie.get('jwttoken'), JSON.stringify(requestdata), httpOptions).pipe(catchError((error) => {this.openSnackBar(); return throwError(error);}),map(response => response));
+    const result = this._http.post(this.nodesslurl + endpoint + '?token=' + this.cookie.get('jwttoken'), JSON.stringify(requestdata), httpOptions).pipe(catchError((error) => {this.openSnackBar(); return throwError(error); }), map(response => response));
     return result;
   }
 
@@ -165,11 +165,11 @@ export class ApiService {
       duration: 6000,
     });
   }
-  getState(){
-    var result = this._http.get("assets/data/states.json").pipe(map(response => response));
+  getState() {
+    const result = this._http.get('assets/data/states.json').pipe(map(response => response));
     return result;
   }
-  
+
 
 
 }

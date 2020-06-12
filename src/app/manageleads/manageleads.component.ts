@@ -4,7 +4,7 @@ import { Commonservices } from '../app.commonservices';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from './../api.service';
 import { Router } from '@angular/router';
-import { BsModalService } from "ngx-bootstrap/modal";
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-manageleads',
@@ -27,7 +27,7 @@ export class ManageleadsComponent implements OnInit {
   status:any =[{ val: 1, 'name':'Active' }, { val:0, 'name': 'Inactive'}];
   //statusarray: any = [{ val: '', name: '' }, { val: 'seen', name: 'Seen' }, { val: 'send', name: 'Email Send' }]; //status name set
 
-  //emailarray: any = [{val: 'sourotest222@gmail.com', name: 'sourotest222@gmail.com'}, {val: 'octtest@yopmail.com', name: 'octtest@yopmail.com'}, {val: 'septest@yopmail.com', name: 'septest@yopmail.com'}]; //Static Email search eg.
+  // emailarray: any = [{val: 'sourotest222@gmail.com', name: 'sourotest222@gmail.com'}, {val: 'octtest@yopmail.com', name: 'octtest@yopmail.com'}, {val: 'septest@yopmail.com', name: 'septest@yopmail.com'}]; //Static Email search eg.
 
   editroute: any = 'manage-leads/edit/'; // use for edit any field Navigate that page And you should be import the app-routing.module.ts ex:- {path: 'editroute/:id', component: < "Write the class name"> },
 
@@ -49,7 +49,7 @@ export class ManageleadsComponent implements OnInit {
 
   manageleads_header_skip: any = ['_id', 'appointment_count','website', 'created_at', 'created_by', 'firstname', 'lastname', 'mobile', 'notescount', 'pricepoint', 'product', 'rep_name', 'youtube', 'productname','emailStatus']; // use for Table Header Skip
 
-  manageleads_detail_skip: any = ['_id','created_by','product','productname','created_at','rep_name','only_productname','appointment_count','emailStatus','pricepoint','youtube','firstname','lastname']; // use for Table Detail Field Skip
+  manageleads_detail_skip: any = ['_id', 'created_by', 'product', 'productname', 'created_at', 'rep_name', 'only_productname', 'appointment_count', 'emailStatus', 'pricepoint', 'youtube', 'firstname', 'lastname']; // use for Table Detail Field Skip
   updateendpoint = 'addorupdatedata'; // updateendpoint is use for data update endpoint
 
   deleteendpoint = 'deletesingledata'; // deleteendpoint is use for data delete endpoint
@@ -63,12 +63,12 @@ export class ManageleadsComponent implements OnInit {
   date_search_endpoint: any = 'datalist'; // date_search_endpoint is use for date search endpoint
 
   limitcond: any = { // send basic limit data
-    "limit": 10,
-    "skip": 0,
-    "pagecount": 1
+    'limit': 10,
+    'skip': 0,
+    'pagecount': 1
   };
   public libdata: any = {};
-  
+
 
   sortdata: any = {
     "type": 'asc', // default sort data ascend and descend (desc)
@@ -89,9 +89,9 @@ export class ManageleadsComponent implements OnInit {
   search_settings: any = {
     selectsearch: [{ label: 'Search By Status', field: 'status' , values: this.status}],
 
-    datesearch: [{ startdatelabel: "Start Date", enddatelabel: "End Date", submit: "Search", field: "created_at" }], // this is use for date search //created at = field in res which gives date in unix format that changes to ist using moment.js
+    datesearch: [{ startdatelabel: 'Start Date', enddatelabel: 'End Date', submit: 'Search', field: 'created_at' }], // this is use for date search //created at = field in res which gives date in unix format that changes to ist using moment.js
 
-    textsearch: [{ label: "Search By Name", field: 'fullname' }, { label: "Search By Email", field: 'email' }], // this is use for text search
+    textsearch: [{ label: 'Search By Name', field: 'fullname' }, { label: 'Search By Email', field: 'email' }], // this is use for text search
 
 
   };
@@ -113,11 +113,11 @@ export class ManageleadsComponent implements OnInit {
     ], // optional
       updateendpoint: 'togglestatusnew', // update endpoint set
       notes: {
-        label: "Notes",
-        addendpoint: "addnotedata",
-        deleteendpoint: "deletenotedata",
-        listendpoint: "listnotedata",
-        user:this.cookieservice.get('userid'),
+        label: 'Notes',
+        addendpoint: 'addnotedata',
+        deleteendpoint: 'deletenotedata',
+        listendpoint: 'listnotedata',
+        user: this.cookieservice.get('userid'),
         currentuserfullname: this.cookieservice.get('fullname'),
         header: 'emailStatus',
     },
@@ -132,59 +132,59 @@ export class ManageleadsComponent implements OnInit {
       tableheaders: ['fullname','email', 'phoneno', 'mobile', 'address', 'company', 'only_productname','date','status'], //not required (table header name)
       custombuttons: [
         {
-          label: "Discovery Call", //  button name
-          link: "#", //  link
+          label: 'Discovery Call', //  button name
+          link: '#', //  link
           type: 'internallink', // internallink link
-          //param:[{key:'blogtitle',q:'q'}], // passed parameter 
+          // param:[{key:'blogtitle',q:'q'}], // passed parameter
         },
         {
-          label: " Send Contract Review Video ", //  button name
-          link: "#", // profile link
+          label: ' Send Contract Review Video ', //  button name
+          link: '#', // profile link
           type: 'internallink' // internallink link
         },
         {
-          label: " Send Marketing Review Video ", //  button name
-          link: "#", // profile link
+          label: ' Send Marketing Review Video ', //  button name
+          link: '#', // profile link
           type: 'internallink' // internallink link
         }
-  
+
       ]
-    }
+    };
     // if (this.cookieservice.get('usertype') != 'admin') {
-    //   this.libdata.basecondition = {created_by: ''} 
+    //   this.libdata.basecondition = {created_by: ''}
     // }else{
-    //   this.libdata.basecondition = {created_by: this.cookieservice.get('userid') } 
+    //   this.libdata.basecondition = {created_by: this.cookieservice.get('userid') }
     // }
-    this.libdata.basecondition = (this.cookieservice.get('usertype') != 'admin') ? { created_by: this.cookieservice.get('userid') } : { created_by: '' }
-  
+    this.libdata.basecondition = (this.cookieservice.get('usertype') != 'admin') ? { created_by: this.cookieservice.get('userid') } : { created_by: '' };
+
 
 
     this.datasource = '';
-    let endpoint = 'getleadsmanagelistdata'; // for main data endpoint
-    let endpointc = 'getleadsmanagelistdata-count'; // for count endpoint
+    const endpoint = 'getleadsmanagelistdata'; // for main data endpoint
+    const endpointc = 'getleadsmanagelistdata-count'; // for count endpoint
     // data param for conditionlimit and search
-    let data: any = {
-      "condition": {
+    const data: any = {
+      'condition': {
 
-        "limit": 10,
-        "skip": 0
+        'limit': 10,
+        'skip': 0
       },
       sort: {
-        "type": 'asc', // defalut field sort type
-        "field": 'fullname' // default sort field
+        'type': 'asc', // defalut field sort type
+        'field': 'fullname' // default sort field
       }
 
-    }
+    };
     data.created_by = (this.cookieservice.get('usertype') != 'admin') ? this.cookieservice.get('userid') : '';
      console.log(this.cookieservice.get('fullname'));
 
 
-    let link = this.commonservices.nodesslurl + endpoint;
-    let link1 = this.commonservices.nodesslurl + endpointc;
+    const link = this.commonservices.nodesslurl + endpoint;
+    const link1 = this.commonservices.nodesslurl + endpointc;
     this._http.post(link, data)
       .subscribe((response: any) => {
         this.manageleads = response.results.res;
-      })
+      });
 
     this._http.post(link1, data)
       .subscribe((res: any) => {

@@ -1,9 +1,9 @@
-import { Component, OnInit, EventEmitter,ViewChild,ElementRef } from '@angular/core';
+import { Component, OnInit, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import {Commonservices} from '../app.commonservices' ;
 
 
 /*Accordian*/
-//import { AccordionConfig } from 'ngx-bootstrap/accordion';
+// import { AccordionConfig } from 'ngx-bootstrap/accordion';
 /*Accordian*/
 
 
@@ -37,11 +37,11 @@ export class TrialsComponent implements OnInit {
 
 
   /*File Upload*/
-  files:UploadFile[];
-  files1:UploadFile[];
-  uploadInput:EventEmitter<UploadInput>;
-  humanizeBytes:Function;
-  dragOver:boolean;
+  files: UploadFile[];
+  files1: UploadFile[];
+  uploadInput: EventEmitter<UploadInput>;
+  humanizeBytes: Function;
+  dragOver: boolean;
   options: UploaderOptions;
   @ViewChild('fileInput1') uploaderInput: ElementRef;
   @ViewChild('fileInput2') uploaderInput1: ElementRef;
@@ -49,7 +49,7 @@ export class TrialsComponent implements OnInit {
 
 
 
-  constructor(private _commonservices:Commonservices) {
+  constructor(private _commonservices: Commonservices) {
 
 
     /*File Upload*/
@@ -65,17 +65,17 @@ export class TrialsComponent implements OnInit {
 
 
   /*File Upload*/
-  onUploadOutput(output:UploadOutput):void {
+  onUploadOutput(output: UploadOutput): void {
     this.uploaderInput.nativeElement.value = '';
     if (output.type === 'allAddedToQueue') {
-      const event:UploadInput = {
+      const event: UploadInput = {
         type: 'uploadAll',
         url: this._commonservices.nodesslurl + 'uploads',
         method: 'POST',
       };
       this.uploadInput.emit(event);
     } else if (output.type === 'addedToQueue' && typeof output.file !== 'undefined') {
-      if (output.file.response != "") {
+      if (output.file.response != '') {
         this.files = [];
         this.files.push(output.file);
       }
@@ -84,7 +84,7 @@ export class TrialsComponent implements OnInit {
       const index = this.files.findIndex(file => typeof output.file !== 'undefined' && file.id === output.file.id);
       this.files[index] = output.file;
     } else if (output.type === 'removed') {
-      this.files = this.files.filter((file:UploadFile) => file !== output.file);
+      this.files = this.files.filter((file: UploadFile) => file !== output.file);
     } else if (output.type === 'dragOver') {
       this.dragOver = true;
     } else if (output.type === 'dragOut') {
@@ -96,27 +96,27 @@ export class TrialsComponent implements OnInit {
      console.log(this.files);
   }
 
-  onUploadOutput1(output:UploadOutput):void {
+  onUploadOutput1(output: UploadOutput): void {
     this.uploaderInput1.nativeElement.value = '';
     if (output.type === 'allAddedToQueue') {
-      const event:UploadInput = {
+      const event: UploadInput = {
         type: 'uploadAll',
         url: this._commonservices.nodesslurl + 'uploads',
         method: 'POST',
       };
       this.uploadInput.emit(event);
     } else if (output.type === 'addedToQueue' && typeof output.file !== 'undefined') {
-      if (output.file.response != "") {
+      if (output.file.response != '') {
         this.files1 = [];
         this.files1.push(output.file);
       }
     } else if (output.type === 'uploading' && typeof output.file !== 'undefined') {
       const index = this.files1.findIndex(file => typeof output.file !== 'undefined' && file.id === output.file.id);
-      console.log('index'+index);
+      console.log('index' + index);
       this.files1[index] = output.file;
-      //this.files1.push(output.file);
+      // this.files1.push(output.file);
     } else if (output.type === 'removed') {
-      this.files1 = this.files1.filter((file:UploadFile) => file !== output.file);
+      this.files1 = this.files1.filter((file: UploadFile) => file !== output.file);
     } else if (output.type === 'dragOver') {
       this.dragOver = true;
     } else if (output.type === 'dragOut') {

@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api.service';
 import { BsModalService } from 'ngx-bootstrap';
-import { BsModalRef } from "ngx-bootstrap/modal/bs-modal-ref.service";
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 @Component({
   selector: 'app-login-as-a-rep',
@@ -14,40 +14,40 @@ import { BsModalRef } from "ngx-bootstrap/modal/bs-modal-ref.service";
   providers: [Commonservices]
 })
 export class LoginAsARepComponent implements OnInit {
-public consultantrole:any;
-public selectedlead:any={};
-public selectedproductid:any="";
+public consultantrole: any;
+public selectedlead: any = {};
+public selectedproductid: any = '';
 modalRef: BsModalRef;
 modalRef1: BsModalRef;
 modalRef2: BsModalRef;
 modalRef3: BsModalRef;
-  constructor(public commonservices: Commonservices, public cookieservice: CookieService, public originalCookie: CookieService, public _http: HttpClient, private router: Router, public modal: BsModalService,public _apiService: ApiService, public activatedRoute :ActivatedRoute) {
-    if(this.activatedRoute.snapshot.routeConfig.path == 'login-as-a-rep/:_id/:email'){
-      console.log(this.activatedRoute.snapshot.params._id)
+  constructor(public commonservices: Commonservices, public cookieservice: CookieService, public originalCookie: CookieService, public _http: HttpClient, private router: Router, public modal: BsModalService, public _apiService: ApiService, public activatedRoute: ActivatedRoute) {
+    if (this.activatedRoute.snapshot.routeConfig.path == 'login-as-a-rep/:_id/:email') {
+      console.log(this.activatedRoute.snapshot.params._id);
       console.log(this.activatedRoute.snapshot.params.email);
        this.getUserDetails(this.activatedRoute.snapshot.params.email);
     }
     if (this.activatedRoute.snapshot.routeConfig.path == 'calender-access/:_id/:calenderaccess') {
-      console.log(this.activatedRoute.snapshot.params._id)
+      console.log(this.activatedRoute.snapshot.params._id);
       console.log(this.activatedRoute.snapshot.params.calenderaccess);
-      this.toggleCalenderAccess({_id: this.activatedRoute.snapshot.params._id, calenderaccess: this.activatedRoute.snapshot.params.calenderaccess})
+      this.toggleCalenderAccess({_id: this.activatedRoute.snapshot.params._id, calenderaccess: this.activatedRoute.snapshot.params.calenderaccess});
     }
 
     if (this.activatedRoute.snapshot.routeConfig.path == 'senior-consulting-director/:_id/:is_consultant') {
-      console.log(this.activatedRoute.snapshot.params._id)
+      console.log(this.activatedRoute.snapshot.params._id);
       console.log(this.activatedRoute.snapshot.params.is_consultant);
-      this.toggleConsultantRole({_id: this.activatedRoute.snapshot.params._id, is_consultant: this.activatedRoute.snapshot.params.is_consultant})
+      this.toggleConsultantRole({_id: this.activatedRoute.snapshot.params._id, is_consultant: this.activatedRoute.snapshot.params.is_consultant});
     }
 
 
 
     // this.openDiscoverCallModal(item,item.productname,marktingProducMmodal);
     // this.openDiscoverCallModal(item,item.productname,contractProducMmodal);
-   
+
    }
 
   ngOnInit() {
-    this.consultantrole = this.cookieservice.get('is_consultant'); //to know whether it is admin or senior consultant
+    this.consultantrole = this.cookieservice.get('is_consultant'); // to know whether it is admin or senior consultant
   }
 
 //   openDiscoverCallModal(leadval:any,val: any, template: TemplateRef<any>) {
@@ -59,23 +59,23 @@ modalRef3: BsModalRef;
 //     },2000);
 // }
 
-  
-  marketingreview(val:any, template:TemplateRef<any>){
-    let link = this.commonservices.nodesslurl + 'marketingreview';
+
+  marketingreview(val: any, template: TemplateRef<any>) {
+    const link = this.commonservices.nodesslurl + 'marketingreview';
     this.selectedlead.rep_id = this.cookieservice.get('userid');
     this.selectedlead.product_ids = this.selectedproductid;
-    let data = this.selectedlead;
+    const data = this.selectedlead;
     if (this.selectedproductid != '') {
-     this._http.post(link, data).subscribe((res:any) =>{
+     this._http.post(link, data).subscribe((res: any) => {
          // console.log('ok',res);
-         if (res.status =='success') {
+         if (res.status == 'success') {
              const link1 = this.commonservices.nodesslurl + 'addorupdatedata?token=' + this.cookieservice.get('jwttoken');
-             let data = {
+             const data = {
                  source: 'leads',
-                 data: { id: this.selectedlead._id, emailStatus:'send' }
+                 data: { id: this.selectedlead._id, emailStatus: 'send' }
              };
              this._http.post(link1, data).subscribe((res1: any) => {
-                 console.log(res1,'+++res1');
+                 console.log(res1, '+++res1');
           });
              this.modalRef2.hide();
              this.modalRef1 = this.modal.show(template, { class: 'successmodal' });
@@ -87,18 +87,18 @@ modalRef3: BsModalRef;
     }
  }
 
- 
+
  contractReview(val: any, template: TemplateRef<any>) {
-     let link = this.commonservices.nodesslurl + 'contractreview';
+     const link = this.commonservices.nodesslurl + 'contractreview';
      this.selectedlead.rep_id = this.cookieservice.get('userid');
      this.selectedlead.product_ids = this.selectedproductid;
-     let data = this.selectedlead;
+     const data = this.selectedlead;
      if (this.selectedproductid != '') {
          this._http.post(link, data).subscribe((res: any) => {
              // console.log('ok',res);
              if (res.status == 'success') {
                  const link1 = this.commonservices.nodesslurl + 'addorupdatedata?token=' + this.cookieservice.get('jwttoken');
-                 let data = {
+                 const data = {
                      source: 'leads',
                      data: { id: this.selectedlead._id, emailStatus: 'send' }
                  };
@@ -161,19 +161,19 @@ modalRef3: BsModalRef;
 //  // }
 //  }
 
- 
-  
+
+
   // added by chandrani
   getUserDetails(email: any) {
-    let link = this.commonservices.nodesslurl + 'datalist?token=' + this.cookieservice.get('jwttoken');
-    let data = { source: 'users', condition: { email: email } };
+    const link = this.commonservices.nodesslurl + 'datalist?token=' + this.cookieservice.get('jwttoken');
+    const data = { source: 'users', condition: { email: email } };
     this._http.post(link, data)
       .subscribe(res => {
 
         let originalcookiedata: any;
         originalcookiedata = this.cookieservice.getAll();
         this.cookieservice.set('oldcookie', JSON.stringify(originalcookiedata));
-        let result: any; //originalCookie
+        let result: any; // originalCookie
         result = res;
         if (result.resc == 1 && result.res != null && result.res[0] != null) {
           if (result.res[0].status == 1) {
@@ -213,20 +213,20 @@ modalRef3: BsModalRef;
               }
 
 
-              if (result.res[0].signup_step2 == 1 && result.res[0].contractstep == null && result.res[0].reptraininglessonstep == null) this.router.navigate(['/contract']);
-              if (result.res[0].signup_step2 == 1 && result.res[0].contractstep == 1 && result.res[0].reptraininglessonstep == null) this.router.navigate(['/reptrainingcenter']);
-              if (result.res[0].signup_step2 == 1 && result.res[0].contractstep == 1 && result.res[0].reptraininglessonstep == 1) this.router.navigate(['/repdashboard']);
+              if (result.res[0].signup_step2 == 1 && result.res[0].contractstep == null && result.res[0].reptraininglessonstep == null) { this.router.navigate(['/contract']); }
+              if (result.res[0].signup_step2 == 1 && result.res[0].contractstep == 1 && result.res[0].reptraininglessonstep == null) { this.router.navigate(['/reptrainingcenter']); }
+              if (result.res[0].signup_step2 == 1 && result.res[0].contractstep == 1 && result.res[0].reptraininglessonstep == 1) { this.router.navigate(['/repdashboard']); }
             }
           }
         }
-      })
+      });
   }
 
-  
+
   toggleCalenderAccess(item: any) {
     let calenderaccess: any;
-    if (item.calenderaccess != null) calenderaccess = 1 - item.calenderaccess;
-    if (item.calenderaccess == null) calenderaccess = 1;
+    if (item.calenderaccess != null) { calenderaccess = 1 - item.calenderaccess; }
+    if (item.calenderaccess == null) { calenderaccess = 1; }
     const link = this.commonservices.nodesslurl + 'addorupdatedata';
     this._http.post(link, { source: 'users', data: { id: item._id, calenderaccess: calenderaccess } })
       .subscribe(res => {
@@ -238,8 +238,8 @@ modalRef3: BsModalRef;
 
   toggleConsultantRole(item: any) {
     let consultantrole: any;
-    if (item.is_consultant != null) consultantrole = 1 - item.consultantrole;
-    if (item.is_consultant == null) consultantrole = 1;
+    if (item.is_consultant != null) { consultantrole = 1 - item.consultantrole; }
+    if (item.is_consultant == null) { consultantrole = 1; }
     const link = this.commonservices.nodesslurl + 'addorupdatedata';
     this._http.post(link, { source: 'users', data: { id: item._id, is_consultant: consultantrole } })
       .subscribe(res => {
@@ -250,5 +250,5 @@ modalRef3: BsModalRef;
   }
 
 
-  
+
 }

@@ -1,6 +1,6 @@
-import { Component, OnInit,TemplateRef, Inject } from '@angular/core';
+import { Component, OnInit, TemplateRef, Inject } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { FormBuilder, FormGroup, Validators,FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Commonservices } from '../app.commonservices' ;
 import { HttpClient } from '@angular/common/http';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -9,7 +9,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { WINDOW } from '@ng-toolkit/universal';
 import { error } from 'util';
 
-declare var moment:any;
+declare var moment: any;
 @Component({
   selector: 'app-contract-manager-add',
   templateUrl: './contract-manager-add.component.html',
@@ -20,51 +20,51 @@ export class ContractManagerAddComponent implements OnInit {
 
 
  public allslots;
-  public timezoneval:any;
-  public recid:any;
-  public refreshtoken:any;
-  public timezone:any=[];
-  public filterval5:any;
-  public blockHeaderFooterBlock: boolean = true;
+  public timezoneval: any;
+  public recid: any;
+  public refreshtoken: any;
+  public timezone: any = [];
+  public filterval5: any;
+  public blockHeaderFooterBlock = true;
    public headerText: any = {};
    public slotval: any ;
-   public slotView: boolean = false;
+   public slotView = false;
 
    public contractForm: FormGroup;
    public noticeForm: FormGroup;
-   public medicalform:FormGroup;
-   public contractFormSubmitFlug: boolean = false;
+   public medicalform: FormGroup;
+   public contractFormSubmitFlug = false;
    public allcontract: any = '';
    public contractSuggestion: any = [];
-   public contractSuggestionFlug: boolean = false;
+   public contractSuggestionFlug = false;
    public leadname: any = [];
    public contract_manager_list: any = [];
-   public timeSpanView: boolean = false;
-   public timeSpanVal: any = "15";
-   public loader: boolean = false;
-   public modalReference : BsModalRef;
-   public selectedlead:any;
-   public selectedproduct:any;
-   public isedit_id:any ;
-   all_data:any;
-   
+   public timeSpanView = false;
+   public timeSpanVal: any = '15';
+   public loader = false;
+   public modalReference: BsModalRef;
+   public selectedlead: any;
+   public selectedproduct: any;
+   public isedit_id: any ;
+   all_data: any;
 
-  constructor(@Inject(WINDOW) private window: Window, public _commonservice:Commonservices, private router: Router, public _http:HttpClient, public modal:BsModalService, public cookeiservice: CookieService, private route: ActivatedRoute, private formBuilder: FormBuilder) {
-    window.scrollTo(1000,0);
-    this._commonservice =_commonservice;
+
+  constructor(@Inject(WINDOW) private window: Window, public _commonservice: Commonservices, private router: Router, public _http: HttpClient, public modal: BsModalService, public cookeiservice: CookieService, private route: ActivatedRoute, private formBuilder: FormBuilder) {
+    window.scrollTo(1000, 0);
+    this._commonservice = _commonservice;
 
 
     /* Agreement Form Control */
     this.contractForm = this.formBuilder.group({
         product:      [ null, [ Validators.required, Validators.maxLength(200) ] ],
-        lead:    [ "", [ Validators.required, Validators.maxLength(200) ] ],
+        lead:    [ '', [ Validators.required, Validators.maxLength(200) ] ],
         // contract_manager:['',Validators.required]
       });
     this.noticeForm = this.formBuilder.group({
       notes: ['', Validators.required]
     });
 
-     
+
   }
 
     ngOnInit() {
@@ -72,9 +72,9 @@ export class ContractManagerAddComponent implements OnInit {
             this.recid = params['id'];
 
 
-            if(this.cookeiservice.get('userid')) {
-                if( this.recid != null) {
-                    
+            if (this.cookeiservice.get('userid')) {
+                if ( this.recid != null) {
+
                     this.getUserDetails(this.recid);
                 }
                 this.geteventarr();
@@ -90,7 +90,7 @@ export class ContractManagerAddComponent implements OnInit {
         this._http.post(link,  { source: 'contract_repote', data: {
             id: this.isedit_id,
          notes: val.notes,
-         status:'request',
+         status: 'request',
          rep_id: this.allcontract.rep_id,
          product: this.contractForm.value.product,
          product_id: this.cookeiservice.get('product_id'),
@@ -98,7 +98,7 @@ export class ContractManagerAddComponent implements OnInit {
         //  contract_manager_id: this.contractForm.value.contract_manager,
          updated_by: this.cookeiservice.get('userid')
           }})
-            .subscribe((res: any) => { 
+            .subscribe((res: any) => {
                 if (res.status == 'success') {
                 this.router.navigateByUrl('/contract-manager-list');
             }
@@ -107,15 +107,15 @@ export class ContractManagerAddComponent implements OnInit {
         const link = this._commonservice.nodesslurl + 'addorupdatedata?token=' + this.cookeiservice.get('jwttoken');
         this._http.post(link,  { source: 'contract_repote', data: {
          notes: val.notes,
-         status:'request',
-         rep_id:this.cookeiservice.get('userid'),
+         status: 'request',
+         rep_id: this.cookeiservice.get('userid'),
          product: this.contractForm.value.product,
          product_id: this.cookeiservice.get('product_id'),
          lead_id: this.contractForm.value.lead,
         //  contract_manager_id: this.contractForm.value.contract_manager,
          created_by: this.cookeiservice.get('userid')
           }})
-            .subscribe((res: any) => { 
+            .subscribe((res: any) => {
                 if (res.status == 'success') {
                 this.router.navigateByUrl('/contract-manager-list');
             }
@@ -123,21 +123,21 @@ export class ContractManagerAddComponent implements OnInit {
       }
 
     }
-    saveAsDraft(val: any){
-     console.log('saveAsDraft',val);
+    saveAsDraft(val: any) {
+     console.log('saveAsDraft', val);
      if (this.recid != null && this.isedit_id != null ) {
         const link = this._commonservice.nodesslurl + 'addorupdatedata?token=' + this.cookeiservice.get('jwttoken');
         this._http.post(link, { source: 'contract_repote', data: {
           id: this.isedit_id,
           notes: val.notes,
-          status:'asDraft',
+          status: 'asDraft',
           product: this.contractForm.value.product,
           product_id: this.cookeiservice.get('product_id'),
           lead_id: this.contractForm.value.lead,
           updated_by: this.cookeiservice.get('userid')
           }})
             .subscribe((res: any) => {
-                if(res.status == 'success') {
+                if (res.status == 'success') {
                     this.router.navigateByUrl('/contract-manager-list');
                 }
       });
@@ -145,8 +145,8 @@ export class ContractManagerAddComponent implements OnInit {
      // val.status = 'asDraft';
      const link = this._commonservice.nodesslurl + 'addorupdatedata?token=' + this.cookeiservice.get('jwttoken');
             this._http.post(link, { source: 'contract_repote', data: { notes: val.notes,
-             status:'asDraft',
-              rep_id:this.cookeiservice.get('userid'),
+             status: 'asDraft',
+              rep_id: this.cookeiservice.get('userid'),
               product: this.contractForm.value.product,
               product_id: this.cookeiservice.get('product_id'),
               lead_id: this.contractForm.value.lead,
@@ -154,53 +154,53 @@ export class ContractManagerAddComponent implements OnInit {
               created_by: this.cookeiservice.get('userid')
               }})
                 .subscribe((res: any) => {
-                    if(res.status == 'success') {
+                    if (res.status == 'success') {
                         this.router.navigateByUrl('/contract-manager-list');
                     }
           });
         }
-      console.log("saveAsDraft is work");
+      console.log('saveAsDraft is work');
     }
-   
 
-    geteventarr(){
 
-        console.log(this.recid)
-      console.log('geteventarr')
+    geteventarr() {
+
+        console.log(this.recid);
+      console.log('geteventarr');
         let cond: any;
-        switch(this.route.snapshot.url[0].path) {
-            
+        switch (this.route.snapshot.url[0].path) {
+
             case 'add-contract-manager':
 
-                if(!this.contractForm.valid) {
+                if (!this.contractForm.valid) {
                     this.getcontract();
                     this.slotView = false;
                     return ;
-                }else{
-                    this.slotView=true;
+                } else {
+                    this.slotView = true;
                 }
-                console.log('slotview',this.slotView);
+                console.log('slotview', this.slotView);
                 this.headerText.hedaerH4 = 'Select your Closer Call Appointment as per your convenience.';
                 this.headerText.span = 'Please select your Time Zone carefully to eliminate any confusion. Your scheduled appointment will be confirmed and mailed to you accordingly.';
                 // this.cookeiservice.set('lead-product',this.contractForm.value.product);
-               
+
                 break;
-            
+
             default:
 
             console.log('default');
         }
-        
+
     }
 
 //   /* Get user details */
   getUserDetails(id) {
-    
-      if(id!=null) {
+
+      if (id != null) {
           const link = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
           this._http.post(link, {source: 'contract_repote', condition: {_id_object: id}})
-              .subscribe((res:any) => {
-                  console.log('-----',res.res[0])
+              .subscribe((res: any) => {
+                  console.log('-----', res.res[0]);
                   this.allcontract = res.res[0];
                   this.contractForm.controls['product'].patchValue(res.res[0].product);
                   this.contractForm.controls['lead'].patchValue(res.res[0].lead_id);
@@ -214,29 +214,29 @@ export class ContractManagerAddComponent implements OnInit {
 
     /* Get contract */
     getcontract() {
-        let userId: any = this.cookeiservice.get('userid');
+        const userId: any = this.cookeiservice.get('userid');
         const link = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
-        this._http.post(link, { source:'traning_management_view', condition: { "user_id_object": userId }}).subscribe(res => {
+        this._http.post(link, { source: 'traning_management_view', condition: { 'user_id_object': userId }}).subscribe(res => {
             // this._http.post(link, { source:'traning_management_view'}).subscribe(res => {
-            let result: any = res;
+            const result: any = res;
             this.allcontract = result.res;
-            console.log(this.allcontract,'++++++++++++++');
+            console.log(this.allcontract, '++++++++++++++');
         });
 
-       
+
     }
 
     /* contract auto complete */
-    contractSuggest(event:any) {
-        console.log(event.target.value)
+    contractSuggest(event: any) {
+        console.log(event.target.value);
         this.contractSuggestion = [];
-        let keyword: any = event.target.value;
-        if(keyword.length > 0) {
+        const keyword: any = event.target.value;
+        if (keyword.length > 0) {
             this.contractSuggestionFlug = true;
-            for(let c in this.allcontract) {
-                if(this.allcontract[c].product_name != null && this.allcontract[c].product_name.toLowerCase().indexOf(keyword.toLowerCase())>-1) {
+            for (const c in this.allcontract) {
+                if (this.allcontract[c].product_name != null && this.allcontract[c].product_name.toLowerCase().indexOf(keyword.toLowerCase()) > -1) {
                     this.contractSuggestion.push(this.allcontract[c]);
-                    console.log('call firstname',this.contractSuggestion);
+                    console.log('call firstname', this.contractSuggestion);
                 }
             }
         } else {
@@ -247,72 +247,72 @@ export class ContractManagerAddComponent implements OnInit {
     /* contractForm */
     contractFormSubmit() {
         this.contractFormSubmitFlug = true;
-        if(this.contractForm.valid) {
+        if (this.contractForm.valid) {
             this.slotView = true;
             this.geteventarr();
         }
     }
 
     selectcontract(contractData) {
-        let productval: any = contractData;
-        console.log(contractData)
+        const productval: any = contractData;
+        console.log(contractData);
         // this.loader = true;
-        if( this.recid == null || this.recid == '') {
-            this.contractForm.patchValue({    
+        if ( this.recid == null || this.recid == '') {
+            this.contractForm.patchValue({
             product: contractData.product_name
         });
-    }else {
-        this.contractForm.patchValue({    
+    } else {
+        this.contractForm.patchValue({
             product: contractData.product
         });
     }
 
         const link = this._commonservice.nodesslurl + 'lead_and_product';
-        this._http.post(link, {  "product_id": contractData.product_id }).subscribe((res:any) => {
+        this._http.post(link, {  'product_id': contractData.product_id }).subscribe((res: any) => {
             // this.loader = false;
             this.leadname = res.data.lead_list;
             // this.contract_manager_list = res.data.contract_manager_list;
-            if (res.res =="success" && this.recid !=null && this.recid !='') {
+            if (res.res == 'success' && this.recid != null && this.recid != '') {
                 this.selectproductfunc(contractData.product_id );
                 this.selectcontractmanagerfunc(contractData.product_id );
             }
         }, error => {
-            this.selectcontract(productval); 
+            this.selectcontract(productval);
         });
-        
+
         this.cookeiservice.set('product_id', contractData.product_id);
         // this.leadname = contractData.firstname + contractData.lastname;
         this.contractSuggestionFlug = false;
         this.contractSuggestion = [];
         // this.selectedlead = contractData;
     }
-    selectproductfunc(event:any){
+    selectproductfunc(event: any) {
         console.log(event.target.value);
-        console.log(this.leadname)
-        for(let i in this.leadname){
-            if(this.leadname[i].product_id == event.target.value){
+        console.log(this.leadname);
+        for (const i in this.leadname) {
+            if (this.leadname[i].product_id == event.target.value) {
                 this.selectedproduct = this.leadname[i];
             }
         }
     }
-    selectcontractmanagerfunc(event:any){
+    selectcontractmanagerfunc(event: any) {
         console.log(event.target.value);
-        console.log(this.contract_manager_list)
-        for(let i in this.contract_manager_list){
-            if(this.contract_manager_list[i].product_id == event.target.value){
+        console.log(this.contract_manager_list);
+        for (const i in this.contract_manager_list) {
+            if (this.contract_manager_list[i].product_id == event.target.value) {
                 this.selectedproduct = this.leadname[i];
             }
         }
     }
 
-    // added by chandrani 
-    openLeadDetailsModal(item:any,template:TemplateRef<any>){
+    // added by chandrani
+    openLeadDetailsModal(item: any, template: TemplateRef<any>) {
         this.selectedlead = item;
-        console.log(item)
+        console.log(item);
         this.modalReference = this.modal.show(template);
     }
 
-    goback(){
+    goback() {
         this.router.navigateByUrl('/contract-manager-list');
         this.contractForm.reset();
         this.noticeForm.reset();
@@ -320,13 +320,13 @@ export class ContractManagerAddComponent implements OnInit {
     cancelContract() {
         if (this.slotView == false) {
             this.router.navigateByUrl('/contract-manager-list');
-        } else{
+        } else {
         this.contractForm.reset();
         this.noticeForm.reset();
         this.slotView = false;
     }
       }
-  
+
 
 }
 

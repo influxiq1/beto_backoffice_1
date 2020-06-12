@@ -23,20 +23,20 @@ headElementsCron = ['ID', '_id', 'Data'];
      public cookeiservice: CookieService,
      public http: HttpClient,
      public modal: BsModalService) {
-       let useremail:any;
+       let useremail: any;
        useremail = this.cookeiservice.get('useremail');
        console.log(useremail);
-       let link = this._commonservices.nodesslurl + 'commoneventdata';
-       let data = {
-        "daterange" : "2019-11-13",
-        "email" : useremail
-       }
-       this.http.post(link, {data: data}).subscribe((res: any)=>{
+       const link = this._commonservices.nodesslurl + 'commoneventdata';
+       const data = {
+        'daterange' : '2019-11-13',
+        'email' : useremail
+       };
+       this.http.post(link, {data: data}).subscribe((res: any) => {
          console.log(res);
          this.commonevents = res.data.commonevents;
          this.usergoogleevent = res.data.usergoogleevent;
          this.cron = res.data.cron;
-       })
+       });
   }
 
 

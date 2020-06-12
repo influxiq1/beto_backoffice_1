@@ -1,4 +1,4 @@
-import { Component, OnInit,TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import {Commonservices} from '../app.commonservices' ;
@@ -14,9 +14,14 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
   providers: [Commonservices]
 })
 export class ResetpasswordComponent implements OnInit {
+
+  constructor(fb: FormBuilder, private router: Router, private route: ActivatedRoute, private _commonservices: Commonservices, public _http: HttpClient , private cookie: CookieService, public modal: BsModalService) {
+    this.fb = fb;
+    this.serverurl = _commonservices.url;
+  }
+  static invalidpassword;
   public dataForm: FormGroup;
   public fb;
-  static invalidpassword;
   public addcookie: CookieService;
   public cookiedetails;
   public serverurl;
@@ -28,12 +33,7 @@ export class ResetpasswordComponent implements OnInit {
   public sourceconditionval;
   public id;
   modalRef: BsModalRef;
-  public issubmit=0;
-
-  constructor(fb: FormBuilder, private router: Router, private route: ActivatedRoute, private _commonservices: Commonservices, public _http: HttpClient ,private cookie: CookieService,public modal:BsModalService) {
-    this.fb = fb;
-    this.serverurl = _commonservices.url;
-  }
+  public issubmit = 0;
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -44,46 +44,46 @@ export class ResetpasswordComponent implements OnInit {
     this.passmatchvalidate = false;
     this.dataForm = this.fb.group({
       password: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(15)])],
-      confirmpassword: ["", Validators.required]
-    },{validator: this.matchingPasswords('password', 'confirmpassword')});
+      confirmpassword: ['', Validators.required]
+    }, {validator: this.matchingPasswords('password', 'confirmpassword')});
   }
 
 
 
 
   getuserdetails() {
-    this.sourceconditionval ={accesscode:this.accesscode};
-    const link = this._commonservices.nodesslurl+'datalist2';
-    this._http.post(link,{source:'users',condition:this.sourceconditionval})
-        .subscribe(res=>{
-          let result:any;
-          result=res;
-          this.userdetails=result.res;
+    this.sourceconditionval = {accesscode: this.accesscode};
+    const link = this._commonservices.nodesslurl + 'datalist2';
+    this._http.post(link, {source: 'users', condition: this.sourceconditionval})
+        .subscribe(res => {
+          let result: any;
+          result = res;
+          this.userdetails = result.res;
           console.log('this.userdetails------------');
           console.log(this.userdetails);
           this.id = this.userdetails[0]._id;
           console.log(this.id);
-        })
+        });
   }
 
-  public matchingPasswords(passwordKey: string, confirmPasswordKey: string){
+  public matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
     return (group: FormGroup): {[key: string]: any} => {
 
-      let password = group.controls[passwordKey];
-      let confirmPassword = group.controls[confirmPasswordKey];
+      const password = group.controls[passwordKey];
+      const confirmPassword = group.controls[confirmPasswordKey];
 
-      if (password.value !== confirmPassword.value){
+      if (password.value !== confirmPassword.value) {
         confirmPassword.setErrors({'incorrect': true});
         console.log('true');
         return {
           mismatchedPasswords: true
         };
       }
-    }
+    };
   }
 
-  dosubmit(formval,template:TemplateRef<any>) {
-    this.issubmit=1;
+  dosubmit(formval, template: TemplateRef<any>) {
+    this.issubmit = 1;
     console.log(this.dataForm.valid);
     let x: any;
     for (x in this.dataForm.controls) {
@@ -91,22 +91,21 @@ export class ResetpasswordComponent implements OnInit {
     }
     this.is_error = 0;
     if (this.dataForm.valid ) {
-      let link = this._commonservices.nodesslurl + 'newpassword';
-      let data = {id: this.id, password: formval.password};
+      const link = this._commonservices.nodesslurl + 'newpassword';
+      const data = {id: this.id, password: formval.password};
       this._http.post(link, data)
           .subscribe(res => {
-            let result:any;
-            result=res;
+            let result: any;
+            result = res;
             console.log(result);
-            this.issubmit=0;
+            this.issubmit = 0;
             if (result.status == 'success') {
               this.modalRef = this.modal.show(template, {class: 'successmodal'});
               setTimeout(() => {
                 this.modalRef.hide();
                 this.router.navigate(['/login']);
               }, 3000);
-            }
-            else {
+            } else {
               this.is_error = 'Some internal problem happened! Please try again later.';
             }
           }, error => {

@@ -14,15 +14,15 @@ declare var $: any;
 })
 export class AdditionalVideoComponent implements OnInit {
 
-  public categoryid:any;
-  public condition:any = {};
+  public categoryid: any;
+  public condition: any = {};
   public datalist: any;
-  public loader:any = 0;
+  public loader: any = 0;
 
-  constructor(public activatedRoute:ActivatedRoute, public _commonservices: Commonservices, public _http: HttpClient, public cookie: CookieService, public router: Router, public sanitizer: DomSanitizer) {
+  constructor(public activatedRoute: ActivatedRoute, public _commonservices: Commonservices, public _http: HttpClient, public cookie: CookieService, public router: Router, public sanitizer: DomSanitizer) {
     this.categoryid  = this.activatedRoute.snapshot.params.categoryid;
     console.log(this.categoryid);
-    this.condition = {source:'videos_view_with_categoryname',condition:{category_object:this.categoryid,status:true}};
+    this.condition = {source: 'videos_view_with_categoryname', condition: {category_object: this.categoryid, status: true}};
     this.additionalvideos();
    }
 
@@ -42,46 +42,46 @@ export class AdditionalVideoComponent implements OnInit {
           this.datalist = result.res;
            console.log('datalist:');
               console.log(this.datalist);
-              for(let i in this.datalist){
-                if(this.datalist[i].youtube_url!=null){
-                    let videourl = this.datalist[i].youtube_url.split('v=');
-                    let videoid = videourl[videourl.length - 1];
-                    let vurl = videoid;
+              for (const i in this.datalist) {
+                if (this.datalist[i].youtube_url != null) {
+                    const videourl = this.datalist[i].youtube_url.split('v=');
+                    const videoid = videourl[videourl.length - 1];
+                    const vurl = videoid;
                     let url = this.datalist[i].youtube_url.replace('watch?v=', 'embed/');
-                    this.datalist[i].youtube_url = this.sanitizer.bypassSecurityTrustResourceUrl(url+"?autoplay=1");
+                    this.datalist[i].youtube_url = this.sanitizer.bypassSecurityTrustResourceUrl(url + '?autoplay=1');
                     url = url.split('/');
-                    let urlid = url[url.length - 1];
-                    this.datalist[i].thumbnail_youtube = this.sanitizer.bypassSecurityTrustResourceUrl("https://i1.ytimg.com/vi/" + urlid + "/0.jpg");
+                    const urlid = url[url.length - 1];
+                    this.datalist[i].thumbnail_youtube = this.sanitizer.bypassSecurityTrustResourceUrl('https://i1.ytimg.com/vi/' + urlid + '/0.jpg');
                     this.loader = 0;
                 }
             }
-          
+
         }
       }, error => {
         console.log('Oooops!');
         this.datalist = [];
       });
   }
-  iframeAutoplay(id:any){
+  iframeAutoplay(id: any) {
     // console.log('this is video id', id);
-    $( ".playerspan" ).each(function( index ) {
-        $( this ).removeClass( "show" );
-        $( this ).addClass( "hide" );
+    $( '.playerspan' ).each(function( index ) {
+        $( this ).removeClass( 'show' );
+        $( this ).addClass( 'hide' );
         // $( this ).html("");                  //if there is any need to reload the span
       });
-      $( ".iframgeimg" ).each(function( index ) {
-        $( this ).removeClass( "hide" );
-        $( this ).addClass( "show" );
-        
+      $( '.iframgeimg' ).each(function( index ) {
+        $( this ).removeClass( 'hide' );
+        $( this ).addClass( 'show' );
+
       });
-    
-        setTimeout(()=>{
-            $("#iframe_span_"+id).removeClass('hide');
-            $("#iframe_span_"+id).addClass('show');
-            $("#thumb"+id).addClass('hide');
-        },500);
-        
-    
-   
+
+        setTimeout(() => {
+            $('#iframe_span_' + id).removeClass('hide');
+            $('#iframe_span_' + id).addClass('show');
+            $('#thumb' + id).addClass('hide');
+        }, 500);
+
+
+
 }
 }

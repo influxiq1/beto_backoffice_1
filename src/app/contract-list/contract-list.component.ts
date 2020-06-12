@@ -63,7 +63,7 @@ export class ContractListComponent implements OnInit {
     this.loader = 1;
     const link = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
     this._http.post(link, { source: 'contractDetails_view' }).subscribe(res => {
-      let result: any = res;
+      const result: any = res;
       this.datalist = result.res;
       this.loader = 0;
     });
@@ -75,11 +75,11 @@ export class ContractListComponent implements OnInit {
       this.loader = 1;
     const link = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
     this._http.post(link, {
-      source: 'contractDetails_view', "condition": {
-        "product_name": val
+      source: 'contractDetails_view', 'condition': {
+        'product_name': val
       }
     }).subscribe(res => {
-      let result: any = res;
+      const result: any = res;
       console.log(result.res);
       this.datalist = result.res;
       this.loader = 0;
@@ -104,9 +104,9 @@ export class ContractListComponent implements OnInit {
     if (item.status != null && item.status == true) {
       status = false;
     }
-    if (item.status == null || item.status == false) status = true;
+    if (item.status == null || item.status == false) { status = true; }
     const link = this._commonservice.nodesslurl + 'togglestatus?token=' + this.cookeiservice.get('jwttoken');
-    this._http.post(link, { id: item._id, source: "contractDetails", status: status })
+    this._http.post(link, { id: item._id, source: 'contractDetails', status: status })
       .subscribe(res => {
         this.showdata();
       }, error => {
@@ -116,7 +116,7 @@ export class ContractListComponent implements OnInit {
   showdata() {
     const link = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
     this._http.post(link, { source: 'contractDetails_view' }).subscribe(res => {
-      let result: any = res;
+      const result: any = res;
       this.datalist = result.res;
     });
   }
@@ -128,12 +128,12 @@ export class ContractListComponent implements OnInit {
 
   confirmdelete(template: TemplateRef<any>) {
     this.modalRef1.hide();
-    this.message = "Record deleted successfully!!";
+    this.message = 'Record deleted successfully!!';
     const link = this._commonservice.nodesslurl + 'deletesingledata?token=' + this.cookeiservice.get('jwttoken');
     this._http.post(link, { source: 'contractDetails', id: this.selecteditem._id })
       .subscribe((res: any) => {
         console.log(res);
-        if (res.status == "success") {
+        if (res.status == 'success') {
           this.getdata();
           this.modalRef1 = this.modal.show(template, { class: 'successmodal' });
           setTimeout(() => {

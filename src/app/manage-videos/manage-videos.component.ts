@@ -20,7 +20,7 @@ export class ManageVideosComponent implements OnInit {
       // title
       { inputtype: 'text', name: 'video_title', label: 'Title', placeholder: 'Enter Title', validationrule: { required: true }, validationerrormsg: 'is required' },
       // category
-      {inputtype:'select',name:'category',label:'Category',defaultchoice:'Select a Category',sourceview:'videocategory',selectvalue:'categoryname',selectid:'_id'},
+      {inputtype: 'select', name: 'category', label: 'Category', defaultchoice: 'Select a Category', sourceview: 'videocategory', selectvalue: 'categoryname', selectid: '_id'},
       // description
       { inputtype: 'textarea', name: 'description', label: 'Description', placeholder: 'Enter Description' },
       // youtube url
@@ -28,13 +28,13 @@ export class ManageVideosComponent implements OnInit {
        // priority
        { inputtype: 'text', name: 'priority', label: 'Priority', placeholder: 'Enter Priority', validationrule: { required: true }, validationerrormsg: 'is required' },
       // status
-      {inputtype:'checkbox',name:'status',label:'Status',value:false},
+      {inputtype: 'checkbox', name: 'status', label: 'Status', value: false},
       // added by
-      { inputtype: 'hidden', name: 'added_by', label: "added_by", placeholder: "Added By", value: this.cookieservice.get('userid') },
-      { inputtype: 'hidden', name: 'thumbnail_youtube', label: "thumbnail_youtube", placeholder: "thumbnail_youtube" },
+      { inputtype: 'hidden', name: 'added_by', label: 'added_by', placeholder: 'Added By', value: this.cookieservice.get('userid') },
+      { inputtype: 'hidden', name: 'thumbnail_youtube', label: 'thumbnail_youtube', placeholder: 'thumbnail_youtube' },
 
     ];
-    this.datasource = { table: 'videos', objarr: ["added_by","category"] };
+    this.datasource = { table: 'videos', objarr: ['added_by', 'category'] };
       this.sourcecondition = {};
       this.hideaddval = false;
       // data which will be displayed in the list
@@ -45,7 +45,7 @@ export class ManageVideosComponent implements OnInit {
         { value: 'thumbnail_youtube', name: 'Video thumbnail', role: 0, func: '', class: 'thumbnail_youtube', type: 'img' },
         { value: 'description', name: 'Description ', role: 0, func: '', class: 'company', type: 'text' },
         { value: 'priority', name: 'Priority ', role: 0, func: '', class: 'priority', type: 'text' },
-        {value:'status',name:'Status',role:0,func:'',class:'status',type:'checkbox',editrole:['admin']},
+        {value: 'status', name: 'Status', role: 0, func: '', class: 'status', type: 'checkbox', editrole: ['admin']},
       ]; }
 
   ngOnInit() {

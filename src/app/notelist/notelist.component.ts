@@ -1,11 +1,11 @@
 import { Component, OnInit, TemplateRef, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl, FormControl } from "@angular/forms";
-import { Router } from "@angular/router";
-import { Commonservices } from "../app.commonservices";
-import { HttpClient } from "@angular/common/http";
-import { BsModalService } from "ngx-bootstrap/modal";
-import { BsModalRef } from "ngx-bootstrap/modal/bs-modal-ref.service";
-import { CookieService } from "ngx-cookie-service";
+import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Commonservices } from '../app.commonservices';
+import { HttpClient } from '@angular/common/http';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-notelist',
   templateUrl: './notelist.component.html',
@@ -16,16 +16,16 @@ export class NotelistComponent implements OnInit {
 
   public noteForm: FormGroup;
   public issubmit = 0;
-  formbuilder:any;
-  public modalRef1:BsModalRef;
-  public noteslist:any=[];
-  public selectednote:any;
-  public selecteditem:any;
-  public isedit:any=0;
-  public message:any='';
-  public sourcecondition:any = {};
-  public leaddata:any={};
-  
+  formbuilder: any;
+  public modalRef1: BsModalRef;
+  public noteslist: any = [];
+  public selectednote: any;
+  public selecteditem: any;
+  public isedit: any = 0;
+  public message: any = '';
+  public sourcecondition: any = {};
+  public leaddata: any = {};
+
   @Input()
     set lead_data(source: any) {
         this.leaddata = (source) || '<no name set>';
@@ -37,53 +37,53 @@ export class NotelistComponent implements OnInit {
 
   constructor(public _commonservice: Commonservices, public router: Router, public _http: HttpClient, public modal: BsModalService, formbuilder: FormBuilder, private cookeiservice: CookieService) {
     this.formbuilder = formbuilder;
-    
+
    }
 
   ngOnInit() {
     this.noteForm = this.formbuilder.group({
-      id: [""],
-      note: ["", Validators.required]
+      id: [''],
+      note: ['', Validators.required]
     });
     console.log(this.cookeiservice.get('usertype'));
     console.log(this.router.url);
-    
-    if(this.router.url=='/manage-leads'){
-      this.sourcecondition = {'created_under_object':this.leaddata._id};
+
+    if (this.router.url == '/manage-leads') {
+      this.sourcecondition = {'created_under_object': this.leaddata._id};
     }
-    if(this.router.url=='/appointmentlist'){
-    this.sourcecondition = {'created_under_object':this.leaddata.userdata._id};
+    if (this.router.url == '/appointmentlist') {
+    this.sourcecondition = {'created_under_object': this.leaddata.userdata._id};
   }
-    if(this.cookeiservice.get('usertype')== 'admin'){
-      
+    if (this.cookeiservice.get('usertype') == 'admin') {
+
     }
-    if(this.cookeiservice.get('usertype')== 'rep'){
+    if (this.cookeiservice.get('usertype') == 'rep') {
       console.log('leaddata:');
       console.log(this.leaddata);
       // this.sourcecondition = {'created_by_object':this.cookeiservice.get('userid'),'created_under_object':this.leaddata._id};
     }
     this.getnoteslist();
   }
-  openform(val:any,template: TemplateRef<any>){
+  openform(val: any, template: TemplateRef<any>) {
     this.noteForm.reset();
     this.noteForm.clearValidators;
     this.modalRef1 = this.modal.show(template);
   }
-  editform(val:any,template: TemplateRef<any>){
+  editform(val: any, template: TemplateRef<any>) {
     this.selectednote = val;
     this.modalRef1 = this.modal.show(template);
     this.editnoteslist();
   }
-  notesubmit(){
-    for (let x in this.noteForm.controls) {
+  notesubmit() {
+    for (const x in this.noteForm.controls) {
       this.noteForm.controls[x].markAsTouched();
     }
     this.selectednote = {};
     this.issubmit = 1;
     console.log(this.noteForm.value);
-    if(this.noteForm.valid && this.issubmit==1){
-      let link = this._commonservice.nodesslurl+'addorupdatedata';
-      let data2 = this.noteForm.value;
+    if (this.noteForm.valid && this.issubmit == 1) {
+      const link = this._commonservice.nodesslurl + 'addorupdatedata';
+      const data2 = this.noteForm.value;
       data2.created_by = this.cookeiservice.get('userid');
       data2.created_under = this.leaddata._id;
     //   if(this.router.url=='/manage-leads'){
@@ -92,50 +92,50 @@ export class NotelistComponent implements OnInit {
     //   if(this.router.url=='/appointmentlist'){
     //     data2.created_under = this.leaddata.userdata._id;
     // }
-      let postdata:any;
-      
-      
-      if(data2.id!='' && data2.id!=null){
+      let postdata: any;
+
+
+      if (data2.id != '' && data2.id != null) {
         console.log('not null');
-        postdata = { source: 'notes', data: data2, sourceobj: ["created_by","created_under"] };
-      }else{
+        postdata = { source: 'notes', data: data2, sourceobj: ['created_by', 'created_under'] };
+      } else {
         console.log('null');
-        
-        if(this.router.url=='/manage-leads'){
-          postdata = { source: 'notes', data: {note:this.noteForm.controls['note'].value,created_by:this.cookeiservice.get('userid'),created_under:this.leaddata._id}, sourceobj: ["created_by","created_under"] };
+
+        if (this.router.url == '/manage-leads') {
+          postdata = { source: 'notes', data: {note: this.noteForm.controls['note'].value, created_by: this.cookeiservice.get('userid'), created_under: this.leaddata._id}, sourceobj: ['created_by', 'created_under'] };
         }
-        if(this.router.url=='/appointmentlist'){
-          postdata = { source: 'notes', data: {note:this.noteForm.controls['note'].value,created_by:this.cookeiservice.get('userid'),created_under:this.leaddata.userdata._id}, sourceobj: ["created_by","created_under"] };
+        if (this.router.url == '/appointmentlist') {
+          postdata = { source: 'notes', data: {note: this.noteForm.controls['note'].value, created_by: this.cookeiservice.get('userid'), created_under: this.leaddata.userdata._id}, sourceobj: ['created_by', 'created_under'] };
         }
       }
       console.log(postdata);
-      this._http.post(link,postdata)
-        .subscribe(res=>{
-          let result:any;
+      this._http.post(link, postdata)
+        .subscribe(res => {
+          let result: any;
           result = res;
           console.log(result);
-          if(result.status == 'success'){
+          if (result.status == 'success') {
             this.getnoteslist();
-            setTimeout(()=>{
+            setTimeout(() => {
               this.modalRef1.hide();
-            },2000);
-            
-          }
-        })
-     
+            }, 2000);
 
-     
+          }
+        });
+
+
+
     }
-    
+
   }
   editnoteslist() {
-   
-    let link = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
+
+    const link = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
     /* console.log('link');
      console.log(link);*/
     console.log('hh---ist----');
     console.log(this.selectednote);
-    this._http.post(link, { source: 'notes', condition: {'_id':this.selectednote._id} })
+    this._http.post(link, { source: 'notes', condition: {'_id': this.selectednote._id} })
         .subscribe(res => {
             let result;
             result = res;
@@ -157,7 +157,7 @@ export class NotelistComponent implements OnInit {
         });
 }
 getnoteslist() {
-  let link = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
+  const link = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
   /* console.log('link');
    console.log(link);*/
   console.log('hh---ist----');
@@ -185,7 +185,7 @@ deletdata(val: any, template: TemplateRef<any>) {
 confirmdelete(template: TemplateRef<any>) {
   this.modalRef1.hide();
   this.isedit = 0;
-  this.message = "Record deleted successfully!!";
+  this.message = 'Record deleted successfully!!';
   const link = this._commonservice.nodesslurl + 'deletesingledata?token=' + this.cookeiservice.get('jwttoken');
   /* console.log('link');
    console.log(link);*/

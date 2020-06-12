@@ -1290,7 +1290,7 @@ background: #ec6060;
 
 /*--------------------------loader------------------------------*/
 
-.loder_body{ width: 100%; height: 100vh;  position: fixed; left: 0; top: 0; background-color: #fff; z-index: 99;}
+.loder_body{ width: 100%; height: 100vh;  position: fixed; left: 0; top: 0; z-index: 99;  background:#fff;}
 
 
 .loder_wrapper{width: 300vh; height: 100vh; display: table-cell; text-align: center; vertical-align: middle;}

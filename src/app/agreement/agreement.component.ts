@@ -14,21 +14,21 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
   providers: [Commonservices]
 })
 export class AgreementComponent implements OnInit {
-  modalref:BsModalRef;
+  modalref: BsModalRef;
   /* Digital Sign */
   public degitalSignForm: FormGroup;
-  public degitalSignFormSubmitFlug: boolean = false;
+  public degitalSignFormSubmitFlug = false;
   /* Agreement Form */
   public agreementForm: FormGroup;
-  public agreementFormSubmitFlug: boolean = false;
+  public agreementFormSubmitFlug = false;
   public userDetails: any = {};
   public today: any = new Date;
   constructor( public _commonservice: Commonservices, public router: Router,
                 private activateRoute: ActivatedRoute, public _http: HttpClient,
                 public modalservices: BsModalService, public cookeiservice: CookieService,
                 public sanitizer: DomSanitizer, private formBuilder: FormBuilder ) {
-    
-   
+
+
     /* Digital Sign Form Control */
     this.degitalSignForm = this.formBuilder.group({
       fullName:   [ null, [ Validators.required, Validators.maxLength(150) ] ],
@@ -44,10 +44,10 @@ export class AgreementComponent implements OnInit {
   ngOnInit() {
      /* Geting User Data */
      this.activateRoute.params.subscribe(params => {
-      if(params['userId']) {
+      if (params['userId']) {
         this.getUserDetails(params['userId']);
-      } 
-      if(this.cookeiservice.get('userid') != null && this.cookeiservice.get('userid') != 'undefined') {
+      }
+      if (this.cookeiservice.get('userid') != null && this.cookeiservice.get('userid') != 'undefined') {
         this.getUserDetails(this.cookeiservice.get('userid'));
       }
     });
@@ -55,7 +55,7 @@ export class AgreementComponent implements OnInit {
   /* Get User Details by userID */
   getUserDetails(userId) {
     const postLink = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
-    const postData: any = { source:'users', condition: { _id_object: userId } };
+    const postData: any = { source: 'users', condition: { _id_object: userId } };
     this._http.post(postLink, postData).subscribe(responce => {
       this.userDetails = responce;
       this.userDetails = this.userDetails.res[0];
@@ -65,7 +65,7 @@ export class AgreementComponent implements OnInit {
         address:      this.userDetails.address,
         fullName:     this.userDetails.firstname + ' ' + this.userDetails.lastname
       });
-      if(this.userDetails.companyname==null || this.userDetails.companyname==''){
+      if (this.userDetails.companyname == null || this.userDetails.companyname == '') {
         this.agreementForm.patchValue({
           companyName:  this.userDetails.firstname + ' ' + this.userDetails.lastname
         });
@@ -75,7 +75,7 @@ export class AgreementComponent implements OnInit {
   /* Digital Sign Form Submit */
   degitalSignFormSubmit() {
     this.degitalSignFormSubmitFlug = true;
-    if(this.degitalSignForm.valid) {
+    if (this.degitalSignForm.valid) {
       /* Set Default Value */
       this.agreementForm.patchValue({
         signature: this.degitalSignForm.value.fullName
@@ -91,25 +91,25 @@ export class AgreementComponent implements OnInit {
   /* Agreement Form Submit */
   agreementFormSubmit() {
     this.agreementFormSubmitFlug = true;
-    if(this.agreementForm.valid) {
+    if (this.agreementForm.valid) {
       const postLink = this._commonservice.nodesslurl + 'addorupdatedata?token=' + this.cookeiservice.get('jwttoken');
-      const postData: any = { 
-                              source:'users',
+      const postData: any = {
+                              source: 'users',
                               data: { id: this.userDetails._id, is_contract_signed: 1, contract_signed_date: this.today, contract_signature: this.agreementForm.value.signature }
                             };
       this._http.post(postLink, postData).subscribe(responce => {
-        let result: any = responce;
-        if(result.status == 'success') {
+        const result: any = responce;
+        if (result.status == 'success') {
           /* Set cookie */
           this.cookeiservice.set('lockdornot', this.userDetails.lock);
           this.cookeiservice.set('usertype', this.userDetails.type);
           this.cookeiservice.set('useremail', this.userDetails.email);
           this.cookeiservice.set('fullname', this.userDetails.firstname + ' ' + this.userDetails.lastname);
-          let link2 = this._commonservice.nodesslurl+'contractsigncomplete';
-          let data2 = {'userid':this.userDetails._id};
-          this._http.post(link2,data2)
-          .subscribe(res=>{
-            let result2:any;
+          const link2 = this._commonservice.nodesslurl + 'contractsigncomplete';
+          const data2 = {'userid': this.userDetails._id};
+          this._http.post(link2, data2)
+          .subscribe(res => {
+            let result2: any;
             result2 = res;
           });
         //  this.router.navigate(['/repdashboard']);
@@ -121,7 +121,7 @@ export class AgreementComponent implements OnInit {
     }
   }
   /* Open Modal */
-  openModal(template:TemplateRef<any>) {
+  openModal(template: TemplateRef<any>) {
     this.modalref = this.modalservices.show(template, {class: 'signmodal'});
   }
 }

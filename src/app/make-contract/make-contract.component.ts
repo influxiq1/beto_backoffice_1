@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Commonservices } from '../app.commonservices';
-import { FormBuilder, FormGroup, Validators,FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
 
@@ -13,7 +13,7 @@ import { HttpClient } from '@angular/common/http';
   providers: [Commonservices]
 })
 export class MakeContractComponent implements OnInit {
-  public makeContentForm:FormGroup;
+  public makeContentForm: FormGroup;
   public datalist: any;
   public recid: any;
   public issubmit = 0;
@@ -24,9 +24,9 @@ export class MakeContractComponent implements OnInit {
     public router: Router,
     protected _sanitizer: DomSanitizer,
     private formBuilder: FormBuilder,
-    public _commonservice:Commonservices,
-    public cookeiservice:CookieService,
-    public _http: HttpClient 
+    public _commonservice: Commonservices,
+    public cookeiservice: CookieService,
+    public _http: HttpClient
   ) {
 
     this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
@@ -43,12 +43,12 @@ export class MakeContractComponent implements OnInit {
 
   ngOnInit() {
 
-    this.route.data.forEach((data:any ) => {
+    this.route.data.forEach((data: any ) => {
       // console.log('json',data.results.res);
       this.datalist = data.results.res[0];
       this.makeContentForm = this.formBuilder.group({
         contentTop: [this.datalist.contentTop, Validators.required],
-        notesMsg:[this.datalist.notesByCM]
+        notesMsg: [this.datalist.notesByCM]
       });
     // if (this.datalist.clauses != null && this.datalist.clauses != '') {
       // console.log(this.datalist.contentTop)
@@ -75,12 +75,12 @@ export class MakeContractComponent implements OnInit {
     }
     // console.log('sdf',this.makeContentForm.value)
 
-    if (this.makeContentForm.controls[x].valid && this.datalist != null && this.datalist != '' &&( this.datalist.status == 'request' || this.datalist.status == 'ask_for_modification')) {
-     
-      let data:any= {
-        id:this.recid,
+    if (this.makeContentForm.controls[x].valid && this.datalist != null && this.datalist != '' && ( this.datalist.status == 'request' || this.datalist.status == 'ask_for_modification')) {
+
+      const data: any = {
+        id: this.recid,
         notes: this.datalist.notes,
-        notesByCM:this.makeContentForm.value.notesMsg,
+        notesByCM: this.makeContentForm.value.notesMsg,
         notesByCM_date: Date.now(),
         // clauses: this.makeContentForm.value.clauses,
         status: 'send_to_rep',
@@ -93,18 +93,18 @@ export class MakeContractComponent implements OnInit {
         contentTop: this.makeContentForm.value.contentTop,
         // contentBottiom: this.datalist.contentBottiom,
         contract_content_notes: this.datalist.contract_content_notes
-      }
+      };
       const link = this._commonservice.nodesslurl + 'addorupdatedata?token=' + this.cookeiservice.get('jwttoken');
-        this._http.post(link,  { source: 'contract_repote', data: data}).subscribe((res:any)=>{
-          if (res.status == "success") {
-            this.router.navigateByUrl('/contract-manager-list')
+        this._http.post(link,  { source: 'contract_repote', data: data}).subscribe((res: any) => {
+          if (res.status == 'success') {
+            this.router.navigateByUrl('/contract-manager-list');
           }
         });
-    }else {
-      let data:any= {
-        id:this.recid,
+    } else {
+      const data: any = {
+        id: this.recid,
         notes: this.datalist.notes,
-        ModifiedNotesByRep:this.makeContentForm.value.notesMsg,
+        ModifiedNotesByRep: this.makeContentForm.value.notesMsg,
         ModifiedByRep_date: Date.now(),
         // clauses: this.makeContentForm.value.clauses,
         status: 'ask_for_modification',
@@ -118,12 +118,12 @@ export class MakeContractComponent implements OnInit {
         // contentBottiom: this.datalist.contentBottiom,
         contract_content_notes: this.datalist.contract_content_notes,
         contract_manager_id: this.datalist.contract_manager_id
-      }
+      };
       const link = this._commonservice.nodesslurl + 'addorupdatedata?token=' + this.cookeiservice.get('jwttoken');
-        this._http.post(link,  { source: 'contract_repote', data: data}).subscribe((res:any)=>{
-          if (res.status == "success") {
+        this._http.post(link,  { source: 'contract_repote', data: data}).subscribe((res: any) => {
+          if (res.status == 'success') {
             // this.sendEmail(data);
-            this.router.navigateByUrl('/contract-manager-list')
+            this.router.navigateByUrl('/contract-manager-list');
           }
         });
     }
@@ -131,24 +131,24 @@ export class MakeContractComponent implements OnInit {
   // send_to_lead(val){
   //   console.log(val.value)
   // }
-  sendToLead(){
+  sendToLead() {
     // console.log(this.datalist)
       const link = this._commonservice.nodesslurl + 'addorupdatedata?token=' + this.cookeiservice.get('jwttoken');
       this._http.post(link,  { source: 'contract_repote', data: {
        id: this.datalist._id,
        notes: this.datalist.notes,
-       notesByCM:this.datalist.notesByCM,
-       status:'send_to_lead',
+       notesByCM: this.datalist.notesByCM,
+       status: 'send_to_lead',
        product: this.datalist.product,
        product_id: this.datalist.product_id,
-       lead_id:this.datalist.lead_id,
+       lead_id: this.datalist.lead_id,
        contract_manager_id: this.datalist.contract_manager_id,
-       rep_id:this.datalist.rep_id,
+       rep_id: this.datalist.rep_id,
        updated_by: this.cookeiservice.get('userid')
         }})
-          .subscribe((res: any) => { 
+          .subscribe((res: any) => {
               if (res.status == 'success') {
-                console.log('+++++++++')
+                console.log('+++++++++');
               this.router.navigateByUrl('/contract-manager-list');
           }
           });
@@ -161,7 +161,7 @@ export class MakeContractComponent implements OnInit {
   // }
 
 // contractRepote(id){
-  
+
 // }
 
 }

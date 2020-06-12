@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Commonservices} from "../app.commonservices";
-import {CookieService} from "ngx-cookie-service";
-import {HttpClient} from "@angular/common/http";
+import {Commonservices} from '../app.commonservices';
+import {CookieService} from 'ngx-cookie-service';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-trainingcenterreoprt',
@@ -17,7 +17,7 @@ export class TrainingcenterreoprtComponent implements OnInit {
     public filterval1;
     public filterval2;
 
-  constructor(public commonservices:Commonservices,public cookie:CookieService,public _http:HttpClient) { }
+  constructor(public commonservices: Commonservices, public cookie: CookieService, public _http: HttpClient) { }
 
   ngOnInit() {
     this.trainingcenterdetails();
@@ -32,27 +32,27 @@ export class TrainingcenterreoprtComponent implements OnInit {
           console.log('Get Onedetails');
           console.log(this.getonedetails);
         });
-    const link1 = this.commonservices.nodesslurl+'datalist?token='+this.cookie.get('jwttoken');
-    this._http.post(link1,{source:'training_group'})
-        .subscribe(res=>{
+    const link1 = this.commonservices.nodesslurl + 'datalist?token=' + this.cookie.get('jwttoken');
+    this._http.post(link1, {source: 'training_group'})
+        .subscribe(res => {
           let result;
-          result=res;
+          result = res;
           console.log('training group  details');
           console.log(result);
 
-          if(result['res']!=null && result['res'][0]!=null && result['res'][0]['_id']=='New Hire Trainning' ){
-            this.totalnewhiretraining=result['res'][0]['count'];
+          if (result['res'] != null && result['res'][0] != null && result['res'][0]['_id'] == 'New Hire Trainning' ) {
+            this.totalnewhiretraining = result['res'][0]['count'];
           }
 
-          if(result['res']!=null && result['res'][0]!=null && result['res'][0]['_id']=='Rep Training' ){
-            this.totalreptraining=result['res'][0]['count'];
+          if (result['res'] != null && result['res'][0] != null && result['res'][0]['_id'] == 'Rep Training' ) {
+            this.totalreptraining = result['res'][0]['count'];
           }
-          if(result['res']!=null && result['res'][1]!=null && result['res'][1]['_id']=='New Hire Trainning' ){
-            this.totalnewhiretraining=result['res'][1]['count'];
+          if (result['res'] != null && result['res'][1] != null && result['res'][1]['_id'] == 'New Hire Trainning' ) {
+            this.totalnewhiretraining = result['res'][1]['count'];
           }
 
-          if(result['res']!=null && result['res'][1]!=null && result['res'][1]['_id']=='Rep Training' ){
-            this.totalreptraining=result['res'][1]['count'];
+          if (result['res'] != null && result['res'][1] != null && result['res'][1]['_id'] == 'Rep Training' ) {
+            this.totalreptraining = result['res'][1]['count'];
           }
         });
   }
