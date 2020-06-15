@@ -119,7 +119,7 @@ export class ManageleadsComponent implements OnInit {
         listendpoint: 'listnotedata',
         user: this.cookieservice.get('userid'),
         currentuserfullname: this.cookieservice.get('fullname'),
-        header: 'emailStatus',
+        header: 'fullname',
     },
     updateendpointmany: 'update',
     deleteendpointmany: 'delete',

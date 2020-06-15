@@ -90,7 +90,8 @@ export class UsermanagementComponent implements OnInit {
       { key: "type", val: "Account Type" },
       { key: "legaldoc_doctype", val: "Leagal doc submission"},
       { key: "fullname", val: "Name" },
-      { key: "phoneno" , val: "Phone Number"}
+      { key: "phoneno" , val: "Phone Number"},
+      { key: "address" , val: "Address"}
     ], 
     updateendpointmany: 'update',
     deleteendpointmany: 'delete',                                                // (hide action column)

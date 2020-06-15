@@ -55,13 +55,7 @@ export class AppointmentlistComponent implements OnInit {
   name: any = ['Username'];
   products: any = [];
 
-
-
-
-
-
   appointmentlist: any = [];
-
 
 
   //  Example like this
@@ -123,6 +117,15 @@ export class AppointmentlistComponent implements OnInit {
     deleteendpointmany: 'deleteendpointmany',
     hideeditbutton: true, // all these button options are optional not mandatory
     hidedeletebutton: false,
+    notes: {
+      label: 'Notes',
+      addendpoint: 'addnotedata',
+      deleteendpoint: 'deletenotedata',
+      listendpoint: 'listnotedata',
+      user: this.cookeiservice.get('userid'),
+      currentuserfullname: this.cookeiservice.get('fullname'),
+      header: 'notescount',
+  },
     // hideviewbutton:false,
     hidestatustogglebutton: true,
     // hideaction:true,
@@ -397,6 +400,7 @@ export class AppointmentlistComponent implements OnInit {
       });
   }
   seteventtime(val) {
+    console.log('val', val);
     this.activeFlag = val;
     this.futureevent = val;
     if(this.cookeiservice.get('usertype') == 'admin'){

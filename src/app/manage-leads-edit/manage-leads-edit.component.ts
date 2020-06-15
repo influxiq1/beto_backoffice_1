@@ -333,7 +333,7 @@ public leads_statuss:any =[{ val: 1,'name': 'true' }, { val: 0, 'name': 'Inactiv
 
   label:"Products",
   name:"product",
-  value:response.res[0].product,
+  value:response.res[0].product[0],
   val:this.products,
   type:"select",
   validations:[
