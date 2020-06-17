@@ -73,7 +73,7 @@ export class UsermanagementComponent implements OnInit {
   };
 
 
-  userdata_detail_skip: any = ['_id', 'created_at', 'fullname_s', 'reactsum', 'trainingpercentage', 'recruiter', 'parentname_s', 'status', 'parentname', 'newhirecatsum', 'lock', 'is_consultant', 'calenderaccess'];   // use for Table Detail Field Skip
+  userdata_detail_skip: any = ['_id','firstname', 'lastname', 'created_at', 'fullname_s', 'reactsum', 'trainingpercentage', 'recruiter', 'parentname_s', 'status', 'parentname', 'newhirecatsum', 'lock', 'is_consultant', 'calenderaccess'];   // use for Table Detail Field Skip
   libdata: any = {
     updateendpoint: 'statusupdatesingledata',                                        // update endpoint set
     hideeditbutton: false,                                                  // (hide edit button)
@@ -89,9 +89,13 @@ export class UsermanagementComponent implements OnInit {
       { key: "email", val: "Email" },
       { key: "type", val: "Account Type" },
       { key: "legaldoc_doctype", val: "Leagal doc submission"},
+      { key: "companyname" , val: "Company Name"},
       { key: "fullname", val: "Name" },
       { key: "phoneno" , val: "Phone Number"},
-      { key: "address" , val: "Address"}
+      { key: "address" , val: "Address"},
+      { key: "city" , val: "City"},
+      { key: "sate" , val: "Sate"},
+      { key: "zip" , val: "Zip"}
     ], 
     updateendpointmany: 'update',
     deleteendpointmany: 'delete',                                                // (hide action column)
@@ -149,19 +153,15 @@ export class UsermanagementComponent implements OnInit {
         cond: 'is_contract_signed_m',
         condval: 1
       },
-      {
-        label: 'More Details',
-        type: 'action',
-        datatype: 'api',
-        endpoint: 'getuserdatabyid',
-        otherparam: [],
-        // cond:'status',
-        // condval:0,
-        param: 'id',
-        datafields: ['address', 'city', 'state', 'zip'],
-        // refreshdata: true,
-        headermessage: 'Address Details',
-    }
+    //   {
+    //     label: "View Details",
+    //     type: 'action',
+    //     datatype: 'local',
+    //     datafields: ['fullname', 'email', 'phoneno', 'companyname', 'address', 'city', 'state', 'zip', 'legaldoc_doctype', 'is_contract_signed_m', 'is_discovery', 'is_onboarding','type','created_datetime'],
+    //     headermessage: 'User Details',
+    //     // cond:'status',
+    //     // condval:0
+    // },
     ]
   };
 
