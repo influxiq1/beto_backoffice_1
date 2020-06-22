@@ -66,19 +66,20 @@ export class AppointmentlistComponent implements OnInit {
 
   // Like Table head name is " firstname" => "First Name"
   modify_header_array: any = {
-    'name': 'Organizer\'s Name',
-    'startdate': 'Date Set',
-    'start_time': 'Time',
-    'closername': 'Rep Name',
+    'organizer_name': 'Organizer\'s Name',
+    'participant_name':'Participant\'s Name',
     'phoneNumber': 'Participant\'s Phone No.',
-    'productname': 'Products'
-
+    'productname': 'Products',
+    'emailid':'Leads Email',
+    'closername': 'Rep Name',
+    'time': 'Time',
+    'startdate': 'Date Set'
   };
 
 
   // use for Table Header Skip
-  appointmentlist_skip: any = ['_id', 'attendees', 'booked_by', 'closeremail', 'eid', 'emailid', 'end_time', 'endtime_only', 'eventdata', 'eventuser', 'googleevent', 'id', 'is_custom', 'is_discovery', 'is_onboarding', 'leaddata', 'notescount', 'refresh_token', 'slot', 'starttime_only', 'summery', 'timespan', 'timezone', 'type', 'repsmsg', 'status'];
-  statusarray: any = [{ val: 'true', 'name': 'pending' }];
+  appointmentlist_skip: any = ['_id', 'attendees', 'booked_by', 'closeremail', 'eid', 'end_time', 'endtime_only', 'eventdata', 'eventuser', 'googleevent', 'id', 'is_custom', 'is_discovery', 'is_onboarding', 'leaddata', 'notescount', 'refresh_token', 'slot', 'starttime_only', 'summery', 'timespan', 'timezone', 'type', 'repsmsg', 'status','start_time','name'];
+  statusarray: any = [{ val: 'true', 'name': 'pending', }];
 
   // use for Table Detail Field Skip
   appointmentlist_detail_skip: any = ['_id', 'attendees', 'booked_by', 'closeremail', 'eid', 'emailid', 'end_time', 'endtime_only', 'eventdata', 'eventuser', 'googleevent', 'id', 'is_custom', 'is_discovery', 'is_onboarding', 'leaddata', 'notescount', 'refresh_token', 'slot', 'starttime_only', 'summery', 'timespan', 'timezone', 'type', 'userdata'];
@@ -129,7 +130,7 @@ export class AppointmentlistComponent implements OnInit {
     // hideviewbutton:false,
     hidestatustogglebutton: true,
     // hideaction:true,
-    tableheaders: ['name', 'startdate', 'start_time', 'closername', 'phoneNumber', 'productname'], // not required
+    tableheaders: ['organizer_name','participant_name', 'phoneNumber', 'productname','emailid', 'closername','time','startdate'], // not required
     custombuttons: [
 
       {
@@ -152,7 +153,7 @@ export class AppointmentlistComponent implements OnInit {
   sortdata: any = {
     'type': 'desc',
     'field': 'start_time',
-    'options': ['start_time']
+    'options': ['start_time','startdate','closername','organizer_name','productname']
   };
 
 
@@ -165,7 +166,7 @@ export class AppointmentlistComponent implements OnInit {
 
   search_settings: any = {
 
-    textsearch: [{ label: 'Search By Name', field: 'name' }, { label: 'Search By Lead Name', field: 'leaddata' }, { label: 'Search By Lead Email', field: 'emailid' }, { label: 'Search By Closer Name', field: 'closername' }],  // this is use for  text search
+    textsearch: [{ label: 'Search By Name', field: 'organizer_name_s' }, { label: 'Search By Lead Name', field: 'participant_name_s' }, { label: 'Search By Lead Email', field: 'emailid' }, { label: 'Search By Closer Name', field: 'closername_s' }],  // this is use for  text search
 
   };
 
