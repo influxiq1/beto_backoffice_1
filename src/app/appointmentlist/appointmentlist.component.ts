@@ -82,7 +82,7 @@ export class AppointmentlistComponent implements OnInit {
   statusarray: any = [{ val: 'true', 'name': 'pending', }];
 
   // use for Table Detail Field Skip
-  appointmentlist_detail_skip: any = ['_id', 'attendees', 'booked_by', 'closeremail', 'eid', 'emailid', 'end_time', 'endtime_only', 'eventdata', 'eventuser', 'googleevent', 'id', 'is_custom', 'is_discovery', 'is_onboarding', 'leaddata', 'notescount', 'refresh_token', 'slot', 'starttime_only', 'summery', 'timespan', 'timezone', 'type', 'userdata'];
+  appointmentlist_detail_skip: any = ['_id', 'attendees', 'booked_by', 'closeremail', 'eid', 'end_time', 'endtime_only', 'eventdata', 'eventuser', 'googleevent', 'id', 'is_custom', 'is_discovery', 'is_onboarding', 'leaddata', 'refresh_token', 'slot', 'starttime_only', 'summery', 'timespan', 'timezone', 'type', 'userdata'];
 
 
   // updateendpoint is use for data update endpoint
@@ -118,6 +118,18 @@ export class AppointmentlistComponent implements OnInit {
     deleteendpointmany: 'deleteendpointmany',
     hideeditbutton: true, // all these button options are optional not mandatory
     hidedeletebutton: false,
+    detailview_override: [
+      { key: "organizer_name", val: "Organizer\'s Name" },
+      { key: "participant_name", val: "Participant\'s Name" },
+      { key: "phoneNumber", val: "Participant\'s Phone No." },
+      { key: "productname", val: "Products Name" },
+      { key: "emailid", val: "Leads Email" },
+      { key: "closername", val: "Rep Name" },
+      { key: "repsmsg", val: "Rep Message" },
+      { key: "time", val: "Time" },
+      { key: "startdate", val: "Date Set" },
+      { key: "notescount", val:"Notes count"}
+  ],
     notes: {
       label: 'Notes',
       addendpoint: 'addnotedata',
