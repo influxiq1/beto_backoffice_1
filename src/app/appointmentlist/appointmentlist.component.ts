@@ -135,15 +135,15 @@ export class AppointmentlistComponent implements OnInit {
 
       {
         label: 'Cancle',
-        route: 'appointmentlist',
+        route: 'appointmentlist-cancel',
         type: 'internallink',
-        param: ['googleevent', 'refresh_token','_id'],
+        param: ['_id'],
         // cond: 'is_consultant',
         // condval: 0
       },
       {
         label: 'Reschedule',
-        route: 'appointmentlist',
+        route: 'appointmentlist-reschedule',
         type: 'internallink',
         param: ['_id'],
         // cond: 'is_consultant',
@@ -186,15 +186,13 @@ export class AppointmentlistComponent implements OnInit {
 
 
 
-    if (this.activatedroute.snapshot.routeConfig.path == 'appointmentlist/:googleevent:/refresh_token:/_id') {
-      console.log(this.activatedroute.snapshot.params._id);
-      console.log(this.activatedroute.snapshot.params.email);
-       this.cancelAppointment(this.activatedroute.snapshot.params.googleevent, this.activatedroute.snapshot.params.refresh_token, this.activatedroute.snapshot.params._id);
+    if (this.activatedroute.snapshot.routeConfig.path == 'appointmentlist/:cancel/:_id') {
+      console.log(this.activatedroute.snapshot.params._id, this.activatedroute.snapshot.routeConfig.path);
+       this.cancelAppointment(this.activatedroute.snapshot.params._id);
     }
 
-    if (this.activatedroute.snapshot.routeConfig.path == 'appointmentlist/:reschedule') {
-      console.log(this.activatedroute.snapshot.params._id);
-      console.log(this.activatedroute.snapshot.params.email);
+    if (this.activatedroute.snapshot.routeConfig.path == 'appointmentlist/:reschedule/:_id') {
+      console.log(this.activatedroute.snapshot.params._id, this.activatedroute.snapshot.routeConfig.path);
       //  this.reschedule_data(this.activatedroute.snapshot.params.email);
     }
 
@@ -626,38 +624,52 @@ export class AppointmentlistComponent implements OnInit {
       });
   }
 
-  cancelAppointment(google_event_id: any, refresh_token: any, eid: any) {
+  cancelAppointment(id: any) {
+
+
+console.log(id)
+
+    const getlink = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
+    this._http.post(getlink,{source:'appointmentlist_view',condition:{_id:id}}).subscribe((res:any) => {
+        // this.allslots = res.res;
+        console.log('allslots',res.res);
+    });
+  }
+
+
+
+
     // console.log("google_event_id",google_event_id,"refresh_token",refresh_token,"eid",eid);
     // return;
-    let link = 'https://gapi.betoparedes.com/deleteevent.php?event=' + google_event_id + '&refresh_token=' + refresh_token;
-    this._http.get(link)
-      .subscribe(res => {
-        let result: any;
-        result = res;
-        if (result.status == 'success') {
-          let linkfordb = this._commonservice.nodesslurl + 'addorupdatedata';
-          let datafordb = {
-            "source": "googleevents", "data": {
-              "is_canceled": 1, "id": eid
-            }, sourceobj: []
-          };
-          this._http.post(linkfordb, datafordb)
-            .subscribe(response => {
-              let result2: any;
-              result2 = response;
-              if (result2.status == 'success') {
-                this.getgoogleevents();
-              }
-            }, error => {
-              console.log('Oooops!!!');
-            });
-        } else {
-          console.log(result);
-        }
-      }, error => {
-        console.log('Oooops!');
-      });
-  }
+  //   let link = 'https://gapi.betoparedes.com/deleteevent.php?event=' + google_event_id + '&refresh_token=' + refresh_token;
+  //   this._http.get(link)
+  //     .subscribe(res => {
+  //       let result: any;
+  //       result = res;
+  //       if (result.status == 'success') {
+  //         let linkfordb = this._commonservice.nodesslurl + 'addorupdatedata';
+  //         let datafordb = {
+  //           "source": "googleevents", "data": {
+  //             "is_canceled": 1, "id": eid
+  //           }, sourceobj: []
+  //         };
+  //         this._http.post(linkfordb, datafordb)
+  //           .subscribe(response => {
+  //             let result2: any;
+  //             result2 = response;
+  //             if (result2.status == 'success') {
+  //               this.getgoogleevents();
+  //             }
+  //           }, error => {
+  //             console.log('Oooops!!!');
+  //           });
+  //       } else {
+  //         console.log(result);
+  //       }
+  //     }, error => {
+  //       console.log('Oooops!');
+  //     });
+  // }
   // toggleStatusInArray(item) {
   //   if (item.status == null) item.status = 'Pending';
   //   $('.statusspan').removeClass('hide');
