@@ -82,7 +82,7 @@ export class AppointmentlistComponent implements OnInit {
   statusarray: any = [{ val: 'true', 'name': 'pending', }];
 
   // use for Table Detail Field Skip
-  appointmentlist_detail_skip: any = ['_id', 'attendees', 'booked_by', 'closeremail', 'eid', 'end_time', 'endtime_only', 'eventdata', 'eventuser', 'googleevent', 'id', 'is_custom', 'is_discovery', 'is_onboarding', 'leaddata', 'refresh_token', 'slot', 'starttime_only', 'summery', 'timespan', 'timezone', 'type', 'userdata','organizer_name_s'];
+  appointmentlist_detail_skip: any = ['_id', 'attendees', 'booked_by', 'closeremail', 'eid', 'end_time', 'endtime_only', 'eventdata', 'eventuser', 'googleevent', 'id', 'is_custom', 'is_discovery', 'is_onboarding', 'leaddata', 'refresh_token', 'slot', 'starttime_only', 'summery', 'timespan', 'timezone', 'type', 'userdata','organizer_name_s','start_time','participant_name_s','closername_s'];
 
 
   // updateendpoint is use for data update endpoint
@@ -147,17 +147,21 @@ export class AppointmentlistComponent implements OnInit {
     custombuttons: [
 
       {
-        label: 'Cancle',
-        link: '#',
-        type: 'externallink',
-        paramtype: 'angular',
+        label: 'Cancel',
+        route: 'appointmentlist-cancel',
+        type: 'internallink',
+        param: ['_id'],
+        // cond: 'is_consultant',
+        // condval: 0
       },
       {
         label: 'Reschedule',
-        link: '#',
-        type: 'externallink',
-        paramtype: 'angular',
-      }
+        route: 'appointmentlist-reschedule',
+        type: 'internallink',
+        param: ['_id'],
+        // cond: 'is_consultant',
+        // condval: 0
+      },
 
     ]
 
@@ -192,6 +196,22 @@ export class AppointmentlistComponent implements OnInit {
   adminlist: any = [];
 
   constructor(public _commonservice: Commonservices, public modal: BsModalService, public _http: HttpClient, public cookeiservice: CookieService, public activatedroute: ActivatedRoute, public router: Router, public _apiService: ApiService) {
+
+
+
+    if (this.activatedroute.snapshot.routeConfig.path == 'appointmentlist-cancel/:_id') {
+      console.log("cancel");
+      console.log(this.activatedroute.snapshot.params._id, this.activatedroute.snapshot.routeConfig.path);
+       this.cancelAppointment(this.activatedroute.snapshot.params._id);
+    }
+
+    if (this.activatedroute.snapshot.routeConfig.path == 'appointmentlist-reschedule/:_id') {
+      console.log(this.activatedroute.snapshot.params._id, this.activatedroute.snapshot.routeConfig.path);
+        this.reschedule_data(this.activatedroute.snapshot.params._id);
+    }
+
+    //console.log(this.activatedroute.snapshot.params._id, this.activatedroute.snapshot.routeConfig.path);
+
     // this.usertype = this.cookeiservice.get('usertype');
     // this._http.get("assets/data/timezone.json")
     //       .subscribe(res => {
@@ -551,25 +571,31 @@ export class AppointmentlistComponent implements OnInit {
 
   // }
 
-  // reschedule_data(val:any, template: TemplateRef<any>){
-  //   console.log(val)
-  //   this.product_id_for_modale = val.userdata.product;
-  //   if (val.googleevent != 'N/A') {
-  //     //  this.googleevent = {"googleevent":val.googleevent, "refresh_token":val.refresh_token,"prv_id":val._id, "prvslot":val.slot, lead_id:val.lead_id, leaddata:val.leaddata};
-  //      this.googleevent = val;
-  //   }
-  //   let cond = { "is_discovery": false, "is_onboarding": false, "is_qna": false, "is_custom": false, "userproducts": { "$in": val.userdata.product}, slots:{$type:'array'}, startdate:{
-  //     $lte: moment().add(2, 'weeks').format('YYYY-MM-DD'),
-  //     $gt: moment().subtract(1, 'days').format('YYYY-MM-DD')
-  // }};
-
-  // const link = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
-  //       this._http.post(link,{source:'eventdayarr_events',condition:cond}).subscribe((res:any) => {
-  //           this.allslots = res.res;
-  //           console.log('allslots',this.allslots,this.allslots.length);
-  //       });
-  //   this.modalRef2 = this.modal.show(template);
-  // }
+ // reschedule_data(val:any, template: TemplateRef<any>){
+  reschedule_data(val:any){
+    this.activatedroute.data.subscribe((response: any) => {
+      console.log('Result', response.appointrescheduledata.res[0]);
+   
+   // console.log(val)
+    this.product_id_for_modale = response.appointrescheduledata.res[0].userdata.product[0];
+    if (response.appointrescheduledata.res[0].googleevent != 'N/A') {
+      //  this.googleevent = {"googleevent":val.googleevent, "refresh_token":val.refresh_token,"prv_id":val._id, "prvslot":val.slot, lead_id:val.lead_id, leaddata:val.leaddata};
+       this.googleevent = val;
+    }
+ 
+    let cond = { "is_discovery": false, "is_onboarding": false, "is_qna": false, "is_custom": false, "userproducts": { "$in": this.product_id_for_modale}, slots:{$type:'array'}, startdate:{
+      $lte: moment().add(2, 'weeks').format('YYYY-MM-DD'),
+      $gt: moment().subtract(1, 'days').format('YYYY-MM-DD')
+  }};
+ 
+  const link = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
+        this._http.post(link,{source:'appointmentlist_view',condition:cond}).subscribe((res:any) => {
+            this.allslots = res.res;
+            console.log('allslots',this.allslots,this.allslots.length);
+        });
+   // this.modalRef2 = this.modal.show(template);
+  });
+  }
 
   getCanceledAppoint() {
     let sourcecondition;
@@ -618,9 +644,23 @@ export class AppointmentlistComponent implements OnInit {
       });
   }
 
-  // cancelAppointment(google_event_id: any, refresh_token: any, eid: any) {
-  //   // console.log("google_event_id",google_event_id,"refresh_token",refresh_token,"eid",eid);
-  //   // return;
+  cancelAppointment(id: any) {
+
+
+console.log(id)
+
+    const getlink = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
+    this._http.post(getlink,{source:'appointmentlist_view',condition:{_id:id}}).subscribe((res:any) => {
+        // this.allslots = res.res;
+        console.log('allslots',res.res);
+    });
+  }
+
+
+
+
+    // console.log("google_event_id",google_event_id,"refresh_token",refresh_token,"eid",eid);
+    // return;
   //   let link = 'https://gapi.betoparedes.com/deleteevent.php?event=' + google_event_id + '&refresh_token=' + refresh_token;
   //   this._http.get(link)
   //     .subscribe(res => {

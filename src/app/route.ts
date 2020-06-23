@@ -212,8 +212,40 @@ const appRoutes: Routes = [
 
     { path: 'slotview/:id', component: SlotviewComponent },
     { path: 'appointmentlist', component: AppointmentlistComponent },
-    { path: 'appointmentlist/:reschedule', component: AppointmentlistComponent },
-    { path: 'appointmentlist/:googleevent:/refresh_token:/_id', component: AppointmentlistComponent },
+    { path: 'appointmentlist-reschedule/:_id', component: AppointmentlistComponent,
+    resolve:
+    {
+        appointrescheduledata: TestresolveService
+    },
+    data:
+    {
+        requestcondition:
+        {
+            'source': 'appointmentlist_view',
+                 'condition': {
+                 // "_id_object":'_id'
+                 }
+        },
+        endpoint: 'datalist'
+    }
+},
+    { path: 'appointmentlist-cancel/:_id', component: AppointmentlistComponent,
+    resolve:
+    {
+        appointcancledata: TestresolveService
+    },
+    data:
+    {
+        requestcondition:
+        {
+            'source': 'appointmentlist_view',
+                 'condition': {
+                 // "_id_object":'_id'
+                 }
+        },
+        endpoint: 'datalist'
+    }
+},
     { path: 'appointmentlist/:leadid', component: AppointmentlistComponent },
     { path: 'appointments/:leadid', component: AppointmentlistComponent },
     { path: 'resetpassword/:id', component: ResetpasswordComponent },
