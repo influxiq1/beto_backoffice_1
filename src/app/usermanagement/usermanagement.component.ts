@@ -35,7 +35,7 @@ export class UsermanagementComponent implements OnInit {
   public datasource: any = '';
 
   public status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];   // use for status search
-  public type:any = [{val:'rep', 'name': 'Rep'},{val:'contract_manager', 'name': 'Contract Manager'},{val:'regional_recruiter', 'name':'Regional Recruiter'},{val:'admin', 'name':'Admin'}]
+  public type: any = [{ val: 'rep', 'name': 'Rep' }, { val: 'contract_manager', 'name': 'Contract Manager' }, { val: 'regional_recruiter', 'name': 'Regional Recruiter' }, { val: 'admin', 'name': 'Admin' }]
   statusarray: any = [{ val: 1, name: 'Active' }, { val: 0, name: 'Inactive' }];  //status name set
 
   // emailarray: any = [{ val: 'sourotest222@gmail.com', name: 'sourotest222@gmail.com' }]; //Static Email search eg.
@@ -73,7 +73,7 @@ export class UsermanagementComponent implements OnInit {
   };
 
 
-  userdata_detail_skip: any = ['_id','firstname', 'lastname', 'created_at', 'fullname_s', 'reactsum', 'trainingpercentage', 'recruiter', 'parentname_s', 'status', 'parentname', 'newhirecatsum', 'lock', 'is_consultant', 'calenderaccess'];   // use for Table Detail Field Skip
+  userdata_detail_skip: any = ['_id', 'firstname', 'lastname', 'created_at', 'fullname_s', 'reactsum', 'trainingpercentage', 'recruiter', 'parentname_s', 'status', 'parentname', 'newhirecatsum', 'lock', 'is_consultant', 'calenderaccess'];   // use for Table Detail Field Skip
   libdata: any = {
     updateendpoint: 'statusupdatesingledata',                                        // update endpoint set
     hideeditbutton: false,                                                  // (hide edit button)
@@ -88,19 +88,19 @@ export class UsermanagementComponent implements OnInit {
       { key: "created_datetime", val: "Date Added with time" },
       { key: "email", val: "Email" },
       { key: "type", val: "Account Type" },
-      { key: "legaldoc_doctype", val: "Leagal doc submission"},
-      { key: "companyname" , val: "Company Name"},
+      { key: "legaldoc_doctype", val: "Leagal doc submission" },
+      { key: "companyname", val: "Company Name" },
       { key: "fullname", val: "Name" },
-      { key: "phoneno" , val: "Phone Number"},
-      { key: "address" , val: "Address"},
-      { key: "city" , val: "City"},
-      { key: "sate" , val: "Sate"},
-      { key: "zip" , val: "Zip"}
-    ], 
+      { key: "phoneno", val: "Phone Number" },
+      { key: "address", val: "Address" },
+      { key: "city", val: "City" },
+      { key: "sate", val: "Sate" },
+      { key: "zip", val: "Zip" }
+    ],
     updateendpointmany: 'update',
     deleteendpointmany: 'delete',                                                // (hide action column)
 
-    tableheaders: ['fullname', 'phoneno', 'email', 'parentname', 'type', 'created_datetime', 'status' ], //not required (table header name)
+    tableheaders: ['fullname', 'phoneno', 'email', 'parentname', 'type', 'created_datetime', 'status'], //not required (table header name)
     custombuttons: [
       {
         label: 'delete',
@@ -153,15 +153,15 @@ export class UsermanagementComponent implements OnInit {
         cond: 'is_contract_signed_m',
         condval: 1
       },
-    //   {
-    //     label: "View Details",
-    //     type: 'action',
-    //     datatype: 'local',
-    //     datafields: ['fullname', 'email', 'phoneno', 'companyname', 'address', 'city', 'state', 'zip', 'legaldoc_doctype', 'is_contract_signed_m', 'is_discovery', 'is_onboarding','type','created_datetime'],
-    //     headermessage: 'User Details',
-    //     // cond:'status',
-    //     // condval:0
-    // },
+      //   {
+      //     label: "View Details",
+      //     type: 'action',
+      //     datatype: 'local',
+      //     datafields: ['fullname', 'email', 'phoneno', 'companyname', 'address', 'city', 'state', 'zip', 'legaldoc_doctype', 'is_contract_signed_m', 'is_discovery', 'is_onboarding','type','created_datetime'],
+      //     headermessage: 'User Details',
+      //     // cond:'status',
+      //     // condval:0
+      // },
     ]
   };
 
@@ -182,11 +182,11 @@ export class UsermanagementComponent implements OnInit {
 
   // this is search block
   search_settings: any = {
-    datesearch: [{startdatelabel: 'Start Date', enddatelabel: 'End Date', submit: 'Search',  field: 'created_datetime'}],
+    datesearch: [{ startdatelabel: 'Start Date', enddatelabel: 'End Date', submit: 'Search', field: 'created_datetime' }],
 
     selectsearch: [{ label: 'Search By Type', field: 'type', values: this.type }, { label: 'Search By Status', field: 'status', values: this.status }],
 
-    textsearch: [{ label: 'Search By Full Name', field: 'fullname_s' }, { label: 'Search By Email', field: 'email' }, { label: 'Search By Parent Name', field: 'parentname_s' } , { label: 'Search By Phone Number', field: 'phoneno' }],  // this is use for  text search
+    textsearch: [{ label: 'Search By Full Name', field: 'fullname_s' }, { label: 'Search By Email', field: 'email' }, { label: 'Search By Parent Name', field: 'parentname_s' }, { label: 'Search By Phone Number', field: 'phoneno' }],  // this is use for  text search
   };
 
   constructor(public commonservices: Commonservices, public cookieservice: CookieService, public originalCookie: CookieService, public _http: HttpClient, private router: Router, public modal: BsModalService, public _apiService: ApiService, public activatedRoute: ActivatedRoute) {
