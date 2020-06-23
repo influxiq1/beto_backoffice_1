@@ -82,7 +82,7 @@ export class AppointmentlistComponent implements OnInit {
   statusarray: any = [{ val: 'true', 'name': 'pending', }];
 
   // use for Table Detail Field Skip
-  appointmentlist_detail_skip: any = ['_id', 'attendees', 'booked_by', 'closeremail', 'eid', 'end_time', 'endtime_only', 'eventdata', 'eventuser', 'googleevent', 'id', 'is_custom', 'is_discovery', 'is_onboarding', 'leaddata', 'refresh_token', 'slot', 'starttime_only', 'summery', 'timespan', 'timezone', 'type', 'userdata'];
+  appointmentlist_detail_skip: any = ['_id', 'attendees', 'booked_by', 'closeremail', 'eid', 'end_time', 'endtime_only', 'eventdata', 'eventuser', 'googleevent', 'id', 'is_custom', 'is_discovery', 'is_onboarding', 'leaddata', 'refresh_token', 'slot', 'starttime_only', 'summery', 'timespan', 'timezone', 'type', 'userdata','organizer_name_s'];
 
 
   // updateendpoint is use for data update endpoint
@@ -128,7 +128,8 @@ export class AppointmentlistComponent implements OnInit {
       { key: "repsmsg", val: "Rep Message" },
       { key: "time", val: "Time" },
       { key: "startdate", val: "Date Set" },
-      { key: "notescount", val:"Notes count"}
+      { key: "notescount", val:"Notes count"},
+     
   ],
     notes: {
       label: 'Notes',
@@ -147,20 +148,16 @@ export class AppointmentlistComponent implements OnInit {
 
       {
         label: 'Cancle',
-        route: 'appointmentlist',
-        type: 'internallink',
-        param: ['googleevent', 'refresh_token','_id'],
-        // cond: 'is_consultant',
-        // condval: 0
+        link: '#',
+        type: 'externallink',
+        paramtype: 'angular',
       },
       {
         label: 'Reschedule',
-        route: 'appointmentlist',
-        type: 'internallink',
-        param: ['_id'],
-        // cond: 'is_consultant',
-        // condval: 0
-      },
+        link: '#',
+        type: 'externallink',
+        paramtype: 'angular',
+      }
 
     ]
 
@@ -195,23 +192,6 @@ export class AppointmentlistComponent implements OnInit {
   adminlist: any = [];
 
   constructor(public _commonservice: Commonservices, public modal: BsModalService, public _http: HttpClient, public cookeiservice: CookieService, public activatedroute: ActivatedRoute, public router: Router, public _apiService: ApiService) {
-
-
-
-    if (this.activatedroute.snapshot.routeConfig.path == 'appointmentlist/:googleevent:/refresh_token:/_id') {
-      console.log(this.activatedroute.snapshot.params._id);
-      console.log(this.activatedroute.snapshot.params.email);
-       this.cancelAppointment(this.activatedroute.snapshot.params.googleevent, this.activatedroute.snapshot.params.refresh_token, this.activatedroute.snapshot.params._id);
-    }
-
-    if (this.activatedroute.snapshot.routeConfig.path == 'appointmentlist/:reschedule') {
-      console.log(this.activatedroute.snapshot.params._id);
-      console.log(this.activatedroute.snapshot.params.email);
-      //  this.reschedule_data(this.activatedroute.snapshot.params.email);
-    }
-
-
-
     // this.usertype = this.cookeiservice.get('usertype');
     // this._http.get("assets/data/timezone.json")
     //       .subscribe(res => {
@@ -571,25 +551,25 @@ export class AppointmentlistComponent implements OnInit {
 
   // }
 
-  reschedule_data(val:any, template: TemplateRef<any>){
-    console.log(val)
-    this.product_id_for_modale = val.userdata.product;
-    if (val.googleevent != 'N/A') {
-      //  this.googleevent = {"googleevent":val.googleevent, "refresh_token":val.refresh_token,"prv_id":val._id, "prvslot":val.slot, lead_id:val.lead_id, leaddata:val.leaddata};
-       this.googleevent = val;
-    }
-    let cond = { "is_discovery": false, "is_onboarding": false, "is_qna": false, "is_custom": false, "userproducts": { "$in": val.userdata.product}, slots:{$type:'array'}, startdate:{
-      $lte: moment().add(2, 'weeks').format('YYYY-MM-DD'),
-      $gt: moment().subtract(1, 'days').format('YYYY-MM-DD')
-  }};
+  // reschedule_data(val:any, template: TemplateRef<any>){
+  //   console.log(val)
+  //   this.product_id_for_modale = val.userdata.product;
+  //   if (val.googleevent != 'N/A') {
+  //     //  this.googleevent = {"googleevent":val.googleevent, "refresh_token":val.refresh_token,"prv_id":val._id, "prvslot":val.slot, lead_id:val.lead_id, leaddata:val.leaddata};
+  //      this.googleevent = val;
+  //   }
+  //   let cond = { "is_discovery": false, "is_onboarding": false, "is_qna": false, "is_custom": false, "userproducts": { "$in": val.userdata.product}, slots:{$type:'array'}, startdate:{
+  //     $lte: moment().add(2, 'weeks').format('YYYY-MM-DD'),
+  //     $gt: moment().subtract(1, 'days').format('YYYY-MM-DD')
+  // }};
 
-  const link = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
-        this._http.post(link,{source:'eventdayarr_events',condition:cond}).subscribe((res:any) => {
-            this.allslots = res.res;
-            console.log('allslots',this.allslots,this.allslots.length);
-        });
-    this.modalRef2 = this.modal.show(template);
-  }
+  // const link = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
+  //       this._http.post(link,{source:'eventdayarr_events',condition:cond}).subscribe((res:any) => {
+  //           this.allslots = res.res;
+  //           console.log('allslots',this.allslots,this.allslots.length);
+  //       });
+  //   this.modalRef2 = this.modal.show(template);
+  // }
 
   getCanceledAppoint() {
     let sourcecondition;
@@ -638,38 +618,38 @@ export class AppointmentlistComponent implements OnInit {
       });
   }
 
-  cancelAppointment(google_event_id: any, refresh_token: any, eid: any) {
-    // console.log("google_event_id",google_event_id,"refresh_token",refresh_token,"eid",eid);
-    // return;
-    let link = 'https://gapi.betoparedes.com/deleteevent.php?event=' + google_event_id + '&refresh_token=' + refresh_token;
-    this._http.get(link)
-      .subscribe(res => {
-        let result: any;
-        result = res;
-        if (result.status == 'success') {
-          let linkfordb = this._commonservice.nodesslurl + 'addorupdatedata';
-          let datafordb = {
-            "source": "googleevents", "data": {
-              "is_canceled": 1, "id": eid
-            }, sourceobj: []
-          };
-          this._http.post(linkfordb, datafordb)
-            .subscribe(response => {
-              let result2: any;
-              result2 = response;
-              if (result2.status == 'success') {
-                this.getgoogleevents();
-              }
-            }, error => {
-              console.log('Oooops!!!');
-            });
-        } else {
-          console.log(result);
-        }
-      }, error => {
-        console.log('Oooops!');
-      });
-  }
+  // cancelAppointment(google_event_id: any, refresh_token: any, eid: any) {
+  //   // console.log("google_event_id",google_event_id,"refresh_token",refresh_token,"eid",eid);
+  //   // return;
+  //   let link = 'https://gapi.betoparedes.com/deleteevent.php?event=' + google_event_id + '&refresh_token=' + refresh_token;
+  //   this._http.get(link)
+  //     .subscribe(res => {
+  //       let result: any;
+  //       result = res;
+  //       if (result.status == 'success') {
+  //         let linkfordb = this._commonservice.nodesslurl + 'addorupdatedata';
+  //         let datafordb = {
+  //           "source": "googleevents", "data": {
+  //             "is_canceled": 1, "id": eid
+  //           }, sourceobj: []
+  //         };
+  //         this._http.post(linkfordb, datafordb)
+  //           .subscribe(response => {
+  //             let result2: any;
+  //             result2 = response;
+  //             if (result2.status == 'success') {
+  //               this.getgoogleevents();
+  //             }
+  //           }, error => {
+  //             console.log('Oooops!!!');
+  //           });
+  //       } else {
+  //         console.log(result);
+  //       }
+  //     }, error => {
+  //       console.log('Oooops!');
+  //     });
+  // }
   // toggleStatusInArray(item) {
   //   if (item.status == null) item.status = 'Pending';
   //   $('.statusspan').removeClass('hide');
