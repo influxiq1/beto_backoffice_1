@@ -212,6 +212,8 @@ const appRoutes: Routes = [
 
     { path: 'slotview/:id', component: SlotviewComponent },
     { path: 'appointmentlist', component: AppointmentlistComponent },
+    { path: 'appointmentlist/:reschedule', component: AppointmentlistComponent },
+    { path: 'appointmentlist/:googleevent:/refresh_token:/_id', component: AppointmentlistComponent },
     { path: 'appointmentlist/:leadid', component: AppointmentlistComponent },
     { path: 'appointments/:leadid', component: AppointmentlistComponent },
     { path: 'resetpassword/:id', component: ResetpasswordComponent },
