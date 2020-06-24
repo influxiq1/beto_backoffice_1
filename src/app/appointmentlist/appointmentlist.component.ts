@@ -7,6 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { listenToTriggers } from 'ngx-bootstrap/utils';
 declare var moment: any;
 declare var $: any;
 @Component({
@@ -41,6 +42,9 @@ export class AppointmentlistComponent implements OnInit {
   public timezone: any;
   public timezoneval: any;
   public product_id_for_modale: any = '';
+  // public google_event_id:any;
+  // public refresh_token:any;
+  // public eid:any;
 
   // ------------------ LIB LISTING --------------------------
 
@@ -201,7 +205,7 @@ export class AppointmentlistComponent implements OnInit {
     if (this.activatedroute.snapshot.routeConfig.path == 'appointmentlist-cancel/:_id') {
       console.log("cancel");
       console.log(this.activatedroute.snapshot.params._id, this.activatedroute.snapshot.routeConfig.path);
-       this.cancelAppointment(this.activatedroute.snapshot.params._id);
+       this.cancelAppointment();
     }
 
     if (this.activatedroute.snapshot.routeConfig.path == 'appointmentlist-reschedule/:_id') {
@@ -643,52 +647,56 @@ export class AppointmentlistComponent implements OnInit {
       });
   }
 
-  cancelAppointment(id: any) {
-
-
-console.log(id)
-
-    const getlink = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
-    this._http.post(getlink,{source:'appointmentlist_view',condition:{_id:id}}).subscribe((res:any) => {
-        // this.allslots = res.res;
-        console.log('allslots',res.res);
+  cancelAppointment() {
+   let refresh_token;
+   let google_event_id;
+   let eid;
+    this.activatedroute.data.subscribe((response: any) => {
+      console.log('Result', response.appointcancledata.res[0]);
+       google_event_id = response.appointcancledata.res[0].googleevent;
+       refresh_token = response.appointcancledata.res[0].refresh_token;
+       eid = response.appointcancledata.res[0]._id;
     });
-  }
+// console.log(google_event_id, refresh_token, eid);
 
-
-
-
-    // console.log("google_event_id",google_event_id,"refresh_token",refresh_token,"eid",eid);
-    // return;
-  //   let link = 'https://gapi.betoparedes.com/deleteevent.php?event=' + google_event_id + '&refresh_token=' + refresh_token;
-  //   this._http.get(link)
-  //     .subscribe(res => {
-  //       let result: any;
-  //       result = res;
-  //       if (result.status == 'success') {
-  //         let linkfordb = this._commonservice.nodesslurl + 'addorupdatedata';
-  //         let datafordb = {
-  //           "source": "googleevents", "data": {
-  //             "is_canceled": 1, "id": eid
-  //           }, sourceobj: []
-  //         };
-  //         this._http.post(linkfordb, datafordb)
-  //           .subscribe(response => {
-  //             let result2: any;
-  //             result2 = response;
-  //             if (result2.status == 'success') {
-  //               this.getgoogleevents();
-  //             }
-  //           }, error => {
-  //             console.log('Oooops!!!');
-  //           });
-  //       } else {
-  //         console.log(result);
-  //       }
-  //     }, error => {
-  //       console.log('Oooops!');
-  //     });
+    // const getlink = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
+    // this._http.post(getlink,{source:'appointmentlist_view',condition:{_id:id}}).subscribe((res:any) => {
+    //     // this.allslots = res.res;
+    //     console.log('allslots',res.res);
+    // });
   // }
+
+    console.log("google_event_id",google_event_id,"refresh_token",refresh_token,"eid",eid);
+   // return;
+    let link = 'https://gapi.betoparedes.com/deleteevent.php?event=' + google_event_id + '&refresh_token=' + refresh_token;
+    this._http.get(link)
+      .subscribe(res => {
+        let result: any;
+        result = res;
+        if (result.status == 'success') {
+          let linkfordb = this._commonservice.nodesslurl + 'addorupdatedata';
+          let datafordb = {
+            "source": "googleevents", "data": {
+              "is_canceled": 1, "id": eid
+            }, sourceobj: []
+          };
+          this._http.post(linkfordb, datafordb)
+            .subscribe(response => {
+              let result2: any;
+              result2 = response;
+              if (result2.status == 'success') {
+                this.getgoogleevents();
+              }
+            }, error => {
+              console.log('Oooops!!!');
+            });
+        } else {
+          console.log(result);
+        }
+      }, error => {
+        console.log('Oooops!');
+      });
+  }
   // toggleStatusInArray(item) {
   //   if (item.status == null) item.status = 'Pending';
   //   $('.statusspan').removeClass('hide');
