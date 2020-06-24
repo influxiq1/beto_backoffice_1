@@ -279,7 +279,6 @@ export class ListingComponent implements OnInit {
         });
     }
     preview_button(template: TemplateRef<any>) {
-        console.log('preview_button');
 
         // setTimeout(()=>{
             this.modalRef3 = this.modal.show(template);
@@ -302,10 +301,8 @@ export class ListingComponent implements OnInit {
                     result = res;
                     this.issubmit = 0;
                     if (result.status == 'success') {
-
                         this.submit_loaderbar1 = false;
                         // this.sucessmodalflag = true;
-                        console.log('****');
                         this.isedit = 0;
                         this.modalRef1 = this.modal.show(template, { class: 'successmodal' });
                         setTimeout(() => {
@@ -403,7 +400,6 @@ setdatetonull() {
         if (this.filterval5 != null && this.filterval5 != '') {
 
             if (this.router.url == '/delete-event') {
-                console.log('test date');
                 this.start_date = moment(this.filterval5[0]).format('YYYY-MM-DD');
                 this.end_date = moment(this.filterval5[1]).format('YYYY-MM-DD');
                 cond = {
@@ -498,7 +494,6 @@ setdatetonull() {
         const searchCondition = this.sourceconditionval;
         if (this.filterval != '' && this.filterval != null) {
             this.sourceconditionval = {type: {$regex: this.filterval}};
-            console.log(this.sourceconditionval, '++++++');
             this.getdatalist();
         } else {
             this.sourceconditionval = searchCondition;
