@@ -61,7 +61,6 @@ export class AppointmentlistComponent implements OnInit {
   //  Example like this
   editroute: any = 'editroute';
 
-
   // use for Table Header modification
 
   // Like Table head name is " firstname" => "First Name"
@@ -128,8 +127,7 @@ export class AppointmentlistComponent implements OnInit {
       { key: "repsmsg", val: "Rep Message" },
       { key: "time", val: "Time" },
       { key: "startdate", val: "Date Set" },
-      { key: "notescount", val:"Notes count"},
-     
+      { key: "notescount", val:"Notes count"},   
   ],
     notes: {
       label: 'Notes',
@@ -154,6 +152,7 @@ export class AppointmentlistComponent implements OnInit {
         // cond: 'is_consultant',
         // condval: 0
       },
+      
       {
         label: 'Reschedule',
         route: 'appointmentlist-reschedule',
