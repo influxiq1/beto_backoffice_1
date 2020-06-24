@@ -230,43 +230,43 @@ export class AppointmentlistComponent implements OnInit {
     this.seteventtime(1);
   }
 
-  // settimezone(){
-  //   this.cookeiservice.set('timezone',this.timezoneval);
-  //   setTimeout(()=>{
-  //     this.geteventarr();
-  //   },1000);
-  // //   this.window.location.reload();
-  // }
+  settimezone(){
+    this.cookeiservice.set('timezone',this.timezoneval);
+    setTimeout(()=>{
+      this.geteventarr();
+    },1000);
+  //   this.window.location.reload();
+  }
 
-  // setdatetonull() {
-  //   this.filterval5 = null;
-  //   this.geteventarr();
-  // }
+  setdatetonull() {
+    this.filterval5 = null;
+    this.geteventarr();
+  }
 
-  // geteventarr() {
-  //   let cond: any;
-  //   if (this.filterval5 != null && this.filterval5 != '') {
-  //     cond = {
-  //       "is_discovery": false, "is_onboarding": false, "is_qna": false, "is_custom": false, "userproducts": { "$in": this.product_id_for_modale }, slots: { $type: 'array' }, startdate: {
-  //         $lte: moment(this.filterval5[1]).format('YYYY-MM-DD'),
-  //         $gte: moment(this.filterval5[0]).format('YYYY-MM-DD')
-  //       }
-  //     };
-  //   } else {
-  //     cond = {
-  //       "is_discovery": false, "is_onboarding": false, "is_qna": false, "is_custom": false, "userproducts": { "$in": this.product_id_for_modale }, slots: { $type: 'array' }, startdate: {
-  //         $lte: moment().add(2, 'weeks').format('YYYY-MM-DD'),
-  //         $gt: moment().subtract(1, 'days').format('YYYY-MM-DD')
-  //       }
-  //     };
-  //     console.log('cond', cond);
-  //   }
-  //   const link = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
-  //   this._http.post(link, { source: 'eventdayarr_events', condition: cond }).subscribe((res:any) => {
-  //     this.allslots = res.res;
-  //     console.log('allslots', this.allslots, this.allslots.length);
-  //   });
-  // }
+  geteventarr() {
+    let cond: any;
+    if (this.filterval5 != null && this.filterval5 != '') {
+      cond = {
+        "is_discovery": false, "is_onboarding": false, "is_qna": false, "is_custom": false, "userproducts": { "$in": this.product_id_for_modale }, slots: { $type: 'array' }, startdate: {
+          $lte: moment(this.filterval5[1]).format('YYYY-MM-DD'),
+          $gte: moment(this.filterval5[0]).format('YYYY-MM-DD')
+        }
+      };
+    } else {
+      cond = {
+        "is_discovery": false, "is_onboarding": false, "is_qna": false, "is_custom": false, "userproducts": { "$in": this.product_id_for_modale }, slots: { $type: 'array' }, startdate: {
+          $lte: moment().add(2, 'weeks').format('YYYY-MM-DD'),
+          $gt: moment().subtract(1, 'days').format('YYYY-MM-DD')
+        }
+      };
+      console.log('cond', cond);
+    }
+    const link = this._commonservice.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
+    this._http.post(link, { source: 'eventdayarr_events', condition: cond }).subscribe((res:any) => {
+      this.allslots = res.res;
+      console.log('allslots', this.allslots, this.allslots.length);
+    });
+  }
 
   // usersearch() {
   //   if (this.userfilterval == null || this.userfilterval == '') {
@@ -583,7 +583,7 @@ export class AppointmentlistComponent implements OnInit {
     this.product_id_for_modale = response.appointrescheduledata.res[0].userdata.product[0];
     if (response.appointrescheduledata.res[0].googleevent != 'N/A') {
       //  this.googleevent = {"googleevent":val.googleevent, "refresh_token":val.refresh_token,"prv_id":val._id, "prvslot":val.slot, lead_id:val.lead_id, leaddata:val.leaddata};
-       this.googleevent = val;
+       this.googleevent = response.appointrescheduledata.res[0];
     }
  
     let cond = { "is_discovery": false, "is_onboarding": false, "is_qna": false, "is_custom": false, "userproducts": { "$in": this.product_id_for_modale}, slots:{$type:'array'}, startdate:{
@@ -599,6 +599,8 @@ export class AppointmentlistComponent implements OnInit {
    // this.modalRef2 = this.modal.show(template);
   });
   }
+
+  
 
   getCanceledAppoint() {
     let sourcecondition;
