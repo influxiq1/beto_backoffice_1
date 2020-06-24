@@ -33,15 +33,22 @@ public leads_statuss:any =[{ val: 1,'name': 'true' }, { val: 0, 'name': 'Inactiv
 
    
     let endpoint = 'datalist'; // for main data endpoint
-    let data: any = {
+    let data:any={};
+    if (this.ActivatedRoute.snapshot.params._id != null && this.ActivatedRoute.snapshot.params._id != undefined) {
+   data= {
         "source": "products",
-        "condition": {
-            "status": true
-        }
-
-
-
+        // "condition": {
+        //     "status": true
+        // }
     };
+  } else{
+    data= {
+      "source": "products",
+      "condition": {
+          "status": true
+      }
+  };
+  }
     this._apiService.getDataforAdminList(endpoint, data).subscribe((res: any) => {
       // console.log('in constructor');
        console.log(res.res[9]);
@@ -212,6 +219,7 @@ public leads_statuss:any =[{ val: 1,'name': 'true' }, { val: 0, 'name': 'Inactiv
   }
   // update function
   update(id: any) {
+    let product;
     const endpoint = 'datalist';
     const data: any = {
      'source': 'leads',
@@ -224,6 +232,14 @@ public leads_statuss:any =[{ val: 1,'name': 'true' }, { val: 0, 'name': 'Inactiv
       this.manage_leads_firstname = response.res[0].firstname;
       this.manage_leads_lastname = response.res[0].lastname;
       this.manageleads_fullname = this.manage_leads_firstname +  this.manage_leads_lastname;
+      if(!Array.isArray(response.res[0].product)){
+        console.log("this is not array");
+        product=response.res[0].product;
+      }else{
+        product=response.res[0].product[0];
+      }
+      console.log(product);
+
       console.log(response);
       let stat: any;
       if (response.status == 1) {
@@ -333,7 +349,7 @@ public leads_statuss:any =[{ val: 1,'name': 'true' }, { val: 0, 'name': 'Inactiv
 
   label:"Products",
   name:"product",
-  value:response.res[0].product[0],
+  value:product,
   val:this.products,
   type:"select",
   validations:[
