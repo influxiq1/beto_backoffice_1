@@ -1,3 +1,4 @@
+
 <app-adminheader></app-adminheader>
 <div class="nextGen_admin_mainwrapper">
   <div class="page-wrapper s_getmybrand_adminlist">
@@ -68,29 +69,75 @@
             </div>
           </div>
           <div class="table-responsive admin_table_wrapper generaltablecls">
-            <div>
-              <lib-listing *ngIf="appointmentlist!=null && appointmentlist.length>0" 
-                [datasource]="appointmentlist"
-                [skip]="appointmentlist_skip"
-                [modify_header_array]="modify_header_array"
+            <div *ngIf="activeFlag == 0">
+              <!-- <p>{{activeFlag}}</p> -->
+              <lib-listing *ngIf="appointmentlist_past!=null && appointmentlist_past.length>0" 
+                [datasource]="appointmentlist_past"
+                [skip]="appointmentlist_skip_past"
+                [modify_header_array]="modify_header_array_past"
                 [apiurl]="_apiService.nodesslurl"
-                [deleteendpoint]="deleteendpoint"
-                [updateendpoint]="updateendpoint"
+                [deleteendpoint]="deleteendpoint_past"
+                [updateendpoint]="updateendpoint_past"
                 [jwttoken]="_apiService.jwttoken"
-                [date_search_source]="date_search_source"
-                [date_search_endpoint]="date_search_endpoint"
-                [sourcedata]="tablename"
-                [detail_skip_array]="appointmentlist_detail_skip"
-                [search_settings]="search_settings"
-                [searchendpoint]="searchendpoint"
-                [statusarr]="statusarray"
-                [sortdata]="sortdata"
-                [datacollection]="datacollection"
-                [date_search_source_count]="date_search_source_count"
-                [libdata]="libdata"
-              
-                [limitcond]="limitcond">
+                [date_search_source]="date_search_source_past"
+                [date_search_endpoint]="date_search_endpoint_past"
+                [sourcedata]="tablename_past"
+                [detail_skip_array]="appointmentlist_detail_skip_past"
+                [search_settings]="search_settings_past"
+                [searchendpoint]="searchendpoint_past"
+                [sortdata]="sortdata_past"
+                [datacollection]="datacollection_past"
+                [date_search_source_count]="date_search_source_count_past"
+                [libdata]="libdata_past"
+                [limitcond]="limitcond_past">
       </lib-listing>
+    </div>
+    <div *ngIf="activeFlag == 1">
+      <!-- <p>{{activeFlag}}</p> -->
+      <lib-listing *ngIf="appointmentlist_future!=null && appointmentlist_future.length>0" 
+        [datasource]="appointmentlist_future"
+        [skip]="appointmentlist_skip_future"
+        [modify_header_array]="modify_header_array_future"
+        [apiurl]="_apiService.nodesslurl"
+        [deleteendpoint]="deleteendpoint_future"
+        [updateendpoint]="updateendpoint_future"
+        [jwttoken]="_apiService.jwttoken"
+        [date_search_source]="date_search_source_future"
+        [date_search_endpoint]="date_search_endpoint_future"
+        [sourcedata]="tablename_future"
+        [detail_skip_array]="appointmentlist_detail_skip_futere"
+        [search_settings]="search_settings_future"
+        [searchendpoint]="searchendpoint_future"
+        [sortdata]="sortdata_future"
+        [datacollection]="datacollection_future"
+        [date_search_source_count]="date_search_source_count_future"
+        [libdata]="libdata_future"
+        [limitcond]="limitcond_future">
+</lib-listing>
+</div>
+<div *ngIf="activeFlag == 2">
+  <!-- <p>{{activeFlag}}</p> -->
+<lib-listing *ngIf="appointmentlist_cancel!=null && appointmentlist_cancel.length>0" 
+    [datasource]="appointmentlist_cancel"
+    [skip]="appointmentlist_skip_cancel"
+    [modify_header_array]="modify_header_array_cancel"
+    [apiurl]="_apiService.nodesslurl"
+    [deleteendpoint]="deleteendpoint_cancel"
+    [updateendpoint]="updateendpoint_cancel"
+    [jwttoken]="_apiService.jwttoken"
+    [date_search_source]="date_search_source_cancel"
+    [date_search_endpoint]="date_search_endpoint_cancel"
+    [sourcedata]="tablename_cancel"
+    [detail_skip_array]="appointmentlist_detail_skip_cancel"
+    [search_settings]="search_settings_cancel"
+    [searchendpoint]="searchendpoint_cancel"
+    [sortdata]="sortdata_cancel"
+    [datacollection]="datacollection_cancel"
+    [date_search_source_count]="date_search_source_count_cancel"
+    [libdata]="libdata_cancel"
+    [limitcond]="limitcond_cancel">
+</lib-listing>
+</div>
               <!-- <table class="table" *ngIf="googleevents!=null && googleevents.length>0">
                 <thead>
                   <tr>
@@ -160,7 +207,7 @@
                 </tbody>
               </table> -->
               <!-- <h3 style="text-align:center" *ngIf="googleevents==null || googleevents.length==0">There is no event!</h3> -->
-            </div>
+            
           </div>
         </div>
       </div>

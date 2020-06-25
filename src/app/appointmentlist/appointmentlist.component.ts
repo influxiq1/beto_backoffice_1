@@ -42,6 +42,13 @@ export class AppointmentlistComponent implements OnInit {
   public timezone: any;
   public timezoneval: any;
   public product_id_for_modale: any = '';
+  public data_past: any={};
+  public data_future: any={};
+  public data_cancel: any={};
+  public endpoint: any;
+  public endpointc: any;
+  public link: any;
+  public link1: any;
   // public google_event_id:any;
   // public refresh_token:any;
   // public eid:any;
@@ -59,16 +66,40 @@ export class AppointmentlistComponent implements OnInit {
   name: any = ['Username'];
   products: any = [];
 
-  appointmentlist: any = [];
+  appointmentlist_past: any = [];
+  appointmentlist_future: any = [];
+  appointmentlist_cancel: any = [];
 
-
+  statusarray: any = [{ val: 'true', 'name': 'pending', }];
   //  Example like this
   editroute: any = 'editroute';
 
   // use for Table Header modification
 
   // Like Table head name is " firstname" => "First Name"
-  modify_header_array: any = {
+  modify_header_array_past: any = {
+    'organizer_name': 'Organizer\'s Name',
+    'participant_name': 'Participant\'s Name',
+    'phoneNumber': 'Participant\'s Phone No.',
+    'productname': 'Products',
+    'emailid': 'Leads Email',
+    'closername': 'Rep Name',
+    'time': 'Time',
+    'startdate': 'Date Set'
+  };
+
+  modify_header_array_future: any = {
+    'organizer_name': 'Organizer\'s Name',
+    'participant_name': 'Participant\'s Name',
+    'phoneNumber': 'Participant\'s Phone No.',
+    'productname': 'Products',
+    'emailid': 'Leads Email',
+    'closername': 'Rep Name',
+    'time': 'Time',
+    'startdate': 'Date Set'
+  };
+
+  modify_header_array_cancel: any = {
     'organizer_name': 'Organizer\'s Name',
     'participant_name': 'Participant\'s Name',
     'phoneNumber': 'Participant\'s Phone No.',
@@ -81,38 +112,68 @@ export class AppointmentlistComponent implements OnInit {
 
 
   // use for Table Header Skip
-  appointmentlist_skip: any = ['_id', 'attendees', 'booked_by', 'closeremail', 'eid', 'end_time', 'endtime_only', 'eventdata', 'eventuser', 'googleevent', 'id', 'is_custom', 'is_discovery', 'is_onboarding', 'leaddata', 'notescount', 'refresh_token', 'slot', 'starttime_only', 'summery', 'timespan', 'timezone', 'type', 'repsmsg', 'status', 'start_time', 'name'];
-  statusarray: any = [{ val: 'true', 'name': 'pending', }];
+  appointmentlist_skip_past: any = ['_id', 'attendees', 'booked_by', 'closeremail', 'eid', 'end_time', 'endtime_only', 'eventdata', 'eventuser', 'googleevent', 'id', 'is_custom', 'is_discovery', 'is_onboarding', 'leaddata', 'notescount', 'refresh_token', 'slot', 'starttime_only', 'summery', 'timespan', 'timezone', 'type', 'repsmsg', 'status', 'start_time', 'name'];
+
+  appointmentlist_skip_future: any = ['_id', 'attendees', 'booked_by', 'closeremail', 'eid', 'end_time', 'endtime_only', 'eventdata', 'eventuser', 'googleevent', 'id', 'is_custom', 'is_discovery', 'is_onboarding', 'leaddata', 'notescount', 'refresh_token', 'slot', 'starttime_only', 'summery', 'timespan', 'timezone', 'type', 'repsmsg', 'status', 'start_time', 'name'];
+
+  appointmentlist_skip_cancel: any = ['_id', 'attendees', 'booked_by', 'closeremail', 'eid', 'end_time', 'endtime_only', 'eventdata', 'eventuser', 'googleevent', 'id', 'is_custom', 'is_discovery', 'is_onboarding', 'leaddata', 'notescount', 'refresh_token', 'slot', 'starttime_only', 'summery', 'timespan', 'timezone', 'type', 'repsmsg', 'status', 'start_time', 'name'];
+  
 
   // use for Table Detail Field Skip
-  appointmentlist_detail_skip: any = ['_id', 'attendees', 'booked_by', 'closeremail', 'eid', 'end_time', 'endtime_only', 'eventdata', 'eventuser', 'googleevent', 'id', 'is_custom', 'is_discovery', 'is_onboarding', 'leaddata', 'refresh_token', 'slot', 'starttime_only', 'summery', 'timespan', 'timezone', 'type', 'userdata', 'organizer_name_s', 'start_time', 'participant_name_s', 'closername_s'];
+  appointmentlist_detail_skip_past: any = ['_id', 'attendees', 'booked_by', 'closeremail', 'eid', 'end_time', 'endtime_only', 'eventdata', 'eventuser', 'googleevent', 'id', 'is_custom', 'is_discovery', 'is_onboarding', 'leaddata', 'refresh_token', 'slot', 'starttime_only', 'summery', 'timespan', 'timezone', 'type', 'userdata', 'organizer_name_s', 'start_time', 'participant_name_s', 'closername_s'];
+
+  appointmentlist_detail_skip_futere: any = ['_id', 'attendees', 'booked_by', 'closeremail', 'eid', 'end_time', 'endtime_only', 'eventdata', 'eventuser', 'googleevent', 'id', 'is_custom', 'is_discovery', 'is_onboarding', 'leaddata', 'refresh_token', 'slot', 'starttime_only', 'summery', 'timespan', 'timezone', 'type', 'userdata', 'organizer_name_s', 'start_time', 'participant_name_s', 'closername_s'];
+
+  appointmentlist_detail_skip_cancel: any = ['_id', 'attendees', 'booked_by', 'closeremail', 'eid', 'end_time', 'endtime_only', 'eventdata', 'eventuser', 'googleevent', 'id', 'is_custom', 'is_discovery', 'is_onboarding', 'leaddata', 'refresh_token', 'slot', 'starttime_only', 'summery', 'timespan', 'timezone', 'type', 'userdata', 'organizer_name_s', 'start_time', 'participant_name_s', 'closername_s'];
 
 
   // updateendpoint is use for data update endpoint
-  updateendpoint = 'addorupdatedata';
+  updateendpoint_past = 'addorupdatedata';
+  updateendpoint_future = 'addorupdatedata';
+  updateendpoint_cancel = 'addorupdatedata';
 
   // deleteendpoint is use for data delete endpoint
-  deleteendpoint = 'deletesingledata';
+  deleteendpoint_past = 'deletesingledata';
+  deleteendpoint_future = 'deletesingledata';
+  deleteendpoint_cancel = 'deletesingledata';
 
   // this is a database collection name
-  tablename = 'contract_repote';
+  tablename_past = 'contract_repote';
+  tablename_future= 'contract_repote';
+  tablename_cancel = 'contract_repote';
 
   // searchendpoint is use for data search endpoint
-  searchendpoint = 'datalist';
+  searchendpoint_past = 'datalist';
+  searchendpoint_future = 'datalist';
+  searchendpoint_cancel = 'datalist';
 
 
 
   // date_search_endpoint is use for date search endpoint
-  date_search_endpoint: any = 'datalist';
+  date_search_endpoint_past: any = 'datalist';
+  date_search_endpoint_future: any = 'datalist';
+  date_search_endpoint_cancel: any = 'datalist';
   // send basic limit data
-  limitcond: any = {
+  limitcond_past: any = {
+    'limit': 10,
+    'skip': 0,
+    'pagecount': 1
+  };
+
+  limitcond_future: any = {
+    'limit': 10,
+    'skip': 0,
+    'pagecount': 1
+  };
+
+  limitcond_cancel: any = {
     'limit': 10,
     'skip': 0,
     'pagecount': 1
   };
 
   // other data
-  libdata: any = {
+  libdata_past: any = {
     // basecondition:{"startdate": moment().subtract(1, 'days').format('YYYY-MM-DD') },
     // detailview_override: [
     // ],
@@ -169,27 +230,171 @@ export class AppointmentlistComponent implements OnInit {
     ]
 
   };
+
+  libdata_future: any = {
+    // basecondition:{"startdate": moment().subtract(1, 'days').format('YYYY-MM-DD') },
+    // detailview_override: [
+    // ],
+    updateendpoint: 'statusupdate',
+    updateendpointmany: 'updateendpointmany',
+    deleteendpointmany: 'deleteendpointmany',
+    hideeditbutton: true, // all these button options are optional not mandatory
+    hidedeletebutton: false,
+    detailview_override: [
+      { key: "organizer_name", val: "Organizer\'s Name" },
+      { key: "participant_name", val: "Participant\'s Name" },
+      { key: "phoneNumber", val: "Participant\'s Phone No." },
+      { key: "productname", val: "Products Name" },
+      { key: "emailid", val: "Leads Email" },
+      { key: "closername", val: "Rep Name" },
+      { key: "repsmsg", val: "Rep Message" },
+      { key: "time", val: "Time" },
+      { key: "startdate", val: "Date Set" },
+      { key: "notescount", val: "Notes count" },
+    ],
+    notes: {
+      label: 'Notes',
+      addendpoint: 'addnotedata',
+      deleteendpoint: 'deletenotedata',
+      listendpoint: 'listnotedata',
+      user: this.cookeiservice.get('userid'),
+      currentuserfullname: this.cookeiservice.get('fullname'),
+      header: 'notescount',
+    },
+    // hideviewbutton:false,
+    hidestatustogglebutton: true,
+    // hideaction:true,
+    tableheaders: ['organizer_name', 'participant_name', 'phoneNumber', 'productname', 'emailid', 'closername', 'time', 'startdate'], // not required
+    custombuttons: [
+
+      {
+        label: 'Cancel',
+        route: 'appointmentlist-cancel',
+        type: 'internallink',
+        param: ['_id'],
+        // cond: 'is_consultant',
+        // condval: 0
+      },
+
+      {
+        label: 'Reschedule',
+        route: 'appointmentlist-reschedule',
+        type: 'internallink',
+        param: ['_id'],
+        // cond: 'is_consultant',
+        // condval: 0
+      },
+
+    ]
+
+  };
+
+  libdata_cancel: any = {
+    // basecondition:{"startdate": moment().subtract(1, 'days').format('YYYY-MM-DD') },
+    // detailview_override: [
+    // ],
+    updateendpoint: 'statusupdate',
+    updateendpointmany: 'updateendpointmany',
+    deleteendpointmany: 'deleteendpointmany',
+    hideeditbutton: true, // all these button options are optional not mandatory
+    hidedeletebutton: false,
+    detailview_override: [
+      { key: "organizer_name", val: "Organizer\'s Name" },
+      { key: "participant_name", val: "Participant\'s Name" },
+      { key: "phoneNumber", val: "Participant\'s Phone No." },
+      { key: "productname", val: "Products Name" },
+      { key: "emailid", val: "Leads Email" },
+      { key: "closername", val: "Rep Name" },
+      { key: "repsmsg", val: "Rep Message" },
+      { key: "time", val: "Time" },
+      { key: "startdate", val: "Date Set" },
+      { key: "notescount", val: "Notes count" },
+    ],
+    notes: {
+      label: 'Notes',
+      addendpoint: 'addnotedata',
+      deleteendpoint: 'deletenotedata',
+      listendpoint: 'listnotedata',
+      user: this.cookeiservice.get('userid'),
+      currentuserfullname: this.cookeiservice.get('fullname'),
+      header: 'notescount',
+    },
+    // hideviewbutton:false,
+    hidestatustogglebutton: true,
+    // hideaction:true,
+    tableheaders: ['organizer_name', 'participant_name', 'phoneNumber', 'productname', 'emailid', 'closername', 'time', 'startdate'], // not required
+    custombuttons: [
+
+      // {
+      //   label: 'Cancel',
+      //   route: 'appointmentlist-cancel',
+      //   type: 'internallink',
+      //   param: ['_id'],
+      //   // cond: 'is_consultant',
+      //   // condval: 0
+      // },
+
+      // {
+      //   label: 'Reschedule',
+      //   route: 'appointmentlist-reschedule',
+      //   type: 'internallink',
+      //   param: ['_id'],
+      //   // cond: 'is_consultant',
+      //   // condval: 0
+      // },
+
+    ]
+
+  };
   // send basic sort data
-  sortdata: any = {
+  sortdata_past: any = {
     'type': 'desc',
     'field': 'start_time',
     'options': ['start_time', 'startdate', 'closername', 'organizer_name', 'productname']
   };
 
+  sortdata_future: any = {
+    'type': 'desc',
+    'field': 'start_time',
+    'options': ['start_time', 'startdate', 'closername', 'organizer_name', 'productname']
+  };
+
+  sortdata_cancel: any = {
+    'type': 'desc',
+    'field': 'start_time',
+    'options': ['start_time', 'startdate', 'closername', 'organizer_name', 'productname']
+  };
 
   // this is a database collection or view name
-  date_search_source: any = 'contract_repote';
+  date_search_source_past: any = 'contract_repote';
+  date_search_source_future: any = 'contract_repote';
+  date_search_source_cancel: any = 'contract_repote';
   // datacollection
-  datacollection: any = 'getappointmentlist';
+  datacollection_past: any = 'getappointmentlist';
+  datacollection_future: any = 'getappointmentlist';
+  datacollection_cancel: any = 'getappointmentlist';
   // source count
-  date_search_source_count: any = 0;
+  date_search_source_count_past: any = 0;
+  date_search_source_count_future: any = 0;
+  date_search_source_count_cancel: any = 0;
 
-  search_settings: any = {
+  search_settings_past: any = {
 
     textsearch: [{ label: 'Search By Name', field: 'organizer_name_s' }, { label: 'Search By Lead Name', field: 'participant_name_s' }, { label: 'Search By Lead Email', field: 'emailid' }, { label: 'Search By Closer Name', field: 'closername_s' }],  // this is use for  text search
 
   };
 
+  search_settings_future: any = {
+
+    textsearch: [{ label: 'Search By Name', field: 'organizer_name_s' }, { label: 'Search By Lead Name', field: 'participant_name_s' }, { label: 'Search By Lead Email', field: 'emailid' }, { label: 'Search By Closer Name', field: 'closername_s' }],  // this is use for  text search
+
+  };
+
+  search_settings_cancel: any = {
+
+    textsearch: [{ label: 'Search By Name', field: 'organizer_name_s' }, { label: 'Search By Lead Name', field: 'participant_name_s' }, { label: 'Search By Lead Email', field: 'emailid' }, { label: 'Search By Closer Name', field: 'closername_s' }],  // this is use for  text search
+
+  };
   // this is search block
 
 
@@ -227,7 +432,167 @@ export class AppointmentlistComponent implements OnInit {
     //       });
 
     this.datasource = '';
+    if(this.cookeiservice.get('usertype') == 'admin'){
+       this.data_past = {
+        'condition': {
+          'limit': 10,
+          'skip': 0,
+          "cond": {
+            startdate: { $lt: moment().format('YYYY-MM-DD') }, is_canceled: { $ne: 1 }
+          }
+        },
+        'sort': {
+          'type': 'desc',
+          'field': 'start_time'
+        }
+  
+      };
+
+       this.data_future = {
+        'condition': {
+          'limit': 10,
+          'skip': 0,
+          "cond": {
+            startdate: { $gt: moment().subtract(1, 'days').format('YYYY-MM-DD') },
+            is_canceled: { $ne: 1 }
+          }
+        },
+        'sort': {
+          'type': 'desc',
+          'field': 'start_time'
+        }
+  
+      };
+
+       this.data_cancel = {
+        'condition': {
+          'limit': 10,
+          'skip': 0,
+          "cond": {
+            is_canceled: { $eq: 1 }
+          }
+        },
+        'sort': {
+          'type': 'desc',
+          'field': 'start_time'
+        }
+  
+      };
+    }
+    else{ 
+      this.data_past = {
+        'condition': {
+          'limit': 10,
+          'skip': 0,
+          "cond": {
+            startdate: { $lt: moment().format('YYYY-MM-DD') }, is_canceled: { $ne: 1 }, booked_by: this.cookeiservice.get('userid')
+          }
+        },
+        'sort': {
+          'type': 'desc',
+          'field': 'start_time'
+        }
+  
+      };
+
+      this.data_future = {
+        'condition': {
+          'limit': 10,
+          'skip': 0,
+          "cond": {
+            startdate: { $gt: moment().subtract(1, 'days').format('YYYY-MM-DD') },
+            is_canceled: { $ne: 1 },
+            booked_by: this.cookeiservice.get('userid')
+          }
+        },
+        'sort': {
+          'type': 'desc',
+          'field': 'start_time'
+        }
+  
+      };
+
+      this.data_cancel = {
+        'condition': {
+          'limit': 10,
+          'skip': 0,
+          "cond": {
+            is_canceled: { $eq: 1 },
+            booked_by: this.cookeiservice.get('userid')
+          }
+        },
+        'sort': {
+          'type': 'desc',
+          'field': 'start_time'
+        }
+  
+      };
+    }
+     this.endpoint = 'getappointmentlist'; // for main data endpoint
+    this.endpointc = 'getappointmentlist-count'; // for count endpoint
+    // data param for conditionlimit and search
+     this.link = this._commonservice.nodesslurl + this.endpoint;
+   this.link1 = this._commonservice.nodesslurl + this.endpointc;
     this.seteventtime(1);
+  }
+
+  seteventtime(val) {
+    console.log('val', val);
+    this.activeFlag = val;
+    this.futureevent = val;
+      if (val == 0) {
+        // const endpoint = 'getappointmentlist'; // for main data endpoint
+        // const endpointc = 'getappointmentlist-count'; // for count endpoint
+        // // data param for conditionlimit and search
+        // const link = this._commonservice.nodesslurl + endpoint;
+        // const link1 = this._commonservice.nodesslurl + endpointc;
+        this._http.post(this.link, this.data_past)
+          .subscribe((response: any) => {
+            this.appointmentlist_past = response.results.res;
+            console.warn('blogData', this.appointmentlist_past);
+          });
+
+        this._http.post(this.link1, this.data_past)
+          .subscribe((res: any) => {
+            console.log(res, ' for count');
+            this.date_search_source_count_past = res.count;
+          });
+
+      } else if (val == 1) {
+        // const endpoint = 'getappointmentlist'; // for main data endpoint
+        // const endpointc = 'getappointmentlist-count'; // for count endpoint
+        // // data param for conditionlimit and search
+        // const link = this._commonservice.nodesslurl + endpoint;
+        // const link1 = this._commonservice.nodesslurl + endpointc;
+        this._http.post(this.link, this.data_future)
+          .subscribe((response: any) => {
+            this.appointmentlist_future = response.results.res;
+            console.warn('blogData', this.appointmentlist_future);
+          });
+
+        this._http.post(this.link1, this.data_future)
+          .subscribe((res: any) => {
+            console.log(res, ' for count');
+            this.date_search_source_count_future = res.count;
+          });
+     
+      } else {
+   
+        this._http.post(this.link, this.data_cancel)
+          .subscribe((response: any) => {
+            this.appointmentlist_cancel = response.results.res;
+            console.warn('blogData', this.appointmentlist_cancel);
+          });
+
+        this._http.post(this.link1, this.data_cancel)
+          .subscribe((res: any) => {
+            console.log(res, ' for count');
+            this.date_search_source_count_cancel = res.count;
+          });
+        
+       
+      }
+   
   }
 
   settimezone() {
@@ -437,136 +802,136 @@ export class AppointmentlistComponent implements OnInit {
         console.log('Oooops!');
       });
   }
-  seteventtime(val) {
-    console.log('val', val);
-    this.activeFlag = val;
-    this.futureevent = val;
-    if (this.cookeiservice.get('usertype') == 'admin') {
-      if (val == 0) {
-        this.getdata({
+  // seteventtime(val) {
+  //   console.log('val', val);
+  //   this.activeFlag = val;
+  //   this.futureevent = val;
+  //   if (this.cookeiservice.get('usertype') == 'admin') {
+  //     if (val == 0) {
+  //       this.getdata({
 
-          'condition': {
-            'limit': 10,
-            'skip': 0,
-            "cond": {
-              startdate: { $lt: moment().format('YYYY-MM-DD') }, is_canceled: { $ne: 1 }
-            }
-          },
-          'sort': {
-            'type': 'desc',
-            'field': 'start_time'
-          }
-        })
-      } else if (val == 1) {
-        this.getdata({
+  //         'condition': {
+  //           'limit': 10,
+  //           'skip': 0,
+  //           "cond": {
+  //             startdate: { $lt: moment().format('YYYY-MM-DD') }, is_canceled: { $ne: 1 }
+  //           }
+  //         },
+  //         'sort': {
+  //           'type': 'desc',
+  //           'field': 'start_time'
+  //         }
+  //       })
+  //     } else if (val == 1) {
+  //       this.getdata({
 
-          'condition': {
-            'limit': 10,
-            'skip': 0,
-            "cond": {
-              startdate: { $gt: moment().subtract(1, 'days').format('YYYY-MM-DD') },
-              is_canceled: { $ne: 1 }
-            }
-          },
-          'sort': {
-            'type': 'desc',
-            'field': 'start_time'
-          }
-        })
-      } else {
-        this.getdata({
+  //         'condition': {
+  //           'limit': 10,
+  //           'skip': 0,
+  //           "cond": {
+  //             startdate: { $gt: moment().subtract(1, 'days').format('YYYY-MM-DD') },
+  //             is_canceled: { $ne: 1 }
+  //           }
+  //         },
+  //         'sort': {
+  //           'type': 'desc',
+  //           'field': 'start_time'
+  //         }
+  //       })
+  //     } else {
+  //       this.getdata({
 
-          'condition': {
-            'limit': 10,
-            'skip': 0,
-            "cond": {
-              is_canceled: { $eq: 1 }
-            }
-          },
-          'sort': {
-            'type': 'desc',
-            'field': 'start_time'
-          }
-        })
-      }
-    }
-    else {
-      if (val == 0) {
-        this.getdata({
+  //         'condition': {
+  //           'limit': 10,
+  //           'skip': 0,
+  //           "cond": {
+  //             is_canceled: { $eq: 1 }
+  //           }
+  //         },
+  //         'sort': {
+  //           'type': 'desc',
+  //           'field': 'start_time'
+  //         }
+  //       })
+  //     }
+  //   }
+  //   else {
+  //     if (val == 0) {
+  //       this.getdata({
 
-          'condition': {
-            'limit': 10,
-            'skip': 0,
-            "cond": {
-              startdate: { $lt: moment().format('YYYY-MM-DD') }, is_canceled: { $ne: 1 }, booked_by: this.cookeiservice.get('userid')
-            }
-          },
-          'sort': {
-            'type': 'desc',
-            'field': 'start_time'
-          }
-        })
-      } else if (val == 1) {
-        this.getdata({
+  //         'condition': {
+  //           'limit': 10,
+  //           'skip': 0,
+  //           "cond": {
+  //             startdate: { $lt: moment().format('YYYY-MM-DD') }, is_canceled: { $ne: 1 }, booked_by: this.cookeiservice.get('userid')
+  //           }
+  //         },
+  //         'sort': {
+  //           'type': 'desc',
+  //           'field': 'start_time'
+  //         }
+  //       })
+  //     } else if (val == 1) {
+  //       this.getdata({
 
-          'condition': {
-            'limit': 10,
-            'skip': 0,
-            "cond": {
-              startdate: { $gt: moment().subtract(1, 'days').format('YYYY-MM-DD') },
-              is_canceled: { $ne: 1 },
-              booked_by: this.cookeiservice.get('userid')
-            }
-          },
-          'sort': {
-            'type': 'desc',
-            'field': 'start_time'
-          }
-        })
-      } else {
-        this.getdata({
+  //         'condition': {
+  //           'limit': 10,
+  //           'skip': 0,
+  //           "cond": {
+  //             startdate: { $gt: moment().subtract(1, 'days').format('YYYY-MM-DD') },
+  //             is_canceled: { $ne: 1 },
+  //             booked_by: this.cookeiservice.get('userid')
+  //           }
+  //         },
+  //         'sort': {
+  //           'type': 'desc',
+  //           'field': 'start_time'
+  //         }
+  //       })
+  //     } else {
+  //       this.getdata({
 
-          'condition': {
-            'limit': 10,
-            'skip': 0,
-            "cond": {
-              is_canceled: { $eq: 1 },
-              booked_by: this.cookeiservice.get('userid')
-            }
-          },
-          'sort': {
-            'type': 'desc',
-            'field': 'start_time'
-          }
-        })
-      }
+  //         'condition': {
+  //           'limit': 10,
+  //           'skip': 0,
+  //           "cond": {
+  //             is_canceled: { $eq: 1 },
+  //             booked_by: this.cookeiservice.get('userid')
+  //           }
+  //         },
+  //         'sort': {
+  //           'type': 'desc',
+  //           'field': 'start_time'
+  //         }
+  //       })
+  //     }
 
-    }
+  //   }
 
-  }
-
-
-  getdata(data) {
-    const endpoint = 'getappointmentlist'; // for main data endpoint
-    const endpointc = 'getappointmentlist-count'; // for count endpoint
-    // data param for conditionlimit and search
+  // }
 
 
+  // getdata(data) {
+  //   const endpoint = 'getappointmentlist'; // for main data endpoint
+  //   const endpointc = 'getappointmentlist-count'; // for count endpoint
+  //   // data param for conditionlimit and search
 
-    const link = this._commonservice.nodesslurl + endpoint;
-    const link1 = this._commonservice.nodesslurl + endpointc;
-    this._http.post(link, data)
-      .subscribe((response: any) => {
-        this.appointmentlist = response.results.res;
-        console.warn('blogData', this.appointmentlist);
-      });
 
-    this._http.post(link1, data)
-      .subscribe((res: any) => {
-        console.log(res, ' for count');
-        this.date_search_source_count = res.count;
-      });
-  }
+
+  //   const link = this._commonservice.nodesslurl + endpoint;
+  //   const link1 = this._commonservice.nodesslurl + endpointc;
+  //   this._http.post(link, data)
+  //     .subscribe((response: any) => {
+  //       this.appointmentlist = response.results.res;
+  //       console.warn('blogData', this.appointmentlist);
+  //     });
+
+  //   this._http.post(link1, data)
+  //     .subscribe((res: any) => {
+  //       console.log(res, ' for count');
+  //       this.date_search_source_count_past = res.count;
+  //     });
+  // }
   // added by Chandrani
   // notesdata(val: any, template: TemplateRef<any>) {
   //   this.selectedlead = val;
