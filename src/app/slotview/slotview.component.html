@@ -2,7 +2,7 @@
 
 <!-- Loader start -->
 <div class="loder_body" *ngIf="loader">
-    <div class="loder_wrapper">
+    <div class="loder_wrapper" style="padding:25px 0">
         <img src="assets/images/betologo.png" alt="#" style="margin:0 auto; display: block; margin-bottom:30px; max-width: 280px;" />
         <div class="loader"></div>
     </div>
@@ -15,7 +15,43 @@
         <div class=" account_inner_wrapper1 ">
             <div class="listevent_inner_wrapper" *ngIf="slotView">
                 <div class="inner_head_wrapper">
-                    <img src="" alt="#" srcset="" *ngIf="route.snapshot.url[0].path == 'pece-book-event'">
+                    <!-- <img src="" alt="#" srcset="" *ngIf="route.snapshot.url[0].path == 'pece-book-event'"> -->
+
+                    <div *ngIf="route.snapshot.url[0].path == 'pece-book-event'">
+                        <div class="snapshot_peaceblock">
+               
+                            <div class="snapshot_peaceblock_wrapper">
+                                <div class="snapshot_peaceblock_logo">
+                                <img src="assets/images/betologo.png">
+                            </div>
+                                <div class="snapshot_peaceblock_text">
+
+                                    A Meeting with Director of Software Services for PECE, <span>Beto Paredes</span>
+                                </div>
+
+                            
+                            </div>
+                        </div>
+                    </div> 
+
+                    <div *ngIf="route.snapshot.url[0].path == 'customevent'">
+                        <div class="snapshot_peaceblock">
+               
+                            <div class="snapshot_peaceblock_wrapper">
+                                <div class="snapshot_peaceblock_logo">
+                                <img src="assets/images/bpecelogo.png">
+                            </div>
+                                <div class="snapshot_peaceblock_text">
+
+                                    A Meeting with Director of Software Services for PECE, <span>Beto Paredes</span>
+                                </div>
+
+                            
+                            </div>
+                        </div>
+                    
+                    </div>
+                     
                     <h4 [innerHtml]="headerText.hedaerH4"></h4>
                     <span>{{ headerText.span }}</span>
                 </div>
@@ -23,7 +59,7 @@
                 <div class="event_content_wrapper contentnewcon1wrapper">
                     <div class="main_inner_content main_inner_contentnew contentnewcon1">
                         <form>
-                            <h3 class="timezone_class">search by date</h3>
+                            <h3 class="timezone_class">Search By Date</h3>
                             <div class="form-group">
 
                                 <!-- <input class="form-control select_inpu2" [(ngModel)]="filterval5" [ngModelOptions]="{standalone: true}"> -->
@@ -33,15 +69,15 @@
                             </div>
                             <div class="form-group row form-groupbtndiv">
 
-                                <button type="submit" class="btn_search" (click)="geteventarr()"> search </button>
-                                <button type="submit" class="btn_search" (click)="setdatetonull()"> show all </button>
+                                <button type="submit" class="btn_search" (click)="geteventarr()"> Search </button>
+                                <button type="submit" class="btn_search" (click)="setdatetonull()"> Show all </button>
                             </div>
 
                         </form>
                     </div>
                     <div class="main_inner_content main_inner_contentnew contentnewcon1">
                         <form>
-                            <h3 class="timezone_class">my timezone</h3>
+                            <h3 class="timezone_class">My Timezone</h3>
                             <div class="form-group">
 
                                 <select class="form-control select_inpu2" (change)="settimezone()" [(ngModel)]="timezoneval" [ngModelOptions]="{standalone: true}">
@@ -51,15 +87,15 @@
                             </div>
 
                             <div class="form-group row form-groupbtndiv">
-                                <button type="submit" class="btn_search hide"> search </button>
-                                <button type="submit" class="btn_search"> update </button>
+                                <button type="submit" class="btn_search hide"> Search </button>
+                                <button type="submit" class="btn_search"> Update </button>
                             </div>
                         </form>
                     </div>
 
                     <div *ngIf="timeSpanView" class="main_inner_content main_inner_contentnew contentnewcon1">
                         <form>
-                            <h3 class="timezone_class">Select time span</h3>
+                            <h3 class="timezone_class">Select Sime Span</h3>
                             <div class="form-group">
 
                                 <select class="form-control select_inpu2" (change)="geteventarr()" [(ngModel)]="timeSpanVal" [ngModelOptions]="{standalone: true}">
