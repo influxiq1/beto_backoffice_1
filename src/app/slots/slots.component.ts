@@ -1,12 +1,12 @@
-import {Component, OnInit, Input, TemplateRef, Inject} from '@angular/core';
+import { Component, OnInit, Input, TemplateRef, Inject } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import {Commonservices} from '../app.commonservices';
+import { Commonservices } from '../app.commonservices';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
-import {ModalOptions} from 'ngx-bootstrap';
+import { ModalOptions } from 'ngx-bootstrap';
 import { WINDOW } from '@ng-toolkit/universal';
 declare var moment;
 declare var $: any;
@@ -47,22 +47,22 @@ export class SlotsComponent implements OnInit {
   public slotDataStatus: any = '';
   public isflagval: any;
   public doctorspeciality: any = [
-    {name: 'Family Medicine', value: 'Family Medicine'},
-    {name: 'Neurology', value: 'Neurology'},
-    {name: 'D.O. Doctor of Osteopathy', value: 'D.O. Doctor of Osteopathy'},
-    {name: 'General Practice', value: 'General Practice'},
-    {name: 'Internal Medicine', value: 'Internal Medicine'},
-    {name: 'Pain Mgmt (Integrated Practice)', value: 'Pain Mgmt'},
-    {name: 'Primary Care', value: 'Primary Care'},
-    {name: 'Endocrinology', value: 'Endocrinology'},
-    {name: 'Integrated Speciality Groups', value: 'Integrated Speciality Groups'},
-    {name: 'Cardiology', value: 'Cardiology'}
-];
+    { name: 'Family Medicine', value: 'Family Medicine' },
+    { name: 'Neurology', value: 'Neurology' },
+    { name: 'D.O. Doctor of Osteopathy', value: 'D.O. Doctor of Osteopathy' },
+    { name: 'General Practice', value: 'General Practice' },
+    { name: 'Internal Medicine', value: 'Internal Medicine' },
+    { name: 'Pain Mgmt (Integrated Practice)', value: 'Pain Mgmt' },
+    { name: 'Primary Care', value: 'Primary Care' },
+    { name: 'Endocrinology', value: 'Endocrinology' },
+    { name: 'Integrated Speciality Groups', value: 'Integrated Speciality Groups' },
+    { name: 'Cardiology', value: 'Cardiology' }
+  ];
 
   bsDatepicker = {
     format: 'DD/MM/YYYY',
     minDate: moment().format('DD/MM/YYYY'),
-    noDefaultRangeSelected : true
+    noDefaultRangeSelected: true
   };
 
 
@@ -88,7 +88,7 @@ export class SlotsComponent implements OnInit {
     // console.log(this.googleeventval,item)
   }
 
-public bookNowStatus = true;
+  public bookNowStatus = true;
   constructor(@Inject(WINDOW) private window: Window, public _commonservices: Commonservices, public modal: BsModalService, kp: FormBuilder, private cookeiservice: CookieService, public _http: HttpClient, public route: ActivatedRoute, public router: Router) {
     if (this.route.snapshot.routeConfig.path == 'marketing-review/:product_id' || this.route.snapshot.routeConfig.path == 'marketing-review/:product_id/:rep_id/:lead_id') {
       this.bookNowStatus = false;
@@ -102,11 +102,11 @@ public bookNowStatus = true;
       /*  description: ['',Validators.required],*/
       meeting_with: [''],
       participant: [this.cookeiservice.get('useremail')],
-    /*  startdate: ['',Validators.required],
-      starttime: ['',Validators.required],
-      enddate: ['',Validators.required],
-      endtime: ['',Validators.required],
-      timezone: ['',Validators.required],*/
+      /*  startdate: ['',Validators.required],
+        starttime: ['',Validators.required],
+        enddate: ['',Validators.required],
+        endtime: ['',Validators.required],
+        timezone: ['',Validators.required],*/
       repsmsg: [''],
     });
   }
@@ -128,25 +128,25 @@ public bookNowStatus = true;
       now.tz(tz1);
       const centralOffset1 = now.utcOffset();
       const diffInMinutes = centralOffset1 - centralOffset;
-     // console.log('offset'+this.timezoneval+this.slotdata.timezone);
-    //  console.log(diffInMinutes);
-     // console.log(tz);
-    //  console.log(tz1);
+      // console.log('offset'+this.timezoneval+this.slotdata.timezone);
+      //  console.log(diffInMinutes);
+      // console.log(tz);
+      //  console.log(tz1);
       const a = moment(this.slotdata.startdate + 'T' + this.slotdata.slots[this.itemidval].trim() + ':00');
       const starttime = moment(a).add(diffInMinutes, 'minutes').format('hh:mm A');
       const endtime = moment(a).add(diffInMinutes, 'minutes').add(this.slotdata.timespan, 'minutes').format('hh:mm A');
       this.slotvalue = starttime + ' - ' + endtime;
-      this.slotvalue2 = starttime ;
+      this.slotvalue2 = starttime;
       this.timezoneshow = this.timezoneval;
 
     } else {
-     // console.log('no offset'+this.timezoneval+this.slotdata.timezone);
+      // console.log('no offset'+this.timezoneval+this.slotdata.timezone);
 
       const a = moment(this.slotdata.startdate + 'T' + this.slotdata.slots[this.itemidval].trim() + ':00');
       const starttime = a.format('hh:mm A');
       const endtime = moment(a).add(this.slotdata.timespan, 'minutes').format('hh:mm A');
       this.slotvalue = starttime + ' - ' + endtime;
-        this.slotvalue2 = starttime ;
+      this.slotvalue2 = starttime;
       this.timezoneshow = this.slotdata.timezone;
     }
     // return this.slotvalue;
@@ -157,71 +157,71 @@ public bookNowStatus = true;
       this.getslot();
     }, 0);
 
-   // console.log('refreshtoken');
-   // console.log(this.cookeiservice.get('refreshtoken').length);
-   // console.log(this.cookeiservice.get('refreshtoken'));
-   // console.log(typeof (this.cookeiservice.get('refreshtoken')));
-  /*  if(this.cookeiservice.get('refreshtoken')==null ||  this.cookeiservice.get('refreshtoken').length<12 ){
-      this.getrepdetails();
-    }*/
+    // console.log('refreshtoken');
+    // console.log(this.cookeiservice.get('refreshtoken').length);
+    // console.log(this.cookeiservice.get('refreshtoken'));
+    // console.log(typeof (this.cookeiservice.get('refreshtoken')));
+    /*  if(this.cookeiservice.get('refreshtoken')==null ||  this.cookeiservice.get('refreshtoken').length<12 ){
+        this.getrepdetails();
+      }*/
   }
-/*  getrepdetails(){
-    const link = this._commonservices.nodesslurl+'datalist?token='+this.cookeiservice.get('jwttoken');
-    this._http.post(link,{source:'users',condition:{_id_object:this.cookeiservice.get('userid')}})
-        .subscribe(res => {
-          let result:any;
-          result = res;
-          if(result.status=='error'){
-          }else{
-            this.mydetails = result.res;
-            console.log('this.mydetails');
-            console.log(this.mydetails);
-            //this.cookeiservice.set('refreshtoken', this.mydetails[0].regionalrecruiter_id);
-
-
-            const link = this._commonservices.nodesslurl+'datalist?token='+this.cookeiservice.get('jwttoken');
-            this._http.post(link,{source:'users',condition:{_id_object:this.mydetails[0].regionalrecruiter_id}})
-                .subscribe(res => {
-                  let result:any;
-                  result = res;
-                  if(result.status=='error'){
-                  }else{
-                    //this.mydetails = result.res;
-                    console.log('this.regional details');
-                    console.log(result.res);
-                    console.log(result.res[0]);
-                    console.log(result.res[0].refreshtoken);
-                    this.cookeiservice.set('refreshtoken', result.res[0].refreshtoken);
-
-
-
-
-
-
-                  }
-                }, error => {
-                  console.log('Oooops!');
-                });
-
-
-
-          }
-        }, error => {
-          console.log('Oooops!');
-        });
-  }*/
+  /*  getrepdetails(){
+      const link = this._commonservices.nodesslurl+'datalist?token='+this.cookeiservice.get('jwttoken');
+      this._http.post(link,{source:'users',condition:{_id_object:this.cookeiservice.get('userid')}})
+          .subscribe(res => {
+            let result:any;
+            result = res;
+            if(result.status=='error'){
+            }else{
+              this.mydetails = result.res;
+              console.log('this.mydetails');
+              console.log(this.mydetails);
+              //this.cookeiservice.set('refreshtoken', this.mydetails[0].regionalrecruiter_id);
+  
+  
+              const link = this._commonservices.nodesslurl+'datalist?token='+this.cookeiservice.get('jwttoken');
+              this._http.post(link,{source:'users',condition:{_id_object:this.mydetails[0].regionalrecruiter_id}})
+                  .subscribe(res => {
+                    let result:any;
+                    result = res;
+                    if(result.status=='error'){
+                    }else{
+                      //this.mydetails = result.res;
+                      console.log('this.regional details');
+                      console.log(result.res);
+                      console.log(result.res[0]);
+                      console.log(result.res[0].refreshtoken);
+                      this.cookeiservice.set('refreshtoken', result.res[0].refreshtoken);
+  
+  
+  
+  
+  
+  
+                    }
+                  }, error => {
+                    console.log('Oooops!');
+                  });
+  
+  
+  
+            }
+          }, error => {
+            console.log('Oooops!');
+          });
+    }*/
   booknowmodal(template: TemplateRef<any>, slotdata, template1: TemplateRef<any>) {
-      const config: ModalOptions = {
-          backdrop: 'static',
-          class: 'booknowmodal',
-          keyboard: false,
-          animated: true,
-          ignoreBackdropClick: true,
-          initialState: {
-              data1: 'new-user',
-              username: 'test'
-          }
-      };
+    const config: ModalOptions = {
+      backdrop: 'static',
+      class: 'booknowmodal',
+      keyboard: false,
+      animated: true,
+      ignoreBackdropClick: true,
+      initialState: {
+        data1: 'new-user',
+        username: 'test'
+      }
+    };
     this.getUserDetails(slotdata.allslotsuserid);
 
     console.log('/**/*/*/*/**/*/*/*/*/*/*/*/*/*', this.cookeiservice.get('useremail'));
@@ -239,22 +239,24 @@ public bookNowStatus = true;
         console.log('result.res[0]---');
 
         const link = this._commonservices.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
-        this._http.post(link, { source: 'leads_view', condition: { '_id': leadsId }}).subscribe(res => {
+        this._http.post(link, { source: 'leads_view', condition: { '_id': leadsId } }).subscribe(res => {
           const result: any = res;
+
+
           if (this.selectedproduct == this._commonservices.productid) {
             this.dataForm = this.kp.group({
-              meeting_with: [ slotdata.meetingwith ],
-              participant: [ result.res[0].email, Validators.required ],
-              participantName: [ result.res[0].fullname, Validators.required ],
-              participantPhNumber: [ result.res[0].phoneno, Validators.required ],
+              meeting_with: [slotdata.meetingwith],
+              participant: [result.res[0].email, Validators.required],
+              participantName: [result.res[0].fullname, Validators.required],
+              participantPhNumber: [result.res[0].phoneno, Validators.required],
               repsmsg: [''],
               doctor_details: this.kp.array([
                 this.kp.group({
-                  totalpatients: [ '', Validators.required],
-                  medicare_patients: [ '' , Validators.required],
-                  medicaid_patients: [ '', Validators.required],
-                  cash_payers: [ '', Validators.required],
-                  pvt_insuarance_patients: [ '', Validators.required],
+                  totalpatients: ['', Validators.required],
+                  medicare_patients: ['', Validators.required],
+                  medicaid_patients: ['', Validators.required],
+                  cash_payers: ['', Validators.required],
+                  pvt_insuarance_patients: ['', Validators.required],
                   sixteen_year_patients: ['', Validators.required],
                   speciality: [''],
                   Family_Medicine: [''],
@@ -286,115 +288,122 @@ public bookNowStatus = true;
             console.log(result.res[0]);
             console.log(result.res[0].fullname);
             this.dataForm = this.kp.group({
-              meeting_with: [ slotdata.meetingwith ],
-              participant: [ result.res[0].email, Validators.required ],
-              participantName: [ result.res[0].fullname, Validators.required ],
-              participantPhNumber: [ result.res[0].phoneno, Validators.required ],
+              meeting_with: [slotdata.meetingwith],
+              participant: [result.res[0].email, Validators.required],
+              participantName: [result.res[0].fullname, Validators.required],
+              participantPhNumber: [result.res[0].phoneno, Validators.required],
               repsmsg: ['']
             });
           }
 
 
 
-            const config: ModalOptions = {
-                backdrop: 'static',
-                class: 'booknowmodal',
-                keyboard: false,
-                animated: true,
-                ignoreBackdropClick: true,
-                initialState: {
-                    data1: 'new-user',
-                    username: 'test'
-                }
-            };
+          const config: ModalOptions = {
+            backdrop: 'static',
+            class: 'booknowmodal',
+            keyboard: false,
+            animated: true,
+            ignoreBackdropClick: true,
+            initialState: {
+              data1: 'new-user',
+              username: 'test'
+            }
+          };
 
-          if (result.res != null && result.res[0] != null) {this.leaddata = result.res[0]; }
+          if (result.res != null && result.res[0] != null) { this.leaddata = result.res[0]; }
           setTimeout(() => {
             this.modalRef = this.modal.show(template, config);
           }, 2000);
         });
         break;
-        case 'marketing-review':
-          const link1 = this._commonservices.nodesslurl + 'datalistforleaddata';
-          this._http.post(link1, { source: 'leads_view', condition: { _id_object: this.route.snapshot.params['lead_id'] }}).subscribe(res => {
-            const result: any = res;
-              this.dataForm = this.kp.group({
-                meeting_with: [ slotdata.meetingwith ],
-                participant: [ result.res[0].email, Validators.required ],
-                participantName: [ result.res[0].fullname, Validators.required ],
-                participantPhNumber: [ result.res[0].phoneno, Validators.required ],
-                repsmsg: ['']
-              });
+      case 'marketing-review':
+        const link1 = this._commonservices.nodesslurl + 'datalistforleaddata';
+        this._http.post(link1, { source: 'leads_view', condition: { _id_object: this.route.snapshot.params['lead_id'] } }).subscribe(res => {
+          const result: any = res;
+          this.dataForm = this.kp.group({
+            meeting_with: [slotdata.meetingwith],
+            participant: [result.res[0].email, Validators.required],
+            participantName: [result.res[0].fullname, Validators.required],
+            participantPhNumber: [result.res[0].phoneno, Validators.required],
+            repsmsg: ['']
+          });
 
 
-            });
+        });
       default:
         setTimeout(() => {
           this.modalRef = this.modal.show(template, config);
         }, 1000);
 
+        let participantName = this.cookeiservice.get('fullname');
+        let participantPhNumber = this.cookeiservice.get('phone');
+        if (this.route.snapshot.url[0].path == 'pece-book-event') {
+          participantName = '';
+          participantPhNumber = '';
+        }
+
         this.dataForm = this.kp.group({
           /*  description: [slotdata.description,Validators.required],*/
-          meeting_with:         [ slotdata.meetingwith ],
-          participant:          [ this.cookeiservice.get('useremail'), Validators.required],
-          participantName:      [ this.cookeiservice.get('fullname'), Validators.required],
-          participantPhNumber:  [ this.cookeiservice.get('phone'), Validators.required],
+          meeting_with: [slotdata.meetingwith],
+          participant: [this.cookeiservice.get('useremail'), Validators.required],
+          participantName: [participantName, Validators.required],
+          participantPhNumber: [participantPhNumber, Validators.required],
           repsmsg: [''],
-          });
+        });
 
-          // this.dataForm.patchValue({ participantPhNumber: this.participantPhNumber });
-          setTimeout(() => {
-            console.log(this.cookeiservice.get('fullname'));
-            console.log(this.cookeiservice.get('phone'));
-            this.dataForm.controls['participantPhNumber'].setValue( this.participantPhNumber );
-            // console.log('phoneno - '+this.dataForm.controls['participantPhNumber'].value);
-          }, 100);
+        // this.dataForm.patchValue({ participantPhNumber: this.participantPhNumber });
+        setTimeout(() => {
+          console.log(this.cookeiservice.get('fullname'));
+          console.log(this.cookeiservice.get('phone'));
+          this.dataForm.controls['participantPhNumber'].setValue(this.participantPhNumber);
+          // console.log('phoneno - '+this.dataForm.controls['participantPhNumber'].value);
+        }, 100);
 
         break;
     }
   }
   booknowmodal_appointmentlist1(val: any = {}, template2: TemplateRef<any>) {
-          // setTimeout(() => {
-          //   this.modalRef2.hide();
-          // }, 1000);
-          this.slotdata = val;
+    // setTimeout(() => {
+    //   this.modalRef2.hide();
+    // }, 1000);
+    this.slotdata = val;
 
     this.modalRef2 = this.modal.show(template2);
     // console.log('pkoklk',this.leaddata ,'+++++++', val);
     const link1 = this._commonservices.nodesslurl + 'datalistforleaddata';
-    this._http.post(link1, { source: 'leads_view', condition: { _id_object: this.route.snapshot.params['lead_id'] }}).subscribe((res: any) => {
+    this._http.post(link1, { source: 'leads_view', condition: { _id_object: this.route.snapshot.params['lead_id'] } }).subscribe((res: any) => {
       this.leaddata = res.res[0];
-    this.dataFormForLead = this.kp.group({
-      firstname: [ '', Validators.required ],
-      lastname: [ '', Validators.required ],
-      company: [ '', Validators.required ],
-      email: [ res.res[0].email, Validators.required ],
-      address: [ '', Validators.required ],
-      phoneno: [ '', Validators.required ],
-      product: [res.res[0].product]
-    });
+      this.dataFormForLead = this.kp.group({
+        firstname: ['', Validators.required],
+        lastname: ['', Validators.required],
+        company: ['', Validators.required],
+        email: [res.res[0].email, Validators.required],
+        address: ['', Validators.required],
+        phoneno: ['', Validators.required],
+        product: [res.res[0].product]
+      });
 
     });
 
   }
 
   dosubmitForLead(template: TemplateRef<any>, template1: TemplateRef<any>) {
-      // console.log(this.dataFormForLead.value);
-      let y: any;
-        for (y in this.dataFormForLead.controls) {
-            this.dataFormForLead.controls[y].markAsTouched();
+    // console.log(this.dataFormForLead.value);
+    let y: any;
+    for (y in this.dataFormForLead.controls) {
+      this.dataFormForLead.controls[y].markAsTouched();
+    }
+    const link = this._commonservices.nodesslurl + 'addorupdatedata';
+    this.dataFormForLead.value.id = this.leaddata._id;
+    this._http.post(link, { source: 'leads', data: this.dataFormForLead.value, sourceobj: ['created_by'] })
+      .subscribe((res: any) => {
+        if (res.status == 'success') {
+          this.modalRef2.hide();
+          setTimeout(() => {
+            this.booknowmodal(template, this.slotdata, template1);
+          }, 500);
         }
-        const link = this._commonservices.nodesslurl + 'addorupdatedata';
-        this.dataFormForLead.value.id = this.leaddata._id;
-            this._http.post(link, { source: 'leads', data: this.dataFormForLead.value, sourceobj: ['created_by']  })
-                .subscribe((res: any) => {
-                  if (res.status == 'success') {
-                    this.modalRef2.hide();
-                    setTimeout(() => {
-                      this.booknowmodal(template, this.slotdata, template1);
-                    }, 500);
-                  }
-                });
+      });
 
   }
   booknowmodal_appointmentlist(val: any = {}, template2: TemplateRef<any>) {
@@ -402,17 +411,17 @@ public bookNowStatus = true;
     // console.log(val);
     val.refresh_token = this.cookeiservice.get('refreshtoken'),
       val.organizerid = [val.useremail];
-      val.oldstartdate = this.googleeventval.startdate;
-      val.oldtimezone = this.googleeventval.eventdata.timezone;
-      val.attendees = this.googleeventval.attendeesarr;
-      val.eid = this.googleeventval._id;
-      val.name = this.googleeventval.name;
-      val.leaddata = this.googleeventval.leaddata;
-      val.productid = val.userproducts;
-      val.closername = this.googleeventval.closername;
-      val.closeremail = this.googleeventval.closeremail;
-      val.prvslot = this.googleeventval.prvslot;
-      val.prv_id = this.googleeventval.prv_id;
+    val.oldstartdate = this.googleeventval.startdate;
+    val.oldtimezone = this.googleeventval.eventdata.timezone;
+    val.attendees = this.googleeventval.attendeesarr;
+    val.eid = this.googleeventval._id;
+    val.name = this.googleeventval.name;
+    val.leaddata = this.googleeventval.leaddata;
+    val.productid = val.userproducts;
+    val.closername = this.googleeventval.closername;
+    val.closeremail = this.googleeventval.closeremail;
+    val.prvslot = this.googleeventval.prvslot;
+    val.prv_id = this.googleeventval.prv_id;
     let timeZone = val.timezone;
     timeZone = timeZone.slice(0, 6);
     const start_time = (moment(this.slotdata.startdate + 'T' + this.slotdata.slots[this.itemidval].trim() + ':00').format('YYYY-MM-DDTHH:mm:ss') + timeZone);
@@ -456,45 +465,45 @@ public bookNowStatus = true;
 
   }
 
-// functions to delete and add form group
-removeFormControl(i) {
-  const usersArray = this.dataForm.controls.doctor_details as FormArray;
-  usersArray.removeAt(i);
-}
+  // functions to delete and add form group
+  removeFormControl(i) {
+    const usersArray = this.dataForm.controls.doctor_details as FormArray;
+    usersArray.removeAt(i);
+  }
 
-addFormControl() {
-  const usersArray = this.dataForm.controls.doctor_details as FormArray;
-  const arraylen = usersArray.length;
+  addFormControl() {
+    const usersArray = this.dataForm.controls.doctor_details as FormArray;
+    const arraylen = usersArray.length;
 
-  const newUsergroup: FormGroup = this.kp.group({
-    totalpatients: [ '', Validators.required],
-                  medicare_patients: [ '' , Validators.required],
-                  medicaid_patients: [ '', Validators.required],
-                  cash_payers: [ '', Validators.required],
-                  pvt_insuarance_patients: [ '', Validators.required],
-                  sixteen_year_patients: ['', Validators.required],
-                  speciality: [''],
-                  Family_Medicine: [''],
-                  Neurology: [''],
-                  Doctor_of_Osteopathy: [''],
-                  General_Practice: [''],
-                  Internal_Medicine: [''],
-                  Pain_Mgmt: [''],
-                  Primary_Care: [''],
-                  Endocrinology: [''],
-                  Integrated_Speciality_Groups: [''],
-                  Cardiology: [''],
-                  npi: ['', Validators.required],
-                  doctor_name: ['', Validators.required]
-  });
+    const newUsergroup: FormGroup = this.kp.group({
+      totalpatients: ['', Validators.required],
+      medicare_patients: ['', Validators.required],
+      medicaid_patients: ['', Validators.required],
+      cash_payers: ['', Validators.required],
+      pvt_insuarance_patients: ['', Validators.required],
+      sixteen_year_patients: ['', Validators.required],
+      speciality: [''],
+      Family_Medicine: [''],
+      Neurology: [''],
+      Doctor_of_Osteopathy: [''],
+      General_Practice: [''],
+      Internal_Medicine: [''],
+      Pain_Mgmt: [''],
+      Primary_Care: [''],
+      Endocrinology: [''],
+      Integrated_Speciality_Groups: [''],
+      Cardiology: [''],
+      npi: ['', Validators.required],
+      doctor_name: ['', Validators.required]
+    });
 
-  usersArray.insert(arraylen, newUsergroup);
-}
+    usersArray.insert(arraylen, newUsergroup);
+  }
 
 
-showformat(stdt) {
+  showformat(stdt) {
     return moment(stdt).format('dddd MMMM DD, YYYY');
-}
+  }
   dosubmit() {
     let x: any;
     let doctor_details: any;
@@ -541,7 +550,12 @@ showformat(stdt) {
       let repmsg = '';
       let description: any = this.slotdata.description;
 
-      if (this.dataForm.controls['repsmsg'].value.length > 0 && this.route.snapshot.url[0].path != 'book-a-closer') {
+      this.route.snapshot.url[0].path != 'book-a-closer'
+
+      if (this.route.snapshot.url[0].path == 'pece-book-event') {
+        description += '<br /><br /><br />Notes from Attendee:- <br />' + this.dataForm.controls['repsmsg'].value;
+      }
+      else if (this.dataForm.controls['repsmsg'].value.length > 0 && this.route.snapshot.url[0].path != 'book-a-closer') {
         description += '<br /><br /><br />Notes from rep. <br />' + this.dataForm.controls['repsmsg'].value;
       } else {
         repmsg = this.dataForm.controls['repsmsg'].value;
@@ -551,7 +565,7 @@ showformat(stdt) {
 
       }
 
-      if (this.dataForm.controls['doctor_details'] == null || this.dataForm.controls['doctor_details'].value != null ) {
+      if (this.dataForm.controls['doctor_details'] == null || this.dataForm.controls['doctor_details'].value != null) {
         doctor_details = '';
       } else {
         doctor_details = this.dataForm.controls['doctor_details'].value;
@@ -596,59 +610,59 @@ showformat(stdt) {
       // console.log(link1)
 
       this._http.get(link1)
-      .subscribe((res: any) => {
-        // console.log(res);
-        this.slotDataStatus = res;
-        if (res == 0) {
-          this._http.post(link, data)
-          .subscribe(res => {
-            const result: any = res;
-            // console.log('result.... for google calendar');
-            // console.log(result);
-            this.modalRef.hide();
-            this.message = 'Your Booking done successfully !!';
-            // this.modalRef=this.modal.show(this.mymodal, {class: 'successmodal'});
+        .subscribe((res: any) => {
+          // console.log(res);
+          this.slotDataStatus = res;
+          if (res == 0) {
+            this._http.post(link, data)
+              .subscribe(res => {
+                const result: any = res;
+                // console.log('result.... for google calendar');
+                // console.log(result);
+                this.modalRef.hide();
+                this.message = 'Your Booking done successfully !!';
+                // this.modalRef=this.modal.show(this.mymodal, {class: 'successmodal'});
 
-            this.cookeiservice.delete('leadsId');
-            this.cookeiservice.delete('viewonlyaccess');
-            switch (this.route.snapshot.url[0].path) {
-              case 'on-boarding-call':
-                this.router.navigate(['/on-boarding-call-booked/' + this.route.snapshot.url[1].path + '/' + result.gdata]);
-                break;
-              case 'is_discovery':
-                this.router.navigate(['/on-boarding-call-booked/' + this.route.snapshot.url[1].path + '/' + result.gdata]);
-                break;
-              case 'book-a-closer':
-                this.cookeiservice.delete('lead-product');
-                this.modalRef = this.modal.show(this.mymodal, {class: 'successmodal'});
-                this.route.paramMap.subscribe(params => {
-                  if (!params.get('id')) {
-                    const random = Math.floor(Math.random() * (999999 - 100000)) + 100000;
-                    // this.router.navigate(['/book-a-closer/' + random]);
-                    this.router.navigate(['/repdashboard']);
-                  } else {
-                    this.router.navigate(['/book-a-closer']);
+                this.cookeiservice.delete('leadsId');
+                this.cookeiservice.delete('viewonlyaccess');
+                switch (this.route.snapshot.url[0].path) {
+                  case 'on-boarding-call':
+                    this.router.navigate(['/on-boarding-call-booked/' + this.route.snapshot.url[1].path + '/' + result.gdata]);
+                    break;
+                  case 'is_discovery':
+                    this.router.navigate(['/on-boarding-call-booked/' + this.route.snapshot.url[1].path + '/' + result.gdata]);
+                    break;
+                  case 'book-a-closer':
+                    this.cookeiservice.delete('lead-product');
+                    this.modalRef = this.modal.show(this.mymodal, { class: 'successmodal' });
+                    this.route.paramMap.subscribe(params => {
+                      if (!params.get('id')) {
+                        const random = Math.floor(Math.random() * (999999 - 100000)) + 100000;
+                        // this.router.navigate(['/book-a-closer/' + random]);
+                        this.router.navigate(['/repdashboard']);
+                      } else {
+                        this.router.navigate(['/book-a-closer']);
 
-                  }
-                });
-                break;
-              default:
-                // console.log(this.route.snapshot.url[0].path,'+++++++',result.gdata)
-                this.router.navigate(['/on-boarding-call-booked/' + 'us7ag61k4r9306plvmilbot9jk' + '/' + result.gdata]);
-                break;
-            }
-            // setTimeout(() => {
-            //   window.location.reload();
-            // },5000);
-            // this.router.navigate(['/reptrainingcenter'])
-          });
-        } else {
-          // this.modalRef.hide();
-          // this.message = "Sorry, This slot just got occupied ! \n Please select another convenient slot.";
-          // this.modalRef = this.modal.show(this.mymodal, {class: 'successmodal'});
-          this.loader = false;
-        }
-      });
+                      }
+                    });
+                    break;
+                  default:
+                    // console.log(this.route.snapshot.url[0].path,'+++++++',result.gdata)
+                    this.router.navigate(['/on-boarding-call-booked/' + 'us7ag61k4r9306plvmilbot9jk' + '/' + result.gdata]);
+                    break;
+                }
+                // setTimeout(() => {
+                //   window.location.reload();
+                // },5000);
+                // this.router.navigate(['/reptrainingcenter'])
+              });
+          } else {
+            // this.modalRef.hide();
+            // this.message = "Sorry, This slot just got occupied ! \n Please select another convenient slot.";
+            // this.modalRef = this.modal.show(this.mymodal, {class: 'successmodal'});
+            this.loader = false;
+          }
+        });
       // return;
 
     }
@@ -668,11 +682,11 @@ showformat(stdt) {
   getUserDetails(id) {
     let link: any;
     if (this.route.snapshot.routeConfig.path == 'marketing-review/:product_id/:rep_id/:lead_id') {
-     link = this._commonservices.nodesslurl + 'datalistforleaddata';
+      link = this._commonservices.nodesslurl + 'datalistforleaddata';
     } else {
       link = this._commonservices.nodesslurl + 'datalist?token=' + this.cookeiservice.get('jwttoken');
     }
-    this._http.post(link, { source: 'users', condition: { _id_object: id }})
+    this._http.post(link, { source: 'users', condition: { _id_object: id } })
       .subscribe(res => {
         const result: any = res;
         // console.log('===== Refresh Token =====');
@@ -686,7 +700,7 @@ showformat(stdt) {
         } else {
 
           this.cookeiservice.set('viewonlyaccess', 'false');
-}
+        }
         // this.participantName = result.res[0].firstname + ' ' + result.res[0].lastname;
         // this.participantPhNumber = result.res[0].phoneno;
         // console.log(this.participantPhNumber);
@@ -705,8 +719,8 @@ showformat(stdt) {
       }
     }
     if (event.target.checked == false) {
-      for ( let i = 0; i < this.specialityarray.length; i++) {
-        if ( this.specialityarray[i] === event.target.value) {
+      for (let i = 0; i < this.specialityarray.length; i++) {
+        if (this.specialityarray[i] === event.target.value) {
           this.specialityarray.splice(i, 1);
           i--;
         }
