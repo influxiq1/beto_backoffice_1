@@ -69,6 +69,7 @@ export class EventmanagementComponent implements OnInit {
       {inputtype: 'checkbox', name: 'is_discovery', label: '90 min game plan', value: false},
       {inputtype: 'checkbox', name: 'is_custom', label: 'General Call(for Beto only)', value: false},
       {inputtype: 'checkbox', name: 'is_qna', label: 'Q&A', value: false},
+      {inputtype: 'checkbox', name: 'is_pece', label: 'PECE', value: false},
       {inputtype: 'hidden', name: 'userid', label: 'userid', placeholder: 'Enter userid', value: this.cookieservice.get('userid')}
     ];
     this.datasource = {table: 'events', objarr: ['userid']};
