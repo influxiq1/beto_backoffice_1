@@ -1,0 +1,31 @@
+.cartpagebody {
+    background-image: url(https://all-frontend-assets.s3.amazonaws.com/troy-wenning/assets/images/aboutmainbg.jpg);
+    background-repeat: no-repeat;
+    background-position: center top;
+    overflow: hidden;
+    background-size: cover;
+}
+
+.slotview {
+    background-color: transparent !important;
+}
+
+
+/* .adminmodal_btn_group .CONSULTANT_btn {
+    width: 220px;
+} */
+
+.adminmodal_btn_group {
+    display: flex;
+    flex-wrap: wrap;
+    width: auto;
+    justify-content: center;
+}
+
+.AddUserComponentmodal .adminmodal_btn_group {
+    padding: 0!important;
+}
+
+.adminmodal_btn_group_new {
+    text-align: center;
+}

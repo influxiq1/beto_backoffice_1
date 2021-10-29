@@ -19,43 +19,47 @@
 
                     <div *ngIf="route.snapshot.url[0].path == 'pece-book-event'">
                         <div class="snapshot_peaceblock peaceblockbody_wrapper">
-               
+
                             <div class="snapshot_peaceblock_wrapper">
                                 <div class="snapshot_peaceblock_logo2">
                                     <img src="assets/images/bpecelogo.png">
-                            </div>
+                                </div>
                                 <div class="snapshot_peaceblock_text">
 
                                     A Meeting with Director of Software Services for PECE, <span>Beto Paredes</span>
                                 </div>
 
-                            
+
                             </div>
                         </div>
-                    </div> 
+                    </div>
 
                     <div *ngIf="route.snapshot.url[0].path == 'customevent'">
                         <div class="snapshot_peaceblock">
-               
+
                             <div class="snapshot_peaceblock_wrapper">
                                 <div class="snapshot_peaceblock_logo">
-                                    <img src="assets/images/betologo.png"> 
-                               
-                            </div>
+                                    <img src="assets/images/betologo.png">
+
+                                </div>
                                 <div class="snapshot_peaceblock_text">
 
                                     A MEETING WITH CEO OF Beto Paredes Family of Companies, <span>Beto Paredes</span>
                                 </div>
 
-                            
+
                             </div>
                         </div>
-                    
+
                     </div>
-                     
+
                     <h4 [innerHtml]="headerText.hedaerH4"></h4>
                     <span>{{ headerText.span }}</span>
                 </div>
+
+
+
+
 
                 <div class="event_content_wrapper contentnewcon1wrapper">
                     <div class="main_inner_content main_inner_contentnew contentnewcon1">
@@ -133,7 +137,7 @@
             </div>
 
             <!-- This block for book-a-closer start -->
-            <div class="listevent_inner_wrapper" *ngIf="slotView == false">
+            <!-- <div class="listevent_inner_wrapper" *ngIf="slotView == false">
                 <div class="inner_head_wrapper">
                     <h4>{{ headerText.hedaerH4 }}</h4>
                     <span>{{ headerText.span }}</span>
@@ -188,7 +192,7 @@
                 </div>
 
                 <div class="clearfix"></div>
-            </div>
+            </div> -->
             <!-- This block for book-a-closer end -->
         </div>
     </div>

@@ -148,6 +148,33 @@ export class ApiService {
     }
 
   }
+  getJsonObject(path: any) {
+    const result = this._http.get(path).pipe(
+      catchError((error) => {
+        this.openSnackBar();
+        return throwError(error);
+      }),
+      map((response) => response)
+    );
+    return result;
+  }
+
+
+
+  customRequest1(requestdata: any, endpoint: any, url: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: this.cookie.get('jwtToken')
+      })
+    };
+    // console.log("souresh",url,endpoint);
+    const result = this._http.post(url + endpoint, JSON.stringify(requestdata), httpOptions).pipe(catchError((error) => {
+      this.openSnackBar();
+      return throwError(error);
+    }), map(response => response));
+    return result;
+  }
 // Mahitosh
   getDataforAdminList(endpoint: any, requestdata: any) {
     const httpOptions = {

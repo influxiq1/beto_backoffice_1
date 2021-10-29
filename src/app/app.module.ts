@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CookieService } from 'ngx-cookie-service';
@@ -115,6 +115,9 @@ import { LoginAsARepComponent } from './login-as-a-rep/login-as-a-rep.component'
 import { ManageLeadsEditComponent } from './manage-leads-edit/manage-leads-edit.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { UsermanagementAddEditComponent } from './usermanagement-add-edit/usermanagement-add-edit.component';
+import { BookSlotsComponent, DialogEventTypeModal } from './calender-management/book-slots/book-slots.component';
+import { CalendarManagementModule } from 'calendar-management-lib-influxiq';
+
 @NgModule({
   declarations: [
     ContractReviewVideoComponent,
@@ -203,7 +206,9 @@ import { UsermanagementAddEditComponent } from './usermanagement-add-edit/userma
     LoginAsARepComponent,
     ManageLeadsEditComponent,
     PrivacyPolicyComponent,
-    UsermanagementAddEditComponent
+    UsermanagementAddEditComponent,
+    BookSlotsComponent,
+    DialogEventTypeModal
 
   ],
   imports: [
@@ -228,13 +233,17 @@ import { UsermanagementAddEditComponent } from './usermanagement-add-edit/userma
     TransferHttpCacheModule,
     NgtUniversalModule,
     // DemoMaterialModule,
-    ListingModule
+    ListingModule,
+    CalendarManagementModule
+  ],
+  entryComponents: [
+    DialogEventTypeModal,
   ],
   providers: [
     CookieService, TestresolveService, ApiService, LoaderService,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   bootstrap: [AppComponent]
 })
 // export class AppModule { }
