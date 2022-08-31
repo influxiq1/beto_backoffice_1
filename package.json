@@ -54,7 +54,7 @@
         "memo-decorator": "^2.0.1",
         "moment": "^2.29.1",
         "moment-es6": "^1.0.0",
-        "moment-timezone": "^0.5.28",
+        "moment-timezone": "^0.5.35",
         "mongodb": "^2.2.36",
         "ng2-ckeditor": "^1.2.7",
         "ngx-accordion": "0.0.17",
